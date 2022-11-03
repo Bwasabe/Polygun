@@ -5,7 +5,7 @@ using UnityEditor;
 
 public class ColorHierarchyEditor
 {
-    [MenuItem("ColorHierarchy/AddColorHierarchy %H")]
+    [MenuItem("ColorHierarchy/AddColorHierarchy")]
     [MenuItem("GameObject/ColorHierarchy/AddColorHierarchy %H")]
     private static void CreateColorHierarchy()
     {
@@ -14,23 +14,21 @@ public class ColorHierarchyEditor
 
         for (int i = 0; i < obj.Length; i++)
         {
-            Undo.AddComponent<ColorHierarchy>(obj[i]);
+            if(obj[i].GetComponent<ColorHierarchy>() == null)
+                Undo.AddComponent<ColorHierarchy>(obj[i]);
         }
     }
 
-    [MenuItem("ColorHierarchy/RemoveColorHierarchy %#H")]
-    [MenuItem("GameObject/ColorHierarchy/AddColorHierarchy %#H")]
+    [MenuItem("ColorHierarchy/RemoveColorHierarchy")]
+    [MenuItem("GameObject/ColorHierarchy/RemoveColorHierarchy %#H")]
     private static void RemoveColorHierarchy()
     {
         GameObject[] obj = Selection.gameObjects;
 
-
         for (int i = 0; i < obj.Length; i++)
         {
             ColorHierarchy ch = obj[i].GetComponent<ColorHierarchy>();
-            if(ch != null){
                 Undo.DestroyObjectImmediate(ch);
-            }
         }
     }
 }

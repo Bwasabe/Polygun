@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+[DisallowMultipleComponent]
 public class ColorHierarchy : MonoBehaviour
 {
 #if UNITY_EDITOR

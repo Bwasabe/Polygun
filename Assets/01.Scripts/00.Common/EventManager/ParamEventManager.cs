@@ -50,5 +50,13 @@ public class ParamEventManager
 
 public struct EventParam
 {
-    public object[] objs;
+    public object[] objs
+    {
+        get;set;
+    }
+
+    public EventParam(params object[] arr)
+    {
+        objs = arr;
+    }
 }
