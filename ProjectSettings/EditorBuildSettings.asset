@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/05.Scenes/UIScene.unity
     guid: 53bcc08cb51bb2a40b6fefeb06cecb19
+  - enabled: 1
+    path: Assets/05.Scenes/TestPlayer.unity
+    guid: 2873d4cfdcbc10f4d87a935eabba2e08
   m_configObjects: {}
