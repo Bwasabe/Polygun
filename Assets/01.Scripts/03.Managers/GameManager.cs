@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    public Player Player
-    {
-        get
-        {
-            return _player ??= FindObjectOfType<Player>();
-        }
-
-    }
+    public Player Player => _player ??= FindObjectOfType<Player>();
 
     private Player _player;
+
+    public InputManager InputManager => _inputManager ??= GetComponent<InputManager>() ?? gameObject.AddComponent<InputManager>();
+
+    private InputManager _inputManager;
+
+    public static float TimeScale = 1f;
 }
