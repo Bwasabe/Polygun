@@ -59,7 +59,6 @@ public class ToolbarLeft
 
                     if (assetsIndex == -1) continue;
 
-                    Debug.Log($"{addPath}{extension}");
                     menu.AddItem(new GUIContent($"{addPath}{extension}"), false, () =>
                     {
                         EditorSceneManager.OpenScene(scene.Substring(assetsIndex));
