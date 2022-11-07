@@ -5,7 +5,7 @@ using UnityEngine;
 public class InputManager : MonoBehaviour
 {
 
-    public Dictionary<string, KeyCode> InputDict { get; private set; } = new Dictionary<string, KeyCode>();
+    private Dictionary<string, KeyCode> _inputDict = new Dictionary<string, KeyCode>();
 
     /// <summary>
     /// 키를 더해줄 때 사용하는 함수
@@ -15,14 +15,26 @@ public class InputManager : MonoBehaviour
     public void AddInput(string key, KeyCode value)
     {
         KeyCode keyCode;
-        if (InputDict.TryGetValue(key, out keyCode))
+        if (_inputDict.TryGetValue(key, out keyCode))
         {
             Debug.LogError($"{key} is already exist by {keyCode}");
             return;
         }
         else
         {
-            InputDict.Add(key, value);
+            _inputDict.Add(key, value);
+        }
+    }
+
+    public KeyCode GetInput(string key)
+    {
+        if(_inputDict.ContainsKey(key))
+        {
+            return _inputDict[key];
+        }
+        else
+        {
+            throw new System.Exception($"{key} is None");
         }
     }
 
@@ -32,9 +44,9 @@ public class InputManager : MonoBehaviour
     /// <param name="keyName"> 지울 키의 이름 </param>
     public void RemoveInput(string keyName)
     {
-        if (InputDict.ContainsKey(keyName))
+        if (_inputDict.ContainsKey(keyName))
         {
-            InputDict.Remove(keyName);
+            _inputDict.Remove(keyName);
         }
         else
         {
@@ -50,14 +62,14 @@ public class InputManager : MonoBehaviour
     public void ChangeInput(string oldKey, string newKey)
     {
         KeyCode keyCode;
-        if (InputDict.TryGetValue(newKey, out keyCode))
+        if (_inputDict.TryGetValue(newKey, out keyCode))
         {
-            InputDict[newKey] = InputDict[oldKey];
-            InputDict[oldKey] = keyCode;
+            _inputDict[newKey] = _inputDict[oldKey];
+            _inputDict[oldKey] = keyCode;
         }
         else
         {
-            AddInput(newKey, InputDict[oldKey]);
+            AddInput(newKey, _inputDict[oldKey]);
             RemoveInput(oldKey);
         }
     }

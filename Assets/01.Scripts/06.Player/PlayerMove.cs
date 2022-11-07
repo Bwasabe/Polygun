@@ -9,6 +9,8 @@ public class PlayerMove : BasePlayerComponent
 {
     [SerializeField]
     private float _playerSpeed = 8f;
+    [SerializeField]
+    private float _rotateSmooth = 15f;
 
     [SerializeField]
     private Vector3 _worldDir = Vector3.up;
@@ -21,7 +23,8 @@ public class PlayerMove : BasePlayerComponent
     public bool IsFreeze { get; set; } = false;
 
     private CharacterController _cc;
-    private void Awake() {
+    private void Awake()
+    {
         _cc = GetComponent<CharacterController>();
     }
 
@@ -31,11 +34,13 @@ public class PlayerMove : BasePlayerComponent
         _input.AddInput("RIGHT", KeyCode.D);
         _input.AddInput("FORWARD", KeyCode.W);
         _input.AddInput("BACKWARD", KeyCode.S);
+
     }
 
-    private void Update() {
+    private void Update()
+    {
 
-        if(IsFreeze)return;
+        if (IsFreeze) return;
         Vector3 moveInput = Vector3.zero;
 
         SetInput(ref moveInput);
@@ -45,25 +50,25 @@ public class PlayerMove : BasePlayerComponent
 
     private void SetInput(ref Vector3 input)
     {
-        if (Input.GetKey(_input.InputDict["LEFT"]))
+        if (Input.GetKey(_input.GetInput("LEFT")))
         {
             input += Vector3.left;
         }
-        if (Input.GetKey(_input.InputDict["RIGHT"]))
+        if (Input.GetKey(_input.GetInput("RIGHT")))
         {
             input += Vector3.right;
         }
-        if (Input.GetKey(_input.InputDict["FORWARD"]))
+        if (Input.GetKey(_input.GetInput("FORWARD")))
         {
             input += Vector3.forward;
         }
-        if (Input.GetKey(_input.InputDict["BACKWARD"]))
+        if (Input.GetKey(_input.GetInput("BACKWARD")))
         {
             input += Vector3.back;
         }
     }
 
-    
+
     private void SetState(Vector3 dir)
     {
         if (dir != Vector3.zero)
@@ -80,14 +85,14 @@ public class PlayerMove : BasePlayerComponent
     {
         SetState(input);
 
-        Debug.Log(Define.MainCam.transform.forward);
         Vector3 forward = _worldDir;
         forward.y = 0f;
 
         Vector3 right = new Vector3(forward.z, 0f, -forward.x);
         _dir = Vector3.Lerp(_dir, (right * input.x + forward * input.z).normalized, Time.deltaTime * _moveSmooth);
 
-
+        if(_dir != Vector3.zero)
+            transform.rotation = Quaternion.Slerp(transform.rotation , Quaternion.LookRotation(_dir) ,_rotateSmooth * Time.deltaTime * GameManager.TimeScale);
         _cc.Move(_playerSpeed * _dir * Time.deltaTime * GameManager.TimeScale);
     }
 

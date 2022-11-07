@@ -2,12 +2,6 @@ using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public enum FADECHILDS
-{
-    FADEOBJECT,
-    TOPBAR,
-    BOTTOMBAR,
-}
 
 public static class Define
 {
@@ -48,19 +42,9 @@ public static class Define
 
     private static Camera _uiCam;
 
-    public static Transform FadeParent
-    {
-        get
-        {
-            if (_fadeParent == null)
-            {
-                _fadeParent = GameObject.Find("FadeParent").transform;
-            }
-            return _fadeParent;
-        }
-    }
+    public static FadeParent FadeParent => _fadeParent ??= GameObject.FindObjectOfType<FadeParent>();
 
-    private static Transform _fadeParent;
+    private static FadeParent _fadeParent;
 
 
 

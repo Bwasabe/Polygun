@@ -261,7 +261,7 @@ GameObject:
   - component: {fileID: 627469460}
   - component: {fileID: 627469459}
   m_Layer: 5
-  m_Name: TopBar
+  m_Name: TOPBAR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -336,7 +336,7 @@ GameObject:
   - component: {fileID: 930212978}
   - component: {fileID: 930212977}
   m_Layer: 5
-  m_Name: BottomBar
+  m_Name: BOTTOMBAR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
