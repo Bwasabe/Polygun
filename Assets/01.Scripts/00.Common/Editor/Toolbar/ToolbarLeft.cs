@@ -32,16 +32,16 @@ public class ToolbarLeft
         Rect dropdownRect = new Rect(5, 0, 150, 20);
         if (EditorGUI.DropdownButton(dropdownRect, content, FocusType.Keyboard, EditorStyles.toolbarDropDown))
         {
-            MakeSceneMenus(filePath, dropdownRect);
-            // menu.DropDown(dropdownRect);
+            GenericMenu menu = new GenericMenu();
+            MakeSceneMenus(filePath, menu);
+            menu.DropDown(dropdownRect);
 
         }
     }
 
-    private static void MakeSceneMenus(string path, Rect dropdownRect)
+    private static void MakeSceneMenus(string path, GenericMenu menu, string addPath = "")
     {
 
-        GenericMenu menu = new GenericMenu();
 
         string[] scenes = Directory.GetFileSystemEntries(path);
 
@@ -56,19 +56,26 @@ public class ToolbarLeft
                 if (substring == ".unity")
                 {
                     int assetsIndex = scene.IndexOf("Assets");
-                    Debug.Log(scene.Substring(assetsIndex));
 
                     if (assetsIndex == -1) continue;
 
-                    menu.AddItem(new GUIContent(extension), false, () =>
+                    Debug.Log($"{addPath}{extension}");
+                    menu.AddItem(new GUIContent($"{addPath}{extension}"), false, () =>
                     {
                         EditorSceneManager.OpenScene(scene.Substring(assetsIndex));
                     });
                 }
                 else
                 {
-                    menu.AddItem(new GUIContent(extension), true, ()=>{});
-                    MakeSceneMenus(scene, new Rect(15, 0, 150, 20));
+                    if(addPath == "")
+                    {
+                        MakeSceneMenus(scene, menu, extension + "/");
+                    }
+                    else
+                    {
+                        Debug.Log(addPath + extension + "/");
+                        MakeSceneMenus(scene, menu, addPath + extension + "/");
+                    }
                 }
             }
         }
