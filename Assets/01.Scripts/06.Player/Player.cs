@@ -10,12 +10,18 @@ public enum PLAYER_STATE
     MOVE = 1 << 1,
     JUMP = 1 << 2,
     HOOK = 1 << 3,
+    HIT = 1 << 4,
+    DIE = 1 << 5
 }
 
 [DisallowMultipleComponent]
 public class Player : MonoBehaviour
 {
     public PLAYER_STATE CurrentState { get; set; }
+
+    [SerializeField]
+    public PlayerStat playerStat;
+
 
     private Dictionary<Type, BasePlayerComponent> _playerComponentDict = new Dictionary<Type, BasePlayerComponent>();
 
@@ -37,3 +43,5 @@ public class Player : MonoBehaviour
         return _playerComponentDict[typeof(T)] as T;
     }
 }
+
+
