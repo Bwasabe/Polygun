@@ -20,7 +20,6 @@ namespace ChrisGD
             // _mRoot = new BTNode(this);
             _mRoot = new BTRepeater(this, new BTSequencer(this, new BTNode[] { new BTRandomWalk(this) }));
 
-
             _startBehavior = false;
         }
 
