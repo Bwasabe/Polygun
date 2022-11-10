@@ -10,9 +10,6 @@ public class PlayerMove : BasePlayerComponent
     [SerializeField]
     private float _playerSpeed = 8f;
     [SerializeField]
-    private float _rotateSmooth = 15f;
-
-    [SerializeField]
     private Vector3 _worldDir = Vector3.up;
 
     [SerializeField]

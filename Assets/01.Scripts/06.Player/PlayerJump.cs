@@ -121,7 +121,6 @@ public class PlayerJump : BasePlayerComponent
     private void AdjoinGround()
     {
         OnGUIManager.Instance._guiDict["JUMPSTATE"] = $"JumpState : {_jumpState}";
-        Debug.Log(IsGround());
         if (_player.CurrentState.HasFlag(PLAYER_STATE.JUMP)) return;
 
         if (!(_jumpState == JUMP_STATE.NONE)) return;

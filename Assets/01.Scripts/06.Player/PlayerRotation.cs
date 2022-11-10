@@ -7,8 +7,6 @@ public class PlayerRotation : BasePlayerComponent
 {
     [SerializeField]
     private LayerMask _groundLayer;
-    [SerializeField]
-    private float _rotateSmooth = 8f;
 
     private void Update()
     {
