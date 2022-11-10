@@ -19,6 +19,7 @@ namespace ChrisGD
         {
             NextDestination = Vector3.zero;
             FindNextDestination();
+
         }
 
         private bool FindNextDestination()
