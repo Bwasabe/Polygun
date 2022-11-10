@@ -91,8 +91,7 @@ public class PlayerMove : BasePlayerComponent
         Vector3 right = new Vector3(forward.z, 0f, -forward.x);
         _dir = Vector3.Lerp(_dir, (right * input.x + forward * input.z).normalized, Time.deltaTime * _moveSmooth);
 
-        if(_dir != Vector3.zero)
-            transform.rotation = Quaternion.Slerp(transform.rotation , Quaternion.LookRotation(_dir) ,_rotateSmooth * Time.deltaTime * GameManager.TimeScale);
+        
         _cc.Move(_playerSpeed * _dir * Time.deltaTime * GameManager.TimeScale);
     }
 
