@@ -41,8 +41,6 @@ public class ToolbarLeft
 
     private static void MakeSceneMenus(string path, GenericMenu menu, string addPath = "")
     {
-
-
         string[] scenes = Directory.GetFileSystemEntries(path);
 
         foreach (var scene in scenes)
