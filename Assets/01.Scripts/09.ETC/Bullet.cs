@@ -18,9 +18,17 @@ public class Bullet : MonoBehaviour
 	[SerializeField]
 	private string[] _BulletHitTag;
 
+	private ParticleSystem particleSystem;
+
+	private void Awake()
+	{
+		particleSystem = GetComponent<ParticleSystem>();
+	}
 	private void Update()
 	{
 		this.transform.position += foward.normalized * speed * Time.deltaTime;
+		if (!particleSystem.IsAlive())
+			ObjectPool.Instance.ReturnObject(PoolObjectType.PlayerBullet, this.gameObject);
 	}
 
 	private void OnTriggerEnter(Collider other)
