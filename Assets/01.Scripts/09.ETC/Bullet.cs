@@ -10,39 +10,54 @@ public enum BulletType : int
 }
 
 [RequireComponent(typeof(ParticleSystem))]
+[RequireComponent(typeof(CollisionCtrl))]
 public class Bullet : MonoBehaviour
 {
-	public int damage;
-	public Vector3 foward;
-	public float speed;
-	
+    public int Damage{ get; set; }
+	public Vector3 Direction{ get; set; }
+    public float Speed{ get; set; }
+
+    public LayerMask HitLayer{ get; set; }
 
     [SerializeField]
-    private LayerMask _hitLayer;
+    private GameObject _flush;
+    [SerializeField]
+    private GameObject _hit;
 
-    private ParticleSystem particleSystem;
+    private ParticleSystem _particleSystem;
 
-	private void Awake()
+    private CollisionCtrl _collisionCtrl;
+
+    protected virtual void Awake()
 	{
-		particleSystem = GetComponent<ParticleSystem>();
-	}
-	private void Update()
+		_particleSystem = GetComponent<ParticleSystem>();
+        _collisionCtrl = GetComponent<CollisionCtrl>();
+    }
+
+	protected virtual void Start() {
+        _collisionCtrl.ColliderEnterEvent += Hit;
+    }
+
+	protected virtual void Update()
 	{
-		this.transform.position += foward.normalized * speed * Time.deltaTime;
-		if (!particleSystem.IsAlive())
+		this.transform.position += Direction.normalized * Speed * Time.deltaTime;
+		if (!_particleSystem.IsAlive())
 			ObjectPool.Instance.ReturnObject(PoolObjectType.PlayerBullet, this.gameObject);
 	}
+
 
 	protected virtual void Hit(Collider other)
 	{
-		if( ((1 << other.gameObject.layer) & _hitLayer) > 0 )
+		if( ((1 << other.gameObject.layer) & HitLayer) > 0 )
 		{
-			other.GetComponent<IDmgAble>()?.Damage(damage);
-			ObjectPool.Instance.ReturnObject(PoolObjectType.PlayerBullet, this.gameObject);
+			other.GetComponent<IDmgAble>()?.Damage(Damage);
+
+			if(_hit != null)
+			{
+				GameObject hit = ObjectPool.Instance.GetObject(PoolObjectType.FireBullet_Flush,true);
+
+			}
 		}
-		else
-		{
-			ObjectPool.Instance.ReturnObject(PoolObjectType.PlayerBullet, this.gameObject);
-		}
+		ObjectPool.Instance.ReturnObject(PoolObjectType.PlayerBullet, this.gameObject);
 	}
 }

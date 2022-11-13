@@ -1,4 +1,6 @@
 public enum PoolObjectType
 {
-	PlayerBullet
+	PlayerBullet,
+	FireBullet_Flush,
+	FireBullet_Hit
 }
