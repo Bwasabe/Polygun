@@ -18,7 +18,10 @@ public class Bullet : MonoBehaviour
 	[SerializeField]
 	private string[] _BulletHitTag;
 
-	private ParticleSystem particleSystem;
+    [SerializeField]
+    private LayerMask _hitLayer;
+
+    private ParticleSystem particleSystem;
 
 	private void Awake()
 	{
@@ -33,6 +36,10 @@ public class Bullet : MonoBehaviour
 
 	private void OnTriggerEnter(Collider other)
 	{
+		if( (( 1 << other.gameObject.layer) & _hitLayer) > 0 )
+		{
+
+		}
 		if(other.CompareTag(_BulletHitTag[(int)bulletType]))
 		{
 			other.GetComponent<IDmgAble>().Damage(damage);

@@ -25,7 +25,8 @@ public class Player : MonoBehaviour
 
     private Dictionary<Type, BasePlayerComponent> _playerComponentDict = new Dictionary<Type, BasePlayerComponent>();
 
-    private void Awake() {
+    private void Awake()
+    {
         BasePlayerComponent[] components = GetComponentsInChildren<BasePlayerComponent>();
         for (int i = 0; i < components.Length; ++i)
         {
@@ -35,13 +36,20 @@ public class Player : MonoBehaviour
 
     public void AddPlayerComponent<T>() where T : BasePlayerComponent
     {
-        
+
     }
 
     public T GetPlayerComponent<T>() where T : BasePlayerComponent
     {
-        return _playerComponentDict[typeof(T)] as T;
+        Type type = typeof(T);
+        if (_playerComponentDict.TryGetValue(type, out BasePlayerComponent data))
+        {
+            return data as T;
+        }
+        else
+        {
+            throw new System.Exception($"{type} is Null in Dict");
+        }
     }
 }
-
 

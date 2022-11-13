@@ -9,7 +9,7 @@ public enum Result
     FAILURE,
 }
 
-public abstract class BT_Node : MonoBehaviour
+public abstract class BT_Node
 {
     protected Result _state;
 

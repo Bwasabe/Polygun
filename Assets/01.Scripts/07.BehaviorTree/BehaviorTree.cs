@@ -1,40 +1,64 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Reflection;
 
 public abstract class BehaviorTree : MonoBehaviour
 {
-    private Dictionary<string, object> DataDict { get; } = new Dictionary<string, object>();
+    private Dictionary<Type, BT_Data> _dataDict = new Dictionary<Type, BT_Data>();
 
     private BT_Node _root;
+
 
     protected virtual void Start()
     {
         _root = SetupTree();
+        InitAllData();
     }
 
-    protected virtual void Update() {
-        if(_root != null)
+    private void InitAllData()
+    {
+        Type myType = this.GetType();
+        BindingFlags flag = BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static | BindingFlags.Instance;
+        FieldInfo[] fieldInfos = myType.GetFields(flag);
+
+        foreach (var field in fieldInfos)
+        {
+            BT_Data data = field.GetValue(this) as BT_Data;
+
+            if(data != null)
+            {
+                Debug.Log(field);
+                _dataDict.Add(field.FieldType, data);
+            }
+        }
+    }
+
+    protected virtual void Update()
+    {
+        if (_root != null)
         {
             _root.Execute();
         }
     }
 
-
-    public object GetData(string key)
+    public T GetData<T>() where T : BT_Data
     {
-        if(DataDict.TryGetValue(key, out object o))
+        Type type = typeof(T);
+        if (_dataDict.TryGetValue(type, out BT_Data data))
         {
-            return o;
+            return data as T;
         }
         else
         {
-            throw new System.Exception($"{key} is Null in Dict");
+            throw new System.Exception($"{type} is Null in Dict");
         }
     }
-    public void SetData(string key, object o)
+
+    public void SetData(Type key, BT_Data data)
     {
-        DataDict[key] = o;
+        _dataDict[key] = data;
     }
 
     protected abstract BT_Node SetupTree();
