@@ -2,9 +2,8 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool : MonoBehaviour
+public class ObjectPool : MonoSingleton<ObjectPool>
 {
-    public static ObjectPool Instance;
 
     [SerializeField]
     ObjectPoolData objectPoolData;
@@ -13,8 +12,6 @@ public class ObjectPool : MonoBehaviour
 
     private void Awake()
     {
-        Instance = this;
-
         Initialize();
     }
 
