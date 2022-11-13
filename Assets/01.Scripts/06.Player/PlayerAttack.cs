@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerAttack : BasePlayerComponent
 {
 	[SerializeField]
-	private Transform attackPosition;
+	private Transform _attackPosition;
 	[SerializeField]
 	private float _bulletRate;
 
@@ -30,10 +30,10 @@ public class PlayerAttack : BasePlayerComponent
 	private void Attack()
 	{
 		GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.PlayerBullet);
-		obj.transform.position = attackPosition.position;
+		obj.transform.position = _attackPosition.position;
 		Bullet bulletObj = obj.GetComponent<Bullet>();
-		bulletObj.foward = attackPosition.forward;
-		bulletObj.damage = _player.playerStat.DamageStat;
-		bulletObj.bulletType = BulletType.ENEMY;
+		bulletObj.foward = _attackPosition.forward;
+		bulletObj.damage = _player.PlayerStat.DamageStat;
+		// bulletObj.bulletType = BulletType.ENEMY;
 	}
 }

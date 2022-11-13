@@ -19,8 +19,9 @@ public class Player : MonoBehaviour
 {
     public PLAYER_STATE CurrentState { get; set; }
 
+    public PlayerStat PlayerStat => _playerStat;
     [SerializeField]
-    public PlayerStat playerStat;
+    private PlayerStat _playerStat;
 
 
     private Dictionary<Type, BasePlayerComponent> _playerComponentDict = new Dictionary<Type, BasePlayerComponent>();
@@ -34,9 +35,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void AddPlayerComponent<T>() where T : BasePlayerComponent
+    public void SetPlayerComponent<T>(BasePlayerComponent playerComponent) where T : BasePlayerComponent
     {
-
+        _playerComponentDict[typeof(T)] = playerComponent;
     }
 
     public T GetPlayerComponent<T>() where T : BasePlayerComponent

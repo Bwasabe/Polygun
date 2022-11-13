@@ -8,15 +8,14 @@ public enum BulletType : int
 	ENEMY,
 	PLAYER
 }
+
+[RequireComponent(typeof(ParticleSystem))]
 public class Bullet : MonoBehaviour
 {
 	public int damage;
 	public Vector3 foward;
 	public float speed;
-	public BulletType bulletType;
-
-	[SerializeField]
-	private string[] _BulletHitTag;
+	
 
     [SerializeField]
     private LayerMask _hitLayer;
@@ -34,15 +33,11 @@ public class Bullet : MonoBehaviour
 			ObjectPool.Instance.ReturnObject(PoolObjectType.PlayerBullet, this.gameObject);
 	}
 
-	private void OnTriggerEnter(Collider other)
+	protected virtual void Hit(Collider other)
 	{
-		if( (( 1 << other.gameObject.layer) & _hitLayer) > 0 )
+		if( ((1 << other.gameObject.layer) & _hitLayer) > 0 )
 		{
-
-		}
-		if(other.CompareTag(_BulletHitTag[(int)bulletType]))
-		{
-			other.GetComponent<IDmgAble>().Damage(damage);
+			other.GetComponent<IDmgAble>()?.Damage(damage);
 			ObjectPool.Instance.ReturnObject(PoolObjectType.PlayerBullet, this.gameObject);
 		}
 		else

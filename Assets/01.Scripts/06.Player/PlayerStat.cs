@@ -14,6 +14,7 @@ public struct PlayerStat
 	private int _hp;
 	public int HP => _hp;
 
+
 	public void ResetHp()
 	{
 		_hp = _maxHp;

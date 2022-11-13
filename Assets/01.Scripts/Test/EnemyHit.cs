@@ -31,6 +31,6 @@ public class EnemyHit : MonoBehaviour, IDmgAble
 		Bullet bulletObj = obj.GetComponent<Bullet>();
 		bulletObj.foward = -this.transform.forward;
 		bulletObj.damage = 10;
-		bulletObj.bulletType = BulletType.PLAYER;
+		// bulletObj.bulletType = BulletType.PLAYER;
 	}
 }

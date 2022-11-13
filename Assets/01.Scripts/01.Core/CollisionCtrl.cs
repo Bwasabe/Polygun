@@ -2,12 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(Collider))]
 public class CollisionCtrl : MonoBehaviour
 {
-    public event System.Action<Collider2D> ColliderEvent;
+    public event System.Action<Collider> ColliderEnterEvent;
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        ColliderEvent?.Invoke(other);
+    public event System.Action<Collider> ColliderExitEvent;
+
+    private void OnTriggerEnter(Collider other) {
+        ColliderEnterEvent?.Invoke(other);
+    }
+
+    private void OnTriggerExit(Collider other) {
+        ColliderExitEvent?.Invoke(other);
     }
 }

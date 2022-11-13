@@ -7,12 +7,12 @@ public class PlayerDamaged : BasePlayerComponent,IDmgAble, IDmgCallbackable
 	protected override void Start()
 	{
 		base.Start();
-		_player.playerStat.ResetHp();
+		_player.PlayerStat.ResetHp();
 	}
 	public void Damage(int damage)
 	{
-		_player.playerStat.Damaged(damage);
-		if (_player.playerStat.HP <= 0)
+		_player.PlayerStat.Damaged(damage);
+		if (_player.PlayerStat.HP <= 0)
 		{
 			Die();
 		}
