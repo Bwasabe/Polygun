@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Yields;
 
 public enum BulletType : int
 {
@@ -20,9 +21,9 @@ public class Bullet : MonoBehaviour
     public LayerMask HitLayer{ get; set; }
 
     [SerializeField]
-    private GameObject _flush;
+    private ParticleSystem _flush;
     [SerializeField]
-    private GameObject _hit;
+    private ParticleSystem _hit;
 
     private ParticleSystem _particleSystem;
 
@@ -54,10 +55,19 @@ public class Bullet : MonoBehaviour
 
 			if(_hit != null)
 			{
-				GameObject hit = ObjectPool.Instance.GetObject(PoolObjectType.FireBullet_Flush,true);
+				GameObject hit = ObjectPool.Instance.GetObject(PoolObjectType.FireBullet_Flush);
+                ParticleSystem particle = hit.GetComponent<ParticleSystem>();
 
+                StartCoroutine(ObjectPool.Instance.ReturnObject(PoolObjectType.FireBullet_Hit, hit, particle.main.duration));
+            }
+
+			if(_flush != null)
+			{
+				
 			}
+
 		}
 		ObjectPool.Instance.ReturnObject(PoolObjectType.PlayerBullet, this.gameObject);
 	}
+
 }

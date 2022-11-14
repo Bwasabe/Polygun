@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -59,5 +59,11 @@ public class ObjectPool : MonoSingleton<ObjectPool>
         obj.gameObject.SetActive(false);
         obj.transform.SetParent(Instance.transform);
         Instance.poolObjectMap[type].Enqueue(obj);
+    }
+    
+	public IEnumerator ReturnObject(PoolObjectType type, GameObject returnObject, float duration)
+	{
+        yield return Yields.WaitForSeconds(duration);
+        ReturnObject(type, returnObject);
     }
 }

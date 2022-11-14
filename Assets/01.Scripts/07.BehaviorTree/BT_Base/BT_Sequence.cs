@@ -1,19 +1,13 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class BT_Sequence : BT_Node
+public class BT_Sequence : BT_MultipleNode
 {
-    protected List<BT_Node> nodes;
-
-    public BT_Sequence(BehaviorTree t, List<BT_Node> nodes) : base(t)
-    {
-        this.nodes = nodes;
-    }
+    public BT_Sequence(BehaviorTree t, List<BT_Node> children) : base(t, children){}
+    
     public override Result Execute()
     {
         bool isAnyNodeRunning = false;
-        foreach (var node in nodes)
+        foreach (var node in _children)
         {
             switch (node.Execute())
             {
