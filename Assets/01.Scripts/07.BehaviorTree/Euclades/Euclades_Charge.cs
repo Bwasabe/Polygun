@@ -5,6 +5,8 @@ using UnityEngine;
 // ReadyToCharge에서 넘어온 다음 돌진 동작
 public class Euclades_Charge : BT_Node
 {
+
+    // TODO: 속도 바꾸기 넣어주기
     public Euclades_Charge(BehaviorTree t) : base(t)
     {
         _cc = _tree.GetComponent<CharacterController>();

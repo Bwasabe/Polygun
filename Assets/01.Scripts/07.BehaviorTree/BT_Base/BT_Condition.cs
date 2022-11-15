@@ -1,4 +1,4 @@
-public class BT_Condition : BT_Node
+public abstract class BT_Condition : BT_Node
 {
     protected BT_Node _child;
 

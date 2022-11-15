@@ -5,7 +5,7 @@ public enum Result
     FAILURE,
 }
 
-public class BT_Node
+public abstract class BT_Node
 {
     protected Result _state;
 
@@ -16,10 +16,7 @@ public class BT_Node
         _tree = t;
     }
 
-    public virtual Result Execute()
-    {
-        return Result.FAILURE;
-    }
+    public abstract Result Execute();
 
 }
 

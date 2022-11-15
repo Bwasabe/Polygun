@@ -2,19 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
-public struct Page
-{
-    [SerializeField]
-    private float _maxHp;
-    public float MaxHp => _maxHp;
-
-    [SerializeField]
-    private float _minHp;
-
-    public float MinHp => _minHp;
-}
-
 [DisallowMultipleComponent]
 public class Euclades : BehaviorTree
 {
@@ -34,14 +21,7 @@ public class Euclades : BehaviorTree
 
     protected override BT_Node SetupTree()
     {
-        _root = new BT_Selector
-        (this, new List<BT_Node>
-            {
-                new Euclades_Page_Condition(this, _page[0], EucladesPage.Page1,_root),
-                new Euclades_Page_Condition(this, _page[1], EucladesPage.Page2,_root),
-                new Euclades_Page_Condition(this, _page[2], EucladesPage.Page3,_root),
-            }
-        );
+
 
         BT_RandomNode page1RandomNode = new BT_RandomNode(this, 0, 3, new List<BT_Node>
             {
@@ -57,7 +37,50 @@ public class Euclades : BehaviorTree
 
         _pageRandomNodes.Add(page1RandomNode);
 
-        
+        BT_RandomNode page2RandomNode = new BT_RandomNode(this, 0, 3, new List<BT_Node>
+        {
+            new BT_Sequence(this, new List<BT_Node>
+                {
+                    new Euclades_ReadyToCharge(this),
+                    new Euclades_Charge(this)
+                }),
+            new BT_Sequence(this, new List<BT_Node>{
+                new Boss_ViewChanger(this, Viewpoint.SideView),
+                new Euclades_SideviewDash(this)
+            }),
+            new BT_Sequence(this, new List<BT_Node>{
+                new Boss_ViewChanger(this, Viewpoint.TopView),
+                new Euclades_TopdownShooter(this)
+            }),
+        });
+        _pageRandomNodes.Add(page2RandomNode);
+
+        BT_RandomNode page3RandomNode = new BT_RandomNode(this, 0, 3, new List<BT_Node>
+        {
+            new BT_Sequence(this, new List<BT_Node>{
+                new Boss_ViewChanger(this, Viewpoint.SideView),
+                new Euclades_SideviewPlatformer(this)
+            }),
+            new BT_Sequence(this, new List<BT_Node>
+            {
+                new Euclades_ReadyToCharge(this),
+                new Euclades_PortalCharge(this)
+            }),
+            new BT_Sequence(this, new List<BT_Node>{
+                new Euclades_Blackhole(this),
+                new Euclades_SpawnJumpmap(this)
+            }),
+        });
+        _pageRandomNodes.Add(page3RandomNode);
+
+
+        _root = new BT_Selector(this, new List<BT_Node>
+            {
+                new Euclades_Page_Condition(this, _page[0], EucladesPage.Page1,page1RandomNode),
+                new Euclades_Page_Condition(this, _page[1], EucladesPage.Page2,page2RandomNode),
+                new Euclades_Page_Condition(this, _page[2], EucladesPage.Page3,page3RandomNode),
+            }
+        );
 
         return _root;
     }
