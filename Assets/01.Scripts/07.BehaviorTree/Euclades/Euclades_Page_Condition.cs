@@ -6,6 +6,7 @@ public class Euclades_Page_Condition : BT_Condition
 {
     private Page _page;
     private Euclades_Data _data;
+    private UnitStat _stat;
 
     private Euclades.EucladesPage _pageIndex;
 

@@ -19,8 +19,4 @@ public class PlayerRotation : BasePlayerComponent
         }
     }
 
-    protected override void RegisterInput()
-    {
-
-    }
 }

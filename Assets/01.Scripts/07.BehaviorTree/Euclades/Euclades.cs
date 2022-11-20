@@ -17,13 +17,13 @@ public class Euclades : BehaviorTree
     [SerializeField]
     private Euclades_Data _data;
 
-    private List<BT_RandomNode> _pageRandomNodes = new List<BT_RandomNode>();
+    private List<BT_ListRandomNode> _pageRandomNodes = new List<BT_ListRandomNode>();
 
     protected override BT_Node SetupTree()
     {
 
 
-        BT_RandomNode page1RandomNode = new BT_RandomNode(this, 0, 3, new List<BT_Node>
+        BT_ListRandomNode page1RandomNode = new BT_ListRandomNode(this, Define.DEFAULT_RANDOM_NUM, Define.DEFAULT_RANDOM_NUM, new List<BT_Node>
             {
                 new Euclades_Shockwave(this),
 
@@ -37,7 +37,7 @@ public class Euclades : BehaviorTree
 
         _pageRandomNodes.Add(page1RandomNode);
 
-        BT_RandomNode page2RandomNode = new BT_RandomNode(this, 0, 3, new List<BT_Node>
+        BT_ListRandomNode page2RandomNode = new BT_ListRandomNode(this, Define.DEFAULT_RANDOM_NUM, Define.DEFAULT_RANDOM_NUM, new List<BT_Node>
         {
             new BT_Sequence(this, new List<BT_Node>
                 {
@@ -55,7 +55,7 @@ public class Euclades : BehaviorTree
         });
         _pageRandomNodes.Add(page2RandomNode);
 
-        BT_RandomNode page3RandomNode = new BT_RandomNode(this, 0, 3, new List<BT_Node>
+        BT_ListRandomNode page3RandomNode = new BT_ListRandomNode(this, Define.DEFAULT_RANDOM_NUM, Define.DEFAULT_RANDOM_NUM, new List<BT_Node>
         {
             new BT_Sequence(this, new List<BT_Node>{
                 new Boss_ViewChanger(this, Viewpoint.SideView),
@@ -93,12 +93,12 @@ public class Euclades : BehaviorTree
 
 public partial class Euclades_Data
 {
-    public BT_RandomNode CurrentRandomNode { get; set; }
+    public BT_ListRandomNode CurrentRandomNode { get; set; }
     public int PageIndex { get; private set; } = 0;
 
     public void ResetRandom()
     {
-        CurrentRandomNode.ResetRandom();
+        CurrentRandomNode.ResetList();
     }
 
 }

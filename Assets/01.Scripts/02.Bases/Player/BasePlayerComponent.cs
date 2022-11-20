@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BasePlayerComponent : MonoBehaviour
+public class BasePlayerComponent : MonoBehaviour
 {
     protected Player _player;
 
@@ -19,5 +19,5 @@ public abstract class BasePlayerComponent : MonoBehaviour
     /// <summary>
     /// 키 세팅을 위해 키 등록 해두는 함수
     /// </summary>
-    protected abstract void RegisterInput();
+    protected virtual void RegisterInput() { }
 }
