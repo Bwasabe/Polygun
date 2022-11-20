@@ -5,28 +5,26 @@ using UnityEngine;
 
 public class CameraManager : MonoSingleton<CameraManager>
 {
-	private CinemachineVirtualCamera _virtualCamera;
-	public CinemachineImpulseSource impulseSource;
-	public CinemachineVirtualCamera mainVCamera
-	{
-		get
-		{
-			if (_virtualCamera == null)
-				_virtualCamera = GetComponent<CinemachineVirtualCamera>();
+    // private CinemachineVirtualCamera _virtualCamera;
+    public CinemachineImpulseSource ImpulseSource
+    {
+        get
+        {
+            if (_impulseSource == null)
+            {
+                _impulseSource = Utils.VCam.GetComponent<CinemachineImpulseSource>();
+            }
+            return _impulseSource;
+        }
+    }
 
-			return _virtualCamera;
-		}
-	}
-
-	public void Awake()
-	{
-		_virtualCamera = GetComponent<CinemachineVirtualCamera>();
-	}
+    private CinemachineImpulseSource _impulseSource;
 
 
-	public void CameraShake()
-	{
-		impulseSource.GenerateImpulse();
-		Debug.LogWarning("?");
-	}
+
+    public void CameraShake()
+    {
+        _impulseSource.GenerateImpulse();
+        Debug.LogWarning("?");
+    }
 }
