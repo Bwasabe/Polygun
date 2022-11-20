@@ -13,6 +13,7 @@ public class UnitStat
     [SerializeField]
     private float _defaultSpeed;
 
+    //TODO: 속도를 이용하여 움직이게 만들기
     private float _speed;
     public float Speed{
         get => _speed;

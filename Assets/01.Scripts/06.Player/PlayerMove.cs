@@ -8,8 +8,6 @@ using UnityEngine;
 public class PlayerMove : BasePlayerComponent
 {
     [SerializeField]
-    private float _playerSpeed = 8f;
-    [SerializeField]
     private Vector3 _worldDir = Vector3.up;
 
     [SerializeField]
@@ -17,12 +15,20 @@ public class PlayerMove : BasePlayerComponent
 
     private Vector3 _dir;
 
+    private PlayerStat _playerStat;
+
     public bool IsFreeze { get; set; } = false;
 
     private CharacterController _cc;
     private void Awake()
     {
         _cc = GetComponent<CharacterController>();
+    }
+
+    protected override void Start()
+    {
+        base.Start();
+        _playerStat = _player.PlayerStat;
     }
 
     protected override void RegisterInput()
@@ -89,7 +95,7 @@ public class PlayerMove : BasePlayerComponent
         _dir = Vector3.Lerp(_dir, (right * input.x + forward * input.z).normalized, Time.deltaTime * _moveSmooth);
 
         
-        _cc.Move(_playerSpeed * _dir * Time.deltaTime * GameManager.TimeScale);
+        _cc.Move(_playerStat.Speed * _dir * Time.deltaTime * GameManager.TimeScale);
     }
 
 }

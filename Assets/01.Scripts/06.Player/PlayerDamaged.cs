@@ -20,7 +20,7 @@ public class PlayerDamaged : BasePlayerComponent, IDmgAble
 
     private void Die()
     {
-        GameManager.Instance.Player.CurrentState = PLAYER_STATE.DIE;
+        _player.CurrentState = PLAYER_STATE.DIE;
         Debug.Log("플레이어 죽음");
         Debug.Break();
         this.gameObject.SetActive(false);

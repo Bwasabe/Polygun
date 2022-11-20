@@ -7,7 +7,7 @@ public class BT_ListRandomNode : BT_MultipleNode
 
     public BT_ListRandomNode(BehaviorTree t, int min, int max, List<BT_Node> children) : base(t, children)
     {
-        if (min.Equals(BT_RandomNode.Define.DEFAULT_RANDOM_NUM))
+        if (min.Equals(Define.DEFAULT_RANDOM_NUM))
         {
             _min = 0;
         }
@@ -15,7 +15,7 @@ public class BT_ListRandomNode : BT_MultipleNode
         {
             _min = min;
         }
-        if (max.Equals(BT_RandomNode.Define.DEFAULT_RANDOM_NUM))
+        if (max.Equals(Define.DEFAULT_RANDOM_NUM))
         {
             _max = children.Count;
         }
