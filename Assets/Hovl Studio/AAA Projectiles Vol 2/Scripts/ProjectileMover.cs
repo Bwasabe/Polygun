@@ -68,7 +68,9 @@ public class ProjectileMover : MonoBehaviour
             if (detachedPrefab != null)
             {
                 detachedPrefab.transform.parent = null;
-            }
+                detachedPrefab.transform.localRotation = Quaternion.Euler(0f,45f,0f);
+
+			}
         }
         Destroy(gameObject);
     }
