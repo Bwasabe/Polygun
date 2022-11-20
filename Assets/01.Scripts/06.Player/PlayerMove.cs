@@ -49,19 +49,19 @@ public class PlayerMove : BasePlayerComponent
     {
         if (Input.GetKey(_input.GetInput("LEFT")))
         {
-            input += Vector3.left;
+            input += -CameraManager.Instance.mainVCamera.transform.right;
         }
         if (Input.GetKey(_input.GetInput("RIGHT")))
         {
-            input += Vector3.right;
+            input += CameraManager.Instance.mainVCamera.transform.right;
         }
         if (Input.GetKey(_input.GetInput("FORWARD")))
         {
-            input += Vector3.forward;
+            input += CameraManager.Instance.mainVCamera.transform.forward;
         }
         if (Input.GetKey(_input.GetInput("BACKWARD")))
         {
-            input += Vector3.back;
+            input += -CameraManager.Instance.mainVCamera.transform.forward;
         }
     }
 

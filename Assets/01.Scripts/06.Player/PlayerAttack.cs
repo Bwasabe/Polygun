@@ -37,6 +37,7 @@ public class PlayerAttack : BasePlayerComponent
         bulletObj.Damage = _player.PlayerStat.DamageStat;
         bulletObj.HitLayer = _hitLayer;
         bulletObj.Speed = _bulletSpeed;
-        // bulletObj.bulletType = BulletType.ENEMY;
-    }
+        CameraManager.Instance.CameraShake();
+		// bulletObj.bulletType = BulletType.ENEMY;
+	}
 }
