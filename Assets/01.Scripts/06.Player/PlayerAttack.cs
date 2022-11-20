@@ -17,7 +17,7 @@ public class PlayerAttack : BasePlayerComponent
     private void Update()
     {
         _rateTime += Time.deltaTime;
-        if (Input.GetKey(_input.GetInput("MOUSELEFTBUTTON"))&& _bulletRate <= _rateTime)
+        if (Input.GetKey(_input.GetInput("MOUSE_LEFTBUTTON"))&& _bulletRate <= _rateTime)
         {
             _rateTime = 0;
             Attack();
@@ -25,7 +25,7 @@ public class PlayerAttack : BasePlayerComponent
     }
     protected override void RegisterInput()
     {
-        _input.AddInput("MOUSELEFTBUTTON", KeyCode.Mouse0);
+        _input.AddInput("MOUSE_LEFTBUTTON", KeyCode.Mouse0);
     }
 
     private void Attack()

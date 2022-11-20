@@ -1,13 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 
-public class BT_Selector : BT_Node
+public class BT_Selector : BT_MultipleNode
 {
-    protected List<BT_Node> _children;
-    public BT_Selector(BehaviorTree t, List<BT_Node> children) : base(t) {
-        _children = children;
-    }
+    public BT_Selector(BehaviorTree t, List<BT_Node> children) : base(t, children){}
 
     public override Result Execute()
     {

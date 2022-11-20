@@ -46,6 +46,7 @@ public static class Define
 
     private static FadeParent _fadeParent;
 
+    public const int DEFAULT_RANDOM_NUM = -1;
 
 
     public static Vector2 MousePos => MainCam.ScreenToWorldPoint(Input.mousePosition);

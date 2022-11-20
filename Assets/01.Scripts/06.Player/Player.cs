@@ -35,6 +35,19 @@ public class Player : MonoBehaviour
         }
     }
 
+    private void Start() {
+        StartCoroutine(asfdasdf());
+        Debug.Log("스타트");
+    }
+    private IEnumerator asfdasdf()
+    {
+        for (int i = 0; i < 2; ++i)
+        {
+            yield return null;
+        }
+            Debug.Log("코루틴");
+    }
+
     public void SetPlayerComponent<T>(BasePlayerComponent playerComponent) where T : BasePlayerComponent
     {
         _playerComponentDict[typeof(T)] = playerComponent;

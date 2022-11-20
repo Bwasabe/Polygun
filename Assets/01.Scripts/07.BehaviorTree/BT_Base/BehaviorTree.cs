@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -8,9 +7,9 @@ public abstract class BehaviorTree : MonoBehaviour
 {
     private Dictionary<Type, BT_Data> _dataDict = new Dictionary<Type, BT_Data>();
 
-    private BT_Node _root;
+    protected BT_Node _root;
 
-
+    public bool IsStop { get; set; } = false;
     protected virtual void Start()
     {
         _root = SetupTree();
@@ -37,7 +36,7 @@ public abstract class BehaviorTree : MonoBehaviour
 
     protected virtual void Update()
     {
-        if (_root != null)
+        if (_root != null && !IsStop)
         {
             _root.Execute();
         }
@@ -56,10 +55,10 @@ public abstract class BehaviorTree : MonoBehaviour
         }
     }
 
-    public void SetData(Type key, BT_Data data)
-    {
-        _dataDict[key] = data;
-    }
+    // protected void SetData(Type key, BT_Data data)
+    // {
+    //     _dataDict[key] = data;
+    // }
 
     protected abstract BT_Node SetupTree();
 
