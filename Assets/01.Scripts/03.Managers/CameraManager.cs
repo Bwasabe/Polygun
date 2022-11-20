@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CameraManager : MonoSingleton<CameraManager>
 {
-    // private CinemachineVirtualCamera _virtualCamera;
+    private CinemachineVirtualCamera _virtualCamera;
     public CinemachineImpulseSource ImpulseSource
     {
         get
@@ -20,8 +20,10 @@ public class CameraManager : MonoSingleton<CameraManager>
 
     private CinemachineImpulseSource _impulseSource;
 
-
-
+    private void Awake()
+    {
+        _impulseSource = GetComponent<CinemachineImpulseSource>();
+	}
     public void CameraShake()
     {
         _impulseSource.GenerateImpulse();

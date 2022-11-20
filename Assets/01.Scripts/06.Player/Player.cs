@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        //_playerStat.Init();
+        _playerStat.Init();
         
         BasePlayerComponent[] components = GetComponentsInChildren<BasePlayerComponent>();
         for (int i = 0; i < components.Length; ++i)
