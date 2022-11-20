@@ -23,6 +23,11 @@ public class UnitStat
     private int _hp;
 	public int HP => _hp;
 
+	public virtual void Init()
+	{
+        ResetHp();
+        ResetSpeed();
+    }
 
 	public void ResetHp()
 	{
