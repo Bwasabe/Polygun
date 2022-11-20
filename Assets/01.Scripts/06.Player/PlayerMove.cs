@@ -53,21 +53,22 @@ public class PlayerMove : BasePlayerComponent
 
     private void SetInput(ref Vector3 input)
     {
+        Debug.Log(_input);
         if (Input.GetKey(_input.GetInput("LEFT")))
         {
-            input += -CameraManager.Instance.mainVCamera.transform.right;
+            input += Vector3.left;
         }
         if (Input.GetKey(_input.GetInput("RIGHT")))
         {
-            input += CameraManager.Instance.mainVCamera.transform.right;
+            input += Vector3.right;
         }
         if (Input.GetKey(_input.GetInput("FORWARD")))
         {
-            input += CameraManager.Instance.mainVCamera.transform.forward;
+            input += Vector3.forward;
         }
         if (Input.GetKey(_input.GetInput("BACKWARD")))
         {
-            input += -CameraManager.Instance.mainVCamera.transform.forward;
+            input += Vector3.back;
         }
     }
 
@@ -88,10 +89,11 @@ public class PlayerMove : BasePlayerComponent
     {
         SetState(input);
 
-        Vector3 forward = _worldDir;
+        Vector3 forward = Utils.VCam.transform.forward;
         forward.y = 0f;
 
         Vector3 right = new Vector3(forward.z, 0f, -forward.x);
+        Debug.Log((right * input.x + forward * input.z).normalized);
         _dir = Vector3.Lerp(_dir, (right * input.x + forward * input.z).normalized, Time.deltaTime * _moveSmooth);
 
         
