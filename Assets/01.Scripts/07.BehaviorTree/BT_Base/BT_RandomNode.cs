@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-public class BT_RandomNode : BT_MultipleNode
+public class BT_RandomNode : BT_Node
 {
     public BT_RandomNode(BehaviorTree t, int min, int max, List<BT_Node> children) : base(t, children)
     {
@@ -31,7 +31,14 @@ public class BT_RandomNode : BT_MultipleNode
     {
         return _children[_random].Execute();
     }
-    public void ResetRandom()
+
+    protected override void OnEnter()
+    {
+        base.OnEnter();
+        ResetRandom();
+    }
+
+    private void ResetRandom()
     {
         _random = UnityEngine.Random.Range(_min, _max);
     }

@@ -9,6 +9,8 @@ public abstract class BehaviorTree : MonoBehaviour
 
     protected BT_Node _root;
 
+    protected BT_Node _currentNode;
+
     public bool IsStop { get; set; } = false;
     protected virtual void Start()
     {
