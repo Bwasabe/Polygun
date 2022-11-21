@@ -23,7 +23,7 @@ public class Euclades : BehaviorTree
     {
 
 
-        BT_ListRandomNode page1RandomNode = new BT_ListRandomNode(this, 0, 1, new List<BT_Node>
+        BT_ListRandomNode page1RandomNode = new BT_ListRandomNode(this, 0, 0, new List<BT_Node>
             {
                 new Euclades_Charge(this, EucladesPage.Page1),
 
@@ -73,9 +73,9 @@ public class Euclades : BehaviorTree
 
         _root = new BT_Selector(this, new List<BT_Node>
             {
-                new Euclades_Page_Condition(this, _page[0], EucladesPage.Page1,new List<BT_Node>{page1RandomNode}),
-                new Euclades_Page_Condition(this, _page[1], EucladesPage.Page2,new List<BT_Node>{page2RandomNode}),
-                new Euclades_Page_Condition(this, _page[2], EucladesPage.Page3,new List<BT_Node>{page3RandomNode}),
+                new Euclades_Page_Condition(this, _page[0], EucladesPage.Page1, new List<BT_Node>{page1RandomNode}),
+                new Euclades_Page_Condition(this, _page[1], EucladesPage.Page2, new List<BT_Node>{page2RandomNode}),
+                new Euclades_Page_Condition(this, _page[2], EucladesPage.Page3, new List<BT_Node>{page3RandomNode}),
             }
         );
 
@@ -91,7 +91,7 @@ public class Euclades : BehaviorTree
 public partial class Euclades_Data
 {
     public BT_ListRandomNode CurrentRandomNode { get; set; }
-    public int PageIndex { get; private set; } = 0;
+    public Euclades.EucladesPage PageIndex { get; private set; } = Euclades.EucladesPage.Page1;
 
     public void ResetRandom()
     {
