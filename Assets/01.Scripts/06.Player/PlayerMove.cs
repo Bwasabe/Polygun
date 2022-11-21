@@ -96,6 +96,10 @@ public class PlayerMove : BasePlayerComponent
         Debug.Log((right * input.x + forward * input.z).normalized);
         _dir = Vector3.Lerp(_dir, (right * input.x + forward * input.z).normalized, Time.deltaTime * _moveSmooth);
 
+        if(_dir != Vector3.zero)
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_dir), Time.deltaTime * _moveSmooth);
+        }
         
         _cc.Move(_playerStat.Speed * _dir * Time.deltaTime * GameManager.TimeScale);
     }
