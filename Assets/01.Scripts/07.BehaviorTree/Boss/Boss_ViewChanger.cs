@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Boss_ViewChanger : BT_Node
 {
-    public Boss_ViewChanger(BehaviorTree t, Viewpoint point) : base(t)
+    public Boss_ViewChanger(BehaviorTree t, Viewpoint point, List<BT_Node> c= null) : base(t, c)
     {
         _viewPoint = point;
     }
@@ -12,13 +12,13 @@ public class Boss_ViewChanger : BT_Node
     private Viewpoint _viewPoint;
     private Result _result;
 
-    public override Result Execute()
-    {
-        _tree.IsStop = true;
+    // public override Result Execute()
+    // {
+    //     _tree.IsStop = true;
 
-        _tree.StartCoroutine(ViewChanger(_viewPoint));
-        return _result;
-    }
+    //     _tree.StartCoroutine(ViewChanger(_viewPoint));
+    //     return _result;
+    // }
 
     private IEnumerator ViewChanger(Viewpoint point)
     {

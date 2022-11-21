@@ -1,30 +1,47 @@
 using System.Collections.Generic;
 
-public class BT_Selector : BT_MultipleNode
+public class BT_Selector : BT_Node
 {
-    public BT_Selector(BehaviorTree t, List<BT_Node> children) : base(t, children){}
+    public BT_Selector(BehaviorTree t, List<BT_Node> c) : base(t, c){}
 
-    public override Result Execute()
+    protected override void OnEnter()
     {
-        foreach (BT_Node node in _children)
+        base.OnEnter();
+    }
+
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+
+        foreach (BT_Node child in _children)
         {
-            switch (node.Execute())
+            switch (child.Execute())
             {
                 case Result.FAILURE:
                     continue;
-                case Result.SUCCESS:
-                    _state = Result.SUCCESS;
-                    return _state;
                 case Result.RUNNING:
-                    _state = Result.RUNNING;
-                    return _state;
+                    NodeResult = Result.RUNNING;
+                    continue;
+                case Result.SUCCESS:
+                    NodeResult = Result.SUCCESS;
+                    UpdateState = UpdateState.Exit;
+                    break;
                 default:
                     continue;
             }
         }
+    }
 
-        _state = Result.FAILURE;
-        return _state;
+    protected override void OnExit()
+    {
+        base.OnExit();
+    }
+
+    public override Result Execute()
+    {
+        base.Execute();
+
+        return NodeResult;
     }
 
 }

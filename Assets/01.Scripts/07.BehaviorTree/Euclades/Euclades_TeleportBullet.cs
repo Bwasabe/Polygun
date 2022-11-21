@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Euclades_TeleportBullet : BT_Node
 {
-    public Euclades_TeleportBullet(BehaviorTree t) : base(t)
+    public Euclades_TeleportBullet(BehaviorTree t, List<BT_Node> c= null) : base(t,c)
     {
         _data = _tree.GetData<Euclades_Data>();
     }
@@ -14,33 +14,33 @@ public class Euclades_TeleportBullet : BT_Node
     private int _currentBulletCount = 0;
 
     private float _timer;
-    public override Result Execute()
-    {
-        _timer += Time.deltaTime;
-        if (_currentBulletCount == 0)
-        {
-            //TODO: 조준 애니메이션 혹은 트윈들
-            if (_timer >= _data.FirstBulletDelay)
-            {
-                //TODO: 총 쏘기
-                _currentBulletCount++;
-            }
-            return Result.RUNNING;
-        }
-        else if(_currentBulletCount == _data.BulletCount)
-        {
-            return Result.SUCCESS;
-        }
-        else
-        {
-            if (_timer >= _data.BulletDelay)
-            {
-                //TODO: 총 쏘기
-                _currentBulletCount++;
-            }
-            return Result.RUNNING;
-        }
-    }
+    // public override Result Execute()
+    // {
+    //     _timer += Time.deltaTime;
+    //     if (_currentBulletCount == 0)
+    //     {
+    //         //TODO: 조준 애니메이션 혹은 트윈들
+    //         if (_timer >= _data.FirstBulletDelay)
+    //         {
+    //             //TODO: 총 쏘기
+    //             _currentBulletCount++;
+    //         }
+    //         return Result.RUNNING;
+    //     }
+    //     else if(_currentBulletCount == _data.BulletCount)
+    //     {
+    //         return Result.SUCCESS;
+    //     }
+    //     else
+    //     {
+    //         if (_timer >= _data.BulletDelay)
+    //         {
+    //             //TODO: 총 쏘기
+    //             _currentBulletCount++;
+    //         }
+    //         return Result.RUNNING;
+    //     }
+    // }
 }
 
 public partial class Euclades_Data

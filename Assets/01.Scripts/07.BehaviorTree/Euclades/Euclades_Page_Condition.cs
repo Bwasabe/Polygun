@@ -6,11 +6,10 @@ public class Euclades_Page_Condition : BT_Condition
 {
     private Page _page;
     private Euclades_Data _data;
-    private UnitStat _stat;
 
     private Euclades.EucladesPage _pageIndex;
 
-    public Euclades_Page_Condition(BehaviorTree tree, Page page, Euclades.EucladesPage pageIndex, BT_Node child) : base(tree, child)
+    public Euclades_Page_Condition(BehaviorTree tree, Page page, Euclades.EucladesPage pageIndex,List<BT_Node> c) : base(tree, c)
     {
         _page = page;
         _pageIndex = pageIndex;

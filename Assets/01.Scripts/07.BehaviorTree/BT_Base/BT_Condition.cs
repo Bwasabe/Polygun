@@ -1,10 +1,10 @@
+using System.Collections.Generic;
+
 public abstract class BT_Condition : BT_Node
 {
-    protected BT_Node _child;
-
-    public BT_Condition(BehaviorTree tree, BT_Node child) : base(tree)
+    protected BT_Condition(BehaviorTree t, List<BT_Node> c) : base(t, c)
     {
-        _child = child;
+        
     }
 
 }

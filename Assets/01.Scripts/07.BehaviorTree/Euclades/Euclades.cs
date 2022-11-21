@@ -23,15 +23,12 @@ public class Euclades : BehaviorTree
     {
 
 
-        BT_ListRandomNode page1RandomNode = new BT_ListRandomNode(this, Define.DEFAULT_RANDOM_NUM, Define.DEFAULT_RANDOM_NUM, new List<BT_Node>
+        BT_ListRandomNode page1RandomNode = new BT_ListRandomNode(this, 0, 1, new List<BT_Node>
             {
+                new Euclades_Charge(this, EucladesPage.Page1),
+
                 new Euclades_Shockwave(this),
 
-                new BT_Sequence(this, new List<BT_Node>
-                    {
-                        new Euclades_ReadyToCharge(this),
-                        new Euclades_Charge(this)
-                    }),
                 new Euclades_TeleportBullet(this)
             });
 
@@ -42,7 +39,7 @@ public class Euclades : BehaviorTree
             new BT_Sequence(this, new List<BT_Node>
                 {
                     new Euclades_ReadyToCharge(this),
-                    new Euclades_Charge(this)
+                    new Euclades_Charge(this, EucladesPage.Page2)
                 }),
             new BT_Sequence(this, new List<BT_Node>{
                 new Boss_ViewChanger(this, Viewpoint.SideView),
@@ -76,9 +73,9 @@ public class Euclades : BehaviorTree
 
         _root = new BT_Selector(this, new List<BT_Node>
             {
-                new Euclades_Page_Condition(this, _page[0], EucladesPage.Page1,page1RandomNode),
-                new Euclades_Page_Condition(this, _page[1], EucladesPage.Page2,page2RandomNode),
-                new Euclades_Page_Condition(this, _page[2], EucladesPage.Page3,page3RandomNode),
+                new Euclades_Page_Condition(this, _page[0], EucladesPage.Page1,new List<BT_Node>{page1RandomNode}),
+                new Euclades_Page_Condition(this, _page[1], EucladesPage.Page2,new List<BT_Node>{page2RandomNode}),
+                new Euclades_Page_Condition(this, _page[2], EucladesPage.Page3,new List<BT_Node>{page3RandomNode}),
             }
         );
 
