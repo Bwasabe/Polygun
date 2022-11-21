@@ -32,6 +32,7 @@ public class PlayerAttack : BasePlayerComponent
     {
         GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.PlayerBullet);
         obj.transform.position = _attackPosition.position;
+        obj.transform.rotation = this.transform.localRotation;
         Bullet bulletObj = obj.GetComponent<Bullet>();
         bulletObj.Direction = _attackPosition.forward;
         bulletObj.Damage = _player.PlayerStat.DamageStat;
