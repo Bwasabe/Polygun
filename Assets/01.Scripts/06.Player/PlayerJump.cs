@@ -68,10 +68,16 @@ public class PlayerJump : BasePlayerComponent
     private void Jump()
     {
         CheckJumpState();
-        OnGUIManager.Instance._guiDict["IsGround"] = $"{_cc.collisionFlags}";
+        OnGUIManager.Instance._guiDict["IsGround"] = $"{IsGround()}";
         if (IsGround())
         {
-            if (_jumpState == JUMP_STATE.JUMPDOWN)
+   //         if (_jumpState == JUMP_STATE.NONE)
+   //         {
+   //             Debug.Log("점피");
+			//	_velocity.y = 0f;
+			//}
+
+			if (_jumpState == JUMP_STATE.JUMPDOWN)
             {
                 _velocity.y = 0f;
                 _jumpState = JUMP_STATE.NONE;
@@ -125,7 +131,7 @@ public class PlayerJump : BasePlayerComponent
 
         if (!(_jumpState == JUMP_STATE.NONE)) return;
 
-        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity, _groundLayer))
+        if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, 0.5f, _groundLayer))
         {
             Vector3 pos2 = transform.position + _cc.center;
             float value = _cc.height * 0.5f;

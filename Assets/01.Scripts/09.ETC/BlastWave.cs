@@ -11,16 +11,12 @@ public class BlastWave : MonoBehaviour
 	public float startWidth;
 
 	private LineRenderer lineRenderer;
-	private void Start()
-	{
-		lineRenderer = GetComponent<LineRenderer>();
-	}
-
 	private void Awake()
 	{
 		lineRenderer = GetComponent<LineRenderer>();
 		lineRenderer.positionCount = pointsCount + 1;
 	}
+
 
 	private IEnumerator Blast()
 	{
