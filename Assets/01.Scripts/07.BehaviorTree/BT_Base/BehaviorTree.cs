@@ -12,9 +12,13 @@ public abstract class BehaviorTree : MonoBehaviour
     // protected BT_Node _currentNode;
 
     public bool IsStop { get; set; } = false;
-    protected virtual void Start()
+
+    protected virtual void Awake()
     {
         InitAllData();
+    }
+    protected virtual void Start()
+    {
         _root = SetupTree();
     }
 
