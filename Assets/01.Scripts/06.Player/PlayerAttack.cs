@@ -14,6 +14,11 @@ public class PlayerAttack : BasePlayerComponent
     private float _bulletRate;
 
     private float _rateTime;
+
+    protected override void Start()
+    {
+        base.Start();
+    }
     private void Update()
     {
         _rateTime += Time.deltaTime;

@@ -19,13 +19,14 @@ public class Euclades_Page_Condition : BT_Condition
     public override Result Execute()
     {
 
-        if (_data.Hp <= _page.MaxHp && _data.Hp <= _page.MinHp)
+        if (_page.MinHp <= _data.Stat.HP && _data.Stat.HP <= _page.MaxHp)
         {
-            if (!_pageIndex.Equals(_data.PageIndex))
+            if (_pageIndex != _data.PageIndex)
             {
                 Euclades euclades = _tree as Euclades;
                 euclades.SetRandomNode(_pageIndex);
             }
+            _children[0].Execute();
             return Result.SUCCESS;
         }
         else

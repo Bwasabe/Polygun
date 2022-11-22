@@ -9,13 +9,13 @@ public abstract class BehaviorTree : MonoBehaviour
 
     protected BT_Node _root;
 
-    protected BT_Node _currentNode;
+    // protected BT_Node _currentNode;
 
     public bool IsStop { get; set; } = false;
     protected virtual void Start()
     {
-        _root = SetupTree();
         InitAllData();
+        _root = SetupTree();
     }
 
     private void InitAllData()
@@ -30,7 +30,6 @@ public abstract class BehaviorTree : MonoBehaviour
 
             if(data != null)
             {
-                Debug.Log(field);
                 _dataDict.Add(field.FieldType, data);
             }
         }
@@ -42,6 +41,11 @@ public abstract class BehaviorTree : MonoBehaviour
         {
             _root.Execute();
         }
+    }
+
+    public void EnterNode()
+    {
+        _root.EnterNode();
     }
 
     public T GetData<T>() where T : BT_Data

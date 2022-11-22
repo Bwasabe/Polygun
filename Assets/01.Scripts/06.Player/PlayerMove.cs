@@ -53,7 +53,6 @@ public class PlayerMove : BasePlayerComponent
 
     private void SetInput(ref Vector3 input)
     {
-        Debug.Log(_input);
         if (Input.GetKey(_input.GetInput("LEFT")))
         {
             input += Vector3.left;
@@ -93,7 +92,6 @@ public class PlayerMove : BasePlayerComponent
         forward.y = 0f;
 
         Vector3 right = new Vector3(forward.z, 0f, -forward.x);
-        Debug.Log((right * input.x + forward * input.z).normalized);
         _dir = Vector3.Lerp(_dir, (right * input.x + forward * input.z).normalized, Time.deltaTime * _moveSmooth);
 
         if(_dir != Vector3.zero)

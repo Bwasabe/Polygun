@@ -30,19 +30,24 @@ public class BT_Node
         _children = c;
     }
 
-    public virtual Result Execute(){
-        
-        if(UpdateState.Equals(UpdateState.Enter))
+    public virtual Result Execute()
+    {
+        if(UpdateState.Equals(UpdateState.None))
+        {
+            EnterNode();
+        }
+
+        if (UpdateState.Equals(UpdateState.Enter))
         {
             OnEnter();
         }
 
-        if(UpdateState.Equals(UpdateState.Update))
+        if (UpdateState.Equals(UpdateState.Update))
         {
             OnUpdate();
         }
 
-        if(UpdateState.Equals(UpdateState.Exit))
+        if (UpdateState.Equals(UpdateState.Exit))
         {
             OnExit();
         }
@@ -50,12 +55,17 @@ public class BT_Node
         return Result.FAILURE;
     }
 
-    protected void EnterNode()
+    public void EnterNode()
     {
+        UpdateState = UpdateState.Enter;
+        if(_children==null)return;
         foreach (BT_Node child in _children)
         {
-            child.UpdateState = UpdateState.Enter;
-            child.EnterNode();
+            if (child.UpdateState.Equals(UpdateState.None))
+            {
+                child.UpdateState = UpdateState.Enter;
+                child.EnterNode();
+            }
         }
     }
 

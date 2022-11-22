@@ -39,7 +39,6 @@ public class Player : MonoBehaviour
 
     private void Start() {
         StartCoroutine(asfdasdf());
-        Debug.Log("스타트");
     }
     private IEnumerator asfdasdf()
     {
@@ -47,7 +46,6 @@ public class Player : MonoBehaviour
         {
             yield return null;
         }
-            Debug.Log("코루틴");
     }
 
     public void SetPlayerComponent<T>(BasePlayerComponent playerComponent) where T : BasePlayerComponent
