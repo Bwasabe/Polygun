@@ -5,6 +5,8 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class Euclades : BehaviorTree
 {
+
+
     public enum EucladesPage
     {
         Page1,
@@ -16,6 +18,7 @@ public class Euclades : BehaviorTree
 
     [SerializeField]
     private Euclades_Data _data;
+
 
     private List<BT_ListRandomNode> _pageRandomNodes = new List<BT_ListRandomNode>();
 

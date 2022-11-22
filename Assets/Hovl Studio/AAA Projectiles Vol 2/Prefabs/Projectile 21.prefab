@@ -24477,6 +24477,7 @@ GameObject:
   - component: {fileID: 108625486811999762}
   - component: {fileID: -3910785750416613037}
   - component: {fileID: 1174188770134169436}
+  - component: {fileID: -5014392353730520748}
   m_Layer: 0
   m_Name: Projectile 21
   m_TagString: Untagged
@@ -29490,3 +29491,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0abb08cab3700ea43b3ce8898328dfc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5014392353730520748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1980571578861810}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 474bcb49853aa07438625e644c072ee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Version: 1
+  m_UsePipelineSettings: 1
+  m_AdditionalLightsShadowResolutionTier: 2
+  m_LightLayerMask: 1
+  m_CustomShadowLayers: 0
+  m_ShadowLayerMask: 1
+  m_LightCookieSize: {x: 1, y: 1}
+  m_LightCookieOffset: {x: 0, y: 0}

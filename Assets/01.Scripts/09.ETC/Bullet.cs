@@ -52,20 +52,18 @@ public class Bullet : MonoBehaviour
 		if( ((1 << other.gameObject.layer) & HitLayer) > 0 )
 		{
 			other.GetComponent<IDmgAble>()?.Damage(Damage);
+			// if(_hit != null)
+			// {
+			// 	GameObject hit = ObjectPool.Instance.GetObject(PoolObjectType.FireBullet_Flush);
+            //     ParticleSystem particle = hit.GetComponent<ParticleSystem>();
 
-			if(_hit != null)
-			{
-				GameObject hit = ObjectPool.Instance.GetObject(PoolObjectType.FireBullet_Flush);
-                ParticleSystem particle = hit.GetComponent<ParticleSystem>();
+            //     StartCoroutine(ObjectPool.Instance.ReturnObject(PoolObjectType.FireBullet_Hit, hit, particle.main.duration));
+            // }
 
-                StartCoroutine(ObjectPool.Instance.ReturnObject(PoolObjectType.FireBullet_Hit, hit, particle.main.duration));
-            }
-
-			if(_flush != null)
-			{
+			// if(_flush != null)
+			// {
 				
-			}
-
+			// }
 		}
 		ObjectPool.Instance.ReturnObject(PoolObjectType.PlayerBullet, this.gameObject);
 	}
