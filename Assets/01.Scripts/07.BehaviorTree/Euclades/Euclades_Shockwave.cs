@@ -1,28 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 // TODO: 쇼크웨이브
 public class Euclades_Shockwave : BT_Node
 {
-    public Euclades_Shockwave(BehaviorTree t , List<BT_Node> c = null) : base(t, c) {}
+    public Euclades_Shockwave(BehaviorTree t , List<BT_Node> c = null) : base(t, c)
+    {
+        _data = _tree.GetData<Euclades_Data>();
+	}
 
     private bool _isUp;
 
-    protected override void OnEnter()
-    {
-        base.OnEnter();
-        _isUp = true;
-    }
+    private Sequence _seq = DOTween.Sequence();
 
-    protected override void OnUpdate()
+	private Euclades_Data _data;
+
+    private GameObject blastWave;
+	protected override void OnEnter()
+    {
+		base.OnEnter();
+
+		_seq = DOTween.Sequence()
+		.Append(_tree.transform.DOMoveY(_data.UpDuration, _data.UpSpeed))
+		.Join(_tree.transform.DORotate(new Vector3(0, 360, 0), 2f, RotateMode.FastBeyond360))
+		.Append(_tree.transform.DOMoveY(_tree.transform.localScale.y / 2, _data.DownSpeed))
+		.Join(_tree.transform.DORotate(new Vector3(0, 0, 0), 2f, RotateMode.FastBeyond360))
+		.AppendCallback(() =>
+		{
+
+            UpdateState = UpdateState.Exit;
+		});
+	}
+
+	protected override void OnUpdate()
     {
         base.OnUpdate();
-
-        if(_isUp)
-        {
-            
-        }
     }
 
     protected override void OnExit()
@@ -52,7 +66,11 @@ public partial class Euclades_Data
     public float UpDuration => _upDuration;
 
     [SerializeField]
-    private GameObject _shockwaveObject;
+    private float _upSpeed;
 
-    public GameObject ShockwaveObject => _shockwaveObject;
+    public float UpSpeed => _upSpeed;
+
+    [SerializeField]
+    private float _downSpeed;
+    public float DownSpeed => _downSpeed;
 }

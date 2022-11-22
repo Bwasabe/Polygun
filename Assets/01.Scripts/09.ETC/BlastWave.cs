@@ -10,16 +10,18 @@ public class BlastWave : MonoBehaviour
 	public float speed;
 	public float startWidth;
 
-	private LineRenderer lineRenderer;
+	private LineRenderer _lineRenderer;
+
+	private bool _isRun;
+	public bool IsRun => _isRun;
 	private void Awake()
 	{
-		lineRenderer = GetComponent<LineRenderer>();
-		lineRenderer.positionCount = pointsCount + 1;
+		_lineRenderer = GetComponent<LineRenderer>();
+		_lineRenderer.positionCount = pointsCount + 1;
 	}
-
-
 	private IEnumerator Blast()
 	{
+		_isRun = true;
 		float currentRadius = 0f;
 
 		while(currentRadius < maxRadius)
@@ -28,6 +30,8 @@ public class BlastWave : MonoBehaviour
 			Draw(currentRadius);
 			yield return null;
 		}
+		gameObject.SetActive(false);
+		_isRun = false;
 	}
 
 	private void Draw(float currentRadius)
@@ -37,20 +41,17 @@ public class BlastWave : MonoBehaviour
 		for(int i = 0; i<=pointsCount; i++)
 		{
 			float angle = i * angleBetweenPosints * Mathf.Deg2Rad;
-			Debug.Log(angle);
 			Vector3 direction = new Vector3(Mathf.Sin(angle), Mathf.Cos(angle), 0f);
-			Debug.Log(direction.x);
 			Vector3 position = direction * currentRadius;
 
-			lineRenderer.SetPosition(i, position);
+			_lineRenderer.SetPosition(i, position);
 		}
 
-		lineRenderer.widthMultiplier = Mathf.Lerp(0f, startWidth, 1f - currentRadius / maxRadius);
+		_lineRenderer.widthMultiplier = Mathf.Lerp(0f, startWidth, 1f - currentRadius / maxRadius);
 	}
 
-	private void Update()
+	private void OnEnable()
 	{
-		if (Input.GetKeyDown(KeyCode.LeftShift))
-			StartCoroutine(Blast());
+		StartCoroutine(Blast());
 	}
 }
