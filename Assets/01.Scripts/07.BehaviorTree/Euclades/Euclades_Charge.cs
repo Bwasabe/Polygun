@@ -43,6 +43,8 @@ public class Euclades_Charge : BT_Node
 
     private Vector3 _destination;
 
+    private bool _isCharge;
+
     protected override void OnEnter()
     {
         Debug.Log("Charge들어옴");
@@ -51,14 +53,15 @@ public class Euclades_Charge : BT_Node
 
     protected override void OnUpdate()
     {
-        Debug.Log("업데이트 도는 중");
         base.OnUpdate();
 
         _timer += Time.deltaTime;
-        if (_data.IsCharge)
+        if (_isCharge)
         {
             float distance = Vector3.Distance(_destination, _tree.transform.position);
-            if (distance >= 2f)
+            Debug.Log(distance);
+            // TODO: 멈춤 조건 추가 필요
+            if (distance >= 15f)
             {
                 _cc.Move(_dir * Time.deltaTime * _chargeSpeed);
                 NodeResult = Result.RUNNING;
@@ -81,10 +84,11 @@ public class Euclades_Charge : BT_Node
                 _destination = _target.transform.position;
 
                 _dir = _destination - _tree.transform.position;
+                _dir.y = 0f;
                 _dir.Normalize();
 
                 _timer = 0f;
-                _data.IsCharge = true;
+                _isCharge = true;
             }
             NodeResult = Result.RUNNING;
         }
@@ -95,7 +99,7 @@ public class Euclades_Charge : BT_Node
         Debug.Log("나감");
         _destination = Vector3.zero;
         _dir = Vector3.zero;
-        _data.IsCharge = false;
+        _isCharge = false;
         NodeResult = Result.SUCCESS;
         base.OnExit();
     }
@@ -109,8 +113,6 @@ public class Euclades_Charge : BT_Node
 
 public partial class Euclades_Data
 {
-    public bool IsCharge { get; set; } = false;
-
 
     [SerializeField]
     private float _page1ChargeSpeed;

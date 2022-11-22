@@ -19,7 +19,7 @@ public class Euclades_Page_Condition : BT_Condition
     public override Result Execute()
     {
 
-        if (_data.Stat.HP <= _page.MaxHp && _data.Stat.HP <= _page.MinHp)
+        if (_page.MinHp <= _data.Stat.HP && _data.Stat.HP <= _page.MaxHp)
         {
             if (_pageIndex != _data.PageIndex)
             {

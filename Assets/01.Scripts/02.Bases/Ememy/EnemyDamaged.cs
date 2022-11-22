@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class EnemyDamaged : MonoBehaviour, IDmgAble
 {
+    [SerializeField]
+    private UnitStat _stat;
     public void Damage(int damage)
     {
         

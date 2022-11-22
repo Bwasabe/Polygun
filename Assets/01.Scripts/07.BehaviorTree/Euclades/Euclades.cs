@@ -19,6 +19,12 @@ public class Euclades : BehaviorTree
 
     private List<BT_ListRandomNode> _pageRandomNodes = new List<BT_ListRandomNode>();
 
+    protected override void Start()
+    {
+        _data.Stat.Init();
+        base.Start();
+    }
+
     protected override BT_Node SetupTree()
     {
 
