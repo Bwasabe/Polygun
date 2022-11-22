@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CollisionCtrl))]
 public class PlayerDamaged : BasePlayerComponent, IDmgAble
 {
     protected override void Start()
     {
         base.Start();
-        _player.PlayerStat.ResetHp();
+        _player.PlayerStat.Init();
     }
     public void Damage(int damage)
     {

@@ -5,12 +5,9 @@ using UnityEngine;
 [System.Serializable]
 public partial class Euclades_Data : BT_Data
 {
+    [Header("스텟")]
     [SerializeField]
-    private int _hp;
-    public int Hp => _hp;
+    private UnitStat _stat;
 
-
-    [SerializeField]
-    private float _moveSpeed;
-    public float MoveSpeed => _moveSpeed;
+    public UnitStat Stat=>_stat;
 }

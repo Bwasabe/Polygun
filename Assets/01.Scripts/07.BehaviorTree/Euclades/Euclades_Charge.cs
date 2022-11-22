@@ -15,11 +15,9 @@ public class Euclades_Charge : BT_Node
         switch (page)
         {
             case Euclades.EucladesPage.Page1:
-                _chargeDuartion = _data.Page1ChargeDuration;
                 _chargeSpeed = _data.Page1ChargeSpeed;
                 break;
             case Euclades.EucladesPage.Page2:
-                _chargeDuartion = _data.Page2ChargeDuration;
                 _chargeSpeed = _data.Page2ChargeSpeed;
                 break;
             default:
@@ -43,8 +41,13 @@ public class Euclades_Charge : BT_Node
 
     private Vector3 _dir;
 
+    private Vector3 _destination;
+
+    private bool _isCharge;
+
     protected override void OnEnter()
     {
+        Debug.Log("Charge들어옴");
         base.OnEnter();
     }
 
@@ -53,31 +56,39 @@ public class Euclades_Charge : BT_Node
         base.OnUpdate();
 
         _timer += Time.deltaTime;
-        if(_data.IsCharge)
+        if (_isCharge)
         {
-            if(_timer <= _chargeDuartion)
+            float distance = Vector3.Distance(_destination, _tree.transform.position);
+            Debug.Log(distance);
+            // TODO: 멈춤 조건 추가 필요
+            if (distance >= 15f)
             {
-
                 _cc.Move(_dir * Time.deltaTime * _chargeSpeed);
                 NodeResult = Result.RUNNING;
             }
             else
             {
                 NodeResult = Result.SUCCESS;
+                UpdateState = UpdateState.Exit;
             }
         }
         else
         {
-            if(_timer <= _data.ChargeReadyDuration)
+            if (_timer <= _data.ChargeReadyDuration)
             {
                 _tree.transform.LookAt(_target);
             }
             else
             {
-                _dir = _target.transform.position - _tree.transform.position;
+                Debug.Log("차지 시작");
+                _destination = _target.transform.position;
+
+                _dir = _destination - _tree.transform.position;
+                _dir.y = 0f;
                 _dir.Normalize();
+
                 _timer = 0f;
-                _data.IsCharge = true;
+                _isCharge = true;
             }
             NodeResult = Result.RUNNING;
         }
@@ -85,47 +96,29 @@ public class Euclades_Charge : BT_Node
 
     protected override void OnExit()
     {
+        Debug.Log("나감");
+        _destination = Vector3.zero;
+        _dir = Vector3.zero;
+        _isCharge = false;
+        NodeResult = Result.SUCCESS;
         base.OnExit();
     }
 
     public override Result Execute()
     {
-        _timer += Time.deltaTime;
-
-        if (_timer <= _chargeDuartion)
-        {
-            _data.IsCharge = true;
-            // 돌진
-            // TODO : 돌진 넣고 방향 추가하고 등등
-            // _cc.Move(_data.ChargeSpeed * Time.deltaTime);
-            return Result.RUNNING;
-        }
-        else
-        {
-            _data.IsCharge = false;
-            return Result.SUCCESS;
-        }
+        base.Execute();
+        return NodeResult;
     }
 }
 
 public partial class Euclades_Data
 {
-    public bool IsCharge { get; set; } = false;
-
-    [SerializeField]
-    private float _page1ChargeDuraion;
-
-    public float Page1ChargeDuration => _page1ChargeDuraion;
 
     [SerializeField]
     private float _page1ChargeSpeed;
 
     public float Page1ChargeSpeed => _page1ChargeSpeed;
 
-    [SerializeField]
-    private float _page2ChargeDuration;
-
-    public float Page2ChargeDuration => _page2ChargeDuration;
 
     [SerializeField]
     private float _page2ChargeSpeed;
