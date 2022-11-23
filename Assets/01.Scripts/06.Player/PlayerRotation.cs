@@ -18,7 +18,6 @@ public class PlayerRotation : BasePlayerComponent
             Vector3 camRotation = MainCam.transform.eulerAngles;
             camRotation.x = 0f;
             camRotation.z = 0f;
-            Debug.Log((int)_player.CurrentState);
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(camRotation), Time.deltaTime * _rotateSmooth);
         }
         // if (Physics.Raycast(MainCam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, Mathf.Infinity, _groundLayer))

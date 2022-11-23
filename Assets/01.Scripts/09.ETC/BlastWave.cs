@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 using UnityEngine.UIElements;
 public class BlastWave : MonoBehaviour
 {
@@ -10,7 +11,8 @@ public class BlastWave : MonoBehaviour
 	public float startWidth;
 
 	private LineRenderer _lineRenderer;
-	private EdgeCollider2D _edgeCollider;
+	[SerializeField]
+	private GameObject obj;
 
 	private bool _isRun;
 	public bool IsRun => _isRun;
@@ -18,6 +20,14 @@ public class BlastWave : MonoBehaviour
 	{
 		_lineRenderer = GetComponent<LineRenderer>();
 		_lineRenderer.positionCount = pointsCount + 1;
+	}
+
+	private void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.LeftShift))
+		{
+			StartExplosion();
+		}
 	}
 	private IEnumerator Blast()
 	{
@@ -38,7 +48,8 @@ public class BlastWave : MonoBehaviour
 	{
 		float angleBetweenPosints = 360f / pointsCount;
 
-		for(int i = 0; i<=pointsCount; i++)
+		obj.transform.localScale = new Vector3(currentRadius*2.05f, obj.transform.localScale.y, currentRadius*2.05f);
+		for (int i = 0; i<=pointsCount; i++)
 		{
 			float angle = i * angleBetweenPosints * Mathf.Deg2Rad;
 			Vector3 direction = new Vector3(Mathf.Sin(angle), Mathf.Cos(angle), 0f);
@@ -47,12 +58,7 @@ public class BlastWave : MonoBehaviour
 			_lineRenderer.SetPosition(i, position);
 		}
 
-		_lineRenderer.widthMultiplier = Mathf.Lerp(0f, startWidth, 1f - currentRadius / maxRadius);
-	}
-
-	private void SetEdgeColider(LineRenderer line)
-	{
-
+		//_lineRenderer.widthMultiplier = Mathf.Lerp(0f, startWidth, 1f - currentRadius / maxRadius);
 	}
 	public void StartExplosion()
 	{

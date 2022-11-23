@@ -20,11 +20,10 @@ public class EnemyHit : MonoBehaviour, IDmgAble
 			Attack();
 		}
 	}
-	public int a;
-	public void Damage(int damage)
+	public float hp;
+	public void Damage(float damage)
 	{
-		a -= damage;
-		Debug.Log(a);
+		hp -= damage;
 	}
 
 	private void Attack()

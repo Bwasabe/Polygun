@@ -29,7 +29,7 @@ public class Euclades_Damaged : MonoBehaviour, IDmgAble
         _stat = _tree.GetData<Euclades_Data>().Stat;
     }
 
-    public void Damage(int damage)
+    public void Damage(float damage)
     {
         _stat.Damaged(damage);
         if (_stat.HP <= 0)

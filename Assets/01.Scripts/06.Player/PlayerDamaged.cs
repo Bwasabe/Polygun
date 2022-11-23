@@ -10,9 +10,10 @@ public class PlayerDamaged : BasePlayerComponent, IDmgAble
         base.Start();
         _player.PlayerStat.Init();
     }
-    public void Damage(int damage)
+    public void Damage(float damage)
     {
         _player.PlayerStat.Damaged(damage);
+        Debug.Log(damage);
         if (_player.PlayerStat.HP <= 0)
         {
             Die();

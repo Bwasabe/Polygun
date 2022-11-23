@@ -67,7 +67,9 @@ public class Euclades_Shockwave : BT_Node
        .AppendCallback(() =>
        {
            GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.ShockWave);
+           obj.transform.position = new Vector3(this._tree.transform.position.x, obj.transform.position.y, _tree.transform.position.z);
            obj.GetComponent<BlastWave>().StartExplosion();
+           obj.GetComponentInChildren<ShorkWaveCollision>().damage = _data.ShorkWaveDamage;
        });
 	}
 }
@@ -84,6 +86,11 @@ public partial class Euclades_Data
 
     public Pair<float, float>[] Speeds => _speeds;
     public float upDownCount => _speeds.Length;
+
+    [SerializeField]
+    private float shorkWaveDamage;
+
+    public float ShorkWaveDamage => shorkWaveDamage;
 }
 
 [Serializable]

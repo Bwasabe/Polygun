@@ -20,8 +20,8 @@ public class UnitStat
         set => value = _speed;
     }
 
-    private int _hp;
-	public int HP => _hp;
+    private float _hp;
+	public float HP => _hp;
 
 	public virtual void Init()
 	{
@@ -38,7 +38,7 @@ public class UnitStat
         _speed = _defaultSpeed;
     }
 
-	public void Damaged(int damage)
+	public void Damaged(float damage)
 	{
 		_hp -= damage;
 		Debug.Log(_hp);

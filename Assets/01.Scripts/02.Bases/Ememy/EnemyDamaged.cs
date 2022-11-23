@@ -9,7 +9,7 @@ public class EnemyDamaged : MonoBehaviour, IDmgAble
     private void Awake() {
         
     }
-    public void Damage(int damage)
+    public void Damage(float damage)
     {
         
     }
