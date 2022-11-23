@@ -27,6 +27,5 @@ public class CameraManager : MonoSingleton<CameraManager>
     public void CameraShake()
     {
         _impulseSource.GenerateImpulse();
-        Debug.LogWarning("?");
     }
 }

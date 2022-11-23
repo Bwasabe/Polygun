@@ -22,13 +22,13 @@ public class BlastWave : MonoBehaviour
 		_lineRenderer.positionCount = pointsCount + 1;
 	}
 
-	private void Update()
-	{
-		if(Input.GetKeyDown(KeyCode.LeftShift))
-		{
-			StartExplosion();
-		}
-	}
+	//private void Update()
+	//{
+	//	if(Input.GetKeyDown(KeyCode.LeftShift))
+	//	{
+	//		StartExplosion();
+	//	}
+	//}
 	private IEnumerator Blast()
 	{
 		_isRun = true;

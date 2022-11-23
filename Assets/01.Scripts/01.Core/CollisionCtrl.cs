@@ -13,6 +13,11 @@ public class CollisionCtrl : MonoBehaviour
         ColliderEnterEvent?.Invoke(other);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        ColliderEnterEvent?.Invoke(collision.collider);
+    }
+
     private void OnTriggerExit(Collider other) {
         ColliderExitEvent?.Invoke(other);
     }
