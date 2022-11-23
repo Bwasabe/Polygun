@@ -8,19 +8,23 @@ public class Euclades_TeleportBullet : BT_Node
     public Euclades_TeleportBullet(BehaviorTree t, List<BT_Node> c= null) : base(t,c)
     {
         _data = _tree.GetData<Euclades_Data>();
-        _portalCtrl = _tree.transform.Find("PortalCtrl").GetComponent<TeleportBulletPortal>();
+        _portalCtrlPrefab = _tree.transform.Find("PortalController").GetComponent<TeleportBulletPortal>();
+        _portalCtrlPrefab.gameObject.SetActive(false);
     }
 
     private Euclades_Data _data;
 
-    private TeleportBulletPortal _portalCtrl;
+    private TeleportBulletPortal _portalCtrlPrefab;
 
     protected override void OnEnter()
     {
         base.OnEnter();
 
-        // _portalCtrl.SpawnPortal();
-
+        var g = GameObject.Instantiate(_portalCtrlPrefab, GameManager.Instance.Player.transform.position, Quaternion.identity, null);
+        g.gameObject.SetActive(true);
+        Debug.Log(g._portals.Count);
+        // Debug.Break();
+        _tree.StartCoroutine(g.SpawnPortal(10f));
     }
 
     protected override void OnUpdate()
