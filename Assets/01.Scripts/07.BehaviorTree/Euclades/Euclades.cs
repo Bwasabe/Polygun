@@ -45,11 +45,8 @@ public class Euclades : BehaviorTree
 
         BT_ListRandomNode page2RandomNode = new BT_ListRandomNode(this, Define.DEFAULT_RANDOM_NUM, Define.DEFAULT_RANDOM_NUM, new List<BT_Node>
         {
-            new BT_Sequence(this, new List<BT_Node>
-                {
-                    new Euclades_ReadyToCharge(this),
-                    new Euclades_Charge(this, EucladesPage.Page2)
-                }),
+            new Euclades_Charge(this, EucladesPage.Page2),
+
             new BT_Sequence(this, new List<BT_Node>{
                 new Boss_ViewChanger(this, Viewpoint.SideView),
                 new Euclades_SideviewDash(this)
@@ -67,11 +64,9 @@ public class Euclades : BehaviorTree
                 new Boss_ViewChanger(this, Viewpoint.SideView),
                 new Euclades_SideviewPlatformer(this)
             }),
-            new BT_Sequence(this, new List<BT_Node>
-            {
-                new Euclades_ReadyToCharge(this),
-                new Euclades_PortalCharge(this)
-            }),
+
+            new Euclades_PortalCharge(this),
+            
             new BT_Sequence(this, new List<BT_Node>{
                 new Euclades_Blackhole(this),
                 new Euclades_SpawnJumpmap(this)

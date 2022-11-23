@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 // ReadyToCharge에서 넘어온 다음 돌진 동작
 public class Euclades_Charge : BT_Node
@@ -59,9 +60,7 @@ public class Euclades_Charge : BT_Node
         if (_isCharge)
         {
             float distance = Vector3.Distance(_destination, _tree.transform.position);
-            //Debug.Log(distance);
-            // TODO: 멈춤 조건 추가 필요
-            if (distance >= 15f)
+            if (distance >= _tree.transform.localScale.x * 0.5f + 3f)
             {
                 _cc.Move(_dir * Time.deltaTime * _chargeSpeed);
                 NodeResult = Result.RUNNING;
@@ -81,11 +80,15 @@ public class Euclades_Charge : BT_Node
             else
             {
                 Debug.Log("차지 시작");
-                _destination = _target.transform.position;
+                Vector3 targetPos = _target.transform.position;
 
-                _dir = _destination - _tree.transform.position;
+                _dir = targetPos - _tree.transform.position;
                 _dir.y = 0f;
                 _dir.Normalize();
+
+                _destination = targetPos + (_dir * 3f);
+
+                Debug.Log(_destination);
 
                 _timer = 0f;
                 _isCharge = true;

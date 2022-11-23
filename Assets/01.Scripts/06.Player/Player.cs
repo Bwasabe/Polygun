@@ -9,7 +9,7 @@ public enum PLAYER_STATE
     IDLE = 1 << 0,
     MOVE = 1 << 1,
     JUMP = 1 << 2,
-    HOOK = 1 << 3,
+    ATTACK = 1 << 3,
     HIT = 1 << 4,
     DIE = 1 << 5
 }
@@ -39,6 +39,12 @@ public class Player : MonoBehaviour
 
     private void Start() {
         StartCoroutine(asfdasdf());
+
+        OnGUIManager.Instance._guiDict.Add("PLAYER_STATE", "");
+    }
+
+    private void Update() {
+        OnGUIManager.Instance._guiDict["PLAYER_STATE"] = CurrentState.ToString();
     }
     private IEnumerator asfdasdf()
     {
