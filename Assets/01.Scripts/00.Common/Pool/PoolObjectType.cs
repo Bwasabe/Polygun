@@ -1,7 +1,7 @@
 public enum PoolObjectType
 {
 	PlayerBullet,
-	FireBullet_Flush,
-	FireBullet_Hit,
-	
+	//FireBullet_Flush,
+	//FireBullet_Hit,
+	ShockWave
 }

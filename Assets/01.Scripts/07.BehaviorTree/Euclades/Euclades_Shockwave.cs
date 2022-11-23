@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using DG.Tweening;
+using System;
+//using DaeHyunLibrary;
+using UnityEngine;
 
 // TODO: 쇼크웨이브
 public class Euclades_Shockwave : BT_Node
@@ -22,14 +24,13 @@ public class Euclades_Shockwave : BT_Node
     {
 		base.OnEnter();
 
-		_seq = DOTween.Sequence()
-		.Append(_tree.transform.DOMoveY(_data.UpDuration, _data.UpSpeed))
-		.Join(_tree.transform.DORotate(new Vector3(0, 360, 0), 2f, RotateMode.FastBeyond360))
-		.Append(_tree.transform.DOMoveY(_tree.transform.localScale.y / 2, _data.DownSpeed))
-		.Join(_tree.transform.DORotate(new Vector3(0, 0, 0), 2f, RotateMode.FastBeyond360))
-		.AppendCallback(() =>
+        _seq = DOTween.Sequence();
+        for(int i =0; i<_data.upDownCount; i++)
+        {
+			AddUpDownDotween(ref _seq, _data.Speeds[i].first, _data.Speeds[i].secound);
+		}
+		_seq.AppendCallback(() =>
 		{
-
             UpdateState = UpdateState.Exit;
 		});
 	}
@@ -56,6 +57,19 @@ public class Euclades_Shockwave : BT_Node
 
     //     return Result.RUNNING;
     // }
+
+    private void AddUpDownDotween(ref Sequence seq, float upSpeed, float downSpeed)
+	{
+        seq.Append(_tree.transform.DOMoveY(_data.UpDuration, upSpeed))
+       .Join(_tree.transform.DORotate(new Vector3(0, 360, 0), upSpeed, RotateMode.FastBeyond360))
+       .Append(_tree.transform.DOMoveY(_tree.transform.localScale.y / 2, downSpeed))
+       .Join(_tree.transform.DORotate(new Vector3(0, 0, 0), downSpeed, RotateMode.FastBeyond360))
+       .AppendCallback(() =>
+       {
+           GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.ShockWave);
+           obj.GetComponent<BlastWave>().StartExplosion();
+       });
+	}
 }
 
 public partial class Euclades_Data
@@ -66,11 +80,24 @@ public partial class Euclades_Data
     public float UpDuration => _upDuration;
 
     [SerializeField]
-    private float _upSpeed;
+    private Pair<float, float>[] _speeds;
 
-    public float UpSpeed => _upSpeed;
+    public Pair<float, float>[] Speeds => _speeds;
+    public float upDownCount => _speeds.Length;
+}
 
-    [SerializeField]
-    private float _downSpeed;
-    public float DownSpeed => _downSpeed;
+[Serializable]
+public class Pair<T, U>
+{
+	public Pair()
+	{
+	}
+	public Pair(T first, U second)
+	{
+		this.first = first;
+		this.secound = second;
+	}
+
+	public T first;
+	public U secound;
 }

@@ -30,8 +30,8 @@ public class BlastWave : MonoBehaviour
 			Draw(currentRadius);
 			yield return null;
 		}
-		gameObject.SetActive(false);
 		_isRun = false;
+		ObjectPool.Instance.ReturnObject(PoolObjectType.ShockWave, this.gameObject);
 	}
 
 	private void Draw(float currentRadius)
@@ -50,7 +50,7 @@ public class BlastWave : MonoBehaviour
 		_lineRenderer.widthMultiplier = Mathf.Lerp(0f, startWidth, 1f - currentRadius / maxRadius);
 	}
 
-	private void OnEnable()
+	public void StartExplosion()
 	{
 		StartCoroutine(Blast());
 	}

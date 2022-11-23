@@ -59,7 +59,7 @@ public class Euclades_Charge : BT_Node
         if (_isCharge)
         {
             float distance = Vector3.Distance(_destination, _tree.transform.position);
-            Debug.Log(distance);
+            //Debug.Log(distance);
             // TODO: 멈춤 조건 추가 필요
             if (distance >= 15f)
             {
