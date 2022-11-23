@@ -12,6 +12,8 @@ public class PlayerAttack : BasePlayerComponent
     private float _bulletSpeed = 25f;
     [SerializeField]
     private float _bulletRate;
+    [SerializeField]
+    private float _attackStateRate = 1f;
 
     private float _rateTime;
 
@@ -24,8 +26,14 @@ public class PlayerAttack : BasePlayerComponent
         _rateTime += Time.deltaTime;
         if (Input.GetKey(_input.GetInput("MOUSE_LEFTBUTTON"))&& _bulletRate <= _rateTime)
         {
+            _player.CurrentState |= PLAYER_STATE.ATTACK;
             _rateTime = 0;
             Attack();
+        }
+
+        if(_rateTime >= _attackStateRate)
+        {
+            _player.CurrentState &= ~PLAYER_STATE.ATTACK;
         }
     }
     protected override void RegisterInput()

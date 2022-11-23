@@ -20,10 +20,10 @@ public class Bullet : MonoBehaviour
 
     public LayerMask HitLayer{ get; set; }
 
-    [SerializeField]
-    private ParticleSystem _flush;
-    [SerializeField]
-    private ParticleSystem _hit;
+    // [SerializeField]
+    // private ParticleSystem _flush;
+    // [SerializeField]
+    // private ParticleSystem _hit;
 
     private ParticleSystem _particleSystem;
 

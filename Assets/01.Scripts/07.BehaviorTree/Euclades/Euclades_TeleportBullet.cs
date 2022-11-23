@@ -8,12 +8,43 @@ public class Euclades_TeleportBullet : BT_Node
     public Euclades_TeleportBullet(BehaviorTree t, List<BT_Node> c= null) : base(t,c)
     {
         _data = _tree.GetData<Euclades_Data>();
+        _portalCtrl = _tree.transform.Find("PortalCtrl").GetComponent<TeleportBulletPortal>();
     }
 
     private Euclades_Data _data;
-    private int _currentBulletCount = 0;
 
-    private float _timer;
+    private TeleportBulletPortal _portalCtrl;
+
+    protected override void OnEnter()
+    {
+        base.OnEnter();
+
+        // _portalCtrl.SpawnPortal();
+
+    }
+
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+        
+    }
+
+    protected override void OnExit()
+    {
+        base.OnExit();
+    }
+
+    public override Result Execute()
+    {
+        base.Execute();
+        return NodeResult;
+    }
+
+    private void BulletPage1()
+    {
+
+    }
+    
     // public override Result Execute()
     // {
     //     _timer += Time.deltaTime;
@@ -58,5 +89,8 @@ public partial class Euclades_Data
     private float _firstBulletDelay;
     public float FirstBulletDelay => _firstBulletDelay;
 
+    [SerializeField]
+    private float _portalScale = 3f;
 
+    public float PortalScale => _portalScale;
 }
