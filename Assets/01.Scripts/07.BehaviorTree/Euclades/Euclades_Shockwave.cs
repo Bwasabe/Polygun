@@ -24,6 +24,7 @@ public class Euclades_Shockwave : BT_Node
     {
 		base.OnEnter();
 
+        _tree.IsStop = true;
         _seq = DOTween.Sequence();
         for(int i =0; i<_data.upDownCount; i++)
         {
@@ -31,7 +32,8 @@ public class Euclades_Shockwave : BT_Node
 		}
 		_seq.AppendCallback(() =>
 		{
-            UpdateState = UpdateState.Exit;
+			_tree.IsStop = false;
+			UpdateState = UpdateState.Exit;
 		});
 	}
 

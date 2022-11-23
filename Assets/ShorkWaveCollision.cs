@@ -14,12 +14,15 @@ public class ShorkWaveCollision : MonoBehaviour
 	private CollisionCtrl _collisionCtrl;
 	private MeshCollider mesh;
 
-	void Start()
-    {
+	private void Awake()
+	{
 		mesh = GetComponent<MeshCollider>();
 		_collisionCtrl = GetComponent<CollisionCtrl>();
-		mesh.enabled = true;
 		_collisionCtrl.ColliderEnterEvent += Hit;
+	}
+	void Start()
+    {
+		mesh.enabled = true;
 	}
 
 	private void Hit(Collider other)

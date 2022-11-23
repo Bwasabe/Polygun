@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEditor.Searcher;
 
 // ReadyToCharge에서 넘어온 다음 돌진 동작
 public class Euclades_Charge : BT_Node
@@ -46,10 +47,13 @@ public class Euclades_Charge : BT_Node
 
     private bool _isCharge;
 
+    private bool _isDash = false;
+
+    private CollisionCtrl collisionCtrl;
     protected override void OnEnter()
     {
-        //Debug.Log("Charge들어옴");
-        base.OnEnter();
+		//Debug.Log("Charge들어옴");
+		base.OnEnter();
     }
 
     protected override void OnUpdate()
@@ -63,11 +67,13 @@ public class Euclades_Charge : BT_Node
             if (distance >= _tree.transform.localScale.x * 0.5f + 3f)
             {
                 _cc.Move(_dir * Time.deltaTime * _chargeSpeed);
-                NodeResult = Result.RUNNING;
+                _isDash = true;
+				NodeResult = Result.RUNNING;
             }
             else
             {
-                NodeResult = Result.SUCCESS;
+				_isDash = false;
+				NodeResult = Result.SUCCESS;
                 UpdateState = UpdateState.Exit;
             }
         }
@@ -112,6 +118,8 @@ public class Euclades_Charge : BT_Node
         base.Execute();
         return NodeResult;
     }
+
+
 }
 
 public partial class Euclades_Data
