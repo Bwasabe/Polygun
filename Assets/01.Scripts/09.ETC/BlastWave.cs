@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
-
 public class BlastWave : MonoBehaviour
 {
 	public int pointsCount;
@@ -11,6 +10,7 @@ public class BlastWave : MonoBehaviour
 	public float startWidth;
 
 	private LineRenderer _lineRenderer;
+	private EdgeCollider2D _edgeCollider;
 
 	private bool _isRun;
 	public bool IsRun => _isRun;
@@ -50,6 +50,10 @@ public class BlastWave : MonoBehaviour
 		_lineRenderer.widthMultiplier = Mathf.Lerp(0f, startWidth, 1f - currentRadius / maxRadius);
 	}
 
+	private void SetEdgeColider(LineRenderer line)
+	{
+
+	}
 	public void StartExplosion()
 	{
 		StartCoroutine(Blast());
