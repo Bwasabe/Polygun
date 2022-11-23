@@ -13,14 +13,13 @@ public class PlayerRotation : BasePlayerComponent
 
     private void Update()
     {
-        Debug.Log("로테이션 : " + _player.CurrentState.HasFlag(PLAYER_STATE.ATTACK));
         if(_player.CurrentState.HasFlag(PLAYER_STATE.ATTACK))
         {
             Vector3 camRotation = MainCam.transform.eulerAngles;
             camRotation.x = 0f;
             camRotation.z = 0f;
-            Debug.Log("공격이 왜 안돌지");
-            transform.rotation = Quaternion.Slerp(transform.rotation, MainCam.transform.rotation, Time.deltaTime * _rotateSmooth);
+            Debug.Log((int)_player.CurrentState);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(camRotation), Time.deltaTime * _rotateSmooth);
         }
         // if (Physics.Raycast(MainCam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, Mathf.Infinity, _groundLayer))
         // {

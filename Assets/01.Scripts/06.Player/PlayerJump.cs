@@ -87,7 +87,7 @@ public class PlayerJump : BasePlayerComponent
             && _jumpState == JUMP_STATE.NONE && !_player.CurrentState.HasFlag(PLAYER_STATE.JUMP))
             {
                 _velocity.y = Mathf.Sqrt(_jumpForce * -2.0f * Physics.gravity.y) * GameManager.TimeScale;
-                Debug.Log("점프 눌림");
+                //Debug.Log("점프 눌림");
                 _player.CurrentState |= PLAYER_STATE.JUMP;
             }
         }

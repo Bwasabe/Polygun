@@ -39,9 +39,9 @@ public class ObjectPool : MonoSingleton<ObjectPool>
         if (Instance.poolObjectMap[type].Count > 0)
         {
             var obj = Instance.poolObjectMap[type].Dequeue();
+            Debug.Log(transform);
             obj.transform.SetParent(transform);
             obj.gameObject.SetActive(isActive);
-            //obj.GetComponent<ItemEffect>()?.CreateEffect();
             return obj;
         }
         else

@@ -8,7 +8,7 @@ public class Euclades_TeleportBullet : BT_Node
     public Euclades_TeleportBullet(BehaviorTree t, List<BT_Node> c= null) : base(t,c)
     {
         _data = _tree.GetData<Euclades_Data>();
-        _portalCtrl = _tree.transform.Find("PortalCtrl").GetComponent<TeleportBulletPortal>();
+        //_portalCtrl = _tree.transform.Find("PortalCtrl").GetComponent<TeleportBulletPortal>();
     }
 
     private Euclades_Data _data;

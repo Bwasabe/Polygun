@@ -77,10 +77,14 @@ public class PlayerMove : BasePlayerComponent
         if (dir != Vector3.zero)
         {
             _player.CurrentState |= PLAYER_STATE.MOVE;
-        }
-        else
+			_player.CurrentState &= ~PLAYER_STATE.IDLE;
+
+		}
+		else
         {
-            _player.CurrentState = PLAYER_STATE.IDLE;
+			_player.CurrentState |= PLAYER_STATE.IDLE;
+
+			_player.CurrentState &= ~PLAYER_STATE.MOVE;
         }
     }
 
