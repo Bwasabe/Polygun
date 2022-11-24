@@ -79,7 +79,6 @@ public class Euclades_Charge : BT_Node
             }
             else
             {
-                Debug.Log("차지 시작");
                 Vector3 targetPos = _target.transform.position;
 
                 _dir = targetPos - _tree.transform.position;
@@ -87,8 +86,6 @@ public class Euclades_Charge : BT_Node
                 _dir.Normalize();
 
                 _destination = targetPos + (_dir * 3f);
-
-                Debug.Log(_destination);
 
                 _timer = 0f;
                 _isCharge = true;
@@ -99,7 +96,6 @@ public class Euclades_Charge : BT_Node
 
     protected override void OnExit()
     {
-        Debug.Log("나감");
         _destination = Vector3.zero;
         _dir = Vector3.zero;
         _isCharge = false;

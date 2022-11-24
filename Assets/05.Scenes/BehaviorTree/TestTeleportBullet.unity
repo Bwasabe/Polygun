@@ -1158,9 +1158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 336a76e94342b574799f53a62515acf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _portalScale: 2.5
-  _portalScaleDuration: 0.8
-  _portals: []
 --- !u!1 &29470227
 GameObject:
   m_ObjectHideFlags: 0
@@ -1555,8 +1552,8 @@ MonoBehaviour:
   _laserScaleDuration: 0.1
   _laserWarringInterval: 0.3
   _laserInterval: 0.2
-  _laserWarringScale: 0.1
-  _laserScale: 0.7
+  _laserWarringScale: 1.5
+  _laserScale: 3
   _laserDuration: 1
 --- !u!1 &69260208
 GameObject:
@@ -9599,10 +9596,15 @@ MonoBehaviour:
     _upDuration: 0
     _upSpeed: 0
     _downSpeed: 0
-    _bulletCount: 0
-    _bulletDelay: 0
-    _firstBulletDelay: 0
-    _portalScale: 3
+    _portalSpawnTimeList:
+    - 0
+    - 1
+    - 3
+    _horizontalPortalCount: 5
+    _verticalPortalCount: 5
+    _portalScale: 5
+    _portalScaleDuration: 0.8
+    _horiVertiPortalRate: 0.4
     _topdownBulletCount: 0
 --- !u!114 &655909958
 MonoBehaviour:
@@ -26776,7 +26778,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2045207884}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

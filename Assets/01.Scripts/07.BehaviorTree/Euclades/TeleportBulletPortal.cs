@@ -1,4 +1,4 @@
- using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
@@ -6,48 +6,60 @@ using static Yields;
 
 public class TeleportBulletPortal : MonoBehaviour
 {
-    [SerializeField]
-    private float _portalScale = 2.5f;
 
-    [SerializeField]
-    private float _portalScaleDuration = 0.8f;
     private EucaldesPortal _portalPrefab;
 
-    public List<EucaldesPortal> _portals = new List<EucaldesPortal>();
-    private void Start() {
+    private List<EucaldesPortal> _portals = new List<EucaldesPortal>();
+    private BehaviorTree _euclades;
+
+    private Euclades_Data _data;
+    private void Awake()
+    {
         _portalPrefab = transform.Find("Portal").GetComponent<EucaldesPortal>();
         _portalPrefab.gameObject.SetActive(false);
-
+    }
+    public void InitPortal(BehaviorTree euclades)
+    {
+        _euclades = euclades;
+        _data = _euclades.GetData<Euclades_Data>();
         for (int i = 0; i < 2; ++i)
         {
-            var g = Instantiate(_portalPrefab, transform.position, Quaternion.identity, transform);
+            var g = Instantiate(_portalPrefab, transform);
             g.gameObject.SetActive(true);
             _portals.Add(g);
         }
-        Debug.Log(_portals.Count);
     }
-
-    public IEnumerator SpawnPortal(float distance)
+    public IEnumerator SpawnPortal(float distance, bool isStop = false)
     {
+        Vector3 pos = _portals[0].transform.localPosition;
+        pos.z = distance * 0.5f;
+        _portals[0].transform.localPosition = pos;
+
+        Vector3 pos2 = _portals[1].transform.localPosition;
+        pos2.z = -distance * 0.5f;
+        _portals[1].transform.localPosition = pos2;
+
         _portals.ForEach(x =>
         {
-            Vector3 pos = x.transform.localPosition;
-            pos.z = distance * 0.5f;
-            x.transform.position = pos;
-
-            x.SetScale(distance * 0.5f);
+            x.transform.LookAt(transform);
+            x.SetScale(_data.PortalScale);
         });
         Debug.Log(_portals.Count);
         for (int i = 0; i < _portals.Count; ++i)
         {
-            Debug.Log("실행");
-            _portals[i].transform.DOScale(Vector3.one * _portalScale, _portalScaleDuration);
+            _portals[i].transform.DOScale(Vector3.one * _data.PortalScale, _data.PortalScaleDuration);
         }
-        Debug.Log("포탈");
-        yield return WaitForSeconds(_portalScaleDuration);
+        yield return WaitForSeconds(_data.PortalScaleDuration);
         _portals.ForEach(x =>
         {
-            x.Lazer();
+            if(isStop)
+            {
+                Sequence s = x.Lazer().Append(x.transform.DOScale(Vector3.zero, _data.PortalScaleDuration)).AppendCallback(()=>_euclades.IsStop = false);
+            }
+            else
+            {
+                Sequence s = x.Lazer().Append(x.transform.DOScale(Vector3.zero, _data.PortalScaleDuration));
+            }
         });
     }
 
