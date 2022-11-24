@@ -1,3 +1,4 @@
+using DG.Tweening.Core.Easing;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,52 +21,61 @@ public class Bullet : MonoBehaviour
 
     public LayerMask HitLayer{ get; set; }
 
-    // [SerializeField]
-    // private ParticleSystem _flush;
-    // [SerializeField]
-    // private ParticleSystem _hit;
+	// [SerializeField]
+	// private ParticleSystem _flush;
+	// [SerializeField]
+	// private ParticleSystem _hit;
 
-    private ParticleSystem _particleSystem;
+	private ParticleSystem _particleSystem;
 
     private CollisionCtrl _collisionCtrl;
+
+	public GameObject flash;
+
+	private GameObject _flashObj;
 
     protected virtual void Awake()
 	{
 		_particleSystem = GetComponent<ParticleSystem>();
         _collisionCtrl = GetComponent<CollisionCtrl>();
+		_collisionCtrl.ColliderEnterEvent += Hit;
     }
 
-	protected virtual void Start() {
-        _collisionCtrl.ColliderEnterEvent += Hit;
+	private void Start()
+	{
+		if (_flashObj != null)
+			DoFlash();
+		else
+		{
+			_flashObj = Instantiate(flash, transform);
+			DoFlash();
+		}
+	}
+	protected virtual void OnEnable() {
     }
 
 	protected virtual void Update()
 	{
 		this.transform.position += Direction.normalized * Speed * Time.deltaTime;
 		if (!_particleSystem.IsAlive())
+		{
 			ObjectPool.Instance.ReturnObject(PoolObjectType.PlayerBullet, this.gameObject);
+		}
 	}
-
+	void DoFlash()
+	{
+		_flashObj.transform.forward = gameObject.transform.forward;
+		var flashPs = _flashObj.GetComponent<ParticleSystem>();
+		flashPs.Play();
+	}
 
 	protected virtual void Hit(Collider other)
 	{
 		if( ((1 << other.gameObject.layer) & HitLayer) > 0 )
 		{
 			other.GetComponent<IDmgAble>()?.Damage(Damage);
-			// if(_hit != null)
-			// {
-			// 	GameObject hit = ObjectPool.Instance.GetObject(PoolObjectType.FireBullet_Flush);
-            //     ParticleSystem particle = hit.GetComponent<ParticleSystem>();
-
-            //     StartCoroutine(ObjectPool.Instance.ReturnObject(PoolObjectType.FireBullet_Hit, hit, particle.main.duration));
-            // }
-
-			// if(_flush != null)
-			// {
-				
-			// }
 		}
+
 		ObjectPool.Instance.ReturnObject(PoolObjectType.PlayerBullet, this.gameObject);
 	}
-
 }

@@ -5056,7 +5056,6 @@ GameObject:
   m_Component:
   - component: {fileID: 547767679253197693}
   - component: {fileID: 384793255001803911}
-  - component: {fileID: 433046322553397195}
   - component: {fileID: 384683569414400075}
   m_Layer: 0
   m_Name: Sparks
@@ -9799,18 +9798,6 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!114 &433046322553397195
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 545645181328001273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 199e3c49ebcb3fe46997b10cf6a8eb52, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!199 &384683569414400075
 ParticleSystemRenderer:
   serializedVersion: 6

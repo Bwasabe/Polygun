@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ObjectPool : MonoSingleton<ObjectPool>
@@ -38,9 +39,15 @@ public class ObjectPool : MonoSingleton<ObjectPool>
     {
         if (Instance.poolObjectMap[type].Count > 0)
         {
+   //         Debug.Log(Instance.poolObjectMap[type].Count);
+   //         GameObject obj = null;
+   //         while(obj == null)
+   //         {
+   //            obj = Instance.poolObjectMap[type].Dequeue();
+   //         }
+			//Debug.Log(obj);
             var obj = Instance.poolObjectMap[type].Dequeue();
-            Debug.Log(transform);
-            obj.transform.SetParent(transform);
+			obj.transform.SetParent(transform);
             obj.gameObject.SetActive(isActive);
             return obj;
         }
@@ -56,6 +63,7 @@ public class ObjectPool : MonoSingleton<ObjectPool>
 
     public void ReturnObject(PoolObjectType type, GameObject obj)
     {
+        Debug.Log(obj);
         obj.gameObject.SetActive(false);
         obj.transform.SetParent(Instance.transform);
         Instance.poolObjectMap[type].Enqueue(obj);
