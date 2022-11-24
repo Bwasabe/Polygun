@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEditor.Searcher;
 
 // ReadyToCharge에서 넘어온 다음 돌진 동작
 public class Euclades_Charge : BT_Node
@@ -47,13 +46,10 @@ public class Euclades_Charge : BT_Node
 
     private bool _isCharge;
 
-    private bool _isDash = false;
-
-    private CollisionCtrl collisionCtrl;
     protected override void OnEnter()
     {
-		//Debug.Log("Charge들어옴");
-		base.OnEnter();
+        Debug.Log("Charge들어옴");
+        base.OnEnter();
     }
 
     protected override void OnUpdate()
@@ -67,13 +63,11 @@ public class Euclades_Charge : BT_Node
             if (distance >= _tree.transform.localScale.x * 0.5f + 3f)
             {
                 _cc.Move(_dir * Time.deltaTime * _chargeSpeed);
-                _isDash = true;
-				NodeResult = Result.RUNNING;
+                NodeResult = Result.RUNNING;
             }
             else
             {
-				_isDash = false;
-				NodeResult = Result.SUCCESS;
+                NodeResult = Result.SUCCESS;
                 UpdateState = UpdateState.Exit;
             }
         }
@@ -85,7 +79,6 @@ public class Euclades_Charge : BT_Node
             }
             else
             {
-                //Debug.Log("차지 시작");
                 Vector3 targetPos = _target.transform.position;
 
                 _dir = targetPos - _tree.transform.position;
@@ -93,8 +86,6 @@ public class Euclades_Charge : BT_Node
                 _dir.Normalize();
 
                 _destination = targetPos + (_dir * 3f);
-
-                //Debug.Log(_destination);
 
                 _timer = 0f;
                 _isCharge = true;
@@ -105,7 +96,6 @@ public class Euclades_Charge : BT_Node
 
     protected override void OnExit()
     {
-        //Debug.Log("나감");
         _destination = Vector3.zero;
         _dir = Vector3.zero;
         _isCharge = false;
@@ -118,8 +108,6 @@ public class Euclades_Charge : BT_Node
         base.Execute();
         return NodeResult;
     }
-
-
 }
 
 public partial class Euclades_Data

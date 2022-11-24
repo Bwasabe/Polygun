@@ -34,9 +34,9 @@ public class Euclades : BehaviorTree
 
         BT_ListRandomNode page1RandomNode = new BT_ListRandomNode(this, 0, 0, new List<BT_Node>
             {
-                 new Euclades_Charge(this, EucladesPage.Page1),
+                new Euclades_Charge(this, EucladesPage.Page1),
 
-                 new Euclades_Shockwave(this),
+                new Euclades_Shockwave(this),
 
                 new Euclades_TeleportBullet(this)
             });

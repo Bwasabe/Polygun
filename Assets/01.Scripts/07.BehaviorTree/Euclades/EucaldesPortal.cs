@@ -16,23 +16,29 @@ public class EucaldesPortal : MonoBehaviour
     [SerializeField]
     private float _laserWarringScale = 1f;
     [SerializeField]
-    private float _laserScale = 3f;
+    private float _laserScale = 1f;
     [SerializeField]
     private float _laserDuration = 3f;
 
     private Collider _laserCollider;
 
-    private void Awake() {
+    private void Awake()
+    {
         _laserCollider = _laser.GetComponentInChildren<Collider>();
     }
 
-    public void Lazer()
+    // private void Start() {
+    //     _laserScale /= transform.localScale.z;
+    //     _laserWarringScale /= 
+    // }
+
+    public Sequence Lazer()
     {
         Vector3 scale = _laser.transform.localScale;
         scale.x = 0.01f;
         scale.y = 0.01f;
         _laser.transform.localScale = scale;
-        // _laser.transform.localScale = Vector3.one * 0.01f;
+        
         Sequence sequence = DOTween.Sequence()
         .AppendInterval(_laserWarringInterval)
         .Append(_laser.transform.DOScaleX(_laserWarringScale, _laserScaleDuration).SetLoops(2, LoopType.Yoyo))
@@ -44,12 +50,16 @@ public class EucaldesPortal : MonoBehaviour
         .Append(_laser.transform.DOScaleX(0f, _laserScaleDuration))
         .Join(_laser.transform.DOScaleY(0f, _laserScaleDuration))
         .AppendCallback(() => _laserCollider.enabled = false);
+
+        return sequence;
     }
 
-    public void SetScale(float scaleZ)
+    public void SetScale(float portalScale)
     {
-        Vector3 scale = _laser.transform.localScale;
-        scale.z = scaleZ;
+        Vector3 scale = Vector3.zero;
+        scale.z = Mathf.Abs(transform.localPosition.z) * 1 / portalScale;
+        _laserScale /= portalScale;
+        _laserWarringScale /= portalScale;
 
         _laser.transform.localScale = scale;
     }

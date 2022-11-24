@@ -1158,9 +1158,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 336a76e94342b574799f53a62515acf4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _portalScale: 2.5
-  _portalScaleDuration: 0.8
-  _portals: []
 --- !u!1 &29470227
 GameObject:
   m_ObjectHideFlags: 0
@@ -1555,8 +1552,8 @@ MonoBehaviour:
   _laserScaleDuration: 0.1
   _laserWarringInterval: 0.3
   _laserInterval: 0.2
-  _laserWarringScale: 0.1
-  _laserScale: 0.7
+  _laserWarringScale: 1.5
+  _laserScale: 3
   _laserDuration: 1
 --- !u!1 &69260208
 GameObject:
@@ -9483,7 +9480,6 @@ GameObject:
   - component: {fileID: 655909957}
   - component: {fileID: 655909960}
   - component: {fileID: 655909961}
-  - component: {fileID: 655909962}
   m_Layer: 7
   m_Name: Euclades
   m_TagString: Untagged
@@ -9598,12 +9594,17 @@ MonoBehaviour:
       _damage: 10
       _defaultSpeed: 10
     _upDuration: 0
-    _speeds: []
-    shorkWaveDamage: 0
-    _bulletCount: 0
-    _bulletDelay: 0
-    _firstBulletDelay: 0
-    _portalScale: 3
+    _upSpeed: 0
+    _downSpeed: 0
+    _portalSpawnTimeList:
+    - 0
+    - 1
+    - 3
+    _horizontalPortalCount: 5
+    _verticalPortalCount: 5
+    _portalScale: 5
+    _portalScaleDuration: 0.8
+    _horiVertiPortalRate: 0.4
     _topdownBulletCount: 0
 --- !u!114 &655909958
 MonoBehaviour:
@@ -9662,18 +9663,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0abb08cab3700ea43b3ce8898328dfc0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &655909962
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 655909952}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07514c3bfebb1fb458fc7d9b0c1f56ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &658191461
@@ -9824,9 +9813,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectPoolData:
     prefabs:
-    - {fileID: 1449260960837898, guid: 8b5f820a52d2d9a4c91cf5c0c21107c0, type: 3}
-    - {fileID: 166645235482773501, guid: c28c112e5b544944881ecd1bef0d2c31, type: 3}
-    prefabCreateCounts: 1e0000001e000000
+    - {fileID: 545195124152347345, guid: 0f3c9ae33ee899842814bbeec94800a0, type: 3}
+    prefabCreateCounts: 1e000000
 --- !u!4 &661035057
 Transform:
   m_ObjectHideFlags: 0
@@ -26790,7 +26778,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2045207884}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -0.5}
+  m_LocalPosition: {x: 0, y: 0, z: 0.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
