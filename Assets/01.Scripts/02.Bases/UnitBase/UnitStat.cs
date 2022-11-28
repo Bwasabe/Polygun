@@ -3,44 +3,57 @@ using UnityEngine;
 [System.Serializable]
 public class UnitStat
 {
-	[SerializeField]
-	private int _defaultHp;
-	
-	[SerializeField]
-	private int _damage;
-	public int DamageStat => _damage;
+    [SerializeField]
+    private float _defaultHp;
 
     [SerializeField]
+    private float _defaultDamage;
+    [SerializeField]
     private float _defaultSpeed;
+    [SerializeField]
+    private float _defaultAttackRate;
 
-    //TODO: 속도를 이용하여 움직이게 만들기
+    private float _damage;
+    public float DamageStat => _damage;
+
+
+
     private float _speed;
-    public float Speed{
+    public float Speed
+    {
         get => _speed;
         set => value = _speed;
     }
+    
+    private float _attackRate;
+    public float AttackRate => _attackRate;
 
     private float _hp;
-	public float HP => _hp;
+    public float HP => _hp;
 
-	public virtual void Init()
-	{
+    public virtual void Init()
+    {
         ResetHp();
         ResetSpeed();
     }
 
-	public void ResetHp()
-	{
-		_hp = _defaultHp;
-	}
+    public void ResetHp()
+    {
+        _hp = _defaultHp;
+    }
     public void ResetSpeed()
     {
         _speed = _defaultSpeed;
     }
 
-	public void Damaged(float damage)
+	public void ResetDamage()
 	{
-		_hp -= damage;
-		Debug.Log(_hp);
-	}
+        _damage = _defaultDamage;
+    }
+
+    public void Damaged(float damage)
+    {
+        _hp -= damage;
+        Debug.Log(_hp);
+    }
 }

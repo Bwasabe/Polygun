@@ -15,6 +15,7 @@ public class CollisionCtrl : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("?");
         ColliderEnterEvent?.Invoke(collision.collider);
     }
 

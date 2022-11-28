@@ -38,20 +38,11 @@ public class Player : MonoBehaviour
     }
 
     private void Start() {
-        StartCoroutine(asfdasdf());
-
         OnGUIManager.Instance._guiDict.Add("PLAYER_STATE", "");
     }
 
     private void Update() {
         OnGUIManager.Instance._guiDict["PLAYER_STATE"] = CurrentState.ToString();
-    }
-    private IEnumerator asfdasdf()
-    {
-        for (int i = 0; i < 2; ++i)
-        {
-            yield return null;
-        }
     }
 
     public void SetPlayerComponent<T>(BasePlayerComponent playerComponent) where T : BasePlayerComponent

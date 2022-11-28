@@ -32,7 +32,7 @@ public class Euclades : BehaviorTree
     {
 
 
-        BT_ListRandomNode page1RandomNode = new BT_ListRandomNode(this, 0, 0, new List<BT_Node>
+        BT_ListRandomNode page1RandomNode = new BT_ListRandomNode(this, Define.DEFAULT_RANDOM_NUM, Define.DEFAULT_RANDOM_NUM, new List<BT_Node>
             {
                 new Euclades_Charge(this, EucladesPage.Page1),
 

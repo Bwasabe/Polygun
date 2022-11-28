@@ -6,6 +6,8 @@ public class PlayerAttack : BasePlayerComponent
 {
     [SerializeField]
     private Transform _attackPosition;
+    public Transform AttackPos => _attackPosition;
+
     [SerializeField]
     private LayerMask _hitLayer;
     [SerializeField]
@@ -17,9 +19,15 @@ public class PlayerAttack : BasePlayerComponent
 
     private float _rateTime;
 
+    private PlayerStat _playerStat;
+
+    private BaseAttack _attack;
+
     protected override void Start()
     {
         base.Start();
+        _playerStat = _player.PlayerStat;
+        _attack ??= new PlayerDefaultAttack(this);
     }
     private void Update()
     {
@@ -28,7 +36,7 @@ public class PlayerAttack : BasePlayerComponent
         {
             _player.CurrentState |= PLAYER_STATE.ATTACK;
             _rateTime = 0;
-            Attack();
+            _attack.Attack(_player.PlayerStat.DamageStat, _hitLayer, _bulletSpeed);
         }
 
         if(_rateTime >= _attackStateRate)
@@ -41,17 +49,4 @@ public class PlayerAttack : BasePlayerComponent
         _input.AddInput("MOUSE_LEFTBUTTON", KeyCode.Mouse0);
     }
 
-    private void Attack()
-    {
-        GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.PlayerBullet);
-        obj.transform.position = _attackPosition.position;
-        obj.transform.rotation = this.transform.localRotation;
-        Bullet bulletObj = obj.GetComponent<Bullet>();
-        bulletObj.Direction = _attackPosition.forward;
-        bulletObj.Damage = _player.PlayerStat.DamageStat;
-        bulletObj.HitLayer = _hitLayer;
-        bulletObj.Speed = _bulletSpeed;
-        CameraManager.Instance.CameraShake();
-		// bulletObj.bulletType = BulletType.ENEMY;
-	}
 }

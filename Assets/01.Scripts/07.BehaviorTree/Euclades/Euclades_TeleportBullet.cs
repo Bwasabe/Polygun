@@ -52,7 +52,6 @@ public class Euclades_TeleportBullet : BT_Node
             var method = type.GetMethod($"PortalPage{_currentPortalCount}", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
             method.Invoke(this, null);
 
-            Debug.Log(_data.PortalSpawnTimeList.Count);
             _currentPortalCount++;
             if (_currentPortalCount == _data.PortalSpawnTimeList.Count)
             {
@@ -93,18 +92,30 @@ public class Euclades_TeleportBullet : BT_Node
 
     private IEnumerator SpawnHoriVertiPortal()
     {
-        Vector3 pos = _target.position;
-        for (int i = -(int)(_data.HorizontalPortalCount * 0.5f); i < _data.HorizontalPortalCount * 0.5f; ++i)
+        for (int i = 0; i < _data.HorizontalPortalCount; ++i)
         {
-            SpawnPortal(pos + Vector3.left * _data.PortalScale * i, Quaternion.identity, 20f);
+            SpawnPortal(_target.position, Quaternion.identity, 20f);
             yield return WaitForSeconds(_data.HoriVertiPortalRate);
         }
 
-        for (int i = -(int)(_data.VerticalPortalCount * 0.5f); i < _data.VerticalPortalCount * 0.5f; ++i)
+        for (int i = 0; i < _data.VerticalPortalCount; ++i)
         {
-            SpawnPortal(pos + Vector3.forward * _data.PortalScale * i, Quaternion.Euler(0f, 90f, 0f), 20f, i + (int)(_data.VerticalPortalCount * 0.5f) == _data.VerticalPortalCount - 1);
+            SpawnPortal(_target.position, Quaternion.Euler(0f, 90f, 0f), 20f, i == _data.VerticalPortalCount - 1);
             yield return WaitForSeconds(_data.HoriVertiPortalRate);
         }
+
+        // Vector3 pos = _target.position;
+        // for (int i = -(int)(_data.HorizontalPortalCount * 0.5f); i < _data.HorizontalPortalCount * 0.5f; ++i)
+        // {
+        //     SpawnPortal(pos + Vector3.left * _data.PortalScale * i, Quaternion.identity, 20f);
+        //     yield return WaitForSeconds(_data.HoriVertiPortalRate);
+        // }
+
+        // for (int i = -(int)(_data.VerticalPortalCount * 0.5f); i < _data.VerticalPortalCount * 0.5f; ++i)
+        // {
+        //     SpawnPortal(pos + Vector3.forward * _data.PortalScale * i, Quaternion.Euler(0f, 90f, 0f), 20f, i + (int)(_data.VerticalPortalCount * 0.5f) == _data.VerticalPortalCount - 1);
+        //     yield return WaitForSeconds(_data.HoriVertiPortalRate);
+        // }
     }
 
     private void SpawnPortal(Vector3 position, Quaternion rotation, float distance, bool isStop = false)
@@ -112,7 +123,7 @@ public class Euclades_TeleportBullet : BT_Node
         var g = GameObject.Instantiate(_portalCtrlPrefab, position, rotation, null);
         g.gameObject.SetActive(true);
         g.InitPortal(_tree);
-        _tree.StartCoroutine(g.SpawnPortal(distance));
+        _tree.StartCoroutine(g.SpawnPortal(distance, isStop));
     }
 
 }

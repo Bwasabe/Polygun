@@ -44,7 +44,6 @@ public class TeleportBulletPortal : MonoBehaviour
             x.transform.LookAt(transform);
             x.SetScale(_data.PortalScale);
         });
-        Debug.Log(_portals.Count);
         for (int i = 0; i < _portals.Count; ++i)
         {
             _portals[i].transform.DOScale(Vector3.one * _data.PortalScale, _data.PortalScaleDuration);

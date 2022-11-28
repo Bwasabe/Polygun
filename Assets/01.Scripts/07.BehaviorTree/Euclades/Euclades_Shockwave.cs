@@ -32,7 +32,7 @@ public class Euclades_Shockwave : BT_Node
 		}
 		_seq.AppendCallback(() =>
 		{
-			_tree.IsStop = false;
+            _tree.IsStop = false;
 			UpdateState = UpdateState.Exit;
 		});
 	}
@@ -71,6 +71,7 @@ public class Euclades_Shockwave : BT_Node
            GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.ShockWave);
            obj.transform.position = new Vector3(this._tree.transform.position.x, obj.transform.position.y, _tree.transform.position.z);
            obj.GetComponent<BlastWave>().StartExplosion();
+           Debug.Log("?");
            obj.GetComponentInChildren<ShorkWaveCollision>().damage = _data.ShorkWaveDamage;
        });
 	}

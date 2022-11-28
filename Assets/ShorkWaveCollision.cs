@@ -27,11 +27,10 @@ public class ShorkWaveCollision : MonoBehaviour
 
 	private void Hit(Collider other)
 	{
-		Debug.Log(other.gameObject.layer);
 		if (((1 << other.gameObject.layer) & layer) > 0)
 		{
 			Debug.Log("?");
-			//¿©±â´Ù°¡ ³Ë¹é ±¸Çö
+			//ï¿½ï¿½ï¿½ï¿½Ù°ï¿½ ï¿½Ë¹ï¿½ ï¿½ï¿½ï¿½ï¿½
 			mesh.enabled = false;
 			other.GetComponent<IDmgAble>()?.Damage(damage);
 		}

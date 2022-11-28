@@ -54,7 +54,7 @@ public class BT_ListRandomNode : BT_Node
 
     protected override void OnUpdate()
     {
-        //Debug.Log(_random+  " / "+ _currentChildren[_random]);
+        Debug.Log(_random+  " / "+ _currentChildren[_random]);
         _result = _currentChildren[_random].Execute();
         UpdateState = _currentChildren[_random].UpdateState;
         if (UpdateState == UpdateState.None)
