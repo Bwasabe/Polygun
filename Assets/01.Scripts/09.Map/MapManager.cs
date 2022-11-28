@@ -23,6 +23,7 @@ public class MapManager : MonoBehaviour
 
 	private Queue<Pair<int, int>> pairQueue;
 
+	[SerializeField]
 	private List<Map> EndMaps = new List<Map>();
 	private void Start()
 	{
@@ -47,24 +48,30 @@ public class MapManager : MonoBehaviour
 	private void MapCreate(int x, int y)
 	{
 		if (mapCreateCount >= mapMaxCreateCount)
+		{
+			return;
+		}
+
+		if (mapCreateArray[x, y])
 			return;
 
-		mapCreateArray[x, y] = true;
 		GameObject obj = Instantiate(debugObj, transform);
 		obj.transform.position = new Vector3(x * 20, 0, y * 20);
 		mapInfoArray[x, y] = obj.GetComponent<Map>();
 		mapInfoArray[x, y].pos = new Vector2Int(x, y);
+		mapCreateArray[x, y] = true;
 		mapCreateCount++;
 
 		List<Direction> dir = new List<Direction>();
+
 		for (int i = 0; i < 4; i++)
 		{
 			dir.Add((Direction)i);
 		}
-
 		DirRemove(ref dir, x, y);
 
 		int rand = Random.Range(1, dir.Count);
+
 		ShuffleArray(dir);
 
 		for (int i = 0; i < rand; i++)
