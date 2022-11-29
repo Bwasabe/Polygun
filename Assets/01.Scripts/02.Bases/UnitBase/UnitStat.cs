@@ -15,11 +15,8 @@ public class UnitStat
     private float _defaultAttackRate;
     [SerializeField]
     private BasicHPSlider baseSlider;
-
     private float _damage;
     public float DamageStat => _damage;
-
-
 
     private float _speed;
     public float Speed
@@ -53,6 +50,10 @@ public class UnitStat
 	public void ResetDamage()
 	{
         _damage = _defaultDamage;
+    }
+    public void ResetAttackRate()
+    {
+        _attackRate = _defaultAttackRate;
     }
 
     public void Damaged(float damage)
