@@ -30,7 +30,6 @@ public class ShorkWaveCollision : MonoBehaviour
 		if (((1 << other.gameObject.layer) & layer) > 0)
 		{
 			Debug.Log("?");
-			//����ٰ� �˹� ����
 			mesh.enabled = false;
 			other.GetComponent<IDmgAble>()?.Damage(damage);
 		}

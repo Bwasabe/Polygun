@@ -96,13 +96,13 @@ public class PlayerMove : BasePlayerComponent
         forward.y = 0f;
 
         Vector3 right = new Vector3(forward.z, 0f, -forward.x);
+        _dir = (right * input.x + forward * input.z).normalized;
         _dir = Vector3.Lerp(_dir, (right * input.x + forward * input.z).normalized, Time.deltaTime * _moveSmooth);
 
-        if(_dir != Vector3.zero && !_player.CurrentState.HasFlag(PLAYER_STATE.ATTACK))
+        if (_dir != Vector3.zero && !_player.CurrentState.HasFlag(PLAYER_STATE.ATTACK))
         {
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_dir), Time.deltaTime * _moveSmooth);
         }
-        
         _cc.Move(_playerStat.Speed * _dir * Time.deltaTime * GameManager.TimeScale);
     }
 

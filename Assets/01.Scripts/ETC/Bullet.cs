@@ -15,7 +15,7 @@ public enum BulletType : int
 [RequireComponent(typeof(CollisionCtrl))]
 public class Bullet : MonoBehaviour
 {
-    public int Damage{ get; set; }
+    public float Damage{ get; set; }
 	public Vector3 Direction{ get; set; }
     public float Speed{ get; set; }
 

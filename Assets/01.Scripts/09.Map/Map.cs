@@ -23,6 +23,8 @@ public class Map : MonoBehaviour
 	[SerializeField]
 	private Vector3[] doorVec;
 
+	public Vector3[] DoorVec => doorVec;
+
 	[SerializeField]
 	private GameObject wallObj;
 	[SerializeField]
@@ -65,11 +67,22 @@ public class Map : MonoBehaviour
 	private void DoorCreate(int i)
 	{
 		GameObject obj = Instantiate(doorObj, PObj.transform);
-		if ((Direction)i == Direction.Foword || (Direction)i == Direction.Back)
+		if ((DoorDirection)i == DoorDirection.Foword || (DoorDirection)i == DoorDirection.Back)
 			obj.transform.localRotation = Quaternion.Euler(new Vector3(0, 90, 0));
 		obj.transform.localPosition = doorVec[i];
-	}
+		Pair<int, int> pair = DirToPair((Direction)i);
 
+		obj.GetComponent<Door>().nextMap = moveMaps.Find((x) => x.pos == new Vector2Int(pos.x + pair.first, pos.y + pair.secound));
+		obj.GetComponent<Door>().dir = (DoorDirection)i;
+	}
+	private Pair<int, int> DirToPair(Direction dir) => (dir) switch
+	{
+		Direction.Foword => new Pair<int, int>() { first = 1, secound = 0 },
+		Direction.Back => new Pair<int, int>() { first = -1, secound = 0 },
+		Direction.Left => new Pair<int, int>() { first = 0, secound = -1 },
+		Direction.Right => new Pair<int, int>() { first = 0, secound = 1 },
+		_ => new Pair<int, int>() { first = 1, secound = 0 }
+	};
 	private void WallCreate(int i)
 	{
 		GameObject obj = Instantiate(wallObj, PObj.transform);

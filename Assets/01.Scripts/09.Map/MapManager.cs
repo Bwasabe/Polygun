@@ -25,7 +25,20 @@ public class MapManager : MonoBehaviour
 
 	[SerializeField]
 	private List<Map> EndMaps = new List<Map>();
+
+	[SerializeField]
+	private GameObject playerObj;
+
 	private void Start()
+	{
+		MapInit();
+
+		playerObj.transform.parent = mapInfoArray[mapMaxCreateCount / 2, mapMaxCreateCount / 2]
+	.gameObject.transform;
+
+		playerObj.transform.localPosition = new Vector3(-11, 0, 6);
+	}
+	public void MapInit()
 	{
 		mapCreateArray = new bool[mapMaxCreateCount, mapMaxCreateCount];
 		mapisSearchArray = new bool[mapMaxCreateCount, mapMaxCreateCount];
@@ -45,6 +58,7 @@ public class MapManager : MonoBehaviour
 		MapDoorSet();
 	}
 
+	#region 맵 생성하는 것
 	private void MapCreate(int x, int y)
 	{
 		if (mapCreateCount >= mapMaxCreateCount)
@@ -80,7 +94,80 @@ public class MapManager : MonoBehaviour
 			pairQueue.Enqueue(new Pair<int, int>(x + pair.first, y + pair.secound));
 		}
 	}
+	private void MapSearch(int x, int y, Map beforeMap)
+	{
 
+		if (x < 0 || x >= mapMaxCreateCount
+		|| y < 0 || y >= mapMaxCreateCount)
+			return;
+
+		if (!mapCreateArray[x, y])
+		{
+			return;
+		}
+
+		if (mapisSearchArray[x, y])
+		{
+			return;
+		}
+
+		mapisSearchArray[x, y] = true;
+
+		if (x == mapMaxCreateCount / 2 && y == mapMaxCreateCount / 2)
+		{
+			mapInfoArray[x, y].name = "start";
+		}
+
+		if (beforeMap != null)
+		{
+			if (mapInfoArray[x, y].moveMaps.Count != 0)
+			{
+				int Randoms = Random.Range(0, 1);
+				if (Randoms != 0)
+				{
+					mapInfoArray[x, y].moveMaps.Add(beforeMap);
+					beforeMap.moveMaps.Add(mapInfoArray[x, y]);
+				}
+			}
+			else
+			{
+				mapInfoArray[x, y].moveMaps.Add(beforeMap);
+				beforeMap.moveMaps.Add(mapInfoArray[x, y]);
+			}
+		}
+
+
+		Pair<int, int> pair = DirToPair(Direction.Foword);
+		MapSearch(x + pair.first, y + pair.secound, mapInfoArray[x, y]);
+		pair = DirToPair(Direction.Back);
+		MapSearch(x + pair.first, y + pair.secound, mapInfoArray[x, y]);
+		pair = DirToPair(Direction.Left);
+		MapSearch(x + pair.first, y + pair.secound, mapInfoArray[x, y]);
+		pair = DirToPair(Direction.Right);
+		MapSearch(x + pair.first, y + pair.secound, mapInfoArray[x, y]);
+	}
+	private void MapDoorSet()
+	{
+		for (int i = 0; i < mapMaxCreateCount; i++)
+		{
+			for (int j = 0; j < mapMaxCreateCount; j++)
+			{
+				if (mapCreateArray[i, j])
+				{
+					mapInfoArray[i, j].DoorCreates();
+
+					if(mapInfoArray[i, j].moveMaps.Count == 1 &&
+						!(i == mapCreateCount /2 && j == mapCreateCount/2))
+					{
+						EndMaps.Add(mapInfoArray[i, j]);
+					}
+				}
+			}
+		}
+	}
+	#endregion
+
+	#region 부가적인 것들
 	private void DirRemove(ref List<Direction> dir, int x, int y)
 	{
 		if (x - 1 <= 0)
@@ -151,77 +238,6 @@ public class MapManager : MonoBehaviour
 			list[secoundindex] = temp;
 		}
 	}
+	#endregion
 
-	private void MapSearch(int x, int y, Map beforeMap)
-	{
-
-		if (x < 0 || x >= mapMaxCreateCount
-		|| y < 0 || y >= mapMaxCreateCount)
-			return;
-
-		if (!mapCreateArray[x, y])
-		{
-			return;
-		}
-
-		if (mapisSearchArray[x, y])
-		{
-			return;
-		}
-
-		mapisSearchArray[x, y] = true;
-
-		if (x == mapMaxCreateCount / 2 && y == mapMaxCreateCount / 2)
-		{
-			mapInfoArray[x, y].name = "start";
-		}
-
-		if (beforeMap != null)
-		{
-			if (mapInfoArray[x, y].moveMaps.Count != 0)
-			{
-				int Randoms = Random.Range(0, 1);
-				if (Randoms != 0)
-				{
-					mapInfoArray[x, y].moveMaps.Add(beforeMap);
-					beforeMap.moveMaps.Add(mapInfoArray[x, y]);
-				}
-			}
-			else
-			{
-				mapInfoArray[x, y].moveMaps.Add(beforeMap);
-				beforeMap.moveMaps.Add(mapInfoArray[x, y]);
-			}
-		}
-
-
-		Pair<int, int> pair = DirToPair(Direction.Foword);
-		MapSearch(x + pair.first, y + pair.secound, mapInfoArray[x, y]);
-		pair = DirToPair(Direction.Back);
-		MapSearch(x + pair.first, y + pair.secound, mapInfoArray[x, y]);
-		pair = DirToPair(Direction.Left);
-		MapSearch(x + pair.first, y + pair.secound, mapInfoArray[x, y]);
-		pair = DirToPair(Direction.Right);
-		MapSearch(x + pair.first, y + pair.secound, mapInfoArray[x, y]);
-	}
-
-	private void MapDoorSet()
-	{
-		for (int i = 0; i < mapMaxCreateCount; i++)
-		{
-			for (int j = 0; j < mapMaxCreateCount; j++)
-			{
-				if (mapCreateArray[i, j])
-				{
-					mapInfoArray[i, j].DoorCreates();
-
-					if(mapInfoArray[i, j].moveMaps.Count == 1 &&
-						!(i == mapCreateCount /2 && j == mapCreateCount/2))
-					{
-						EndMaps.Add(mapInfoArray[i, j]);
-					}
-				}
-			}
-		}
-	}
 }
