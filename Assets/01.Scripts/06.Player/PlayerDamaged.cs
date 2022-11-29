@@ -12,6 +12,8 @@ public class PlayerDamaged : BasePlayerComponent, IDmgAble
     }
     public void Damage(float damage)
     {
+        if(_player.CurrentState.HasFlag(PLAYER_STATE.INVINCIBLE))
+            return;
         _player.PlayerStat.Damaged(damage);
         Debug.Log(damage);
         if (_player.PlayerStat.HP <= 0)

@@ -11,7 +11,8 @@ public enum PLAYER_STATE
     JUMP = 1 << 2,
     ATTACK = 1 << 3,
     HIT = 1 << 4,
-    DIE = 1 << 5
+    DIE = 1 << 5,
+    INVINCIBLE = 1 << 6,
 }
 
 [DisallowMultipleComponent]

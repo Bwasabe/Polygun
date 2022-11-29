@@ -21,28 +21,38 @@ public class PlayerAttack : BasePlayerComponent
 
     private PlayerStat _playerStat;
 
-    private BaseAttack _attack;
+    private BaseSkill _attack;
+
+    public float BulletSpeed => _bulletSpeed;
+    public LayerMask HitLayer => _hitLayer;
+    public float Damage => _player.PlayerStat.DamageStat;
 
     protected override void Start()
     {
         base.Start();
         _playerStat = _player.PlayerStat;
-        _attack ??= new PlayerDefaultAttack(this);
+        if(_attack == null)
+            _player.GetPlayerComponent<PlayerSkillCtrl>().AddPlayerSkill(new PlayerDefaultAttack(this, SKillType.MainAttack));
     }
     private void Update()
     {
         _rateTime += Time.deltaTime;
-        if (Input.GetKey(_input.GetInput("MOUSE_LEFTBUTTON"))&& _bulletRate <= _rateTime)
+        if (Input.GetKey(_input.GetInput("MOUSE_LEFTBUTTON")) && _bulletRate <= _rateTime)
         {
             _player.CurrentState |= PLAYER_STATE.ATTACK;
             _rateTime = 0;
-            _attack.Attack(_player.PlayerStat.DamageStat, _hitLayer, _bulletSpeed);
+            _attack.Skill();
         }
 
         if(_rateTime >= _attackStateRate)
         {
             _player.CurrentState &= ~PLAYER_STATE.ATTACK;
         }
+    }
+
+    public void SetPlayerSkill(BaseSkill skill)
+    {
+        _attack = skill;
     }
     protected override void RegisterInput()
     {

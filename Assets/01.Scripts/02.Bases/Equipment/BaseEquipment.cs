@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class BaseEquipment : MonoBehaviour
 {
-    public BaseAttack Attack{ get; set; }
+    public List<BaseSkill> Skills{ get; set; }
 }
