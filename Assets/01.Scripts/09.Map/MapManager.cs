@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,23 +12,44 @@ public enum Direction
 	Right
 }
 
+public enum RoomType
+{
+	StartRoom,
+	NomalRoom,
+	StoreRoom,
+	EffectRoom,
+	BossRoom,
+}
+
+[Serializable]
+public struct Floor
+{
+	public int normalCount;
+	public int storeCount;
+	public int effectCount;
+
+	public int mapMaxCreateCount => normalCount + storeCount + effectCount + 2;
+}
 public class MapManager : MonoBehaviour
 {
-	public int mapMaxCreateCount;
-	private int mapCreateCount = 0;
-	private bool[,] mapCreateArray;
-	private bool[,] mapisSearchArray;
-	private Map[,] mapInfoArray;
+	public GameObject[] normalObjs;
 
-	public GameObject debugObj;
-
-	private Queue<Pair<int, int>> pairQueue;
-
-	[SerializeField]
-	private List<Map> EndMaps = new List<Map>();
+	public Floor[] floor;
 
 	[SerializeField]
 	private GameObject playerObj;
+
+
+	private Floor CurrentFloor => floor[floorCount];
+	private int floorCount = 0;
+	private int mapMaxCreateCount => floor[floorCount].mapMaxCreateCount;
+	private int mapCreateCount = 0;
+	private bool[,] mapCreateArray; //맵 생성 된 곳 표시
+	private bool[,] mapisSearchArray; //맵 dfs로 찾기용 변수
+	private List<Vector2Int>[,] mapMoveArray;
+	private Map[,] mapInfoArray; //map의 정보가 담겨있는 변수;
+	private Queue<Pair<int, int>> pairQueue;
+	private List<GameObject> mapCreateList ;
 
 	private void Start()
 	{
@@ -42,23 +64,45 @@ public class MapManager : MonoBehaviour
 	{
 		mapCreateArray = new bool[mapMaxCreateCount, mapMaxCreateCount];
 		mapisSearchArray = new bool[mapMaxCreateCount, mapMaxCreateCount];
+		mapMoveArray = new List<Vector2Int>[mapCreateCount, mapCreateCount];
 		mapInfoArray = new Map[mapMaxCreateCount, mapMaxCreateCount];
 		pairQueue = new Queue<Pair<int, int>>();
 
 		mapCreateCount = 0;
 
 
+		MapCreateList();
 		MapCreate(mapMaxCreateCount / 2, mapMaxCreateCount / 2);
 		while (pairQueue.Count != 0 && mapCreateCount < mapMaxCreateCount)
 		{
 			Pair<int, int> pair = pairQueue.Dequeue();
 			MapCreate(pair.first, pair.secound);
 		}
-		MapSearch(mapMaxCreateCount / 2, mapMaxCreateCount / 2, null);
+		MapSearch(mapMaxCreateCount / 2, mapMaxCreateCount / 2, Vector2Int.zero);
+		MapInstanceCreate();
 		MapDoorSet();
 	}
 
 	#region 맵 생성하는 것
+	private void MapCreateList()
+	{
+		for (int i = 0; i < CurrentFloor.normalCount; i++)
+		{
+			mapCreateList.Add(normalObjs[(int)RoomType.NomalRoom]);
+		}
+		
+		for(int i =0; i < CurrentFloor.storeCount; i++)
+		{
+			mapCreateList.Add(normalObjs[(int)RoomType.StoreRoom]);
+		}
+
+		for (int i = 0; i < CurrentFloor.effectCount; i++)
+		{
+			mapCreateList.Add(normalObjs[(int)RoomType.EffectRoom]);
+		}
+		//mapCreateList.Add(normalObjs[(int)RoomType.StartRoom]);
+		//mapCreateList.Add(normalObjs[(int)RoomType.BossRoom]);
+	}
 	private void MapCreate(int x, int y)
 	{
 		if (mapCreateCount >= mapMaxCreateCount)
@@ -69,10 +113,10 @@ public class MapManager : MonoBehaviour
 		if (mapCreateArray[x, y])
 			return;
 
-		GameObject obj = Instantiate(debugObj, transform);
-		obj.transform.position = new Vector3(x * 20, 0, y * 20);
-		mapInfoArray[x, y] = obj.GetComponent<Map>();
-		mapInfoArray[x, y].pos = new Vector2Int(x, y);
+		//GameObject obj = Instantiate(debugObj, transform);
+		//obj.transform.position = new Vector3(x * 20, 0, y * 20);
+		//mapInfoArray[x, y] = obj.GetComponent<Map>();
+		//mapInfoArray[x, y].pos = new Vector2Int(x, y);
 		mapCreateArray[x, y] = true;
 		mapCreateCount++;
 
@@ -84,7 +128,7 @@ public class MapManager : MonoBehaviour
 		}
 		DirRemove(ref dir, x, y);
 
-		int rand = Random.Range(1, dir.Count);
+		int rand = UnityEngine.Random.Range(1, dir.Count);
 
 		ShuffleArray(dir);
 
@@ -94,7 +138,7 @@ public class MapManager : MonoBehaviour
 			pairQueue.Enqueue(new Pair<int, int>(x + pair.first, y + pair.secound));
 		}
 	}
-	private void MapSearch(int x, int y, Map beforeMap)
+	private void MapSearch(int x, int y, Vector2Int beforePos)
 	{
 
 		if (x < 0 || x >= mapMaxCreateCount
@@ -118,33 +162,63 @@ public class MapManager : MonoBehaviour
 			mapInfoArray[x, y].name = "start";
 		}
 
-		if (beforeMap != null)
+		if (beforePos != Vector2Int.zero)
 		{
-			if (mapInfoArray[x, y].moveMaps.Count != 0)
+			if (mapMoveArray[x, y].Count != 0)
 			{
-				int Randoms = Random.Range(0, 1);
+				int Randoms = UnityEngine.Random.Range(0, 1);
 				if (Randoms != 0)
 				{
-					mapInfoArray[x, y].moveMaps.Add(beforeMap);
-					beforeMap.moveMaps.Add(mapInfoArray[x, y]);
+					mapMoveArray[x,y].Add(beforePos);
+					mapMoveArray[beforePos.x,beforePos.y].Add(new Vector2Int(x,y));
 				}
 			}
 			else
 			{
-				mapInfoArray[x, y].moveMaps.Add(beforeMap);
-				beforeMap.moveMaps.Add(mapInfoArray[x, y]);
+				mapMoveArray[x, y].Add(beforePos);
+				mapMoveArray[beforePos.x, beforePos.y].Add(new Vector2Int(x, y));
 			}
 		}
 
 
 		Pair<int, int> pair = DirToPair(Direction.Foword);
-		MapSearch(x + pair.first, y + pair.secound, mapInfoArray[x, y]);
+		MapSearch(x + pair.first, y + pair.secound, new Vector2Int(x, y));
 		pair = DirToPair(Direction.Back);
-		MapSearch(x + pair.first, y + pair.secound, mapInfoArray[x, y]);
+		MapSearch(x + pair.first, y + pair.secound, new Vector2Int(x, y));
 		pair = DirToPair(Direction.Left);
-		MapSearch(x + pair.first, y + pair.secound, mapInfoArray[x, y]);
+		MapSearch(x + pair.first, y + pair.secound, new Vector2Int(x, y));
 		pair = DirToPair(Direction.Right);
-		MapSearch(x + pair.first, y + pair.secound, mapInfoArray[x, y]);
+		MapSearch(x + pair.first, y + pair.secound, new Vector2Int(x, y));
+	}
+	private void MapInstanceCreate()
+	{
+		for(int i = 0; i<mapMaxCreateCount; i++)
+		{
+			for(int j = 0; j<mapMaxCreateCount; j++)
+			{
+				if (mapCreateArray[i,j])
+				{
+					if (mapMoveArray[i,j].Count > 1)
+					{
+						
+					}
+					else
+					{
+						EndMapCreate();
+					}
+				}
+			}
+		}
+	}
+
+	private void NormalMapCreate(int x, int y, RoomType roomType)
+	{
+		GameObject obj = Instantiate(normalObjs[(int)roomType], this.transform);
+	}
+
+	private void EndMapCreate()
+	{
+
 	}
 	private void MapDoorSet()
 	{
@@ -156,11 +230,11 @@ public class MapManager : MonoBehaviour
 				{
 					mapInfoArray[i, j].DoorCreates();
 
-					if(mapInfoArray[i, j].moveMaps.Count == 1 &&
-						!(i == mapCreateCount /2 && j == mapCreateCount/2))
-					{
-						EndMaps.Add(mapInfoArray[i, j]);
-					}
+					//if(mapInfoArray[i, j].moveMaps.Count == 1 &&
+					//	!(i == mapCreateCount /2 && j == mapCreateCount/2))
+					//{
+					//	EndMaps.Add(mapInfoArray[i, j]);
+					//}
 				}
 			}
 		}
@@ -230,8 +304,8 @@ public class MapManager : MonoBehaviour
 	{
 		for (int i = 0; i < 100; i++)
 		{
-			int firstindex = Random.Range(0, list.Count - 1);
-			int secoundindex = Random.Range(0, list.Count - 1);
+			int firstindex = UnityEngine.Random.Range(0, list.Count - 1);
+			int secoundindex = UnityEngine.Random.Range(0, list.Count - 1);
 
 			T temp = list[firstindex];
 			list[firstindex] = list[secoundindex];

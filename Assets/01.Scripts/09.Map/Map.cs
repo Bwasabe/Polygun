@@ -11,7 +11,6 @@ public enum DoorDirection
 	Left,
 	Right,
 }
-
 public class Map : MonoBehaviour
 {
 	public Vector2Int pos;

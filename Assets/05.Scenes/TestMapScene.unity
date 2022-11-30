@@ -578,9 +578,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e637eb71e7a16074d942f9ee06aff8b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapMaxCreateCount: 10
-  debugObj: {fileID: 3725552063756417958, guid: 4d4760425fe6dec4c8ab55d7314a00ac, type: 3}
-  EndMaps: []
+  normalObjs: []
+  floor:
+  - normalCount: 0
+    storeCount: 1
+    effectCount: 1
+  - normalCount: 0
+    storeCount: 0
+    effectCount: 0
+  - normalCount: 0
+    storeCount: 0
+    effectCount: 0
   playerObj: {fileID: 160980962}
 --- !u!4 &30924021
 Transform:
@@ -19546,7 +19554,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1940278211}
-  m_LocalRotation: {x: 0.21197593, y: 0.8959526, z: 0.29976928, w: 0.2499473}
+  m_LocalRotation: {x: 0.21197595, y: 0.8959526, z: 0.29976922, w: 0.24994731}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
