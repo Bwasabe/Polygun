@@ -20,6 +20,7 @@ public class Map : MonoBehaviour
 	public GameObject[] roomObjects;
 	public RoomType roomType;
 
+	//[NonSerialized]
 	public Vector3[] doorVec;
 
 	[SerializeField]
@@ -73,6 +74,8 @@ public class Map : MonoBehaviour
 		GameObject obj = Instantiate(doorObj, PObj.transform);
 		if ((DoorDirection)i == DoorDirection.Foword || (DoorDirection)i == DoorDirection.Back)
 			obj.transform.localRotation = Quaternion.Euler(new Vector3(0, 90, 0));
+		Debug.Log(doorVec);
+		Debug.Log(obj);
 		obj.transform.localPosition = doorVec[i];
 		Pair<int, int> pair = DirToPair((Direction)i);
 

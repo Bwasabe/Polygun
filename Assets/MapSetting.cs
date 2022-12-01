@@ -24,6 +24,7 @@ public class MapSetting : MonoBehaviour
 	{
 		map = GetComponentInParent<Map>();
 		map.doorVec = doorVec;
+		OnStart();
 	}
 
 	private void Update()
@@ -37,7 +38,10 @@ public class MapSetting : MonoBehaviour
 		if (isEnter && !isEnd)
 			OnPlay();
 	}
+	protected virtual void OnStart()
+	{	
 
+	}
 	protected virtual void OnEnter()
 	{
 	}
