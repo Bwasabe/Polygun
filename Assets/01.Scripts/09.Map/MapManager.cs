@@ -32,7 +32,7 @@ public struct Floor
 }
 public class MapManager : MonoBehaviour
 {
-	public GameObject[] normalObjs;
+	public GameObject debugObjs;
 
 	public Floor[] floor;
 
@@ -46,62 +46,85 @@ public class MapManager : MonoBehaviour
 	private int mapCreateCount = 0;
 	private bool[,] mapCreateArray; //맵 생성 된 곳 표시
 	private bool[,] mapisSearchArray; //맵 dfs로 찾기용 변수
-	private List<Vector2Int>[,] mapMoveArray;
 	private Map[,] mapInfoArray; //map의 정보가 담겨있는 변수;
 	private Queue<Pair<int, int>> pairQueue;
-	private List<GameObject> mapCreateList ;
 
+	private List<RoomType> roomTypes = new List<RoomType>();
+	private Map bossMap;
 	private void Start()
 	{
 		MapInit();
-
-		playerObj.transform.parent = mapInfoArray[mapMaxCreateCount / 2, mapMaxCreateCount / 2]
-	.gameObject.transform;
-
-		playerObj.transform.localPosition = new Vector3(-11, 0, 6);
 	}
 	public void MapInit()
 	{
 		mapCreateArray = new bool[mapMaxCreateCount, mapMaxCreateCount];
 		mapisSearchArray = new bool[mapMaxCreateCount, mapMaxCreateCount];
-		mapMoveArray = new List<Vector2Int>[mapCreateCount, mapCreateCount];
 		mapInfoArray = new Map[mapMaxCreateCount, mapMaxCreateCount];
 		pairQueue = new Queue<Pair<int, int>>();
 
 		mapCreateCount = 0;
 
-
-		MapCreateList();
+		MapRandomTypeList();
+		ShuffleArray(roomTypes);
 		MapCreate(mapMaxCreateCount / 2, mapMaxCreateCount / 2);
 		while (pairQueue.Count != 0 && mapCreateCount < mapMaxCreateCount)
 		{
 			Pair<int, int> pair = pairQueue.Dequeue();
 			MapCreate(pair.first, pair.secound);
 		}
-		MapSearch(mapMaxCreateCount / 2, mapMaxCreateCount / 2, Vector2Int.zero);
-		MapInstanceCreate();
+		MapSearch(mapMaxCreateCount / 2, mapMaxCreateCount / 2, null);
+		MapTypeSelect();
 		MapDoorSet();
+
+		playerObj.transform.parent = mapInfoArray[mapMaxCreateCount / 2, mapMaxCreateCount / 2].transform.GetChild(0);
+		playerObj.transform.localPosition = new Vector3(-11,0,6);
 	}
 
 	#region 맵 생성하는 것
-	private void MapCreateList()
+	private void MapRandomTypeList()
 	{
 		for (int i = 0; i < CurrentFloor.normalCount; i++)
+			roomTypes.Add(RoomType.NomalRoom);
+		for (int i = 0; i < CurrentFloor.storeCount; i++)
+			roomTypes.Add(RoomType.StoreRoom);
+		for (int i = 0; i < CurrentFloor.effectCount; i++)
+			roomTypes.Add(RoomType.EffectRoom);
+	}
+	private void MapTypeSelect()
+	{
+		for(int i = 0; i<mapMaxCreateCount; i++)
 		{
-			mapCreateList.Add(normalObjs[(int)RoomType.NomalRoom]);
-		}
-		
-		for(int i =0; i < CurrentFloor.storeCount; i++)
-		{
-			mapCreateList.Add(normalObjs[(int)RoomType.StoreRoom]);
+			for(int j = 0; j<mapMaxCreateCount; j++)
+			{
+				if (mapCreateArray[i, j])
+				{
+					if (mapInfoArray[i,j].moveMaps.Count <= 1)
+					{
+						bossMap = mapInfoArray[i, j];
+					}
+				}
+			}
 		}
 
-		for (int i = 0; i < CurrentFloor.effectCount; i++)
+		mapInfoArray[mapMaxCreateCount / 2, mapMaxCreateCount / 2].roomType = RoomType.StartRoom;
+		bossMap.roomType = RoomType.BossRoom;
+
+		for(int i = 0; i<mapCreateCount; i++)
 		{
-			mapCreateList.Add(normalObjs[(int)RoomType.EffectRoom]);
+			for(int j =0; j<mapMaxCreateCount; j++)
+			{
+				if (mapCreateArray[i,j] && 
+					!(bossMap.pos.x == i && bossMap.pos.y == j) &&
+					!(i == mapMaxCreateCount/2 && j == mapMaxCreateCount/2))
+				{
+					if (roomTypes.Count <= 0)
+						return;
+					//Debug.Log(roomTypes.Count);
+					mapInfoArray[i, j].roomType = roomTypes[0];
+					roomTypes.RemoveAt(0);
+				}
+			}
 		}
-		//mapCreateList.Add(normalObjs[(int)RoomType.StartRoom]);
-		//mapCreateList.Add(normalObjs[(int)RoomType.BossRoom]);
 	}
 	private void MapCreate(int x, int y)
 	{
@@ -113,10 +136,10 @@ public class MapManager : MonoBehaviour
 		if (mapCreateArray[x, y])
 			return;
 
-		//GameObject obj = Instantiate(debugObj, transform);
-		//obj.transform.position = new Vector3(x * 20, 0, y * 20);
-		//mapInfoArray[x, y] = obj.GetComponent<Map>();
-		//mapInfoArray[x, y].pos = new Vector2Int(x, y);
+		GameObject obj = Instantiate(debugObjs, transform);
+		obj.transform.position = new Vector3(x * 100, 0, y * 100);
+		mapInfoArray[x, y] = obj.GetComponent<Map>();
+		mapInfoArray[x, y].pos = new Vector2Int(x, y);
 		mapCreateArray[x, y] = true;
 		mapCreateCount++;
 
@@ -138,7 +161,7 @@ public class MapManager : MonoBehaviour
 			pairQueue.Enqueue(new Pair<int, int>(x + pair.first, y + pair.secound));
 		}
 	}
-	private void MapSearch(int x, int y, Vector2Int beforePos)
+	private void MapSearch(int x, int y, Map beforeMap)
 	{
 
 		if (x < 0 || x >= mapMaxCreateCount
@@ -154,7 +177,7 @@ public class MapManager : MonoBehaviour
 		{
 			return;
 		}
-
+			
 		mapisSearchArray[x, y] = true;
 
 		if (x == mapMaxCreateCount / 2 && y == mapMaxCreateCount / 2)
@@ -162,63 +185,33 @@ public class MapManager : MonoBehaviour
 			mapInfoArray[x, y].name = "start";
 		}
 
-		if (beforePos != Vector2Int.zero)
+		if (beforeMap != null)
 		{
-			if (mapMoveArray[x, y].Count != 0)
+			if (mapInfoArray[x, y].moveMaps.Count != 0)
 			{
 				int Randoms = UnityEngine.Random.Range(0, 1);
 				if (Randoms != 0)
 				{
-					mapMoveArray[x,y].Add(beforePos);
-					mapMoveArray[beforePos.x,beforePos.y].Add(new Vector2Int(x,y));
+					mapInfoArray[x,y].moveMaps.Add(beforeMap);
+					beforeMap.moveMaps.Add(mapInfoArray[x,y]);
 				}
 			}
 			else
 			{
-				mapMoveArray[x, y].Add(beforePos);
-				mapMoveArray[beforePos.x, beforePos.y].Add(new Vector2Int(x, y));
+				mapInfoArray[x, y].moveMaps.Add(beforeMap);
+				beforeMap.moveMaps.Add(mapInfoArray[x, y]);
 			}
 		}
 
 
 		Pair<int, int> pair = DirToPair(Direction.Foword);
-		MapSearch(x + pair.first, y + pair.secound, new Vector2Int(x, y));
+		MapSearch(x + pair.first, y + pair.secound, mapInfoArray[x,y]);
 		pair = DirToPair(Direction.Back);
-		MapSearch(x + pair.first, y + pair.secound, new Vector2Int(x, y));
+		MapSearch(x + pair.first, y + pair.secound, mapInfoArray[x,y]);
 		pair = DirToPair(Direction.Left);
-		MapSearch(x + pair.first, y + pair.secound, new Vector2Int(x, y));
+		MapSearch(x + pair.first, y + pair.secound, mapInfoArray[x,y]);
 		pair = DirToPair(Direction.Right);
-		MapSearch(x + pair.first, y + pair.secound, new Vector2Int(x, y));
-	}
-	private void MapInstanceCreate()
-	{
-		for(int i = 0; i<mapMaxCreateCount; i++)
-		{
-			for(int j = 0; j<mapMaxCreateCount; j++)
-			{
-				if (mapCreateArray[i,j])
-				{
-					if (mapMoveArray[i,j].Count > 1)
-					{
-						
-					}
-					else
-					{
-						EndMapCreate();
-					}
-				}
-			}
-		}
-	}
-
-	private void NormalMapCreate(int x, int y, RoomType roomType)
-	{
-		GameObject obj = Instantiate(normalObjs[(int)roomType], this.transform);
-	}
-
-	private void EndMapCreate()
-	{
-
+		MapSearch(x + pair.first, y + pair.secound, mapInfoArray[x,y]);
 	}
 	private void MapDoorSet()
 	{
@@ -228,6 +221,7 @@ public class MapManager : MonoBehaviour
 			{
 				if (mapCreateArray[i, j])
 				{
+					mapInfoArray[i, j].MapCreate();
 					mapInfoArray[i, j].DoorCreates();
 
 					//if(mapInfoArray[i, j].moveMaps.Count == 1 &&

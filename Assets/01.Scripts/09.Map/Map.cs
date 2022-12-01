@@ -17,34 +17,39 @@ public class Map : MonoBehaviour
 
 	public List<Map> moveMaps;
 
-	public bool isEnd;
+	public GameObject[] roomObjects;
+	public RoomType roomType;
 
-	[SerializeField]
-	private Vector3[] doorVec;
-
-	public Vector3[] DoorVec => doorVec;
+	public Vector3[] doorVec;
 
 	[SerializeField]
 	private GameObject wallObj;
 	[SerializeField]
 	private GameObject doorObj;
 
-	[SerializeField]
 	private GameObject PObj;
+
+	public void MapCreate()
+	{
+		GameObject obj = Instantiate(roomObjects[(int)roomType], transform);
+		Debug.Log(this.transform.position);
+		obj.transform.localPosition = Vector3.zero;
+		PObj = obj.transform.GetChild(0).gameObject;
+	}
 	public void DoorCreates()
 	{
-		bool[] dirbools = new bool[4]; 
-		foreach(Map map in moveMaps)
+		bool[] dirbools = new bool[4];
+		foreach (Map map in moveMaps)
 		{
-			if (map.pos == new Vector2Int(pos.x+1,pos.y))
+			if (map.pos == new Vector2Int(pos.x + 1, pos.y))
 			{
 				dirbools[(int)DoorDirection.Foword] = true;
 			}
-			if (map.pos == new Vector2Int(pos.x, pos.y+1))
+			if (map.pos == new Vector2Int(pos.x, pos.y + 1))
 			{
 				dirbools[(int)DoorDirection.Right] = true;
 			}
-			if(map.pos == new Vector2Int(pos.x - 1, pos.y))
+			if (map.pos == new Vector2Int(pos.x - 1, pos.y))
 			{
 				dirbools[(int)DoorDirection.Back] = true;
 			}
@@ -54,7 +59,7 @@ public class Map : MonoBehaviour
 			}
 		}
 
-		for(int i =0; i<4; i++)
+		for (int i = 0; i < 4; i++)
 		{
 			if (dirbools[i])
 				DoorCreate(i);

@@ -32,8 +32,8 @@ public class Door : MonoBehaviour
     {
         if (((1 << other.gameObject.layer) & layer) > 0)
         {
-            other.gameObject.transform.parent = nextMap.transform;
-            Vector3 vec = nextMap.DoorVec[DirectionToInt(dir)];
+            other.gameObject.transform.parent = nextMap.transform.GetChild(0).transform;
+            Vector3 vec = nextMap.doorVec[DirectionToInt(dir)];
             if (dir == DoorDirection.Foword || dir == DoorDirection.Back)
             {
                 int x = dir == DoorDirection.Foword ? 2 : -2;
