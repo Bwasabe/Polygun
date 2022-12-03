@@ -7,6 +7,7 @@ public class Melee_Attack : BT_Node
 	private MeleeEnemy_Data _data;
 	public void EndAttackAnimation()
 	{
+		_data.Animator.SetBool("IsAttack", false);
 		UpdateState = UpdateState.Exit;
 	}
 	public Melee_Attack(BehaviorTree t, MeleeEnemy_Data data,List<BT_Node> c = null) : base(t, c)
@@ -17,7 +18,10 @@ public class Melee_Attack : BT_Node
 	protected override void OnEnter()
 	{
 		base.OnEnter();
-		_data.Animator.SetTrigger("IsAttack");
+		MeleeEnemy enemy = _tree as MeleeEnemy;
+		enemy.endAnimation = EndAttackAnimation;
+		_data.Animator.SetBool("IsAttack",true);
+		Debug.Log("Attack");
 	}
 	public override Result Execute()
 	{

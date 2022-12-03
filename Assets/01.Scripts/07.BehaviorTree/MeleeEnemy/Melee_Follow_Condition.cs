@@ -1,18 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Linq;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Melee_Follow_Condition : BT_Condition
 {
-	public Melee_Follow_Condition(BehaviorTree t, List<BT_Node> c) : base(t, c)
+	private MeleeEnemy_Data _data;
+	public Melee_Follow_Condition(BehaviorTree t, MeleeEnemy_Data data, List<BT_Node> c) : base(t, c)
 	{
+		_data = data;
 	}
 
 	public override Result Execute()
 	{
-		_children[0].Execute();
-		return Result.SUCCESS;
+		if (_data.Animator.GetBool("IsAttack"))
+		{
+			return Result.FAILURE;
+		}
+		else
+		{
+			_children[0].Execute();
+			return Result.SUCCESS;
+		}
 	}
 }

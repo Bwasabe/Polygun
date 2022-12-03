@@ -9929,11 +9929,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    attackRange: 2
+    attackRange: 1.5
     _stat:
       _defaultHp: 0
       _defaultDamage: 0
-      _defaultSpeed: 2
+      _defaultSpeed: 1
       _defaultAttackRate: 0
       baseSlider: {fileID: 1319099082}
     _ani: {fileID: 638287871}

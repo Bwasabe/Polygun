@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,12 +9,14 @@ public class MeleeEnemy : BehaviorTree
 	private MeleeEnemy_Data _data;
 	[SerializeField]
 	private Transform _target;
+
+	public Action endAnimation;
 	protected override BT_Node SetupTree()
     {
 		_root = new BT_Selector(this, new List<BT_Node>
 		{
 			new MeleeEnemy_Attack_Condition(this, _target.transform, _data, new List<BT_Node>{new Melee_Attack(this,_data)}),
-			new Melee_Follow_Condition(this,new List<BT_Node>{new MeleeFollow(this, _target.transform) })
+			new Melee_Follow_Condition(this, _data,new List<BT_Node>{new MeleeFollow(this, _target.transform) })
 		});
 
 		return _root;
@@ -22,6 +25,10 @@ public class MeleeEnemy : BehaviorTree
 	{
 		_data.Stat.Init();
 		base.Start();
+	}
+	public void ExecuteAction()
+	{
+		endAnimation.Invoke();
 	}
 }
 
