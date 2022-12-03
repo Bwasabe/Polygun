@@ -5,8 +5,6 @@ using UnityEngine;
 [DisallowMultipleComponent]
 public class Euclades : BehaviorTree
 {
-
-
     public enum EucladesPage
     {
         Page1,
@@ -30,8 +28,6 @@ public class Euclades : BehaviorTree
 
     protected override BT_Node SetupTree()
     {
-
-
         BT_ListRandomNode page1RandomNode = new BT_ListRandomNode(this, Define.DEFAULT_RANDOM_NUM, Define.DEFAULT_RANDOM_NUM, new List<BT_Node>
             {
                 new Euclades_Charge(this, EucladesPage.Page1),

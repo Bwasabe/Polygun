@@ -13,6 +13,7 @@ public class UnitStat
     private float _defaultSpeed;
     [SerializeField]
     private float _defaultAttackRate;
+
     [SerializeField]
     private BasicHPSlider baseSlider;
     private float _damage;

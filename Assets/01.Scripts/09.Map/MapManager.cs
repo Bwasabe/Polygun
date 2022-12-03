@@ -98,7 +98,7 @@ public class MapManager : MonoBehaviour
 			{
 				if (mapCreateArray[i, j])
 				{
-					if (mapInfoArray[i,j].moveMaps.Count <= 1)
+					if (mapInfoArray[i,j].moveMaps.Count <= 1 && (i != mapMaxCreateCount/2 && j != mapMaxCreateCount/2))
 					{
 						bossMap = mapInfoArray[i, j];
 					}

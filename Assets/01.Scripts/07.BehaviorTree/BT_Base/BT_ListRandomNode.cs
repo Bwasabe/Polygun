@@ -73,7 +73,6 @@ public class BT_ListRandomNode : BT_Node
     public void ResetList()
     {
         _currentChildren = new List<BT_Node>(_children);
-
     }
 
 
