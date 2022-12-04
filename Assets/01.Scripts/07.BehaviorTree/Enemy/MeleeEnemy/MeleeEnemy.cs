@@ -8,7 +8,7 @@ public class MeleeEnemy : BehaviorTree
 {
 	[SerializeField]
 	private MeleeEnemy_Data _data;
-	[SerializeField]
+
 	private Transform _target;
 	[SerializeField]
 	CollisionCtrl attackCtrl;
@@ -21,6 +21,7 @@ public class MeleeEnemy : BehaviorTree
 	{
 		base.Awake();
 		attackCtrl.ColliderEnterEvent += Hit;
+		_target = GameObject.Find("Player").gameObject.transform;
 	}
 	protected override BT_Node SetupTree()
     {
