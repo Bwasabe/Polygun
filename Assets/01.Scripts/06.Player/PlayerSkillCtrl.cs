@@ -12,30 +12,24 @@ public class PlayerSkillCtrl : BasePlayerComponent
 
     private List<ISkillAtkAble> _atkSkills = new List<ISkillAtkAble>();
 
-
     private void Update()
     {
         _persistSkills.ForEach(x => x.SkillPersist());
     }
 
-    private void Awake() {
+    private void Awake()
+    {
         _player = GameManager.Instance.Player;
     }
 
-    public void AddPlayerSkill(BaseSkill skill)
+    public void ChangePlayerSkill<T>(BaseSkill skill) where T : BasePlayerSkillComponent
     {
-        switch (skill.SKillType)
-        {
-            case SKillType.MainAttack:
-                _player.GetPlayerComponent<PlayerAttack>().SetPlayerSkill(skill);
-                break;
-            case SKillType.SubSkill:
-                _player.GetPlayerComponent<PlayerSubSkill>().SetPlayerSkill(skill);
-                break;
-            default:
-                Debug.LogError("SkillType is undefined");
-                break;
-        }
+        _player.GetPlayerComponent<T>().SetPlayerSkill(skill);
+    }
+
+    public void AddPlayerSkill<T>(BaseSkill skill) where T : BasePlayerSkillComponent
+    {
+        _player.GetPlayerComponent<T>().SetPlayerSkill(skill);
 
         _playerSkills.Add(skill);
         skill.GetInterface<ISkillInitAble>()?.SkillInit();
@@ -53,6 +47,29 @@ public class PlayerSkillCtrl : BasePlayerComponent
 
         if (atkAble != null)
             _atkSkills.Add(atkAble);
+    }
 
+    public void RemovePlayerSkill<T>(BaseSkill skill, bool isNullPlayerSKill = false) where T : BasePlayerSkillComponent
+    {
+        if(isNullPlayerSKill)
+        {
+            _player.GetPlayerComponent<T>().SetPlayerSkill(skill);
+        }
+
+        _playerSkills.Remove(skill);
+
+        ISkillPersistAble persistAble = skill.GetInterface<ISkillPersistAble>();
+        if (persistAble != null)
+            _persistSkills.Remove(persistAble);
+
+        ISkillDmgAble dmgAble = skill.GetInterface<ISkillDmgAble>();
+
+        if (dmgAble != null)
+            _dmgSkills.Remove(dmgAble);
+
+        ISkillAtkAble atkAble = skill.GetInterface<ISkillAtkAble>();
+
+        if (atkAble != null)
+            _atkSkills.Remove(atkAble);
     }
 }
