@@ -43,7 +43,6 @@ public class BasicHPSlider : MonoBehaviour
 	{
 		if (isDamage)
 		{
-			Debug.Log("¿Ó?");
 			if (!reverse)
 				whiteSlider.value = Mathf.Lerp(whiteSlider.value, BasicSlider.value, Time.deltaTime * sliderSpeed);
 			else

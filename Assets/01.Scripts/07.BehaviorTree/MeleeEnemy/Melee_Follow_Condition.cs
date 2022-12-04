@@ -14,6 +14,7 @@ public class Melee_Follow_Condition : BT_Condition
 	{
 		if (_data.Animator.GetBool("IsAttack"))
 		{
+			_data.Animator.SetBool("IsWalk", false);
 			return Result.FAILURE;
 		}
 		else

@@ -17,10 +17,17 @@ public class MeleeFollow : BT_Node
     {
         _tree.transform.position = Vector3.Lerp(_tree.transform.position, _player.transform.position, Time.deltaTime  * _data.Stat.Speed);
 		_tree.transform.LookAt(_player);
+		_data.Animator.SetBool("IsWalk", true);
 		if (Vector3.Distance(_tree.transform.position, _player.position) <= _data.attackRange)
-        {
+		{
 			UpdateState = UpdateState.Exit;
         }
+	}
+
+    protected override void OnExit()
+    {
+		_data.Animator.SetBool("IsWalk", false);
+        base.OnExit();
 	}
 
     public override Result Execute()

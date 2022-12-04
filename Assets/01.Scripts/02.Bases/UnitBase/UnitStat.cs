@@ -35,7 +35,9 @@ public class UnitStat
     public virtual void Init()
     {
         ResetHp();
-        ResetSpeed();
+        ResetDamage();
+
+		ResetSpeed();
     }
 
     public void ResetHp()
