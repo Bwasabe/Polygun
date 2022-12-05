@@ -10,7 +10,7 @@ public class AssassinSubSkill : BaseSkill, ISkillPersistAble
 
     public override void Skill()
     {
-        Debug.Log("어쌔신 서브");
+        
     }
 
     public void SkillPersist()

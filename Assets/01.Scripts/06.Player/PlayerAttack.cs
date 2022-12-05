@@ -49,6 +49,11 @@ public class PlayerAttack : BasePlayerSkillComponent
         }
     }
 
+    public void SetBulletRate(float value)
+    {
+        _bulletRate = value;
+    }
+
     protected override void RegisterInput()
     {
         _input.AddInput("MOUSE_LEFTBUTTON", KeyCode.Mouse0);

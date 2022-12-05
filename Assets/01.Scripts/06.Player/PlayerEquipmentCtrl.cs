@@ -35,6 +35,7 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
     {
         equipment.transform.SetParent(_equipmentTransform);
         equipment.transform.localPosition = Vector3.zero;
+        equipment.transform.localRotation = Quaternion.identity;
         SetEquipment(equipment);
     }
     private void SetEquipment(BaseEquipment equipment)

@@ -11,10 +11,16 @@ public enum BulletType : int
 	PLAYER
 }
 
-[RequireComponent(typeof(ParticleSystem))]
 [RequireComponent(typeof(CollisionCtrl))]
 public class Bullet : MonoBehaviour
 {
+    [SerializeField]
+    private PoolObjectType _type = PoolObjectType.PlayerBullet;
+	
+	[SerializeField]
+	private GameObject _flash;
+    [SerializeField]
+    private bool _isReturnObject = true;
     public float Damage{ get; set; }
 	public Vector3 Direction{ get; set; }
     public float Speed{ get; set; }
@@ -30,7 +36,6 @@ public class Bullet : MonoBehaviour
 
     private CollisionCtrl _collisionCtrl;
 
-	public GameObject flash;
 
 	private GameObject _flashObj;
 
@@ -45,9 +50,9 @@ public class Bullet : MonoBehaviour
 	{
 		if (_flashObj != null)
 			DoFlash();
-		else
+		else if(_flash != null)
 		{
-			_flashObj = Instantiate(flash, transform);
+			_flashObj = Instantiate(_flash, transform);
 			DoFlash();
 		}
 	}
@@ -57,9 +62,11 @@ public class Bullet : MonoBehaviour
 	protected virtual void Update()
 	{
 		this.transform.position += Direction.normalized * Speed * Time.deltaTime;
-		if (!_particleSystem.IsAlive())
+		if(_particleSystem == null)return;
+        if (!_particleSystem.IsAlive())
 		{
-			ObjectPool.Instance.ReturnObject(PoolObjectType.PlayerBullet, this.gameObject);
+			if(_isReturnObject)
+			ObjectPool.Instance.ReturnObject(_type, this.gameObject);
 		}
 	}
 	void DoFlash()
@@ -75,7 +82,7 @@ public class Bullet : MonoBehaviour
 		{
 			other.GetComponent<IDmgAble>()?.Damage(Damage);
 		}
-
-		ObjectPool.Instance.ReturnObject(PoolObjectType.PlayerBullet, this.gameObject);
+		if(_isReturnObject)
+			ObjectPool.Instance.ReturnObject(_type, this.gameObject);
 	}
 }
