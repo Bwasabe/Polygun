@@ -63,7 +63,6 @@ public class ObjectPool : MonoSingleton<ObjectPool>
 
     public void ReturnObject(PoolObjectType type, GameObject obj)
     {
-        Debug.Log(obj);
         obj.gameObject.SetActive(false);
         obj.transform.SetParent(Instance.transform);
         Instance.poolObjectMap[type].Enqueue(obj);

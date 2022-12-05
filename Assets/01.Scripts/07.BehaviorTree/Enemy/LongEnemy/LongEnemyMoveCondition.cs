@@ -12,6 +12,7 @@ public class LongEnemyMoveCondition : BT_Condition
 
 	public override Result Execute()
 	{
+		_children[0].Execute();
 		if (longEnemy.IsAttack)
 			return Result.FAILURE;
 		else

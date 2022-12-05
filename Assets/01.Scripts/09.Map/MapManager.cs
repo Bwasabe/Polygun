@@ -98,7 +98,7 @@ public class MapManager : MonoBehaviour
 			{
 				if (mapCreateArray[i, j])
 				{
-					if (mapInfoArray[i,j].moveMaps.Count <= 1 && (i != mapMaxCreateCount/2 && j != mapMaxCreateCount/2))
+					if (mapInfoArray[i,j].moveMaps.Count == 1 && !(i == mapMaxCreateCount/2 && j == mapMaxCreateCount/2))
 					{
 						bossMap = mapInfoArray[i, j];
 					}
@@ -106,9 +106,9 @@ public class MapManager : MonoBehaviour
 			}
 		}
 
-		mapInfoArray[mapMaxCreateCount / 2, mapMaxCreateCount / 2].roomType = RoomType.StartRoom;
 		bossMap.roomType = RoomType.BossRoom;
 
+		mapInfoArray[mapMaxCreateCount / 2, mapMaxCreateCount / 2].roomType = RoomType.StartRoom;
 		for(int i = 0; i<mapCreateCount; i++)
 		{
 			for(int j =0; j<mapMaxCreateCount; j++)
@@ -222,7 +222,6 @@ public class MapManager : MonoBehaviour
 				if (mapCreateArray[i, j])
 				{
 					mapInfoArray[i, j].MapCreate();
-					mapInfoArray[i, j].DoorCreates();
 
 					//if(mapInfoArray[i, j].moveMaps.Count == 1 &&
 					//	!(i == mapCreateCount /2 && j == mapCreateCount/2))

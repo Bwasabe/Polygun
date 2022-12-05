@@ -7,22 +7,31 @@ public class LongEnemyMove : BT_Node
 {
     private LongEnemyData _thisData;
 
-    private float moveCount = 0f;
+    private LongEnemy _treeInfo;
+
+
+	private float moveCount = 0f;
 
     private float CurrentTime = 0f;
 
     private Vector3 nextPostion = Vector3.zero;
 
     private int min = 1;
-	public LongEnemyMove(BehaviorTree t, LongEnemyData longEnemyData,List<BT_Node> c = null) : base(t, c)
+
+    private Transform _target;
+	public LongEnemyMove(BehaviorTree t, Transform target,LongEnemyData longEnemyData,List<BT_Node> c = null) : base(t, c)
     {
-        _tree.transform.position -= new Vector3(_thisData.maxMoveDistance, 0, 0);
         _thisData = longEnemyData;
+        _treeInfo = _tree as LongEnemy;
+
+		_tree.transform.position -= new Vector3(_thisData.maxMoveDistance, 0, 0);
+        _target = target;
         moveCount = 0;
 	}
 
     protected override void OnEnter()
     {
+
         nextPostion = _tree.transform.position + (new Vector3(_thisData.maxMoveDistance, 0, 0) * min);
 		moveCount = CurrentTime = 0;
         base.OnEnter();
@@ -30,7 +39,20 @@ public class LongEnemyMove : BT_Node
 
     protected override void OnUpdate()
     {
-        _tree.transform.position = Vector3.Lerp(_tree.transform.position, nextPostion, Time.deltaTime);
+        if (_tree.transform.position.z - _target.transform.position.z < _thisData.maxZ)
+        {
+            float z = _thisData.maxZ - (_tree.transform.position.z - _target.transform.position.z) ;
+
+			Debug.Log("พน");
+			nextPostion = nextPostion.z > 0 ? new Vector3(nextPostion.x, nextPostion.y, nextPostion.z + z) : new Vector3(nextPostion.x, nextPostion.y, nextPostion.z - z);
+		}
+
+        if (Mathf.Abs(_tree.transform.position.y - _target.transform.position.y) < _thisData.maxY)
+        {
+			nextPostion = nextPostion.y > 0 ? new Vector3(nextPostion.x, nextPostion.y + _thisData.maxY, nextPostion.z) : new Vector3(nextPostion.x, nextPostion.y- _thisData.maxY, nextPostion.z);
+		}
+
+		_tree.transform.position = Vector3.Lerp(_tree.transform.position, nextPostion, Time.deltaTime);
         CurrentTime += Time.deltaTime;
         UpdateState = UpdateState.Update;
 		if (CurrentTime >= _thisData.waitMovingTime && moveCount < _thisData.maxMoveCount)
@@ -42,19 +64,28 @@ public class LongEnemyMove : BT_Node
 		}
         else if(CurrentTime >= _thisData.waitMovingTime && moveCount == _thisData.maxMoveCount)
         {
-            UpdateState = UpdateState.Exit;
+            _treeInfo.IsAttack = true;
+			UpdateState = UpdateState.Exit;
         }
         base.OnUpdate();
     }
 
-	public override Result Execute()
+    protected override void OnExit()
+    {
+		if (moveCount == _thisData.maxMoveCount)
+			NodeResult = Result.FAILURE;
+		else if (moveCount < _thisData.maxMoveCount)
+			NodeResult = Result.RUNNING;
+		else
+			NodeResult = Result.SUCCESS;
+		base.OnExit();
+    }
+
+    public override Result Execute()
 	{
-        if (moveCount == _thisData.maxMoveCount)
-            return Result.FAILURE;
-        else if (moveCount < _thisData.maxMoveCount)
-            return Result.RUNNING;
-        else
-            return Result.SUCCESS;
+		Debug.Log("MOVE");
+		base.Execute();
+        return NodeResult;
 	}
 }
 
@@ -66,7 +97,13 @@ public partial class LongEnemyData
     private float WaitMovingTime;
     [SerializeField]
     private float MaxMoveDistance;
+    [SerializeField]
+    private float MaxY;
+    [SerializeField]
+    private float MaxZ;
 
+    public float maxZ => MaxZ;
+    public float maxY => MaxY;
     public float waitMovingTime => WaitMovingTime;
     public float maxMoveDistance => MaxMoveDistance;
 

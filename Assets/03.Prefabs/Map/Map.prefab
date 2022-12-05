@@ -48,7 +48,7 @@ MonoBehaviour:
   moveMaps: []
   roomObjects:
   - {fileID: 7079768604664442035, guid: 1cabc1a45c9d45c4e845324f857225ef, type: 3}
-  - {fileID: 5727876764302988804, guid: f2633359a9316cc44a7b91c432918aaf, type: 3}
+  - {fileID: 7091152076464405343, guid: 14c3cbe2119908942a8c82bcfe4005be, type: 3}
   - {fileID: 7254386677922731001, guid: 5c27f9d520934bf42ae2d70507280c5e, type: 3}
   - {fileID: 3035274455204493919, guid: 63891a8b60ee8824c94eee16b38cff2e, type: 3}
   - {fileID: 4143522783604892489, guid: 650ac0748be821248a490c62b1c3d16b, type: 3}

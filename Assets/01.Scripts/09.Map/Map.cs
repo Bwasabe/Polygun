@@ -28,6 +28,8 @@ public class Map : MonoBehaviour
 	[SerializeField]
 	private GameObject doorObj;
 
+	//[SerializeField]
+	private List<GameObject> doorObjs = new List<GameObject>();
 	private GameObject PObj;
 
 	public void MapCreate()
@@ -67,7 +69,21 @@ public class Map : MonoBehaviour
 				WallCreate(i);
 		}
 	}
+	public void DoorLock()
+	{
+		foreach(GameObject obj in doorObjs)
+		{
+			obj.transform.GetChild(0).gameObject.GetComponent<Collider>().enabled = false;
+		}
+	}
 
+	public void DoorOpen()
+	{
+		foreach (GameObject obj in doorObjs)
+		{
+			obj.transform.GetChild(0).gameObject.GetComponent<Collider>().enabled = true;
+		}
+	}
 	private void DoorCreate(int i)
 	{
 		GameObject obj = Instantiate(doorObj, PObj.transform);
@@ -78,6 +94,8 @@ public class Map : MonoBehaviour
 
 		obj.GetComponent<Door>().nextMap = moveMaps.Find((x) => x.pos == new Vector2Int(pos.x + pair.first, pos.y + pair.secound));
 		obj.GetComponent<Door>().dir = (DoorDirection)i;
+
+		doorObjs.Add(obj);
 	}
 	private Pair<int, int> DirToPair(Direction dir) => (dir) switch
 	{

@@ -41,7 +41,7 @@ public class PlayerAttack : BasePlayerComponent
         {
             _player.CurrentState |= PLAYER_STATE.ATTACK;
             _rateTime = 0;
-            _attack.Skill();
+            //_attack.Skill();
         }
 
         if(_rateTime >= _attackStateRate)
