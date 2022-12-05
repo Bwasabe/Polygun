@@ -8,6 +8,7 @@ public class LongEnemy : BehaviorTree
     [SerializeField]
     private LongEnemyData _data;
 
+    public UnitStat longEnemyData => _data.Stat;
     public bool IsAttack = false;
 	private GameObject _target;
     protected override BT_Node SetupTree()

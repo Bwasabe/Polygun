@@ -29,7 +29,7 @@ public class BaseEnemyDamaged : MonoBehaviour, IDmgAble
 
     protected virtual void RegisterStat()
     {
-        _stat = GetComponent<UnitStat>();
+        _stat = GetComponent<BehaviorTree>().GetData<BT_Data>().Stat;
     }
 
     public virtual void Damage(float damage)

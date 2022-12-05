@@ -15,10 +15,12 @@ public class MeleeFollow : BT_Node
 
     protected override void OnUpdate()
     {
-        Vector3 player = new Vector3(_player.transform.position.x, _tree.transform.position.y, _player.transform.position.z);
 
+        Vector3 player = _player.transform.position;
+        player.y = _tree.transform.position.y;
 		_tree.transform.position = Vector3.Lerp(_tree.transform.position, player, Time.deltaTime  * _data.Stat.Speed);
-		_tree.transform.LookAt(_player);
+		_tree.transform.LookAt(player);
+
 		_data.Animator.SetBool("IsWalk", true);
         NodeResult = Result.RUNNING;
 		if (Vector3.Distance(_tree.transform.position, _player.position) <= _data.attackRange)

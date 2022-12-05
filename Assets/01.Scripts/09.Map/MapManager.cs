@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 public enum Direction
 {
@@ -15,7 +14,8 @@ public enum Direction
 public enum RoomType
 {
 	StartRoom,
-	NomalRoom,
+	NomalRoom1,
+	NomalRoom2,
 	StoreRoom,
 	EffectRoom,
 	BossRoom,
@@ -84,7 +84,10 @@ public class MapManager : MonoBehaviour
 	private void MapRandomTypeList()
 	{
 		for (int i = 0; i < CurrentFloor.normalCount; i++)
-			roomTypes.Add(RoomType.NomalRoom);
+		{
+			int rand = UnityEngine.Random.Range((int)RoomType.NomalRoom1, (int)RoomType.NomalRoom2+1);
+			roomTypes.Add((RoomType)rand);
+		}
 		for (int i = 0; i < CurrentFloor.storeCount; i++)
 			roomTypes.Add(RoomType.StoreRoom);
 		for (int i = 0; i < CurrentFloor.effectCount; i++)

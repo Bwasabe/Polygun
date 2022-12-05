@@ -9,6 +9,8 @@ public class MeleeEnemy : BehaviorTree
 	[SerializeField]
 	private MeleeEnemy_Data _data;
 
+	public UnitStat stat => _data.Stat;
+
 	private Transform _target;
 	[SerializeField]
 	CollisionCtrl attackCtrl;
