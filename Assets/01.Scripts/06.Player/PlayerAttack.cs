@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAttack : BasePlayerComponent
+public class PlayerAttack : BasePlayerSkillComponent
 {
     [SerializeField]
     private Transform _attackPosition;
@@ -21,7 +21,6 @@ public class PlayerAttack : BasePlayerComponent
 
     private PlayerStat _playerStat;
 
-    private BaseSkill _attack;
 
     public float BulletSpeed => _bulletSpeed;
     public LayerMask HitLayer => _hitLayer;
@@ -31,8 +30,8 @@ public class PlayerAttack : BasePlayerComponent
     {
         base.Start();
         _playerStat = _player.PlayerStat;
-        if(_attack == null)
-            _player.GetPlayerComponent<PlayerSkillCtrl>().AddPlayerSkill(new PlayerDefaultAttack(this, SKillType.MainAttack));
+        if(_skill == null)
+            _player.GetPlayerComponent<PlayerSkillCtrl>().AddPlayerSkill<PlayerAttack>(new PlayerDefaultAttack(this));
     }
     private void Update()
     {
@@ -41,7 +40,7 @@ public class PlayerAttack : BasePlayerComponent
         {
             _player.CurrentState |= PLAYER_STATE.ATTACK;
             _rateTime = 0;
-            //_attack.Skill();
+            _skill.Skill();
         }
 
         if(_rateTime >= _attackStateRate)
@@ -50,10 +49,11 @@ public class PlayerAttack : BasePlayerComponent
         }
     }
 
-    public void SetPlayerSkill(BaseSkill skill)
+    public void SetBulletRate(float value)
     {
-        _attack = skill;
+        _bulletRate = value;
     }
+
     protected override void RegisterInput()
     {
         _input.AddInput("MOUSE_LEFTBUTTON", KeyCode.Mouse0);

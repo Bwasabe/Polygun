@@ -43,7 +43,7 @@ public class UnitStat
     public void ResetHp()
     {
         _hp = _defaultHp;
-        baseSlider.InitSlider(_defaultHp);
+        baseSlider?.InitSlider(_defaultHp);
     }
     public void ResetSpeed()
     {
@@ -62,7 +62,7 @@ public class UnitStat
     public void Damaged(float damage)
     {
         _hp -= damage;
-        baseSlider.SetSlider(_hp);
+        baseSlider?.SetSlider(_hp);
 		Debug.Log(_hp);
     }
 }

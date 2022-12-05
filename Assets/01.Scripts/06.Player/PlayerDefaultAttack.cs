@@ -4,22 +4,22 @@ using UnityEngine;
 
 public class PlayerDefaultAttack : BaseSkill
 {
-    private PlayerAttack _parent;
-    public PlayerDefaultAttack(object parent, SKillType type) : base(type)
+    private PlayerAttack _attack;
+    public PlayerDefaultAttack(object parent) : base(null)
     {
-        _parent = parent as PlayerAttack;
+        _attack = parent as PlayerAttack;
     }
 
     public override void Skill()
     {
         GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.PlayerBullet);
-        obj.transform.position = _parent.AttackPos.position;
-        obj.transform.rotation = _parent.transform.localRotation;
+        obj.transform.position = _attack.AttackPos.position;
+        obj.transform.rotation = _attack.transform.localRotation;
         Bullet bulletObj = obj.GetComponent<Bullet>();
-        bulletObj.Direction = _parent.AttackPos.forward;
-        bulletObj.Damage = _parent.Damage;
-        bulletObj.HitLayer = _parent.HitLayer;
-        bulletObj.Speed = _parent.BulletSpeed;
+        bulletObj.Direction = _attack.AttackPos.forward;
+        bulletObj.Damage = _attack.Damage;
+        bulletObj.HitLayer = _attack.HitLayer;
+        bulletObj.Speed = _attack.BulletSpeed;
         CameraManager.Instance.CameraShake();
 	}
 }
