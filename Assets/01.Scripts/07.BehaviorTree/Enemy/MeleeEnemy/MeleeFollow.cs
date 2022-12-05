@@ -15,7 +15,9 @@ public class MeleeFollow : BT_Node
 
     protected override void OnUpdate()
     {
-        _tree.transform.position = Vector3.Lerp(_tree.transform.position, _player.transform.position, Time.deltaTime  * _data.Stat.Speed);
+        Vector3 player = new Vector3(_player.transform.position.x, _tree.transform.position.y, _player.transform.position.z);
+
+		_tree.transform.position = Vector3.Lerp(_tree.transform.position, player, Time.deltaTime  * _data.Stat.Speed);
 		_tree.transform.LookAt(_player);
 		_data.Animator.SetBool("IsWalk", true);
         NodeResult = Result.RUNNING;
