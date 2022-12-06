@@ -3,5 +3,6 @@ public enum PoolObjectType
 	PlayerBullet,
 	//FireBullet_Flush,
 	//FireBullet_Hit,
-	ShockWave
+	ShockWave,
+	ChronosBullet,
 }

@@ -15,7 +15,7 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
 
     private List<BaseEquipment> _equipmentList = new List<BaseEquipment>();
 
-
+    private PlayerSkillCtrl _playerSkillCtrl;
     private BaseEquipment _currentEquipment;
     public BaseEquipment CurrentEquipment => _currentEquipment;
     private int _currentEquipmentIndex = 0;
@@ -27,6 +27,8 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
     protected override void Start()
     {
         base.Start();
+
+        _playerSkillCtrl = _player.GetPlayerComponent<PlayerSkillCtrl>();
 
         _equipmentList.Add(null);
         _equipmentList.Add(null);
@@ -40,20 +42,21 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
     }
     private void SetEquipment(BaseEquipment equipment)
     {
-        if(_equipmentList[_currentEquipmentIndex] != null)
+        if (_equipmentList[_currentEquipmentIndex] != null)
         {
             // 아이템 드롭하는 것
-            equipment.transform.SetParent(null);
+            _equipmentList[_currentEquipmentIndex].transform.SetParent(null);
             _equipmentList[_currentEquipmentIndex].IsEquip = false;
             _equipmentList[_currentEquipmentIndex].gameObject.SetActive(false);
-            _player.GetPlayerComponent<PlayerSkillCtrl>().RemovePlayerSkill<PlayerAttack>(equipment.GetAttack());
-            _player.GetPlayerComponent<PlayerSkillCtrl>().RemovePlayerSkill<PlayerSubSkill>(equipment.GetSubSkill());
+
+            _playerSkillCtrl.RemovePlayerSkill<PlayerAttack>(_equipmentList[_currentEquipmentIndex].Attack);
+            _playerSkillCtrl.RemovePlayerSkill<PlayerSubSkill>(_equipmentList[_currentEquipmentIndex].SubSkill);
         }
-        else
-        {
-            _player.GetPlayerComponent<PlayerSkillCtrl>().AddPlayerSkill<PlayerAttack>(equipment.GetAttack());
-            _player.GetPlayerComponent<PlayerSkillCtrl>().AddPlayerSkill<PlayerSubSkill>(equipment.GetSubSkill());
-        }
+
+        _playerSkillCtrl.AddPlayerSkill<PlayerAttack>(equipment.Attack);
+        _playerSkillCtrl.AddPlayerSkill<PlayerSubSkill>(equipment.SubSkill);
+
+        equipment.RemoveParticle();
         equipment.IsEquip = true;
         equipment.GetComponent<Collider>().enabled = false;
         _equipmentList[_currentEquipmentIndex] = equipment;
@@ -79,7 +82,7 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
     private void Update()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, _radius, _equipmentLayer);
-        if(colliders.Length > 0)
+        if (colliders.Length > 0)
         {
             _getEquipmentUI.SetActive(true);
             // 장비 구매 or 획득 UI띄어주기

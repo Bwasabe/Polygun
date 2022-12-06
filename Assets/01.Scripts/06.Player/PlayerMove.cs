@@ -92,7 +92,7 @@ public class PlayerMove : BasePlayerComponent
     {
         SetState(input);
 
-        Vector3 forward = Utils.VCam.transform.forward;
+        Vector3 forward = Define.MainCam.transform.forward;
         forward.y = 0f;
 
         Vector3 right = new Vector3(forward.z, 0f, -forward.x);
