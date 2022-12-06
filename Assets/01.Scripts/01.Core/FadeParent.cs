@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 public enum FADECHILDS
 {
@@ -16,11 +17,13 @@ public class FadeParent : MonoBehaviour
 
     private RectTransform _bottomBar = null;
 
+    private Image _fadeObj = null;
+
     private float _hideBarY = 0f;
 
     private void Awake()
     {
-
+        _fadeObj = transform.Find(FADECHILDS.FADEOBJECT.ToString()).GetComponent<Image>();
         _bottomBar = transform.Find(FADECHILDS.BOTTOMBAR.ToString()).GetComponent<RectTransform>();
         _topBar = transform.Find(FADECHILDS.TOPBAR.ToString()).GetComponent<RectTransform>();
 
@@ -46,5 +49,10 @@ public class FadeParent : MonoBehaviour
             _topBar.DOAnchorPosY(_hideBarY, duration);
             _bottomBar.DOAnchorPosY(-_hideBarY, duration);
         }
+    }
+
+    public void Fade(float alpha, float duration)
+    {
+        _fadeObj.DOFade(alpha, duration);
     }
 }

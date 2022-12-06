@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class PlayerFollow : MonoBehaviour
 {
@@ -15,6 +16,6 @@ public class PlayerFollow : MonoBehaviour
 	private void Follow()
 	{
 		this.transform.position = Vector3.Slerp
-			(this.transform.position, GameManager.Instance.Player.transform.position, Time.deltaTime*speed);
+			(this.transform.position, GameManager.Instance.Player.transform.position, Time.deltaTime * speed);
 	}
 }

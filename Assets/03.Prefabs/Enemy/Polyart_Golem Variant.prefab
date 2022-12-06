@@ -363,8 +363,8 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!136 &638287870
-CapsuleCollider:
+--- !u!143 &324792498185431436
+CharacterController:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -373,10 +373,14 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1
-  m_Height: 4
-  m_Direction: 1
-  m_Center: {x: 0, y: 2, z: 0}
+  serializedVersion: 2
+  m_Height: 5
+  m_Radius: 2
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!114 &258107585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -411,12 +415,10 @@ MonoBehaviour:
       _defaultAttackRate: 0
       baseSlider: {fileID: 4542875188729992485}
     attackRange: 3
-    _stat:
-      _defaultHp: 10
-      _defaultDamage: 5
-      _defaultSpeed: 1
-      _defaultAttackRate: 0
-      baseSlider: {fileID: 4542875188729992485}
+    _groundLayer:
+      serializedVersion: 2
+      m_Bits: 64
+    _gravityScale: 0
     _ani: {fileID: 3708754889435996669}
   attackCtrl: {fileID: 1831895041}
   layer:

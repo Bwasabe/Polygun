@@ -32,7 +32,8 @@ public class Door : MonoBehaviour
     {
         if (((1 << other.gameObject.layer) & layer) > 0)
         {
-            other.gameObject.transform.parent = nextMap.transform.GetChild(0).transform;
+            StartCoroutine(fadeOut(0));
+			other.gameObject.transform.parent = nextMap.transform.GetChild(0).transform;
             Vector3 vec = nextMap.doorVec[DirectionToInt(dir)];
             if (dir == DoorDirection.Foword || dir == DoorDirection.Back)
             {
@@ -57,4 +58,11 @@ public class Door : MonoBehaviour
         else
             return doorDirection == DoorDirection.Left ? 3 : 2;
     }
+
+    private IEnumerator fadeOut(float waitTime)
+    {
+		Define.FadeParent.Fade(1f, 0);
+		yield return new WaitForSeconds(1f);
+		Define.FadeParent.Fade(0f, 0.1f);
+	}
 }

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using static Yields;
 
 public class LongEnmyAttack : BT_Node
 {
@@ -47,6 +46,7 @@ public class LongEnmyAttack : BT_Node
 	}
 	private void Fire()
 	{
+		Debug.Log("??");
 		GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.LongEnemyBullet);
 		obj.transform.position = _tree.transform.position;
 		Bullet bullet = obj.GetComponent<Bullet>();

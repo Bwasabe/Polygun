@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditorInternal;
 using UnityEngine;
 
 public enum MapState
@@ -47,6 +48,8 @@ public class MapSetting : MonoBehaviour
 	protected virtual void OnEnter()
 	{
 		map.DoorLock();
+		MiniMap.Instance.MiniMapClear();
+		MiniMap.Instance.MiniMapSet(map);
 	}
 
 	protected virtual void OnPlay()

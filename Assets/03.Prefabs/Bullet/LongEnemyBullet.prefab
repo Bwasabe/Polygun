@@ -24526,7 +24526,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed111800a8130be42831bfc19cd54c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flash: {fileID: 1829338749492330, guid: ab6eff13475032b47b279510d5301eed, type: 3}
+  _type: 2
+  _flash: {fileID: 0}
+  _isReturnObject: 1
 --- !u!114 &5375405522510602575
 MonoBehaviour:
   m_ObjectHideFlags: 0

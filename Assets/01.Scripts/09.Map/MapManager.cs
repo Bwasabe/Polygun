@@ -16,7 +16,10 @@ public enum RoomType
 	StartRoom,
 	NomalRoom1,
 	NomalRoom2,
-	StoreRoom,
+	NomalRoom3,
+	NomalRoom4,
+	NomalEnd = 5,
+	StoreRoom = 5,
 	EffectRoom,
 	BossRoom,
 }
@@ -39,7 +42,7 @@ public class MapManager : MonoBehaviour
 	[SerializeField]
 	private GameObject playerObj;
 
-
+	public Map[,] MapInfos => mapInfoArray;
 	private Floor CurrentFloor => floor[floorCount];
 	private int floorCount = 0;
 	private int mapMaxCreateCount => floor[floorCount].mapMaxCreateCount;
@@ -85,7 +88,7 @@ public class MapManager : MonoBehaviour
 	{
 		for (int i = 0; i < CurrentFloor.normalCount; i++)
 		{
-			int rand = UnityEngine.Random.Range((int)RoomType.NomalRoom1, (int)RoomType.NomalRoom2+1);
+			int rand = UnityEngine.Random.Range((int)RoomType.NomalRoom1, (int)RoomType.NomalEnd);
 			roomTypes.Add((RoomType)rand);
 		}
 		for (int i = 0; i < CurrentFloor.storeCount; i++)

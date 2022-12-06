@@ -8,7 +8,7 @@ public class LongEnemyMove : BT_Node
     private LongEnemyData _thisData;
 
     private LongEnemy _treeInfo;
-
+	private CharacterController ch;
 
 	private float moveCount = 0f;
 
@@ -24,42 +24,45 @@ public class LongEnemyMove : BT_Node
         _thisData = longEnemyData;
         _treeInfo = _tree as LongEnemy;
 
-		_tree.transform.position -= new Vector3(_thisData.maxMoveDistance, 0, 0);
+		_tree.transform.localPosition -= new Vector3(_thisData.maxMoveDistance, 0, 0);
         _target = target;
         moveCount = 0;
+		ch = _tree.GetComponent<CharacterController>();
 	}
 
     protected override void OnEnter()
     {
-
-        nextPostion = _tree.transform.position + (new Vector3(_thisData.maxMoveDistance, 0, 0) * min);
+        nextPostion = _tree.transform.localPosition + (new Vector3(_thisData.maxMoveDistance, 0, 0) * min);
 		moveCount = CurrentTime = 0;
         base.OnEnter();
     }
 
     protected override void OnUpdate()
     {
-        if (_tree.transform.position.z - _target.transform.position.z < _thisData.maxZ)
-        {
-            float z = _thisData.maxZ - (_tree.transform.position.z - _target.transform.position.z) ;
+        //      if (_tree.transform.position.z - _target.transform.position.z < _thisData.maxZ)
+        //      {
+        //          float z = _thisData.maxZ - (_tree.transform.position.z - _target.transform.position.z) ;
 
-			Debug.Log("พน");
-			nextPostion = nextPostion.z > 0 ? new Vector3(nextPostion.x, nextPostion.y, nextPostion.z + z) : new Vector3(nextPostion.x, nextPostion.y, nextPostion.z - z);
-		}
+        //	Debug.Log("พน");
+        //	nextPostion = nextPostion.z > 0 ? new Vector3(nextPostion.x, nextPostion.y, nextPostion.z + z) : new Vector3(nextPostion.x, nextPostion.y, nextPostion.z - z);
+        //}
 
-        if (Mathf.Abs(_tree.transform.position.y - _target.transform.position.y) < _thisData.maxY)
-        {
-			nextPostion = nextPostion.y > 0 ? new Vector3(nextPostion.x, nextPostion.y + _thisData.maxY, nextPostion.z) : new Vector3(nextPostion.x, nextPostion.y- _thisData.maxY, nextPostion.z);
-		}
+        //      if (Mathf.Abs(_tree.transform.position.y - _target.transform.position.y) < _thisData.maxY)
+        //      {
+        //	nextPostion = nextPostion.y > 0 ? new Vector3(nextPostion.x, nextPostion.y + _thisData.maxY, nextPostion.z) : new Vector3(nextPostion.x, nextPostion.y- _thisData.maxY, nextPostion.z);
+        //}
 
-		_tree.transform.position = Vector3.Lerp(_tree.transform.position, nextPostion, Time.deltaTime);
+        //Vector3 vec = nextPostion - _tree.transform.localPosition;
+		_tree.transform.localPosition = Vector3.Lerp(_tree.transform.localPosition, nextPostion, Time.deltaTime);
+		//ch.Move(vec.normalized * _thisData.Stat.Speed * Time.deltaTime);
+        _tree.transform.LookAt(_target);
         CurrentTime += Time.deltaTime;
         UpdateState = UpdateState.Update;
 		if (CurrentTime >= _thisData.waitMovingTime && moveCount < _thisData.maxMoveCount)
         {
             moveCount++;
 			min *= -1;
-            nextPostion = _tree.transform.position + (new Vector3(_thisData.maxMoveDistance, 0, 0) * min);
+            nextPostion = _tree.transform.localPosition + (new Vector3(_thisData.maxMoveDistance, 0, 0) * min);
             CurrentTime = 0;
 		}
         else if(CurrentTime >= _thisData.waitMovingTime && moveCount == _thisData.maxMoveCount)
@@ -102,7 +105,11 @@ public partial class LongEnemyData
     [SerializeField]
     private float MaxZ;
 
-    public float maxZ => MaxZ;
+    [SerializeField]
+    private LayerMask _groundLayer;
+
+    public LayerMask groundLayer => _groundLayer;
+	public float maxZ => MaxZ;
     public float maxY => MaxY;
     public float waitMovingTime => WaitMovingTime;
     public float maxMoveDistance => MaxMoveDistance;
