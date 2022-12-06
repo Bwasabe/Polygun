@@ -8,7 +8,7 @@ public class PlayerDamaged : BasePlayerComponent, IDmgAble
     protected override void Start()
     {
         base.Start();
-        _player.PlayerStat.Init();
+        // _player.PlayerStat.Init();
     }
     public void Damage(float damage)
     {

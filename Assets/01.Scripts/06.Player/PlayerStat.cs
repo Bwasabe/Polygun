@@ -9,12 +9,7 @@ public class PlayerStat : UnitStat
     private float _defaultSubSkillRatio;
 
     private float _subSkillRatio;
-    public float SubSkillRatio => _subSkillRatio;
-    public override void Init()
-    {
-        base.Init();
-        ResetSubSkillRatio();
-    }
+    public float SubSkillRatio { get => _subSkillRatio; set => _subSkillRatio = value; }
 
     public void ResetSubSkillRatio()
     {
