@@ -32,29 +32,16 @@ public class LongEnemyMove : BT_Node
 
     protected override void OnEnter()
     {
-        nextPostion = _tree.transform.localPosition + (new Vector3(_thisData.maxMoveDistance, 0, 0) * min);
+        nextPostion = _tree.transform.localPosition + (new Vector3(_thisData.maxMoveDistance, _thisData.maxY, 0) * min);
 		moveCount = CurrentTime = 0;
         base.OnEnter();
     }
 
     protected override void OnUpdate()
     {
-        //      if (_tree.transform.position.z - _target.transform.position.z < _thisData.maxZ)
-        //      {
-        //          float z = _thisData.maxZ - (_tree.transform.position.z - _target.transform.position.z) ;
-
-        //	Debug.Log("พน");
-        //	nextPostion = nextPostion.z > 0 ? new Vector3(nextPostion.x, nextPostion.y, nextPostion.z + z) : new Vector3(nextPostion.x, nextPostion.y, nextPostion.z - z);
-        //}
-
-        //      if (Mathf.Abs(_tree.transform.position.y - _target.transform.position.y) < _thisData.maxY)
-        //      {
-        //	nextPostion = nextPostion.y > 0 ? new Vector3(nextPostion.x, nextPostion.y + _thisData.maxY, nextPostion.z) : new Vector3(nextPostion.x, nextPostion.y- _thisData.maxY, nextPostion.z);
-        //}
-
-        //Vector3 vec = nextPostion - _tree.transform.localPosition;
+        Vector3 back = -_tree.transform.forward;
+        back *= 10;
 		_tree.transform.localPosition = Vector3.Lerp(_tree.transform.localPosition, nextPostion, Time.deltaTime);
-		//ch.Move(vec.normalized * _thisData.Stat.Speed * Time.deltaTime);
         _tree.transform.LookAt(_target);
         CurrentTime += Time.deltaTime;
         UpdateState = UpdateState.Update;
@@ -62,7 +49,7 @@ public class LongEnemyMove : BT_Node
         {
             moveCount++;
 			min *= -1;
-            nextPostion = _tree.transform.localPosition + (new Vector3(_thisData.maxMoveDistance, 0, 0) * min);
+            nextPostion = _tree.transform.localPosition + (new Vector3(_thisData.maxMoveDistance, _thisData.maxY, 0) * min);
             CurrentTime = 0;
 		}
         else if(CurrentTime >= _thisData.waitMovingTime && moveCount == _thisData.maxMoveCount)

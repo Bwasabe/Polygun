@@ -18,7 +18,6 @@ public enum RoomType
 	NomalRoom2,
 	NomalRoom3,
 	NomalRoom4,
-	NomalEnd = 5,
 	StoreRoom = 5,
 	EffectRoom,
 	BossRoom,
@@ -88,7 +87,7 @@ public class MapManager : MonoBehaviour
 	{
 		for (int i = 0; i < CurrentFloor.normalCount; i++)
 		{
-			int rand = UnityEngine.Random.Range((int)RoomType.NomalRoom1, (int)RoomType.NomalEnd);
+			int rand = UnityEngine.Random.Range((int)RoomType.NomalRoom1, (int)RoomType.NomalRoom4+1);
 			roomTypes.Add((RoomType)rand);
 		}
 		for (int i = 0; i < CurrentFloor.storeCount; i++)

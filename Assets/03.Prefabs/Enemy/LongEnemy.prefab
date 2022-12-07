@@ -137,7 +137,6 @@ GameObject:
   - component: {fileID: 251071072551118726}
   - component: {fileID: 5756179120451686220}
   - component: {fileID: 4205308813506595704}
-  - component: {fileID: 7393294860723963652}
   m_Layer: 0
   m_Name: LongEnemy
   m_TagString: Untagged
@@ -227,19 +226,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitDuration: 0.15
   _hitColor: {r: 1, g: 1, b: 1, a: 1}
---- !u!114 &7393294860723963652
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773996819081677985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5017d273fddafc4f864f96875bd7fbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3
 --- !u!1 &1035973801281281002
 GameObject:
   m_ObjectHideFlags: 0

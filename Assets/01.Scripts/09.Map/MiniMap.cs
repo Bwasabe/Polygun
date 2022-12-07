@@ -54,17 +54,17 @@ public class MiniMap : MonoSingleton<MiniMap>
 		}
 	}
 
-	public void MiniMapClear()
-	{
-		if (objects.Count <= 0)
-			return;
+	//public void MiniMapClear()
+	//{
+	//	if (objects.Count <= 0)
+	//		return;
 
-		foreach (GameObject obj in objects)
-		{
-			Destroy(obj);
-			objects?.Remove(obj);
-		}
-	}
+	//	foreach (GameObject obj in objects)
+	//	{
+	//		Destroy(obj);
+	//		objects?.Remove(obj);
+	//	}
+	//}
 
 	private GameObject MiniMapObjSelect(RoomType roomType)
 	{
