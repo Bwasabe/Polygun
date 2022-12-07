@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 251071072551118726}
   - component: {fileID: 5756179120451686220}
   - component: {fileID: 4205308813506595704}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LongEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
