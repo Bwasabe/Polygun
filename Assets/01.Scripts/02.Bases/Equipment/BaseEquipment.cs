@@ -51,10 +51,12 @@ public abstract class BaseEquipment : MonoBehaviour
     // 처음 스킬들을 등록시키는 함수(공격, sub)
     protected abstract void RegisterSkills();
 
-    public virtual void RemoveParticle()
+
+    public void ParticleActive(bool active)
     {
-        _particle.SetActive(false);
+        _particle.SetActive(active);
     }
+
 
     private void InitAllData()
     {

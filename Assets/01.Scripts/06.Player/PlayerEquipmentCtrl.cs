@@ -56,7 +56,7 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
         _playerSkillCtrl.AddPlayerSkill<PlayerAttack>(equipment.Attack);
         _playerSkillCtrl.AddPlayerSkill<PlayerSubSkill>(equipment.SubSkill);
 
-        equipment.RemoveParticle();
+        equipment.ParticleActive(false);
         equipment.IsEquip = true;
         equipment.GetComponent<Collider>().enabled = false;
         _equipmentList[_currentEquipmentIndex] = equipment;
