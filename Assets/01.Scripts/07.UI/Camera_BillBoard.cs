@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Camera_BillBoard : MonoBehaviour
@@ -37,7 +35,7 @@ public class Camera_BillBoard : MonoBehaviour
     void Awake()
     { 
         if (!referenceCamera)
-            referenceCamera = Camera.main;
+            referenceCamera = Define.MainCam;
     }
 
     void LateUpdate()

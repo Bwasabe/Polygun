@@ -36,9 +36,10 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
         if (_data.TimeStopSlider.value > _data.TimeStopSlider.minValue)
         {
             //TODO: 시간 느리게
-
+            Time.timeScale = 1 / _data.TimeScaleValue;
+            GameManager.PlayerTimeScale = _data.TimeScaleValue;
             _isUsed = true;
-            _data.TimeStopSlider.value -= Time.unscaledDeltaTime * _data.MinTimeStopDuration;
+            _data.TimeStopSlider.value -= Time.deltaTime * _data.MinTimeStopDuration * GameManager.PlayerTimeScale;
             _parent.ParticleActive(true);
             // if(_liftGammaGain.gamma.value == null)
             // {
@@ -47,15 +48,17 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
         }
         else
         {
+            Time.timeScale = 1f;
+            GameManager.PlayerTimeScale = 1f;
             //TODO: 시간 원상복귀
             _parent.ParticleActive(false);
             _isUsed = false;
-            if(_liftGammaGain.gamma.value == _data.GammaValue)
+            if (_liftGammaGain.gamma.value == _data.GammaValue)
             {
                 _liftGammaGain.gamma.Override((Vector4)Vector3.one);
             }
 
-            if(_liftGammaGain.gain.value == _data.GainValue)
+            if (_liftGammaGain.gain.value == _data.GainValue)
             {
                 _liftGammaGain.gain.Override((Vector4)Vector3.one);
             }
@@ -86,6 +89,8 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
         }
         if (Input.GetKeyUp(_input.GetInput(Q)))
         {
+            Time.timeScale = 1f;
+            GameManager.PlayerTimeScale = 1f;
             _isUsed = false;
             _parent.ParticleActive(false);
 
@@ -103,7 +108,7 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
         }
         if (!_isUsed)
         {
-            _data.TimeStopSlider.value += Time.unscaledDeltaTime * _data.AddTimeStopDuration;
+            _data.TimeStopSlider.value += Time.deltaTime * _data.AddTimeStopDuration * GameManager.PlayerTimeScale;
         }
     }
 }
@@ -137,5 +142,9 @@ public partial class ChronosData
     [SerializeField]
     private Vector4 _gainValue = new Vector4(1f, 1f, 0.8f, 0);
     public Vector4 GainValue => _gainValue;
+
+    [SerializeField]
+    private float _timeScaleValue = 2f;
+    public float TimeScaleValue => _timeScaleValue;
 }
 

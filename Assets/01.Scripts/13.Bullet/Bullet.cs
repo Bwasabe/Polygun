@@ -27,12 +27,14 @@ public class Bullet : MonoBehaviour
 
     public LayerMask HitLayer{ get; set; }
 
-	// [SerializeField]
-	// private ParticleSystem _flush;
-	// [SerializeField]
-	// private ParticleSystem _hit;
+    public bool IsPlayerBullet { get; set; } = false;
 
-	private ParticleSystem _particleSystem;
+    // [SerializeField]
+    // private ParticleSystem _flush;
+    // [SerializeField]
+    // private ParticleSystem _hit;
+
+    private ParticleSystem _particleSystem;
 
     private CollisionCtrl _collisionCtrl;
 
@@ -62,7 +64,12 @@ public class Bullet : MonoBehaviour
 
 	protected virtual void Update()
 	{
-		this.transform.position += Direction.normalized * Speed * Time.deltaTime;
+		if(IsPlayerBullet)
+		{
+			this.transform.position += Direction.normalized * Speed * Time.deltaTime * GameManager.PlayerTimeScale;
+		}
+		else
+			this.transform.position += Direction.normalized * Speed * Time.deltaTime;
 		if(_particleSystem == null)return;
         if (!_particleSystem.IsAlive())
 		{

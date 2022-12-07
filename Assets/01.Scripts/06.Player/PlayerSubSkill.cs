@@ -11,7 +11,7 @@ public class PlayerSubSkill : BasePlayerSkillComponent
 
     private void Update() {
         if(_skill == null)return;
-        _timer += Time.deltaTime;
+        _timer += Time.deltaTime * GameManager.PlayerTimeScale;
         if(Input.GetKey(_input.GetInput(Q)) && _timer >= _player.PlayerStat.SubSkillRatio)
         {
             _timer = 0f;

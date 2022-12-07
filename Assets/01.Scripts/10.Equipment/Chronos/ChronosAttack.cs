@@ -49,6 +49,7 @@ public class ChronosAttack : BaseSkill
         bulletObj.HitLayer = _attack.HitLayer;
         bulletObj.Speed = _data.BulletSpeed;
         bulletObj.transform.localScale = scale;
+        bulletObj.IsPlayerBullet = true;
         CameraManager.Instance.CameraShake();
     }
 }
