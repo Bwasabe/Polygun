@@ -101,9 +101,9 @@ public class PlayerMove : BasePlayerComponent
 
         if (_dir != Vector3.zero && !_player.CurrentState.HasFlag(PLAYER_STATE.ATTACK))
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_dir), Time.deltaTime * _moveSmooth);
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(_dir), Time.deltaTime * _moveSmooth * GameManager.PlayerTimeScale);
         }
-        _cc.Move(_playerStat.Speed * _dir * Time.deltaTime * GameManager.TimeScale);
+        _cc.Move(_playerStat.Speed * _dir * Time.deltaTime * GameManager.TimeScale * GameManager.PlayerTimeScale);
     }
 
 }

@@ -72,12 +72,6 @@ public class PlayerJump : BasePlayerComponent
         OnGUIManager.Instance._guiDict["IsGround"] = $"{IsGround()}";
         if (IsGround())
         {
-   //         if (_jumpState == JUMP_STATE.NONE)
-   //         {
-   //             Debug.Log("점피");
-			//	_velocity.y = 0f;
-			//}
-
 			if (_jumpState == JUMP_STATE.JUMPDOWN)
             {
                 _velocity.y = 0f;
@@ -87,14 +81,14 @@ public class PlayerJump : BasePlayerComponent
             if (Input.GetKey(_input.GetInput("JUMP"))
             && _jumpState == JUMP_STATE.NONE && !_player.CurrentState.HasFlag(PLAYER_STATE.JUMP))
             {
-                _velocity.y = Mathf.Sqrt(_jumpForce * -2.0f * Physics.gravity.y) * GameManager.TimeScale;
+                _velocity.y = Mathf.Sqrt(_jumpForce * -2.0f * Physics.gravity.y) * GameManager.TimeScale * GameManager.PlayerTimeScale;
                 //Debug.Log("점프 눌림");
                 _player.CurrentState |= PLAYER_STATE.JUMP;
             }
         }
-        _velocity.y += Physics.gravity.y * Time.deltaTime * _gravityScale * GameManager.TimeScale;
+        _velocity.y += Physics.gravity.y * Time.deltaTime * _gravityScale * GameManager.TimeScale * GameManager.PlayerTimeScale;
 
-        _cc.Move(_velocity * Time.deltaTime * GameManager.TimeScale);
+        _cc.Move(_velocity * Time.deltaTime * GameManager.TimeScale * GameManager.PlayerTimeScale);
     }
 
     public bool IsGround()

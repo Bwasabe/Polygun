@@ -58,7 +58,7 @@ public class PlayeDashSkill : BaseSkill, ISkillPersistAble
         _player.CurrentState |= PLAYER_STATE.INVINCIBLE;
 
         _calcVelocity +=
-        Vector3.Scale(dir, _dashDistance *
+        Vector3.Scale(dir, _dashDistance * GameManager.PlayerTimeScale *
         new Vector3(
             (Mathf.Log(1f / (Time.deltaTime * _drags.x + 1)) / -Time.deltaTime),
             0,
@@ -106,9 +106,9 @@ public class PlayeDashSkill : BaseSkill, ISkillPersistAble
         OnGUIManager.Instance._guiDict["CalcVelocity"] = $"CalcVelocity : {_calcVelocity.ToString()}";
         OnGUIManager.Instance._guiDict["CalcVelocityMag"] = $"CalcVelocity : {_calcVelocity.magnitude.ToString()}";
         _cc.Move(_calcVelocity * Time.deltaTime);
-        _calcVelocity.x /= 1 + _drags.x * Time.deltaTime;
-        _calcVelocity.y /= 1 + _drags.y * Time.deltaTime;
-        _calcVelocity.z /= 1 + _drags.z * Time.deltaTime;
+        _calcVelocity.x /= 1 + _drags.x * Time.deltaTime * GameManager.PlayerTimeScale;
+        _calcVelocity.y /= 1 + _drags.y * Time.deltaTime * GameManager.PlayerTimeScale;
+        _calcVelocity.z /= 1 + _drags.z * Time.deltaTime * GameManager.PlayerTimeScale;
     }
 
 }

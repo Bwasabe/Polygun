@@ -13,4 +13,6 @@ public class GameManager : MonoSingleton<GameManager>
     private InputManager _inputManager;
 
     public static float TimeScale = 1f;
+
+    public static float PlayerTimeScale = 1f;
 }

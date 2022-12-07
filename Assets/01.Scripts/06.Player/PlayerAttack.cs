@@ -35,7 +35,7 @@ public class PlayerAttack : BasePlayerSkillComponent
     }
     private void Update()
     {
-        _rateTime += Time.deltaTime;
+        _rateTime += Time.deltaTime * GameManager.PlayerTimeScale;
         if (Input.GetKey(_input.GetInput("MOUSE_LEFTBUTTON")) && _bulletRate <= _rateTime)
         {
             _player.CurrentState |= PLAYER_STATE.ATTACK;
