@@ -1,5 +1,6 @@
 using UnityEngine;
-using UnityEngine.UIElements;
+using System;
+using System.Reflection;
 
 [System.Serializable]
 public class UnitStat
@@ -10,10 +11,9 @@ public class UnitStat
     [SerializeField]
     private float _defaultDamage;
     [SerializeField]
-    private float _defaultSpeed;
+    private float _defaultSpeed = 15f;
     [SerializeField]
     private float _defaultAttackRate;
-
     [SerializeField]
     private BasicHPSlider baseSlider;
     private float _damage;
@@ -34,10 +34,21 @@ public class UnitStat
 
     public virtual void Init()
     {
-        ResetHp();
-        ResetDamage();
+        CallInitMethod();
+    }
 
-		ResetSpeed();
+    private void CallInitMethod()
+    {
+        Type type = this.GetType();
+        MethodInfo[] methodInfos = type.GetMethods(
+            BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy);
+        foreach(MethodInfo method in methodInfos)
+        {
+            if(method.Name.IndexOf("Reset") != -1)
+            {
+                method.Invoke(this, null);
+            }
+        }
     }
 
     public void ResetHp()
@@ -48,6 +59,7 @@ public class UnitStat
     public void ResetSpeed()
     {
         _speed = _defaultSpeed;
+
     }
 
 	public void ResetDamage()

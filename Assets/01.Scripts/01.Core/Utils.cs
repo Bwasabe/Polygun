@@ -5,17 +5,17 @@ using UnityEngine;
 
 public static class Utils
 {
-    public static CinemachineVirtualCamera VCam
+    public static CinemachineFreeLook VCam
     {
         get
         {
             if (_vCam == null)
             {
-                _vCam = GameObject.FindObjectOfType<CinemachineVirtualCamera>();
+                _vCam = GameObject.FindObjectOfType<CinemachineFreeLook>();
             }
             return _vCam;
         }
     }
 
-    private static CinemachineVirtualCamera _vCam;
+    private static CinemachineFreeLook _vCam;
 }

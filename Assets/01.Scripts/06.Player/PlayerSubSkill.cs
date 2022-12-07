@@ -10,11 +10,12 @@ public class PlayerSubSkill : BasePlayerSkillComponent
     private float _timer;
 
     private void Update() {
+        if(_skill == null)return;
         _timer += Time.deltaTime;
         if(Input.GetKey(_input.GetInput(Q)) && _timer >= _player.PlayerStat.SubSkillRatio)
         {
             _timer = 0f;
-            _skill.Skill();
+            _skill?.Skill();
         }
     }
 

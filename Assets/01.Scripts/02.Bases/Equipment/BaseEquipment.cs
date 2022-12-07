@@ -7,9 +7,16 @@ using System.Reflection;
 public abstract class BaseEquipment : MonoBehaviour
 {
     [SerializeField]
-    private float _sinCycle = 1f;
+    private float _sinCycle = 1.5f;
     [SerializeField]
-    private float _height = 1f;
+    private float _height = 0.5f;
+    [SerializeField]
+    protected GameObject _particle;
+
+    protected BaseSkill _attack;
+    public BaseSkill Attack => _attack;
+    protected BaseSkill _subSkill;
+    public BaseSkill SubSkill => _subSkill;
 
     public bool IsEquip { get; set; } = false;
 
@@ -20,11 +27,11 @@ public abstract class BaseEquipment : MonoBehaviour
 
     protected virtual void Awake() {
         InitAllData();
-        RegisterSkills();
     }
 
     protected virtual void Start()
     {
+        RegisterSkills();
         _skillCtrl = GameManager.Instance.Player.GetPlayerComponent<PlayerSkillCtrl>();
         _startPos = transform.position;
 
@@ -44,12 +51,13 @@ public abstract class BaseEquipment : MonoBehaviour
     // 처음 스킬들을 등록시키는 함수(공격, sub)
     protected abstract void RegisterSkills();
 
-    // 플레이어가 아이템을 획득했을 때 실행시켜주는 함수(각각의 스킬별들을 sub스킬인지 attack스킬인지에 따라 넣어준다)
-    public abstract void GetSkill();
 
-    public abstract BaseSkill GetAttack();
+    public void ParticleActive(bool active)
+    {
+        _particle.SetActive(active);
+    }
 
-    public abstract BaseSkill GetSubSkill();
+
     private void InitAllData()
     {
         Type myType = this.GetType();
