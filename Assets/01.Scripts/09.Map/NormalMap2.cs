@@ -28,7 +28,7 @@ public class NormalMap2 : MapSetting
 		int count = 0;
 		foreach (GameObject obj in enemys)
 		{
-			if (!obj.gameObject.active)
+			if (!obj.gameObject.activeSelf)
 				count++;
 		}
 

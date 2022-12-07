@@ -39,8 +39,13 @@ public class AssassinSubSkill : BaseSkill, ISkillPersistAble, ISkillInitAble
             starFall.SetScale((_player.transform.position - hit.transform.position).magnitude );
 
             Vector3 movePos = hit.point - hit.transform.position;
+            movePos.y = 0f;
+
+            Vector3 hitPoint = hit.transform.position;
+            hitPoint.y = _player.transform.position.y;
+
             _cc.enabled = false;
-            _player.transform.position = hit.transform.position + movePos * -1.5f; //+ hit.transform.forward * -1f; //* hit.collider.bounds.max.magnitude;
+            _player.transform.position = hitPoint + movePos * -1.5f; //+ hit.transform.forward * -1f; //* hit.collider.bounds.max.magnitude;
             _cc.enabled = true;
             Utils.VCam.m_XAxis.Value += 180f;
 
