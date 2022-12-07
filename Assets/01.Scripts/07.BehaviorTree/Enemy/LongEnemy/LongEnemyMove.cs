@@ -42,13 +42,17 @@ public class LongEnemyMove : BT_Node
 
     protected override void OnUpdate()
     {
-        if (Vector3.Distance(_tree.transform.position, _target.transform.position) > 5)
-            backPosition = Vector3.zero;
+        if (Vector3.Distance(_tree.transform.position, _target.transform.position) > _thisData.maxMoveDistance)
+            backPosition = _target.transform.position - _tree.transform.position;
         else
             backPosition = _tree.transform.position - _target.transform.position;
 
-        nextPostion -= backPosition;
-		_tree.transform.localPosition = Vector3.Lerp(_tree.transform.localPosition, nextPostion, Time.deltaTime);
+		nextPostion += backPosition.normalized;
+        nextPostion.y = 0;
+
+        ch.Move(nextPostion.normalized * Time.deltaTime * _thisData.Stat.Speed);
+        this._tree.transform.position = new Vector3(_tree.transform.position.x, 0.5f, _tree.transform.position.z);
+		//_tree.transform.localPosition = Vector3.Lerp(_tree.transform.localPosition, nextPostion, Time.deltaTime);
         _tree.transform.LookAt(_target);
         CurrentTime += Time.deltaTime;
         UpdateState = UpdateState.Update;
@@ -58,7 +62,7 @@ public class LongEnemyMove : BT_Node
         {
             moveCount++;
 			min *= -1;
-            nextPostion = _tree.transform.localPosition + (new Vector3(_thisData.maxMoveDistance, _thisData.maxY, 0) * min);
+            nextPostion = _tree.transform.localPosition + (new Vector3(_thisData.maxMoveDistance, 0, _thisData.maxMoveDistance) * min);
             CurrentTime = 0;
 		}
         else if(CurrentTime >= _thisData.waitMovingTime && moveCount == _thisData.maxMoveCount)

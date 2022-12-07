@@ -27,6 +27,7 @@ public class LongEnemyDamaged : BaseEnemyDamaged
 		_stat.Damaged(damage);
 		if (_stat.HP <= 0)
 		{
+			_testEnemy.deadAction.Invoke();
 			Die();
 		}
 	}

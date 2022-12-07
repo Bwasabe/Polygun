@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,6 +12,7 @@ public class LongEnemy : BehaviorTree
     public UnitStat longEnemyData => _data.Stat;
     public bool IsAttack = false;
 	private GameObject _target;
+    public Action deadAction;
     protected override BT_Node SetupTree()
     {
         _root = new BT_Selector(this, new List<BT_Node>
