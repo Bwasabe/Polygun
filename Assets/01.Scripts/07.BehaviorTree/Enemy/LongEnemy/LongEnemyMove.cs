@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Net.Http.Headers;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class LongEnemyMove : BT_Node
 {
@@ -19,6 +20,8 @@ public class LongEnemyMove : BT_Node
     private int min = 1;
 
     private Transform _target;
+
+    private Vector3 backPosition;
 	public LongEnemyMove(BehaviorTree t, Transform target,LongEnemyData longEnemyData,List<BT_Node> c = null) : base(t, c)
     {
         _thisData = longEnemyData;
@@ -39,12 +42,18 @@ public class LongEnemyMove : BT_Node
 
     protected override void OnUpdate()
     {
-        Vector3 back = -_tree.transform.forward;
-        back *= 10;
+        if (Vector3.Distance(_tree.transform.position, _target.transform.position) > 5)
+            backPosition = Vector3.zero;
+        else
+            backPosition = _tree.transform.position - _target.transform.position;
+
+        nextPostion -= backPosition;
 		_tree.transform.localPosition = Vector3.Lerp(_tree.transform.localPosition, nextPostion, Time.deltaTime);
         _tree.transform.LookAt(_target);
         CurrentTime += Time.deltaTime;
         UpdateState = UpdateState.Update;
+
+
 		if (CurrentTime >= _thisData.waitMovingTime && moveCount < _thisData.maxMoveCount)
         {
             moveCount++;

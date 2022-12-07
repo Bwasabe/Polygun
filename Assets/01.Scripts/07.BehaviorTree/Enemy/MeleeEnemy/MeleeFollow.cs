@@ -25,6 +25,11 @@ public class MeleeFollow : BT_Node
         Vector3 player = _player.transform.position;
         player.y = _tree.transform.position.y;
 
+		Vector3 rotation = _player.transform.position - _tree.transform.position;
+
+		rotation.Normalize();
+
+
 
 		if(IsGround())
 		{
@@ -34,12 +39,9 @@ public class MeleeFollow : BT_Node
 		{
 			_velocity.y += Physics.gravity.y * Time.deltaTime * _data.GravityScale * GameManager.TimeScale;
 		}
-
-        ch.Move((_velocity + playerNormal.normalized) * Time.deltaTime * _data.Stat.Speed);
-		_tree.transform.LookAt(player);
-		//_tree.transform.position = Vector3.Lerp(_tree.transform.position, player, Time.deltaTime  * _data.Stat.Speed);
-
-
+		
+        ch.Move(((playerNormal + _velocity)).normalized * Time.deltaTime * _data.Stat.Speed);
+		_tree.transform.rotation = Quaternion.Slerp(_tree.transform.rotation, Quaternion.LookRotation(rotation), Time.deltaTime * 5);
 
 		_data.Animator.SetBool("IsWalk", true);
         NodeResult = Result.RUNNING;

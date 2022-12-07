@@ -8,7 +8,7 @@ public class BoomEnemyMove : BT_Node
 	private Transform _player;
 	private CharacterController _characterController;
 	private BoomEnemyData _data;
-	private Vector3 _velocity;
+	private Vector3 _velocity = Vector3.zero;
 	private Animator _ani;
 	public BoomEnemyMove(BehaviorTree t, List<BT_Node> c = null) : base(t, c)
 	{
@@ -29,7 +29,8 @@ public class BoomEnemyMove : BT_Node
 		{
 			_velocity.y += Physics.gravity.y * Time.deltaTime * _data.GravityScale * GameManager.TimeScale;
 		}
-		_characterController.Move((_velocity+playerNormal.normalized) * 3 *Time.deltaTime);
+		Debug.Log(IsGround());
+		_characterController.Move((playerNormal + _velocity).normalized * 3 *Time.deltaTime);
 		_tree.transform.LookAt(_player);
 
 		_ani.SetBool("walk", true);
