@@ -89,7 +89,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 4294967295
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 6e89b9b30bff9b84d9c5569b5065d463, type: 2}
+  - {fileID: 2100000, guid: 7597fb26050b2cd4cb0f3adefe406f0d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -194,12 +194,12 @@ MonoBehaviour:
     _stat:
       _defaultHp: 2
       _defaultDamage: 1
-      _defaultSpeed: 0
+      _defaultSpeed: 5
       _defaultAttackRate: 0
       baseSlider: {fileID: 2567962134314250079}
-    MaxMoveCount: 1
+    MaxMoveCount: 3
     WaitMovingTime: 1
-    MaxMoveDistance: 3
+    MaxMoveDistance: 5
     MaxY: 1
     MaxZ: 1
     _groundLayer:
@@ -211,6 +211,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 256
     bulletSpeed: 10
+    bulletWait: 0
   IsAttack: 0
 --- !u!114 &4205308813506595704
 MonoBehaviour:
@@ -226,6 +227,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitDuration: 0.15
   _hitColor: {r: 1, g: 1, b: 1, a: 1}
+  _dissolve: {fileID: 6563675844732769047}
+  _slider: {fileID: 7762429848194469232}
+  _enemyAnimation: {fileID: 7403935763271489881}
 --- !u!1 &1035973801281281002
 GameObject:
   m_ObjectHideFlags: 0

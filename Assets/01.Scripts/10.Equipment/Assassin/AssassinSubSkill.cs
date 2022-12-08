@@ -78,7 +78,7 @@ public class AssassinSubSkill : BaseSkill, ISkillPersistAble, ISkillInitAble
 
     public void SkillPersist()
     {
-        Debug.Log(Utils.VCam.transform.forward);
+        //Debug.Log(Utils.VCam.transform.forward);
     }
 }
 

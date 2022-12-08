@@ -51,7 +51,7 @@ public class LongEnemyMove : BT_Node
         nextPostion.y = 0;
 
         ch.Move(nextPostion.normalized * Time.deltaTime * _thisData.Stat.Speed);
-        this._tree.transform.position = new Vector3(_tree.transform.position.x, 0.5f, _tree.transform.position.z);
+        this._tree.transform.position = new Vector3(_tree.transform.position.x, 0.2f, _tree.transform.position.z);
 		//_tree.transform.localPosition = Vector3.Lerp(_tree.transform.localPosition, nextPostion, Time.deltaTime);
         _tree.transform.LookAt(_target);
         CurrentTime += Time.deltaTime;

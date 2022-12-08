@@ -11,18 +11,18 @@ public class BaseEnemyDamaged : MonoBehaviour, IDmgAble
     private Color _hitColor = Color.white;
 
     protected UnitStat _stat;
-    private Material _material;
+    private Material _meshMaterial;
     private Color _defaultColor;
 
     private Tweener _tweener;
     protected virtual void Awake()
     {
-        _material = GetComponent<MeshRenderer>().material;
+        _meshMaterial = GetComponent<MeshRenderer>().material;
     }
 
     protected virtual void Start()
     {
-        _defaultColor = _material.color;
+        _defaultColor = _meshMaterial.color;
         RegisterStat();
         _stat.Init();
     }
@@ -44,9 +44,9 @@ public class BaseEnemyDamaged : MonoBehaviour, IDmgAble
             if (_tweener != null)
             {
                 _tweener.Kill();
-                _material.color = _defaultColor;
+                _meshMaterial.color = _defaultColor;
             }
-            _tweener = _material.DOColor(_hitColor, _hitDuration).SetLoops(2, LoopType.Yoyo);
+            _tweener = _meshMaterial.DOColor(_hitColor, _hitDuration).SetLoops(2, LoopType.Yoyo);
         }
     }
 

@@ -39,8 +39,9 @@ public class MeleeFollow : BT_Node
 		{
 			_velocity.y += Physics.gravity.y * Time.deltaTime * _data.GravityScale * GameManager.TimeScale;
 		}
-		
-        ch.Move(((playerNormal + _velocity)).normalized * Time.deltaTime * _data.Stat.Speed);
+		playerNormal += _velocity;
+
+		ch.Move(playerNormal.normalized * Time.deltaTime * _data.Stat.Speed);
 		_tree.transform.rotation = Quaternion.Slerp(_tree.transform.rotation, Quaternion.LookRotation(rotation), Time.deltaTime * 5);
 
 		_data.Animator.SetBool("IsWalk", true);
