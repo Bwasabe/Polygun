@@ -28,7 +28,7 @@ public class Map : MonoBehaviour
 	[SerializeField]
 	private GameObject doorObj;
 
-	//[SerializeField]
+	[SerializeField]
 	private List<GameObject> doorObjs = new List<GameObject>();
 	private GameObject PObj;
 
@@ -36,7 +36,7 @@ public class Map : MonoBehaviour
 	{
 		GameObject obj = Instantiate(roomObjects[(int)roomType], transform);
 		obj.transform.localPosition = Vector3.zero;
-		PObj = obj.transform.GetChild(0).gameObject;
+		PObj = obj.transform.gameObject;
 	}
 	public void DoorCreates()
 	{
@@ -86,6 +86,9 @@ public class Map : MonoBehaviour
 	}
 	private void DoorCreate(int i)
 	{
+		if (this.roomType == RoomType.StartRoom)
+			Debug.Log(">");
+
 		GameObject obj = Instantiate(doorObj, PObj.transform);
 		if ((DoorDirection)i == DoorDirection.Foword || (DoorDirection)i == DoorDirection.Back)
 			obj.transform.localRotation = Quaternion.Euler(new Vector3(0, 90, 0));

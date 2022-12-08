@@ -79,7 +79,7 @@ public class MapManager : MonoBehaviour
 		MapDoorSet();
 
 		playerObj.transform.parent = mapInfoArray[mapMaxCreateCount / 2, mapMaxCreateCount / 2].transform.GetChild(0);
-		playerObj.transform.localPosition = new Vector3(-11,0,6);
+		playerObj.transform.localPosition = new Vector3(-2.69f, -1.12f, 1.19f);
 	}
 
 	#region 맵 생성하는 것
