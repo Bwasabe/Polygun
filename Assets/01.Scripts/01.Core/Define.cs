@@ -56,4 +56,9 @@ public static class Define
         Array values = Enum.GetValues(typeof(T));
         return (T)values.GetValue(Random.Range((isNone) ? 1 : 0, (isLength) ? values.Length - 1 : values.Length));
     }
+
+    public static T GetEnumValue<T>(this Enum e) where T : struct, IComparable, IFormattable, IConvertible, IComparable<T>, IEquatable<T>
+    {
+        return (T)(object)e;
+    }
 }
