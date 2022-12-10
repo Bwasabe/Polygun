@@ -593,13 +593,10 @@ MonoBehaviour:
   floor:
   - normalCount: 6
     storeCount: 1
-    effectCount: 1
   - normalCount: 0
     storeCount: 0
-    effectCount: 0
   - normalCount: 0
     storeCount: 0
-    effectCount: 0
   playerObj: {fileID: 160980962}
 --- !u!4 &30924021
 Transform:
@@ -2128,7 +2125,7 @@ MonoBehaviour:
   _playerStat:
     _defaultHp: 10
     _defaultDamage: 1
-    _defaultSpeed: 15
+    _defaultSpeed: 13
     _defaultAttackRate: 0
     baseSlider: {fileID: 1040696778}
     _defaultSubSkillRatio: 1
@@ -6169,6 +6166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da9af1bea73cead4a9033afb45803958, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CoinAmount: 0
 --- !u!4 &628866443
 Transform:
   m_ObjectHideFlags: 0
@@ -16866,7 +16864,8 @@ MonoBehaviour:
     - {fileID: 166645235482773501, guid: c28c112e5b544944881ecd1bef0d2c31, type: 3}
     - {fileID: 1457331437900758251, guid: 29ceb6048c512d443a3947405cccb687, type: 3}
     - {fileID: 7403343094073953139, guid: 3788652be35467040a29f6ed0258cfad, type: 3}
-    prefabCreateCounts: 640000001e0000001e0000001e000000
+    - {fileID: 55845624, guid: 6ae41831feb84194c898993e4dc57086, type: 3}
+    prefabCreateCounts: 640000001e0000001e0000001e0000001e000000
 --- !u!4 &1691093061
 Transform:
   m_ObjectHideFlags: 0
@@ -19148,7 +19147,7 @@ MonoBehaviour:
   m_XAxis:
     Value: 0
     m_SpeedMode: 0
-    m_MaxSpeed: 1000
+    m_MaxSpeed: 500
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: Mouse X
@@ -20403,7 +20402,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071529810}
-  m_LocalRotation: {x: 0.049555443, y: -0.000000037560053, z: 0.000000028267667, w: 0.99877137}
+  m_LocalRotation: {x: 0.049555443, y: -0.000000010064187, z: 0.000000007574299, w: 0.99877137}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

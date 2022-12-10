@@ -425,7 +425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4911057012121422, guid: 5e45c8f884f6d124ea0499aae7fdbec8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.52
+      value: -4.37
       objectReference: {fileID: 0}
     - target: {fileID: 4911057012121422, guid: 5e45c8f884f6d124ea0499aae7fdbec8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -542,6 +542,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _hitDuration: 0.15
   _hitColor: {r: 1, g: 1, b: 1, a: 1}
+  CoinObject: {fileID: 2701665430050440195, guid: 93f65a902ba32e14cb4ea3272a978b66, type: 3}
+  CoinPercent: 30
   _dissolve: {fileID: 4255271848231019644}
   _slider: {fileID: 2271342142657230291}
   characterController: {fileID: 2069661344}

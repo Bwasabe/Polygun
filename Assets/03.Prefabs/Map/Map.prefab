@@ -53,7 +53,6 @@ MonoBehaviour:
   - {fileID: 7091152076464405343, guid: ba2bf2acc6ceec348996c3349be36d52, type: 3}
   - {fileID: 7091152076464405343, guid: 8f81618fd7854924a8bd86d1d54e1f22, type: 3}
   - {fileID: 7254386677922731001, guid: 5c27f9d520934bf42ae2d70507280c5e, type: 3}
-  - {fileID: 3035274455204493919, guid: 63891a8b60ee8824c94eee16b38cff2e, type: 3}
   - {fileID: 4143522783604892489, guid: 650ac0748be821248a490c62b1c3d16b, type: 3}
   roomType: 0
   doorVec:
@@ -63,3 +62,4 @@ MonoBehaviour:
   - {x: -11, y: 0, z: 12}
   wallObj: {fileID: 1285216984, guid: 8ab0d05ceccffa2469d030535e60f0d2, type: 3}
   doorObj: {fileID: 2354936453688865565, guid: 53586fa06fb0f68418a5b4f6532ec8f0, type: 3}
+  doorObjs: []

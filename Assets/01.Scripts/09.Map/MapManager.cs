@@ -19,7 +19,6 @@ public enum RoomType
 	NomalRoom3,
 	NomalRoom4,
 	StoreRoom = 5,
-	EffectRoom,
 	BossRoom,
 }
 
@@ -28,9 +27,8 @@ public struct Floor
 {
 	public int normalCount;
 	public int storeCount;
-	public int effectCount;
 
-	public int mapMaxCreateCount => normalCount + storeCount + effectCount + 2;
+	public int mapMaxCreateCount => normalCount + storeCount + 2;
 }
 public class MapManager : MonoBehaviour
 {
@@ -92,8 +90,8 @@ public class MapManager : MonoBehaviour
 		}
 		for (int i = 0; i < CurrentFloor.storeCount; i++)
 			roomTypes.Add(RoomType.StoreRoom);
-		for (int i = 0; i < CurrentFloor.effectCount; i++)
-			roomTypes.Add(RoomType.EffectRoom);
+		//for (int i = 0; i < CurrentFloor.effectCount; i++)
+			//roomTypes.Add(RoomType.EffectRoom);
 	}
 	private void MapTypeSelect()
 	{
@@ -142,7 +140,7 @@ public class MapManager : MonoBehaviour
 			return;
 
 		GameObject obj = Instantiate(debugObjs, transform);
-		obj.transform.position = new Vector3(x * 100, 0, y * 100);
+		obj.transform.position = new Vector3(x * 1000, 0, y * 1000);
 		mapInfoArray[x, y] = obj.GetComponent<Map>();
 		mapInfoArray[x, y].pos = new Vector2Int(x, y);
 		mapCreateArray[x, y] = true;

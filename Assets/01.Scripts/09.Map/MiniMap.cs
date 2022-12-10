@@ -72,10 +72,10 @@ public class MiniMap : MonoSingleton<MiniMap>
 		{
 			return minimaps[(int)MiniMapType.StoreMap];
 		}
-		else if(roomType == RoomType.EffectRoom)
-		{
-			return minimaps[(int)MiniMapType.EffectMap];
-		}
+		//else if(roomType == RoomType.EffectRoom)
+		//{
+		//	return minimaps[(int)MiniMapType.EffectMap];
+		//}
 		else if (roomType == RoomType.StartRoom)
 		{
 			return minimaps[(int)MiniMapType.StartMap];

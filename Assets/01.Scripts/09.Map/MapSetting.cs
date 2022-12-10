@@ -48,17 +48,14 @@ public class MapSetting : MonoBehaviour
 	protected virtual void OnEnter()
 	{
 		map.DoorLock();
-		//MiniMap.Instance.MiniMapClear();
-		//MiniMap.Instance.MiniMapSet(map);
 	}
 
 	protected virtual void OnPlay()
 	{
-
 	}
 
 	protected virtual bool OnIsEnter()
 	{
-		return true;
+		return transform.Find("Player") != null;
 	}
 }

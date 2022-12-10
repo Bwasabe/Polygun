@@ -5,5 +5,6 @@ public enum PoolObjectType
 	//FireBullet_Hit,
 	ShockWave,
 	ChronosBullet,
-	LongEnemyBullet
+	LongEnemyBullet,
+	Coin
 }

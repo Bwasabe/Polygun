@@ -9,6 +9,10 @@ public class BaseEnemyDamaged : MonoBehaviour, IDmgAble
     private float _hitDuration = 0.15f;
     [SerializeField]
     private Color _hitColor = Color.white;
+    [SerializeField]
+    private GameObject CoinObject;
+    [SerializeField]
+    private float CoinPercent;
 
     protected UnitStat _stat;
     private Material _meshMaterial;
@@ -53,7 +57,14 @@ public class BaseEnemyDamaged : MonoBehaviour, IDmgAble
     protected virtual void Die()
     {
         // TODO: 사라지는 애니메이션
+        float rand = Random.Range(0, 100);
+        if(CoinPercent <= rand)
+        {
+            GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.Coin);
+			obj.transform.position = this.transform.position;
+			obj.GetComponent<Rigidbody>().AddForce(Vector3.up * 5f, ForceMode.Impulse);
+		}
         this.gameObject.SetActive(false);
-    }
+	}
 
 }

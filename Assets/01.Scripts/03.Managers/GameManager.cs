@@ -1,6 +1,8 @@
     using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -15,4 +17,15 @@ public class GameManager : MonoSingleton<GameManager>
     public static float TimeScale = 1f;
 
     public static float PlayerTimeScale = 1f;
+
+    public int CoinAmount = 0;
+
+    private void Start()
+    {
+		OnGUIManager.Instance._guiDict.Add("asdf", $"{CoinAmount}");
+	}
+    private void Update()
+    {
+		OnGUIManager.Instance._guiDict["asdf"] = $"{CoinAmount}";
+	}
 }
