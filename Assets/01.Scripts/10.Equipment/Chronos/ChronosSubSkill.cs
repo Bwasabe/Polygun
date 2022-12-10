@@ -33,7 +33,7 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
 
     public override void Skill()
     {
-        if (_data.TimeStopSlider.value > _data.TimeStopSlider.minValue)
+        if (_data.TimeStopSlider.value > _data.MinSliderValue)
         {
             //TODO: 시간 느리게
             Time.timeScale = 1 / _data.TimeScaleValue;
@@ -146,5 +146,9 @@ public partial class ChronosData
     [SerializeField]
     private float _timeScaleValue = 2f;
     public float TimeScaleValue => _timeScaleValue;
+
+    [SerializeField]
+    private float _minSliderValue = 0.5f;
+    public float MinSliderValue => _minSliderValue;
 }
 

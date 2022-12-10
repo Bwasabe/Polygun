@@ -2,8 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AnimatorCtrl<Amon_Animation_State>))]
 public class Amon : BehaviorTree
 {
+    [SerializeField]
+    private AmonData _data;
+
+    [SerializeField]
+    private Collider _attackCol;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        _data.AnimatorCtrl = GetComponent<AnimatorCtrl<Amon_Animation_State>>();
+    }
 
     protected override BT_Node SetupTree()
     {
@@ -24,4 +36,36 @@ public class Amon : BehaviorTree
         return _root;
     }
 
+    protected void EventAttackColliderStart()
+    {
+        _attackCol.enabled = true;
+    }
+
+    protected void EventAttackColliderEnd()
+    {
+        _attackCol.enabled = true;
+    }
+}
+
+public enum Amon_Animation_State
+{
+    IDLE,
+    WALK,
+    RUN,
+    CHARGE_ATTACK,
+    SLEEP_START,
+    SLEEP_END,
+    JUMP,
+    LAND,
+    DAMAGED,
+    RAGE,
+    DIE
+}
+
+public partial class AmonData
+{
+    // TODO: 타임라인 끝나면 Transform에 플레이어 넣어주기
+    public Transform Target { get; set; } = null;
+
+    public AnimatorCtrl<Amon_Animation_State> AnimatorCtrl{ get; set; }
 }
