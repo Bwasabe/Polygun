@@ -47,7 +47,7 @@ public class PlayeDashSkill : BaseSkill, ISkillPersistAble
     public override void Skill()
     {
         _isDash = true;
-        _modelMatList.Clear();
+        Debug.Log($"{_dashDistance.ToString()}");
 
         Vector3 dir;
         if (_player.CurrentState.HasFlag(PLAYER_STATE.MOVE))
@@ -67,8 +67,7 @@ public class PlayeDashSkill : BaseSkill, ISkillPersistAble
 
     public void SkillPersist()
     {
-
-        for (int i = 0; i < _modelDurationList.Count; ++i)
+        for (int i = 0; i < _modelMatList.Count; ++i)
         {
             if (Time.time - _modelDurationList[i] >= _modelDuration || _modelMatList[i].material.color.a <= 0)
             {
@@ -80,6 +79,7 @@ public class PlayeDashSkill : BaseSkill, ISkillPersistAble
             {
                 _modelMatList[i].material.color = Color.Lerp(_startColor, _endColor, (Time.time - _modelDurationList[i]) / _modelDuration);
             }
+
         }
 
         if (!_isDash) return;
@@ -87,7 +87,7 @@ public class PlayeDashSkill : BaseSkill, ISkillPersistAble
         if (_dashTimer >= _dahsModelTime)
         {
             _dashTimer = 0f;
-            MeshRenderer model = GameManager.Instantiate(_model, _dash.transform.position, _dash.transform.rotation, null);
+            MeshRenderer model = GameObject.Instantiate(_model, _dash.transform.position, _dash.transform.rotation, null);
             _modelMatList.Add(model);
             _modelDurationList.Add(Time.time);
         }
