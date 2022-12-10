@@ -21,7 +21,7 @@ public class AmonSleep : BT_Condition
     {
         _timer = 0f;
         // TODO : 애니메이션 플레이
-        _data.AnimatorCtrl.PlayAnimation(Amon_Animation_State.SLEEP_START);
+        _data.AnimatorCtrl.SetAnimationState(Amon_Animation_State.SLEEP_START);
         base.OnEnter();
     }
 
@@ -35,14 +35,14 @@ public class AmonSleep : BT_Condition
     }
     protected override void OnExit()
     {
-        _data.AnimatorCtrl.PlayAnimation(Amon_Animation_State.SLEEP_START);
+        _data.AnimatorCtrl.SetAnimationState(Amon_Animation_State.SLEEP_END);
         _tree.IsStop = true;
         _tree.StartCoroutine(SleepEnd());
     }
 
     private IEnumerator SleepEnd()
     {
-        yield return WaitForSeconds(_data.SleepDuration);
+        yield return WaitForSeconds(_data.SleepEndAnimationClip.length);
         base.OnExit();
         _tree.IsStop = false;
     }
@@ -60,4 +60,8 @@ public partial class AmonData
     [SerializeField]
     private AnimationClip _sleepEndAnimationClip;
     public AnimationClip SleepEndAnimationClip => _sleepEndAnimationClip;
+
+    
+    [SerializeField]
+    private float _sleepEndDuration;
 }

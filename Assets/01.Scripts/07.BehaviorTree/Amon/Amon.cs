@@ -11,10 +11,12 @@ public class Amon : BehaviorTree
     [SerializeField]
     private Collider _attackCol;
 
+    private Animator _animator;
     protected override void Awake()
     {
         base.Awake();
-        _data.AnimatorCtrl = GetComponent<AnimatorCtrl<Amon_Animation_State>>();
+        _animator = GetComponent<Animator>();
+        _data.AnimatorCtrl = new AnimatorCtrl<Amon_Animation_State>(_animator);
     }
 
     protected override BT_Node SetupTree()
@@ -35,6 +37,7 @@ public class Amon : BehaviorTree
         });
         return _root;
     }
+
 
     protected void EventAttackColliderStart()
     {

@@ -2,29 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using static Define;
 
 
-[RequireComponent(typeof(Animator))]
-public class AnimatorCtrl<T>  : MonoBehaviour where T : Enum
+public class AnimatorCtrl<T> where T : Enum
 {
     private readonly int STATE_HASH = Animator.StringToHash("State");
 
+    private Dictionary<string, AnimationClip> _animationClipDict = new Dictionary<string, AnimationClip>();
+
     private Animator _animator;
 
-    // private T _currentState;
-    // public T CurrentState {
-    //     get => _currentState;
-    //     set => value = _currentState;
-    // }
+    public AnimatorCtrl(Animator animator)
+    {
+        _animator = animator;
 
-
-    private void Awake() {
-        _animator = GetComponent<Animator>();
+        for (int i = 0; i < _animator.runtimeAnimatorController.animationClips.Length; ++i)
+        {
+            AnimationClip clip = _animator.runtimeAnimatorController.animationClips[i];
+            _animationClipDict.Add(clip.name, clip);
+        }
     }
 
-    public void PlayAnimation(T animationState)
+    public float GetAnimationLength(string name)
     {
-        _animator.SetInteger(STATE_HASH, animationState.GetValue<int>());
+        if(_animationClipDict.TryGetValue(name, out AnimationClip value))
+        {
+            return value.length;
+        }
+        else
+        {
+            throw new System.Exception("Name is Wrong or None in Dictionary");
+        }
+    }
+
+
+    public void SetAnimationState(T animationState)
+    {
+        _animator.SetInteger(STATE_HASH, animationState.GetEnumValue<int>());
     }
 }

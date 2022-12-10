@@ -20,7 +20,7 @@ public class AmonAttack : BT_Node
     {
         base.OnEnter();
         NodeResult = Result.RUNNING;
-        _data.AnimatorCtrl.PlayAnimation(Amon_Animation_State.CHARGE_ATTACK);
+        _data.AnimatorCtrl.SetAnimationState(Amon_Animation_State.CHARGE_ATTACK);
     }
 
     protected override void OnUpdate()
@@ -31,5 +31,5 @@ public class AmonAttack : BT_Node
     {
         base.OnExit();
     }
-    
+
 }
