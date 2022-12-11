@@ -325,6 +325,7 @@ MonoBehaviour:
   - {fileID: 5997222611755949120}
   - {fileID: 300073129021620659}
   - {fileID: 1417941586322254077}
+  Chest: {fileID: 5867385638613317424, guid: bcecc32f330b4394386ec8843632a252, type: 3}
 --- !u!1001 &293193534493180916
 PrefabInstance:
   m_ObjectHideFlags: 0

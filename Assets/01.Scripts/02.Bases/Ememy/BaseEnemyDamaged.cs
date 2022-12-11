@@ -58,7 +58,7 @@ public class BaseEnemyDamaged : MonoBehaviour, IDmgAble
     {
         // TODO: 사라지는 애니메이션
         float rand = Random.Range(0, 100);
-        if(CoinPercent <= rand)
+        if(CoinPercent >= rand)
         {
             GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.Coin);
 			obj.transform.position = this.transform.position;

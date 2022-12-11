@@ -4,24 +4,14 @@ using Unity.Burst.CompilerServices;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
-public class Coin : MonoBehaviour
+public class Coin : Item
 {
-	private CollisionCtrl _collision;
-
-	[SerializeField]
-	private LayerMask _layerMask;
-	private void Awake()
+	protected override void Interaction(Collider other)
 	{
-		_collision = GetComponent<CollisionCtrl>();
-		_collision.ColliderEnterEvent += CoinGet;
-	}
-
-	private void CoinGet(Collider other)
-	{
-		if (((1 << other.gameObject.layer) & _layerMask) > 0)
+		if(IsInteraction(other))
 		{
 			GameManager.Instance.CoinAmount++;
-			ObjectPool.Instance.ReturnObject(PoolObjectType.Coin,this.gameObject);
+			ObjectPool.Instance.ReturnObject(PoolObjectType.Coin, this.gameObject);
 		}
 	}
 }

@@ -491,7 +491,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7091152076464405342}
-  - component: {fileID: 7091152076464405341}
+  - component: {fileID: 6233262412811924565}
   m_Layer: 0
   m_Name: NormalMap1
   m_TagString: Untagged
@@ -518,7 +518,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7091152076464405341
+--- !u!114 &6233262412811924565
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -527,7 +527,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7091152076464405343}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eea07945c574a0f49af698d16b52fcc4, type: 3}
+  m_Script: {fileID: 11500000, guid: 3314d5e00d3c7c741bee0a64fb516910, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   doorVec:
@@ -538,6 +538,7 @@ MonoBehaviour:
   enemys:
   - {fileID: 3507906609522463737}
   - {fileID: 3507906609692929997}
+  Chest: {fileID: 5867385638613317424, guid: bcecc32f330b4394386ec8843632a252, type: 3}
 --- !u!1001 &3946769
 PrefabInstance:
   m_ObjectHideFlags: 0

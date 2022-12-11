@@ -397,7 +397,7 @@ MonoBehaviour:
   _hitDuration: 0.15
   _hitColor: {r: 1, g: 1, b: 1, a: 1}
   CoinObject: {fileID: 2701665430050440195, guid: 93f65a902ba32e14cb4ea3272a978b66, type: 3}
-  CoinPercent: 30
+  CoinPercent: 10
   _dissolve: {fileID: 3708754889627432596}
   _slider: {fileID: 4542875188729992483}
   characterController: {fileID: 324792498185431436}
@@ -415,8 +415,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data:
     _stat:
-      _defaultHp: 10
-      _defaultDamage: 1
+      _defaultHp: 30
+      _defaultDamage: 20
       _defaultSpeed: 1
       _defaultAttackRate: 0
       baseSlider: {fileID: 4542875188729992485}

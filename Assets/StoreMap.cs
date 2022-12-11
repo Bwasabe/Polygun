@@ -17,6 +17,9 @@ public class StoreMap : MapSetting
 	private List<ItemObject> itemObjects;
 	[SerializeField]
 	private Vector3[] storeObjVec = new Vector3[3];
+
+	[SerializeField]
+	private int confirmationObjectCount = 0;
 	protected override void OnStart()
 	{
 
@@ -38,13 +41,17 @@ public class StoreMap : MapSetting
 
 	private void RandomObjs()
 	{
-		GameObject obj = Instantiate(itemObjects[(int)StoreObjs.SMALLHPHEAL].obj,transform);
-		obj.transform.localPosition = storeObjVec[0];
-		itemObjects.RemoveAt((int)StoreObjs.SMALLHPHEAL);
-		for (int i = 1; i<= storeObjVec.Length - 1; i++)
+		for(int i = 0; i<confirmationObjectCount; i++)
+		{
+			GameObject obj = Instantiate(itemObjects[i].obj, transform);
+			obj.transform.localPosition = storeObjVec[i];
+			itemObjects.RemoveAt(i);
+		}
+
+		for (int i = confirmationObjectCount; i<= storeObjVec.Length - 1; i++)
 		{
 			int rand = UnityEngine.Random.Range(0, itemObjects.Count-1);
-			obj = Instantiate(itemObjects[rand].obj, transform);
+			GameObject obj = Instantiate(itemObjects[rand].obj, transform);
 			obj.transform.localPosition = storeObjVec[i];
 			itemObjects.RemoveAt(rand);
 		}
