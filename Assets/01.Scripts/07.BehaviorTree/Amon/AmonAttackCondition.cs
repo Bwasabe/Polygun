@@ -4,28 +4,25 @@ using UnityEngine;
 
 public class AmonAttackCondition : BT_Condition
 {
+    private AmonData _data;
     public AmonAttackCondition(BehaviorTree t, List<BT_Node> c) : base(t, c)
     {
+        _data = _tree.GetData<AmonData>();
     }
 
     public override Result Execute()
     {
-        return base.Execute();
-    }
-
-    protected override void OnEnter()
-    {
-        base.OnEnter();
-    }
-
-    protected override void OnUpdate()
-    {
-        base.OnUpdate();
-    }
-
-    protected override void OnExit()
-    {
-        base.OnExit();
+        UpdateState = _children[0].UpdateState;
+        if(Vector3.Distance(_data.Target.position, _tree.transform.position) <= _data.AttackDistance)
+        {
+            _children[0].Execute();
+            return Result.SUCCESS;
+        }
+        else
+        {
+            _data.IsFollow = true;
+            return Result.FAILURE;
+        }
     }
 }
 

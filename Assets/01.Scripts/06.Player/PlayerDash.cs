@@ -40,7 +40,7 @@ public class PlayerDash : BasePlayerSkillComponent
         if(_currentDashCount < MaxDashCount)
         {
             _timer += Time.deltaTime * GameManager.PlayerTimeScale;
-            if(_timer >= _player.PlayerStat.SubSkillRatio)
+            if(_timer >= _player.PlayerStat.DashRatio)
             {
                 _timer = 0f;
                 _currentDashCount++;
