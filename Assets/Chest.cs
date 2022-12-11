@@ -23,9 +23,9 @@ public class Chest : MonoBehaviour
 		objs.Sort(delegate (ChestObject data1, ChestObject data2)
 		{
 			if (data1.percent > data2.percent)
-				return -1;
-			else
 				return 1;
+			else
+				return -1;
 		});
 		playableDirector = GetComponent<PlayableDirector>();
 	}

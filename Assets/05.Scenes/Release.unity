@@ -321,6 +321,7 @@ MonoBehaviour:
     _defaultAttackRate: 0
     baseSlider: {fileID: 1032285428}
     _defaultSubSkillRatio: 1
+    _defaultDashRatio: 5
 --- !u!114 &67630625
 MonoBehaviour:
   m_ObjectHideFlags: 0
