@@ -70,7 +70,8 @@ public enum Amon_Animation_State
     JUMP = 8,
     LAND = 9,
     DAMAGED = 10,
-    DIE = 11
+    DIE = 11,
+    MELEE_ATTACK_END = 12,
 }
 
 public partial class AmonData

@@ -6,5 +6,6 @@ public enum PoolObjectType
 	ShockWave,
 	ChronosBullet,
 	LongEnemyBullet,
-	Coin
+	Coin,
+	AmonMeleeBullet,
 }

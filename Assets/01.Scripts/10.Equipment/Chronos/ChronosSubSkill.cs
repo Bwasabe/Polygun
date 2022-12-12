@@ -35,7 +35,7 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
     {
         if (_data.TimeStopSlider.value > _data.MinSliderValue)
         {
-            //TODO: 시간 느리게
+            //시간 느리게
             Time.timeScale = 1 / _data.TimeScaleValue;
             GameManager.PlayerTimeScale = _data.TimeScaleValue;
             _isUsed = true;
@@ -50,7 +50,7 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
         {
             Time.timeScale = 1f;
             GameManager.PlayerTimeScale = 1f;
-            //TODO: 시간 원상복귀
+            //시간 원상복귀
             _parent.ParticleActive(false);
             _isUsed = false;
             if (_liftGammaGain.gamma.value == _data.GammaValue)
@@ -127,9 +127,7 @@ public partial class ChronosData
     private Slider _timeStopSlider;
     public Slider TimeStopSlider => _timeStopSlider;
 
-    [SerializeField]
-    private Volume _globalVolume;
-    public Volume GlobalVolume => _globalVolume;
+    public Volume GlobalVolume { get; set; }
 
     [SerializeField]
     private Vector4 _gammaValue = new Vector4(1f, 0.9f, 0.7f, 0);
