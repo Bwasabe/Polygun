@@ -30,6 +30,7 @@ public struct Floor
 
 	public int mapMaxCreateCount => normalCount + storeCount + 2;
 }
+
 public class MapManager : MonoBehaviour
 {
 	public GameObject debugObjs;
