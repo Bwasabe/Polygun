@@ -12,24 +12,33 @@ public class AmonAttackCondition : BT_Condition
 
     public override Result Execute()
     {
-        UpdateState = _children[0].UpdateState;
-        if(Vector3.Distance(_data.Target.position, _tree.transform.position) <= _data.AttackDistance)
+        base.Execute();
+        return NodeResult;
+    }
+
+    protected override void OnEnter()
+    {
+        base.OnEnter();
+    }
+
+    protected override void OnExit()
+    {
+        base.OnExit();
+    }
+
+    protected override void OnUpdate()
+    {
+        base.OnUpdate();
+        if (!_data.IsAttack)
         {
             _children[0].Execute();
-            return Result.SUCCESS;
+            NodeResult = Result.FAILURE;
         }
         else
         {
-            _data.IsFollow = true;
-            return Result.FAILURE;
+            _children[1].Execute();
+            NodeResult = Result.SUCCESS;
+            UpdateState = _children[1].UpdateState;
         }
     }
-}
-
-public partial class AmonData
-{
-    [SerializeField]
-    private float _attackDistance;
-    public float AttackDistance => _attackDistance;
-
 }

@@ -47,7 +47,6 @@ public class PlayeDashSkill : BaseSkill, ISkillPersistAble
     public override void Skill()
     {
         _isDash = true;
-        Debug.Log($"{_dashDistance.ToString()}");
 
         Vector3 dir;
         if (_player.CurrentState.HasFlag(PLAYER_STATE.MOVE))

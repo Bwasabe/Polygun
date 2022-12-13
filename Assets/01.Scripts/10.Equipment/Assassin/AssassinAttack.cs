@@ -36,7 +36,6 @@ public class AssassinAttack : BaseSkill, ISkillInitAble
     }
 
 
-    //TODO: 근접공격 오브젝트 생성
     public override void Skill()
     {
         _attackObjectList[_prevAttackIndex].SetActive(false);
@@ -47,7 +46,6 @@ public class AssassinAttack : BaseSkill, ISkillInitAble
         CameraManager.Instance.CameraShake();
     }
 
-    // TODO: 여기서 공격 시간 조정해주기
     public void SkillInit()
     {
         // _attackObjectList.ForEach(x =>

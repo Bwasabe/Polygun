@@ -12,6 +12,8 @@ public class AnimatorCtrl<T> where T : Enum
 
     private Animator _animator;
 
+    // public Animator Animator => _animator;
+
     public AnimatorCtrl(Animator animator)
     {
         _animator = animator;

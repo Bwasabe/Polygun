@@ -23,22 +23,25 @@ public class Amon : BehaviorTree
     protected override void Start() {
         _data.Target = GameManager.Instance.Player.transform;
         base.Start();
+
+    }
+
+    protected override void Update()
+    {
+        base.Update();
     }
 
     protected override BT_Node SetupTree()
     {
-        _root = new BT_Selector(this, new List<BT_Node>()
-        {
-            new BT_ListRandomNode(this, Define.DEFAULT_RANDOM_NUM, Define.DEFAULT_RANDOM_NUM, new List<BT_Node>()
+        _root = new BT_ListRandomNode(this, Define.DEFAULT_RANDOM_NUM, Define.DEFAULT_RANDOM_NUM, new List<BT_Node>()
             {
-                new BT_Selector(this, new List<BT_Node>(){
+                new AmonAttackCondition(this, new List<BT_Node>(){
                     new AmonFollow(this),
                     new AmonMeleeAttack(this),
                 }),
                 new AmonProjectileAttack(this),
                 new AmonShockwave(this)
-            }),
-        });
+            });
         return _root;
     }
 
@@ -67,7 +70,8 @@ public enum Amon_Animation_State
     JUMP = 8,
     LAND = 9,
     DAMAGED = 10,
-    DIE = 11
+    DIE = 11,
+    MELEE_ATTACK_END = 12,
 }
 
 public partial class AmonData

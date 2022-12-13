@@ -7,6 +7,10 @@ public enum PoolObjectType
 	ChronosBullet,
 	LongEnemyBullet,
 	Coin,
+<<<<<<< HEAD
 	MiddleHeal,
 	HighHeal
+=======
+	AmonMeleeBullet,
+>>>>>>> main
 }
