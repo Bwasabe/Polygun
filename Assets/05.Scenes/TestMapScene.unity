@@ -2129,6 +2129,7 @@ MonoBehaviour:
     _defaultAttackRate: 0
     baseSlider: {fileID: 1040696778}
     _defaultSubSkillRatio: 1
+    _defaultDashRatio: 5
 --- !u!114 &160980971
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15249,7 +15250,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468127299}
-  m_LocalRotation: {x: -0.048600666, y: -0.00000001075827, z: 0.0000000065511387, w: 0.9988183}
+  m_LocalRotation: {x: -0.048600666, y: -0.000000040150415, z: 0.000000024449184, w: 0.9988183}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -20402,7 +20403,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2071529810}
-  m_LocalRotation: {x: 0.049555443, y: -0.000000037560053, z: 0.000000028267667, w: 0.99877137}
+  m_LocalRotation: {x: 0.049555443, y: -0.000000010064187, z: 0.000000007574299, w: 0.99877137}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

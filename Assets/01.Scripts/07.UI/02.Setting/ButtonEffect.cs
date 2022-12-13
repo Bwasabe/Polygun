@@ -7,14 +7,21 @@ using DG.Tweening;
 [RequireComponent(typeof(EventTrigger))]
 public class ButtonEffect : MonoBehaviour
 {
+	[SerializeField]
+	private float scale;
 
 	public void OnEnter()
 	{
-		this.transform.DOScale(2f, 0.4f);
+		this.transform.DOScale(scale, 0.4f);
 	}
 
 	public void OnExit()
 	{
 		this.transform.DOScale(1f, 0.4f);
+	}
+
+	public void OnDestroy()
+	{
+		DOTween.KillAll();
 	}
 }
