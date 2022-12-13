@@ -44,9 +44,12 @@ public class AmonMeleeAttack : BT_Node
                 {
                     Vector3 dir = _data.Target.position - _data.MeleeBulletPos[_currentBulletIndex].position;
                     dir.Normalize();
-                    _data.MeleeBullets[_currentBulletIndex].Direction = dir;
-                    _data.MeleeBullets[_currentBulletIndex].Damage = _data.MeleeBulletDamage;
-                    _data.MeleeBullets[_currentBulletIndex].Speed = _data.MeleeBulletSpeed;
+                    Bullet bullet = _data.MeleeBullets[_currentBulletIndex];
+                    bullet.Direction = dir;
+                    bullet.Damage = _data.MeleeBulletDamage;
+                    bullet.Speed = _data.MeleeBulletSpeed;
+                    bullet.transform.rotation = Quaternion.LookRotation(dir);
+                    bullet.transform.SetParent(null);
                     _currentBulletIndex++;
                 }
                 else
@@ -74,7 +77,7 @@ public class AmonMeleeAttack : BT_Node
         _timer = 0f;
         _isSummonBullet = false;
         _currentBulletIndex = 0;
-
+        _data.MeleeBullets.Clear();
         base.OnExit();
     }
 }

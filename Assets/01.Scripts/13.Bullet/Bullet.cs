@@ -6,9 +6,9 @@ using static Yields;
 
 public enum BulletType : int
 {
-	NONE = -1,
-	ENEMY,
-	PLAYER
+    NONE = -1,
+    ENEMY,
+    PLAYER
 }
 
 [RequireComponent(typeof(CollisionCtrl))]
@@ -16,16 +16,16 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField]
     private PoolObjectType _type = PoolObjectType.PlayerBullet;
-	
-	[SerializeField]
-	private GameObject _flash;
+
+    [SerializeField]
+    private GameObject _flash;
     [SerializeField]
     private bool _isReturnObject = true;
-    public float Damage{ get; set; }
-	public Vector3 Direction{ get; set; }
+    public float Damage { get; set; }
+    public Vector3 Direction { get; set; }
     public float Speed { get; set; } = 1f;
 
-    public LayerMask HitLayer{ get; set; }
+    public LayerMask HitLayer { get; set; }
 
     public bool IsPlayerBullet { get; set; } = false;
 
@@ -39,58 +39,59 @@ public class Bullet : MonoBehaviour
     private CollisionCtrl _collisionCtrl;
 
 
-	private GameObject _flashObj;
+    private GameObject _flashObj;
 
     protected virtual void Awake()
-	{
-		_particleSystem = GetComponent<ParticleSystem>();
+    {
+        _particleSystem = GetComponent<ParticleSystem>();
         _collisionCtrl = GetComponent<CollisionCtrl>();
-		_collisionCtrl.ColliderEnterEvent += Hit;
+        _collisionCtrl.ColliderEnterEvent += Hit;
     }
 
-	protected virtual void Start()
-	{
+    protected virtual void Start()
+    {
         if (_flashObj != null)
-			DoFlash();
-		else if(_flash != null)
-		{
-			_flashObj = Instantiate(_flash, transform);
-			DoFlash();
-		}
-	}
-	protected virtual void OnEnable() {
-		
+            DoFlash();
+        else if (_flash != null)
+        {
+            _flashObj = Instantiate(_flash, transform);
+            DoFlash();
+        }
+    }
+    protected virtual void OnEnable()
+    {
+
     }
 
-	protected virtual void Update()
-	{
-		if(IsPlayerBullet)
-		{
-			this.transform.position += Direction.normalized * Speed * Time.deltaTime * GameManager.PlayerTimeScale;
-		}
-		else
-			this.transform.position += Direction.normalized * Speed * Time.deltaTime;
-		if(_particleSystem == null)return;
+    protected virtual void Update()
+    {
+        if (IsPlayerBullet)
+        {
+            this.transform.position += Direction.normalized * Speed * Time.deltaTime * GameManager.PlayerTimeScale;
+        }
+        else
+            this.transform.position += Direction.normalized * Speed * Time.deltaTime;
+        if (_particleSystem == null) return;
         if (!_particleSystem.IsAlive())
-		{
-			if(_isReturnObject)
-			ObjectPool.Instance.ReturnObject(_type, this.gameObject);
-		}
-	}
-	void DoFlash()
-	{
-		_flashObj.transform.forward = gameObject.transform.forward;
-		var flashPs = _flashObj.GetComponent<ParticleSystem>();
-		flashPs.Play();
-	}
+        {
+            if (_isReturnObject && gameObject.activeSelf)
+                ObjectPool.Instance.ReturnObject(_type, this.gameObject);
+        }
+    }
+    void DoFlash()
+    {
+        _flashObj.transform.forward = gameObject.transform.forward;
+        var flashPs = _flashObj.GetComponent<ParticleSystem>();
+        flashPs.Play();
+    }
 
-	protected virtual void Hit(Collider other)
-	{
-		if( ((1 << other.gameObject.layer) & HitLayer) > 0 )
-		{
-			other.GetComponent<IDmgAble>()?.Damage(Damage);
-		}
-		if(_isReturnObject)
-			ObjectPool.Instance.ReturnObject(_type, this.gameObject);
-	}
+    protected virtual void Hit(Collider other)
+    {
+        if (((1 << other.gameObject.layer) & HitLayer) > 0)
+        {
+            other.GetComponent<IDmgAble>()?.Damage(Damage);
+        }
+        if (_isReturnObject && gameObject.activeSelf)
+            ObjectPool.Instance.ReturnObject(_type, this.gameObject);
+    }
 }
