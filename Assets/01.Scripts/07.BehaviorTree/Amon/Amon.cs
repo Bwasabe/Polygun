@@ -7,7 +7,6 @@ public class Amon : BehaviorTree
 {
     [SerializeField]
     private AmonData _data;
-
     [SerializeField]
     private Collider _attackCol;
 
@@ -55,6 +54,16 @@ public class Amon : BehaviorTree
     {
         _attackCol.enabled = true;
     }
+
+    protected void EventProjectileAttack()
+    {
+        Bullet bullet = Instantiate(_data.AmonProjectileBullet, _data.AmonProjectileAttackPos.position, Quaternion.identity);
+        GameObject particle = Instantiate(_data.AmonProjectileParticle, _data.AmonProjectileAttackPos.position, Quaternion.identity);
+
+        ParticleSystem pivot = particle.transform.Find("Pivot").GetComponent<ParticleSystem>();
+        // pivot.main.startSpeed = _data.ProjectileBulletSpeed;
+
+    }
 }
 
 public enum Amon_Animation_State
@@ -80,4 +89,20 @@ public partial class AmonData
     public Transform Target { get; set; } = null;
 
     public AnimatorCtrl<Amon_Animation_State> AnimatorCtrl{ get; set; }
+
+    [SerializeField]
+    private Bullet _amonProjectileBullet;
+    public Bullet AmonProjectileBullet => _amonProjectileBullet;
+
+    [SerializeField]
+    private GameObject _amonProjectileParticle;
+    public GameObject AmonProjectileParticle;
+
+    [SerializeField]
+    private Transform _amonProjectileAttackPos;
+    public Transform AmonProjectileAttackPos => _amonProjectileAttackPos;
+
+    [SerializeField]
+    private float _projectileBulletSpeed = 40f;
+    public float ProjectileBulletSpeed => _projectileBulletSpeed;
 }
