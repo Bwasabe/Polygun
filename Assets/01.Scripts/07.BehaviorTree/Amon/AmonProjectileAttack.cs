@@ -23,7 +23,6 @@ public class AmonProjectileAttack : BT_Node
 
     protected override void OnEnter()
     {
-        Debug.Log("엔터");
         NodeResult = Result.RUNNING;
         _data.AnimatorCtrl.SetAnimationState(Amon_Animation_State.IDLE);
         base.OnEnter();
@@ -32,7 +31,6 @@ public class AmonProjectileAttack : BT_Node
 
     protected override void OnUpdate()
     {
-        Debug.Log("업데이트");
 
         _timer += Time.deltaTime;
         Vector3 dir = _data.Target.position - _tree.transform.position;

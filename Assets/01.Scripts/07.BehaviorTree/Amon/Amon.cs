@@ -19,15 +19,27 @@ public class Amon : BehaviorTree
         _data.CC = GetComponent<CharacterController>();
     }
 
-    protected override void Start() {
+    protected override void Start()
+    {
         _data.Target = GameManager.Instance.Player.transform;
         base.Start();
-
     }
 
     protected override void Update()
     {
         base.Update();
+        // if (!_data.IsShockwave)
+        // {
+        //     if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity, _data.GroundLayer))
+        //     {
+        //         if(transform.position.y - hit.point.y >= 1.1f || transform.position.y - hit.point.y <= 0.6f)
+        //         {
+        //             Vector3 pos = transform.position;
+        //             pos.y = hit.point.y;
+        //             transform.position = pos;
+        //         }
+        //     }
+        // }
     }
 
     protected override BT_Node SetupTree()
@@ -59,9 +71,17 @@ public class Amon : BehaviorTree
     {
         // TODO: 풀링
         Vector3 dir = _data.Target.position - transform.position;
+        dir.Normalize();
         Bullet bullet = Instantiate(_data.AmonProjectileBullet, _data.AmonProjectileAttackPos.position, Quaternion.identity);
+        bullet.gameObject.SetActive(true);
+        bullet.HitLayer = _data.HitLayer;
+        bullet.Damage = 0;
+        bullet.Speed = _data.ProjectileBulletSpeed;
         bullet.transform.rotation = Quaternion.LookRotation(dir);
+        bullet.Direction = dir;
+
         GameObject particle = Instantiate(_data.AmonProjectileParticle, _data.AmonProjectileAttackPos.position, Quaternion.identity);
+        particle.SetActive(true);
         particle.transform.rotation = Quaternion.LookRotation(dir);
 
         ParticleSystem pivot = particle.transform.Find("Pivot").GetComponent<ParticleSystem>();
@@ -92,7 +112,7 @@ public partial class AmonData
     // TODO: 타임라인 끝나면 Transform에 플레이어 넣어주기
     public Transform Target { get; set; } = null;
 
-    public AnimatorCtrl<Amon_Animation_State> AnimatorCtrl{ get; set; }
+    public AnimatorCtrl<Amon_Animation_State> AnimatorCtrl { get; set; }
 
     [SerializeField]
     private Bullet _amonProjectileBullet;
