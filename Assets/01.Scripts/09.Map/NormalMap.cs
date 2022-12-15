@@ -9,6 +9,8 @@ public class NormalMap : MapSetting
 	private List<GameObject> enemys;
 	[SerializeField]
 	private GameObject Chest;
+	[SerializeField]
+	private Transform chestPosition;
 
 	protected override void OnStart()
 	{
@@ -38,7 +40,7 @@ public class NormalMap : MapSetting
 		if (count == enemys.Count)
 		{
 			GameObject chest = Instantiate(Chest,transform.parent);
-			chest.transform.localPosition = new Vector3(-10.5f, 0f, 5);
+			chest.transform.localPosition = chestPosition.localPosition;
 			MapState = MapState.End;
 		}
 	}

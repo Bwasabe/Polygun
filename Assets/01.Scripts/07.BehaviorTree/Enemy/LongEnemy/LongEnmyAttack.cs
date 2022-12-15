@@ -39,6 +39,7 @@ public class LongEnmyAttack : BT_Node
 		_nowRotate = Quaternion.Euler(euler);
 		euler.x -= _data.UpX;
 		_targetRotate = Quaternion.Euler(euler);
+		NodeResult = Result.RUNNING;
 		base.OnEnter();
 	}
 

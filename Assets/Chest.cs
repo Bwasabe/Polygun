@@ -41,15 +41,19 @@ public class Chest : MonoBehaviour
 	public void OpenEnd()
 	{
 		float rand = UnityEngine.Random.Range(0, 100);
-		for(int i = 0; i< objs.Count; i++)
+		GameObject obj = null;
+		for (int i = 0; i< objs.Count; i++)
 		{
 			if (objs[i].percent > rand)
 			{
-				GameObject obj = Instantiate(objs[i].obj);
+				obj = Instantiate(objs[i].obj);
 				obj.transform.position = this.transform.position + Vector3.up;
 				return;
 			}
 		}
+
+		obj = Instantiate(objs[0].obj);
+		obj.transform.position = this.transform.position + Vector3.up;
 	}
 }
 

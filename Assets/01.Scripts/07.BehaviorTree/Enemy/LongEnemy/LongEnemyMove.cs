@@ -35,11 +35,16 @@ public class LongEnemyMove : BT_Node
 
     protected override void OnEnter()
     {
-        nextPostion = _tree.transform.localPosition + (new Vector3(_thisData.maxMoveDistance, _thisData.maxY, 0) * min);
+        nextPostion = _tree.transform.localPosition + (new Vector3(_thisData.maxMoveDistance, 0, 0) * min);
 		moveCount = CurrentTime = 0;
         base.OnEnter();
     }
 
+    private bool IsGround()
+    {
+        return Physics.Raycast(this._tree.transform.position,Vector3.down, 0.2f, _thisData.groundLayer);
+    }
+    private float y;
     protected override void OnUpdate()
     {
         if (Vector3.Distance(_tree.transform.position, _target.transform.position) > _thisData.maxMoveDistance)
@@ -48,15 +53,20 @@ public class LongEnemyMove : BT_Node
             backPosition = _tree.transform.position - _target.transform.position;
 
 		nextPostion += backPosition.normalized;
-        nextPostion.y = 0;
+
+		if (!IsGround())
+        {
+            RaycastHit ray;
+            Physics.Raycast(this._tree.transform.position, Vector3.down, out ray, 100f, _thisData.groundLayer);
+            Vector3 vec = ray.point;
+			y = vec.y + _thisData.maxY;
+        }
 
         ch.Move(nextPostion.normalized * Time.deltaTime * _thisData.Stat.Speed);
-        this._tree.transform.position = new Vector3(_tree.transform.position.x, 0.2f, _tree.transform.position.z);
-		//_tree.transform.localPosition = Vector3.Lerp(_tree.transform.localPosition, nextPostion, Time.deltaTime);
-        _tree.transform.LookAt(_target);
+        _tree.transform.position = new Vector3(_tree.transform.position.x, y, _tree.transform.position.z);
+		_tree.transform.LookAt(_target);
         CurrentTime += Time.deltaTime;
         UpdateState = UpdateState.Update;
-
 
 		if (CurrentTime >= _thisData.waitMovingTime && moveCount < _thisData.maxMoveCount)
         {
@@ -70,7 +80,6 @@ public class LongEnemyMove : BT_Node
             _treeInfo.IsAttack = true;
 			UpdateState = UpdateState.Exit;
         }
-        base.OnUpdate();
     }
 
     protected override void OnExit()

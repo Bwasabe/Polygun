@@ -495,8 +495,8 @@ CharacterController:
   serializedVersion: 2
   m_Height: 1
   m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_SlopeLimit: 0
+  m_StepOffset: 0
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0.5, z: 0}
@@ -516,7 +516,7 @@ MonoBehaviour:
     _stat:
       _defaultHp: 13
       _defaultDamage: 10
-      _defaultSpeed: 5
+      _defaultSpeed: 6
       _defaultAttackRate: 0
       baseSlider: {fileID: 2271342142657230293}
     _radius: 5
@@ -527,7 +527,7 @@ MonoBehaviour:
       serializedVersion: 2
       m_Bits: 64
     _gravityScale: 2
-    _maxDis: 1
+    _maxDis: 2
 --- !u!114 &2069661345
 MonoBehaviour:
   m_ObjectHideFlags: 0

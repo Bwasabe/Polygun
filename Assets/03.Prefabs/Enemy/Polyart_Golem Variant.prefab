@@ -376,12 +376,12 @@ CharacterController:
   m_Enabled: 1
   serializedVersion: 2
   m_Height: 5
-  m_Radius: 2
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
+  m_Radius: 3
+  m_SlopeLimit: 0
+  m_StepOffset: 0.1
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 2.5, z: 0}
+  m_Center: {x: 0, y: 3, z: 0}
 --- !u!114 &258107585
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,7 +417,7 @@ MonoBehaviour:
     _stat:
       _defaultHp: 30
       _defaultDamage: 20
-      _defaultSpeed: 1
+      _defaultSpeed: 10
       _defaultAttackRate: 0
       baseSlider: {fileID: 4542875188729992485}
     attackRange: 3
@@ -431,6 +431,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   isAttackTime: 0
+--- !u!114 &1300720126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3708754889435996668}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5017d273fddafc4f864f96875bd7fbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
 --- !u!95 &3708754889435996669 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1077356409, guid: c6cfc32748fb5004aa11a1be074b5c58, type: 3}

@@ -15,8 +15,7 @@ public class MeleeFollow : BT_Node
 		_data = _tree.GetData<MeleeEnemy_Data>();
 		ch = _tree.GetComponent<CharacterController>();
 	}
-
-    protected override void OnUpdate()
+	protected override void OnUpdate()
     {
 
         Vector3 playerNormal = _player.transform.position - _tree.transform.position;
@@ -39,13 +38,14 @@ public class MeleeFollow : BT_Node
 		{
 			_velocity.y += Physics.gravity.y * Time.deltaTime * _data.GravityScale * GameManager.TimeScale;
 		}
+
 		playerNormal += _velocity;
 
 		ch.Move(playerNormal.normalized * Time.deltaTime * _data.Stat.Speed);
+
 		_tree.transform.rotation = Quaternion.Slerp(_tree.transform.rotation, Quaternion.LookRotation(rotation), Time.deltaTime * 5);
 
 		_data.Animator.SetBool("IsWalk", true);
-        NodeResult = Result.RUNNING;
 		if (Vector3.Distance(_tree.transform.position, _player.position) <= _data.attackRange)
 		{
 			UpdateState = UpdateState.Exit;
@@ -68,7 +68,8 @@ public class MeleeFollow : BT_Node
 	}
 	public override Result Execute()
     {
-        return base.Execute();
+		base.Execute();
+        return NodeResult;
     }
 }
 

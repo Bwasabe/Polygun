@@ -75,6 +75,5 @@ public class UnitStat
     {
         _hp -= damage;
         baseSlider?.SetSlider(_hp);
-		Debug.Log(_hp);
-    }
+	}
 }

@@ -11,6 +11,8 @@ public class Melee_Attack : BT_Node
 	private MeleeEnemy_Data _data;
 	public void EndAttackAnimation()
 	{
+		_data.Animator.SetBool("IsAttack", false);
+		NodeResult = Result.SUCCESS;
 		UpdateState = UpdateState.Exit;
 	}
 	public Melee_Attack(BehaviorTree t,MeleeEnemy_Data data,List<BT_Node> c = null) : base(t, c)
@@ -23,19 +25,8 @@ public class Melee_Attack : BT_Node
 		MeleeEnemy enemy = _tree as MeleeEnemy;
 		enemy.endAnimation = EndAttackAnimation;
 		_data.Animator.SetBool("IsAttack",true);
-		base.OnEnter();
-	}
-
-	protected override void OnUpdate()
-	{
 		NodeResult = Result.RUNNING;
-	}
-
-	protected override void OnExit()
-	{
-		_data.Animator.SetBool("IsAttack", false);
-		NodeResult = Result.SUCCESS;
-		base.OnExit();
+		base.OnEnter();
 	}
 
 	public override Result Execute()

@@ -22,7 +22,6 @@ public class MeleeEnemy_Attack_Condition : BT_Condition
 		}
 		else
 		{
-			_data.Animator.SetBool("IsAttack", false);
 			return Result.FAILURE;
 		}
 	}

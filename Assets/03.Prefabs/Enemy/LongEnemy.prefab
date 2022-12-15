@@ -198,10 +198,10 @@ MonoBehaviour:
       _defaultSpeed: 5
       _defaultAttackRate: 0
       baseSlider: {fileID: 2567962134314250079}
-    MaxMoveCount: 3
+    MaxMoveCount: 2
     WaitMovingTime: 1
     MaxMoveDistance: 5
-    MaxY: 1
+    MaxY: 0.2
     MaxZ: 1
     _groundLayer:
       serializedVersion: 2

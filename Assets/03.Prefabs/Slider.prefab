@@ -233,7 +233,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BasicSlider: {fileID: 2697600392347871885}
   whiteSlider: {fileID: 2697600391800641505}
-  sliderSpeed: 3
+  sliderSpeed: 2
 --- !u!1 &2697600392449863412
 GameObject:
   m_ObjectHideFlags: 0

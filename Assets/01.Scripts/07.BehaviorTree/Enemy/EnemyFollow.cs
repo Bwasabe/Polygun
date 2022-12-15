@@ -21,7 +21,6 @@ public class EnemyFollow : MonoBehaviour
 
 	private void Follow()
 	{
-		//this.transform.position = Vector3.Slerp
-		//	(this.transform.position, GameManager.Instance.Player.transform.position, Time.deltaTime*speed);
+		this.transform.LookAt(GameManager.Instance.Player.transform);
 	}
 }
