@@ -78,4 +78,5 @@ public partial class AmonData
     [SerializeField]
     private float _projectileAttackEndDelay = 1f;
     public float ProjectileAttackEndDelay => _projectileAttackEndDelay;
+
 }

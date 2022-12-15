@@ -12,8 +12,8 @@ public class AmonFollow : BT_Node
 
     private bool _isSummonBullet;
     private float _timer;
-    private int _currentBulletIndex = 0
-    ;
+    private int _currentBulletIndex = 0;
+
     public AmonFollow(BehaviorTree t, List<BT_Node> c = null) : base(t, c)
     {
         _data = _tree.GetData<AmonData>();
@@ -59,11 +59,18 @@ public class AmonFollow : BT_Node
                 {
                     _timer = 0f;
                     //TODO: 풀링
-                    GameObject bullet = ObjectPool.Instance.GetObject(PoolObjectType.AmonMeleeBullet);
-                    bullet.transform.position = _data.MeleeBulletPos[_currentBulletIndex].position;
-                    bullet.transform.rotation = _data.MeleeBulletPos[_currentBulletIndex].rotation;
-                    bullet.SetActive(true);
+                    GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.AmonMeleeBullet);
+                    obj.transform.SetParent(_data.MeleeBulletPos[_currentBulletIndex]);
+                    obj.transform.localPosition = Vector3.zero;
+                    obj.transform.localRotation = Quaternion.identity;
+                    obj.SetActive(true);
 
+                    Bullet bullet = obj.GetComponent<Bullet>();
+                    bullet.HitLayer = _data.HitLayer;
+                    bullet.IsPlayerBullet = false;
+                    bullet.Speed = 0;
+
+                    // Debug.Break();
                     _data.MeleeBullets.Add(bullet.GetComponent<Bullet>());
 
                     if(_currentBulletIndex == _data.MeleeBulletPos.Count -1)
@@ -142,4 +149,8 @@ public partial class AmonData
     [SerializeField]
     private GameObject _meleeBulletPrefab;
     public GameObject MeleeBulletPrefab => _meleeBulletPrefab;
+
+    [SerializeField]
+    private LayerMask _hitLayer;
+    public LayerMask HitLayer => _hitLayer;
 }
