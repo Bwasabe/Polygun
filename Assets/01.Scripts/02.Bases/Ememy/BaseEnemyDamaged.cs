@@ -8,13 +8,15 @@ public class BaseEnemyDamaged : MonoBehaviour, IDmgAble
     [SerializeField]
     private float _hitDuration = 0.15f;
     [SerializeField]
-    private Color _hitColor = Color.white;
+    protected Color _hitColor = Color.white;
     [SerializeField]
     private GameObject CoinObject;
     [SerializeField]
     private float CoinPercent;
 
     protected UnitStat _stat;
+    protected Material _meshMaterial;
+    protected Color _defaultColor;
 
     private Tweener _tweener;
     protected virtual void Awake()
@@ -24,8 +26,14 @@ public class BaseEnemyDamaged : MonoBehaviour, IDmgAble
 
     protected virtual void Start()
     {
+        InitDefaultColor();
         RegisterStat();
         _stat.Init();
+    }
+
+    protected virtual void InitDefaultColor()
+    {
+        _defaultColor = _meshMaterial.color;
     }
 
     protected virtual void RegisterStat()
@@ -45,8 +53,9 @@ public class BaseEnemyDamaged : MonoBehaviour, IDmgAble
             if (_tweener != null)
             {
                 _tweener.Kill();
+                SetDefaultColor();
             }
-            _tweener = _meshMaterial.DOColor(_hitColor, _hitDuration).SetLoops(2, LoopType.Yoyo);
+            _tweener = ChangeColor();
         }
     }
 
@@ -56,9 +65,25 @@ public class BaseEnemyDamaged : MonoBehaviour, IDmgAble
         float rand = Random.Range(0, 100);
 <<<<<<< Updated upstream
         if(CoinPercent >= rand)
+=======
+        if (CoinPercent <= rand)
+>>>>>>> Stashed changes
         {
             GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.Coin);
+            obj.transform.position = this.transform.position;
+            obj.GetComponent<Rigidbody>().AddForce(Vector3.up * 5f, ForceMode.Impulse);
+        }
         this.gameObject.SetActive(false);
-	}
+    }
+
+    protected virtual void SetDefaultColor()
+    {
+        _meshMaterial.color = _defaultColor;
+    }
+
+    protected virtual Tweener ChangeColor()
+    {
+        return _meshMaterial.DOColor(_hitColor, _hitDuration).SetLoops(2, LoopType.Yoyo);
+    }
 
 }
