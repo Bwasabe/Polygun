@@ -90,6 +90,8 @@ public class Bullet : MonoBehaviour
         if (((1 << other.gameObject.layer) & HitLayer) > 0)
         {
             other.GetComponent<IDmgAble>()?.Damage(Damage);
+            GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.PopUpDamage);
+            obj.GetComponent<DamagePopUp>().DamageText((int)Damage, this.transform.position);
         }
         if (_isReturnObject && gameObject.activeSelf)
             ObjectPool.Instance.ReturnObject(_type, this.gameObject);

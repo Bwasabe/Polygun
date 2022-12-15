@@ -48,6 +48,7 @@ public class MapSetting : MonoBehaviour
 	protected virtual void OnEnter()
 	{
 		map.DoorLock();
+		MiniMap.Instance.MiniMapSet(map);
 	}
 
 	protected virtual void OnPlay()
