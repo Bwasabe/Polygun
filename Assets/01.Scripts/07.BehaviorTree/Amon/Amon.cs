@@ -55,14 +55,18 @@ public class Amon : BehaviorTree
         _attackCol.enabled = true;
     }
 
-    protected void EventProjectileAttack()
+    public void EventProjectileAttack()
     {
+        // TODO: 풀링
+        Vector3 dir = _data.Target.position - transform.position;
         Bullet bullet = Instantiate(_data.AmonProjectileBullet, _data.AmonProjectileAttackPos.position, Quaternion.identity);
+        bullet.transform.rotation = Quaternion.LookRotation(dir);
         GameObject particle = Instantiate(_data.AmonProjectileParticle, _data.AmonProjectileAttackPos.position, Quaternion.identity);
+        particle.transform.rotation = Quaternion.LookRotation(dir);
 
         ParticleSystem pivot = particle.transform.Find("Pivot").GetComponent<ParticleSystem>();
-        // pivot.main.startSpeed = _data.ProjectileBulletSpeed;
-
+        ParticleSystem.MainModule main = pivot.main;
+        main.startSpeed = _data.ProjectileBulletSpeed;
     }
 }
 
@@ -96,7 +100,7 @@ public partial class AmonData
 
     [SerializeField]
     private GameObject _amonProjectileParticle;
-    public GameObject AmonProjectileParticle;
+    public GameObject AmonProjectileParticle => _amonProjectileParticle;
 
     [SerializeField]
     private Transform _amonProjectileAttackPos;

@@ -63,6 +63,8 @@ public class AmonShockwave : BT_Node
             }
             else
             {
+                // TODO: 쇼크 웨이브
+                
                 // Debug.Break();
                 _data.CC.enabled = true;
                 _timer = 0f;

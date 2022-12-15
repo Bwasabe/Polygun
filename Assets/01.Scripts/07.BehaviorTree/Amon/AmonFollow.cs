@@ -78,7 +78,6 @@ public class AmonFollow : BT_Node
                         bullet.transform.DOScale(Vector3.one, _data.MeleeBulletSpawnDuration * 0.5f).OnComplete(()=>{
                             _isSummonBullet = false;
                         });
-
                     }
                     else
                     {

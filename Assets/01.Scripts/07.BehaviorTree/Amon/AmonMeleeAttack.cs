@@ -37,7 +37,7 @@ public class AmonMeleeAttack : BT_Node
         _timer += Time.deltaTime;
         if (_isSummonBullet)
         {
-            if (_timer >= _data.MeleeBulletSpawnDuration)
+            if (_timer >= _data.MeleeBulletAttackDelay)
             {
                 _timer = 0f;
                 if (_currentBulletIndex < _data.MeleeBulletPos.Count)
@@ -95,4 +95,8 @@ public partial class AmonData
     [SerializeField]
     private float _meleeBulletDamage = 10f;
     public float MeleeBulletDamage => _meleeBulletDamage;
+
+    [SerializeField]
+    private float _meleeBulletAttackDelay = 1f;
+    public float MeleeBulletAttackDelay => _meleeBulletAttackDelay;
 }
