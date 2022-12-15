@@ -6,7 +6,7 @@ using DG.Tweening;
 public class BaseEnemyDamaged : MonoBehaviour, IDmgAble
 {
     [SerializeField]
-    private float _hitDuration = 0.15f;
+    protected float _hitDuration = 0.15f;
     [SerializeField]
     protected Color _hitColor = Color.white;
     [SerializeField]
@@ -63,11 +63,7 @@ public class BaseEnemyDamaged : MonoBehaviour, IDmgAble
     {
         // TODO: 사라지는 애니메이션
         float rand = Random.Range(0, 100);
-<<<<<<< Updated upstream
-        if(CoinPercent >= rand)
-=======
         if (CoinPercent <= rand)
->>>>>>> Stashed changes
         {
             GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.Coin);
             obj.transform.position = this.transform.position;
