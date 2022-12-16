@@ -10,7 +10,6 @@ public class AmonMeleeAttack : BT_Node
 
     private float _timer;
     private int _currentBulletIndex = 0;
-    private float _bulletTime;
     private bool _isSummonBullet;
 
     public AmonMeleeAttack(BehaviorTree t, List<BT_Node> c = null) : base(t, c)
@@ -84,9 +83,6 @@ public class AmonMeleeAttack : BT_Node
 
 public partial class AmonData
 {
-    [SerializeField]
-    private float _attackDelay = 1f;
-    public float AttackDelay => _attackDelay;
 
     [SerializeField]
     private float _meleeBulletSpeed = 30f;

@@ -73,9 +73,10 @@ public class AmonFollow : BT_Node
                     // Debug.Break();
                     _data.MeleeBullets.Add(bullet.GetComponent<Bullet>());
 
-                    if(_currentBulletIndex == _data.MeleeBulletPos.Count -1)
+                    if (_currentBulletIndex == _data.MeleeBulletPos.Count - 1)
                     {
-                        bullet.transform.DOScale(Vector3.one, _data.MeleeBulletSpawnDuration * 0.5f).OnComplete(()=>{
+                        bullet.transform.DOScale(Vector3.one, _data.MeleeBulletSpawnDuration * 0.5f).OnComplete(() =>
+                        {
                             _isSummonBullet = false;
                         });
                     }
@@ -152,4 +153,8 @@ public partial class AmonData
     [SerializeField]
     private LayerMask _hitLayer;
     public LayerMask HitLayer => _hitLayer;
+
+    [SerializeField]
+    private LayerMask _groundLayer;
+    public LayerMask GroundLayer => _groundLayer;
 }

@@ -29,8 +29,7 @@ public class AmonShockwave : BT_Node
 
     protected override void OnEnter()
     {
-        Debug.Log("엔터");
-
+        _data.IsShockwave = true;
         _tree.IsStop = true;
         _tree.StartCoroutine(PlayAnimation());
 
@@ -78,9 +77,9 @@ public class AmonShockwave : BT_Node
 
     protected override void OnExit()
     {
-        Debug.Log("엑시트");
         _timer = 0f;
         base.OnExit();
+        _data.IsShockwave = false;
     }
 
     private IEnumerator EndAnimation()
@@ -104,6 +103,9 @@ public class AmonShockwave : BT_Node
         
         _targetPos = _data.Target.position;
         _startPos = _tree.transform.position;
+        _startPos.y = Mathf.Max(_data.GroundHeight, _startPos.y);
+
+        Debug.Log($"{_targetPos} / {_startPos}");
         // _targetPos = _data.Target.position;
     }
 }
@@ -111,11 +113,18 @@ public class AmonShockwave : BT_Node
 public partial class AmonData
 {
 
-    [SerializeField]
-    private float _jumpPosY = 3f;
-    public float JumpPosY => _jumpPosY;
+    // [SerializeField]
+    // private float _jumpPosY = 3f;
+    // public float JumpPosY => _jumpPosY;
 
     [SerializeField]
     private float _rotateSmooth = 8f;
     public float RotateSmooth => _rotateSmooth;
+
+    public bool IsShockwave { get; set; } = false;
+
+    [SerializeField]
+    private float _groundHeight = 1f;
+    public float GroundHeight => _groundHeight;
+
 }

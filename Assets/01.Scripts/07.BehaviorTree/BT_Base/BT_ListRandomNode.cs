@@ -42,11 +42,9 @@ public class BT_ListRandomNode : BT_Node
 
     protected override void OnExit()
     {
-        Debug.Log(_currentChildren[_random]);
         _currentChildren.RemoveAt(_random);
         if (_currentChildren.Count <= 0)
         {
-            Debug.Log("리셋");
             ResetList();
         }
         _random = Random.Range(0, _currentChildren.Count);
@@ -57,7 +55,6 @@ public class BT_ListRandomNode : BT_Node
     {
         NodeResult = _currentChildren[_random].Execute();
         UpdateState = _currentChildren[_random].UpdateState;
-        Debug.Log($"랜덤 : {NodeResult}/{UpdateState}");
         if (UpdateState == UpdateState.None)
         {
             UpdateState = UpdateState.Exit;
