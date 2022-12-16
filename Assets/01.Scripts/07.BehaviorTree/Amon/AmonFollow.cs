@@ -13,7 +13,7 @@ public class AmonFollow : BT_Node
     private bool _isSummonBullet;
     private float _timer;
     private int _currentBulletIndex = 0;
-
+    private float _fireTimer;
     public AmonFollow(BehaviorTree t, List<BT_Node> c = null) : base(t, c)
     {
         _data = _tree.GetData<AmonData>();
@@ -45,6 +45,7 @@ public class AmonFollow : BT_Node
 
     protected override void OnExit()
     {
+        _fireTimer = 0f;
         base.OnExit();
     }
 
@@ -92,6 +93,14 @@ public class AmonFollow : BT_Node
         }
         else
         {
+            _fireTimer += Time.deltaTime;
+            if(_fireTimer <= _data.FireDelay)
+            {
+                // TODO : 풀링
+                // 불 소환
+                GameObject g = GameObject.Instantiate(_data.FireWalkPrefab, _tree.transform.position, Quaternion.Euler(0f, _tree.transform.eulerAngles.y, 0f));
+                g.SetActive(true);
+            }
             if (Vector3.Distance(_data.Target.position, _tree.transform.position) <= _data.AttackDistance)
             {
                 NodeResult = Result.FAILURE;
@@ -155,6 +164,10 @@ public partial class AmonData
     public LayerMask HitLayer => _hitLayer;
 
     [SerializeField]
-    private LayerMask _groundLayer;
-    public LayerMask GroundLayer => _groundLayer;
+    private float _fireDelay = 0.5f;
+    public float FireDelay => _fireDelay;
+
+    [SerializeField]
+    private GameObject _fireWalkPrefab;
+    public GameObject FireWalkPrefab => _fireWalkPrefab;
 }

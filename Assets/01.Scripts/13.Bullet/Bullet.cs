@@ -45,7 +45,7 @@ public class Bullet : MonoBehaviour
     {
         _particleSystem = GetComponent<ParticleSystem>();
         _collisionCtrl = GetComponent<CollisionCtrl>();
-        _collisionCtrl.ColliderEnterEvent += Hit;
+        _collisionCtrl.CollisionEnterEvent += Hit;
     }
 
     protected virtual void Start()
@@ -85,11 +85,11 @@ public class Bullet : MonoBehaviour
         flashPs.Play();
     }
 
-    protected virtual void Hit(Collider other)
+    protected virtual void Hit(Collision other)
     {
         if (((1 << other.gameObject.layer) & HitLayer) > 0)
         {
-            other.GetComponent<IDmgAble>()?.Damage(Damage);
+            other.transform.GetComponent<IDmgAble>()?.Damage(Damage);
             GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.PopUpDamage);
             obj.GetComponent<DamagePopUp>().DamageText((int)Damage, this.transform.position);
         }
