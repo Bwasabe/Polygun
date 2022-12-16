@@ -103,7 +103,7 @@ public class AmonShockwave : BT_Node
         
         _targetPos = _data.Target.position;
         _startPos = _tree.transform.position;
-        _startPos.y = Mathf.Max(1f, _startPos.y);
+        _startPos.y = Mathf.Max(_data.GroundHeight, _startPos.y);
 
         Debug.Log($"{_targetPos} / {_startPos}");
         // _targetPos = _data.Target.position;
@@ -122,4 +122,9 @@ public partial class AmonData
     public float RotateSmooth => _rotateSmooth;
 
     public bool IsShockwave { get; set; } = false;
+
+    [SerializeField]
+    private float _groundHeight = 1f;
+    public float GroundHeight => _groundHeight;
+
 }

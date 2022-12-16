@@ -9,16 +9,35 @@ public class CollisionCtrl : MonoBehaviour
 
     public event System.Action<Collider> ColliderExitEvent;
 
-    private void OnTriggerEnter(Collider other) {
+    public event System.Action<Collision> CollisionEnterEvent;
+    public event System.Action<Collision> CollisionStayEvent;
+    public event System.Action<Collision> CollisionExitEvent;
+
+    private void OnTriggerEnter(Collider other)
+    {
         ColliderEnterEvent?.Invoke(other);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerExit(Collider other)
     {
-        ColliderEnterEvent?.Invoke(collision.collider);
-    }
-
-    private void OnTriggerExit(Collider other) {
         ColliderExitEvent?.Invoke(other);
     }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        CollisionEnterEvent?.Invoke(other);
+    }
+
+    private void OnCollisionStay(Collision other)
+    {
+        CollisionStayEvent?.Invoke(other);
+
+    }
+
+    private void OnCollisionExit(Collision other)
+    {
+        CollisionExitEvent?.Invoke(other);
+
+    }
+
 }
