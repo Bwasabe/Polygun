@@ -30,7 +30,6 @@ public class PlayeDashSkill : BaseSkill, ISkillPersistAble
         _dash = parent as PlayerDash;
         _cc = _dash.GetComponent<CharacterController>();
         _model = _dash.transform.Find("Model").GetComponent<MeshRenderer>();
-        Debug.Log(_model);
         _player = GameManager.Instance.Player;
         _drags = drags;
         _dashDistance = dashDistance;

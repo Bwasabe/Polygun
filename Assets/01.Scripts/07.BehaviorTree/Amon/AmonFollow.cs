@@ -98,8 +98,11 @@ public class AmonFollow : BT_Node
             {
                 // TODO : 풀링
                 // 불 소환
-                GameObject g = GameObject.Instantiate(_data.FireWalkPrefab, _tree.transform.position, Quaternion.Euler(0f, _tree.transform.eulerAngles.y, 0f));
-                g.SetActive(true);
+                AmonFire g = GameObject.Instantiate(_data.FireWalkPrefab, _tree.transform.position, Quaternion.Euler(0f, _tree.transform.eulerAngles.y, 0f));
+                g.gameObject.SetActive(true);
+
+                g.Duration = _data.FireWalkDuration;
+                _fireTimer = 0f;
             }
             if (Vector3.Distance(_data.Target.position, _tree.transform.position) <= _data.AttackDistance)
             {
@@ -168,6 +171,10 @@ public partial class AmonData
     public float FireDelay => _fireDelay;
 
     [SerializeField]
-    private GameObject _fireWalkPrefab;
-    public GameObject FireWalkPrefab => _fireWalkPrefab;
+    private AmonFire _fireWalkPrefab;
+    public AmonFire FireWalkPrefab => _fireWalkPrefab;
+
+    [SerializeField]
+    private float _fireWalkDuration = 5f;
+    public float FireWalkDuration => _fireWalkDuration;
 }

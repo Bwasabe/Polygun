@@ -70,18 +70,22 @@ public class AmonShockwave : BT_Node
 
     private IEnumerator Shockwave()
     {
-        for (int i = 0; i < _data.ShockwaveFireCount; ++i)
+        for (int i = 1; i <= _data.ShockwaveFireCount; ++i)
         {
             int fireCount = (int)(360f / _data.ShockwaveFireAngle);
             for (int j = 0; j < fireCount; ++j)
             {
-                float angle = i * _data.ShockwaveFireAngle * Mathf.Rad2Deg;
-                GameObject g = GameObject.Instantiate(_data.ShockwaveFirePrefab,
+                float angle = j * _data.ShockwaveFireAngle * Mathf.Deg2Rad;
+
+                AmonFire g = GameObject.Instantiate(_data.ShockwaveFirePrefab,
                     new Vector3(
-                        Mathf.Cos(angle) + _data.ShockwaveStartDistance,
+                        Mathf.Cos(angle) * i + _data.ShockwaveStartDistance,
                         _tree.transform.position.y,
-                        Mathf.Sin(angle) + _data.ShockwaveStartDistance),
+                        Mathf.Sin(angle)* i+ _data.ShockwaveStartDistance) + _tree.transform.position,
                     _tree.transform.rotation);
+                    
+                g.gameObject.SetActive(true);
+                g.Duration = _data.ShockwaveDuration;
             }
             yield return WaitForSeconds(_data.ShockwaveFireDelay);
         }
@@ -154,6 +158,10 @@ public partial class AmonData
     public float ShockwaveStartDistance => _shockwaveStartDistance;
 
     [SerializeField]
-    private GameObject _shockwaveFirePrefab;
-    public GameObject ShockwaveFirePrefab => _shockwaveFirePrefab;
+    private float _shockwaveDuration = 10f;
+    public float ShockwaveDuration => _shockwaveDuration;
+
+    [SerializeField]
+    private AmonFire _shockwaveFirePrefab;
+    public AmonFire ShockwaveFirePrefab => _shockwaveFirePrefab;
 }

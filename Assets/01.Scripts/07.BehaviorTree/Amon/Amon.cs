@@ -7,8 +7,6 @@ public class Amon : BehaviorTree
 {
     [SerializeField]
     private AmonData _data;
-    [SerializeField]
-    private Collider _attackCol;
 
     private Animator _animator;
     protected override void Awake()
@@ -28,18 +26,19 @@ public class Amon : BehaviorTree
     protected override void Update()
     {
         base.Update();
-        // if (!_data.IsShockwave)
-        // {
-        //     if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity, _data.GroundLayer))
-        //     {
-        //         if(transform.position.y - hit.point.y >= 1.1f || transform.position.y - hit.point.y <= 0.6f)
-        //         {
-        //             Vector3 pos = transform.position;
-        //             pos.y = hit.point.y;
-        //             transform.position = pos;
-        //         }
-        //     }
-        // }
+
+        if (!_data.IsShockwave)
+        {
+            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity, _data.GroundLayer))
+            {
+                if(transform.position.y - hit.point.y >= 1.1f || transform.position.y - hit.point.y <= 0.6f)
+                {
+                    Vector3 pos = transform.position;
+                    pos.y = hit.point.y;
+                    transform.position = pos;
+                }
+            }
+        }
     }
 
     protected override BT_Node SetupTree()
@@ -56,16 +55,6 @@ public class Amon : BehaviorTree
         return _root;
     }
 
-
-    protected void EventAttackColliderStart()
-    {
-        _attackCol.enabled = true;
-    }
-
-    protected void EventAttackColliderEnd()
-    {
-        _attackCol.enabled = true;
-    }
 
     public void EventProjectileAttack()
     {
@@ -129,4 +118,8 @@ public partial class AmonData
     [SerializeField]
     private float _projectileBulletSpeed = 40f;
     public float ProjectileBulletSpeed => _projectileBulletSpeed;
+
+    [SerializeField]
+    private LayerMask _groundLayer;
+    public LayerMask GroundLayer => _groundLayer;
 }
