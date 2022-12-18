@@ -11,6 +11,11 @@ public abstract class BaseEquipment : MonoBehaviour
     [SerializeField]
     private float _height = 0.5f;
     [SerializeField]
+    private int _price;
+    
+    public int Price => _price;
+
+    [SerializeField]
     protected GameObject _particle;
 
     protected BaseSkill _attack;

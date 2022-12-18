@@ -7,7 +7,7 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
     [SerializeField]
     private LayerMask _equipmentLayer;
     [SerializeField]
-    private GameObject _getEquipmentUI;
+    private TMPro.TMP_Text _getEquipmentUI;
     [SerializeField]
     private float _radius = 10f;
     [SerializeField]
@@ -30,7 +30,6 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
 
         _playerSkillCtrl = _player.GetPlayerComponent<PlayerSkillCtrl>();
 
-        _equipmentList.Add(null);
         _equipmentList.Add(null);
     }
     private void GetEquipment(BaseEquipment equipment)
@@ -63,65 +62,57 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
 
     }
 
-    // TODO: 장비가 바뀌는 UI
-    private void ChangeEquipment()
-    {
-        _currentEquipmentIndex = (_currentEquipmentIndex + 1) % _equipmentList.Count;
+    // // TODO: 장비가 바뀌는 UI
+    // private void ChangeEquipment()
+    // {
+    //     _currentEquipmentIndex = (_currentEquipmentIndex + 1) % _equipmentList.Count;
 
-        _currentEquipment = _equipmentList[_currentEquipmentIndex];
-    }
-    private void ChangeEquipment0()
-    {
-        _currentEquipmentIndex = 0;
-    }
-    private void ChangeEquipment1()
-    {
-        _currentEquipmentIndex = 1;
+    //     _currentEquipment = _equipmentList[_currentEquipmentIndex];
+    // }
+    // private void ChangeEquipment0()
+    // {
+    //     _currentEquipmentIndex = 0;
+    // }
+    // private void ChangeEquipment1()
+    // {
+    //     _currentEquipmentIndex = 1;
 
-    }
+    // }
     private void Update()
     {
         Collider[] colliders = Physics.OverlapSphere(transform.position, _radius, _equipmentLayer);
         if (colliders.Length > 0)
         {
-            _getEquipmentUI.SetActive(true);
+            _getEquipmentUI.gameObject.SetActive(true);
             // 장비 구매 or 획득 UI띄어주기
-            if (Input.GetKeyDown(KeyCode.E))
+            BaseEquipment equipment = colliders[0].transform.GetComponent<BaseEquipment>();
+            if (equipment != null)
             {
-                BaseEquipment equipment = colliders[0].transform.GetComponent<BaseEquipment>();
-                if (equipment != null)
+                if (GameManager.Instance.CoinAmount >= equipment.Price)
                 {
-                    GetEquipment(equipment);
+                    _getEquipmentUI.text = PriceText(equipment.Price);
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        GetEquipment(equipment);
+                    }
+                }
+                else
+                {
+                    _getEquipmentUI.text = $"돈이 부족합니다";
                 }
             }
+
         }
         else
         {
-            _getEquipmentUI.SetActive(false);
+            _getEquipmentUI.gameObject.SetActive(false);
 
-        }
-
-        if (Input.GetKeyDown(_input.GetInput(ONE)))
-        {
-            ChangeEquipment0();
-        }
-        if (Input.GetKeyDown(_input.GetInput(SECOND)))
-        {
-            ChangeEquipment1();
-        }
-
-        if (Input.GetKeyDown(_input.GetInput(TAB)))
-        {
-            ChangeEquipment();
         }
     }
 
-
-    protected override void RegisterInput()
+    private string PriceText(int value)
     {
-        _input.AddInput(ONE, KeyCode.Alpha1);
-        _input.AddInput(SECOND, KeyCode.Alpha2);
-        _input.AddInput(TAB, KeyCode.Tab);
-
+        return $"E를 눌러 장비를 {value.ToString()}원에 구매하세요";
     }
+
 }

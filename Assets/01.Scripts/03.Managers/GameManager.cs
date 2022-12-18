@@ -1,8 +1,6 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.InteropServices;
 using UnityEngine;
-using static UnityEngine.Rendering.DebugUI;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -22,10 +20,10 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Start()
     {
-		OnGUIManager.Instance._guiDict.Add("asdf", $"{CoinAmount}");
-	}
+        OnGUIManager.Instance._guiDict.Add("asdf", $"{CoinAmount}");
+    }
     private void Update()
     {
-		OnGUIManager.Instance._guiDict["asdf"] = $"{CoinAmount}";
-	}
+        OnGUIManager.Instance._guiDict["asdf"] = $"{CoinAmount}";
+    }
 }
