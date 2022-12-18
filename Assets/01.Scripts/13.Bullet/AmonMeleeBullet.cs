@@ -17,9 +17,10 @@ public class AmonMeleeBullet : Bullet
         if(((1 << other.gameObject.layer) & _groundLayer) > 0)
         {
             // TODO: 이상하면 여기서 각도 바꿔주기
-            AmonFire g = GameObject.Instantiate(_firePrefab, other.contacts[0].point, 
-            Quaternion.Euler(0f, transform.eulerAngles.y, 0f));
-            g.gameObject.SetActive(true);
+            AmonFire g = ObjectPool.Instance.GetObject(PoolObjectType.FireAmon).GetComponent<AmonFire>();
+            g.transform.position = other.contacts[0].point;
+            g.transform.rotation = Quaternion.Euler(0f, transform.eulerAngles.y, 0f);
+			g.gameObject.SetActive(true);
             g.Duration = _duration;
         }
     }

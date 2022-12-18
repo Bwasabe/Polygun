@@ -101,8 +101,10 @@ public class AmonFollow : BT_Node
             {
                 // TODO : 풀링
                 // 불 소환
-                AmonFire g = GameObject.Instantiate(_data.FireWalkPrefab, _tree.transform.position, Quaternion.Euler(0f, _tree.transform.eulerAngles.y, 0f));
-                g.gameObject.SetActive(true);
+                AmonFire g = ObjectPool.Instance.GetObject(PoolObjectType.FireWalk).GetComponent<AmonFire>();
+                g.transform.position = _tree.transform.position;
+                g.transform.rotation = Quaternion.Euler(0f, _tree.transform.eulerAngles.y, 0f);
+				g.gameObject.SetActive(true);
 
                 g.Duration = _data.FireWalkDuration;
                 _fireTimer = 0f;

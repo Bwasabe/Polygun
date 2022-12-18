@@ -24350,6 +24350,7 @@ MonoBehaviour:
   hit: {fileID: 1924400220764400, guid: b44a4dd7ccb8bc24fb1e8e941eee8eac, type: 3}
   Detached:
   - {fileID: 7402406568038803079}
+  _hitType: 13
 --- !u!199 &7239639584646215175
 ParticleSystemRenderer:
   serializedVersion: 6
@@ -24526,7 +24527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed111800a8130be42831bfc19cd54c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 3
+  _type: 5
   _flash: {fileID: 0}
   _isReturnObject: 1
 --- !u!114 &5375405522510602575

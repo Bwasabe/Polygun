@@ -76,14 +76,15 @@ public class AmonShockwave : BT_Node
             {
                 float angle = j * _data.ShockwaveFireAngle * Mathf.Deg2Rad;
 
-				//AmonFire g = //instan
+                AmonFire g = ObjectPool.Instance.GetObject(PoolObjectType.FireShockWave).GetComponent<AmonFire>();
 
-				AmonFire g = GameObject.Instantiate(_data.ShockwaveFirePrefab,
+                g.transform.position =
                     new Vector3(
                         Mathf.Cos(angle) * i + _data.ShockwaveStartDistance,
                         _tree.transform.position.y,
-                        Mathf.Sin(angle)* i+ _data.ShockwaveStartDistance) + _tree.transform.position,
-                    _tree.transform.rotation);
+                        Mathf.Sin(angle) * i + _data.ShockwaveStartDistance) + _tree.transform.position;
+
+                g.transform.rotation = _tree.transform.rotation;
                     
                 g.gameObject.SetActive(true);
                 g.Duration = _data.ShockwaveDuration;

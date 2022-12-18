@@ -68,11 +68,11 @@ public class Euclades_Shockwave : BT_Node
        .Join(_tree.transform.DORotate(new Vector3(0, 0, 0), downSpeed, RotateMode.FastBeyond360))
        .AppendCallback(() =>
        {
-           GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.ShockWave);
-           obj.transform.position = new Vector3(this._tree.transform.position.x, obj.transform.position.y, _tree.transform.position.z);
-           obj.GetComponent<BlastWave>().StartExplosion();
-           Debug.Log("?");
-           obj.GetComponentInChildren<ShorkWaveCollision>().damage = _data.ShorkWaveDamage;
+           //GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.ShockWave);
+           //obj.transform.position = new Vector3(this._tree.transform.position.x, obj.transform.position.y, _tree.transform.position.z);
+           //obj.GetComponent<BlastWave>().StartExplosion();
+           //Debug.Log("?");
+           //obj.GetComponentInChildren<ShorkWaveCollision>().damage = _data.ShorkWaveDamage;
        });
 	}
 }

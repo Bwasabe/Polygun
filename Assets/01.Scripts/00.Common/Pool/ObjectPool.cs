@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Headers;
 using UnityEngine;
 
 public class ObjectPool : MonoSingleton<ObjectPool>
@@ -8,6 +10,8 @@ public class ObjectPool : MonoSingleton<ObjectPool>
 
     [SerializeField]
     ObjectPoolData objectPoolData;
+
+    private Dictionary<PoolObjectType, GameObject> _tempObjcts = new Dictionary<PoolObjectType, GameObject>();
 
     Dictionary<PoolObjectType, Queue<GameObject>> poolObjectMap = new Dictionary<PoolObjectType, Queue<GameObject>>();
 
@@ -21,15 +25,16 @@ public class ObjectPool : MonoSingleton<ObjectPool>
         for (int i = 0; i < objectPoolData.prefabs.Count; i++)
         {
             poolObjectMap.Add((PoolObjectType)i, new Queue<GameObject>());
+            _tempObjcts.Add((PoolObjectType)i, CreateNewObject(i, objectPoolData.prefabs[i]));
 
             for (int j = 0; j < objectPoolData.prefabCreateCounts[i]; j++)
-                poolObjectMap[(PoolObjectType)i].Enqueue(CreateNewObject(i));
+                poolObjectMap[(PoolObjectType)i].Enqueue(CreateNewObject(i, _tempObjcts[(PoolObjectType)i]));
         }
     }
 
-    private GameObject CreateNewObject(int index)
+    private GameObject CreateNewObject(int index, GameObject createObject)
     {
-        var newObj = Instantiate(objectPoolData.prefabs[index]);
+        var newObj = Instantiate(createObject);
         newObj.gameObject.SetActive(false);
         newObj.transform.SetParent(transform);
         return newObj;
@@ -53,7 +58,7 @@ public class ObjectPool : MonoSingleton<ObjectPool>
         }
         else
         {
-            var newObj = Instance.CreateNewObject((int)type);
+			var newObj = Instance.CreateNewObject((int)type, _tempObjcts[type]);
             newObj.gameObject.SetActive(isActive);
             newObj.transform.SetParent(transform);
 

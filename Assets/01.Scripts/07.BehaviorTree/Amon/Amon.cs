@@ -61,7 +61,7 @@ public class Amon : BehaviorTree
         // TODO: 풀링
         Vector3 dir = _data.Target.position - transform.position;
         dir.Normalize();
-        Bullet bullet = ObjectPool.Instance.GetObject(PoolObjectType.AmonMeleeBullet).GetComponent<Bullet>();
+        Bullet bullet = ObjectPool.Instance.GetObject(PoolObjectType.AmonBullet).GetComponent<Bullet>();
         bullet.transform.position = _data.AmonProjectileAttackPos.position;
         bullet.transform.rotation = Quaternion.identity;
         bullet.gameObject.SetActive(true);
@@ -71,7 +71,9 @@ public class Amon : BehaviorTree
         bullet.transform.rotation = Quaternion.LookRotation(dir);
         bullet.Direction = dir;
 
-        GameObject particle = Instantiate(_data.AmonProjectileParticle, _data.AmonProjectileAttackPos.position, Quaternion.identity);
+        GameObject particle = ObjectPool.Instance.GetObject(PoolObjectType.AmonBulletParticle);
+        particle.transform.position = _data.AmonProjectileAttackPos.position;
+        particle.transform.rotation = Quaternion.identity;
         particle.SetActive(true);
         particle.transform.rotation = Quaternion.LookRotation(dir);
 
@@ -104,10 +106,6 @@ public partial class AmonData
     public Transform Target { get; set; } = null;
 
     public AnimatorCtrl<Amon_Animation_State> AnimatorCtrl { get; set; }
-
-    [SerializeField]
-    private Bullet _amonProjectileBullet;
-    public Bullet AmonProjectileBullet => _amonProjectileBullet;
 
     [SerializeField]
     private GameObject _amonProjectileParticle;

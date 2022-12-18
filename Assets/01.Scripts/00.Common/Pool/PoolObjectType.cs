@@ -1,7 +1,9 @@
 public enum PoolObjectType
 {
 	PlayerBullet,
-	ShockWave,
+	FireShockWave,
+	FireWalk,
+	FireAmon,
 	ChronosBullet,
 	LongEnemyBullet,
 	Coin,
@@ -13,5 +15,7 @@ public enum PoolObjectType
 	ChronosBulletHit,
 	LongEnemyBulletHit,
 	AmonMeleeBulletHit,
-	PlayerDashMesh
+	PlayerDashMesh,
+	AmonBullet,
+	AmonBulletParticle
 }

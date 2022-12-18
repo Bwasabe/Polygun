@@ -41,7 +41,7 @@ public class BlastWave : MonoBehaviour
 			yield return null;
 		}
 		_isRun = false;
-		ObjectPool.Instance.ReturnObject(PoolObjectType.ShockWave, this.gameObject);
+		//ObjectPool.Instance.ReturnObject(PoolObjectType.ShockWave, this.gameObject);
 	}
 
 	private void Draw(float currentRadius)

@@ -12,7 +12,11 @@ public class AmonFire : MonoBehaviour
     private float damage;
 
     private CollisionCtrl _collisionCtrl;
+    
     public float Duration { get; set; } = 0f;
+
+    [SerializeField]
+    private PoolObjectType _objectType;
 
     private float _timer;
 
@@ -36,8 +40,7 @@ public class AmonFire : MonoBehaviour
         _timer += Time.deltaTime;
         if (_timer > Duration)
         {
-            // TODO: 풀링
-            gameObject.SetActive(false);
+            ObjectPool.Instance.ReturnObject(_objectType, gameObject);
         }
     }
 
