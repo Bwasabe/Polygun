@@ -4880,7 +4880,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ed111800a8130be42831bfc19cd54c89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _type: 12
+  _type: 4
   _flash: {fileID: 0}
   _isReturnObject: 1
 --- !u!114 &1457331437900758253
@@ -4902,7 +4902,7 @@ MonoBehaviour:
   hit: {fileID: 1765570899365652, guid: e90b0a20dc997ef4c9e67b1c8b6db6c9, type: 3}
   Detached:
   - {fileID: 6566029627199659370}
-  _hitType: 4
+  _hitType: 12
 --- !u!1 &4136728018234057638
 GameObject:
   m_ObjectHideFlags: 0
