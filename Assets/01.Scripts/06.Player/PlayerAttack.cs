@@ -17,6 +17,7 @@ public class PlayerAttack : BasePlayerSkillComponent
     [SerializeField]
     private float _attackStateRate = 1f;
 
+    public int ReloadCount { get; set; }
     private float _rateTime;
 
     private PlayerStat _playerStat;

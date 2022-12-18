@@ -8,6 +8,14 @@ using DG.Tweening;
 
 public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
 {
+    enum ChronosType
+    {
+        UseEnter,
+        Use,
+        FillEnter,
+        Fill,
+
+    }
     private PlayerStat _playerStat;
     private ChronosData _data;
 
@@ -18,13 +26,16 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
     private InputManager _input;
     private LiftGammaGain _liftGammaGain;
 
-    private Tweener _gammaDownTweener;
-    private Tweener _gammaUpTweener;
+    private Transform _watchCover;
+
+    private ChronosType _type;
+
     public ChronosSubSkill(BaseEquipment parent) : base(parent)
     {
         _playerStat = GameManager.Instance.Player.PlayerStat;
         _input = GameManager.Instance.InputManager;
         _data = _parent.GetData<ChronosData>();
+        _watchCover = _parent.transform.Find("Clock/WatchCover");
 
         // _data.TimeStopSlider.maxValue = _data.TimeStopCoolTime;
 
@@ -33,6 +44,49 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
 
     public override void Skill()
     {
+        if (_type.Equals(ChronosType.UseEnter))
+        {
+            DOTween.To(
+                () => _liftGammaGain.gamma.value,
+                value => _liftGammaGain.gamma.Override(value),
+                new Vector4(1f, 1f, 1f, 0f), _data.TweenDuration
+            );
+            DOTween.To(
+                () => _liftGammaGain.gain.value,
+                value => _liftGammaGain.gain.Override(value),
+                new Vector4(1f, 1f, 1f, 0f), _data.TweenDuration
+            );
+            Time.timeScale = 1 / _data.TimeScaleValue;
+            GameManager.PlayerTimeScale = _data.TimeScaleValue;
+            _parent.ParticleActive(true);
+
+        }
+        if (_type.Equals(ChronosType.Use))
+        {
+            if (_data.TimeStopSlider.value > _data.MinSliderValue)
+            {
+                _data.TimeStopSlider.value -= Time.deltaTime * _data.MinTimeStopDuration * GameManager.PlayerTimeScale;
+            }
+        }
+        if (_type.Equals(ChronosType.FillEnter))
+        {
+            DOTween.To(
+               () => _liftGammaGain.gamma.value,
+               value => _liftGammaGain.gamma.Override(value),
+               new Vector4(1f, 1f, 1f, 0f), _data.TweenDuration
+           );
+            DOTween.To(
+                () => _liftGammaGain.gain.value,
+                value => _liftGammaGain.gain.Override(value),
+                new Vector4(1f, 1f, 1f, 0f), _data.TweenDuration
+            );
+            _watchCover.DOLocalRotateQuaternion(Quaternion.Euler(_data.WatchCoverRotation, 0f, 0f), _data.WatchCoveredDuration);
+        }
+        if (_type.Equals(ChronosType.Fill))
+        {
+            _data.TimeStopSlider.value += Time.deltaTime * _data.AddTimeStopDuration * GameManager.PlayerTimeScale;
+        }
+
         if (_data.TimeStopSlider.value > _data.MinSliderValue)
         {
             //시간 느리게
@@ -41,10 +95,6 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
             _isUsed = true;
             _data.TimeStopSlider.value -= Time.deltaTime * _data.MinTimeStopDuration * GameManager.PlayerTimeScale;
             _parent.ParticleActive(true);
-            // if(_liftGammaGain.gamma.value == null)
-            // {
-            //     _gammaUpTweener.Kill();
-            // }
         }
         else
         {
@@ -53,15 +103,15 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
             //시간 원상복귀
             _parent.ParticleActive(false);
             _isUsed = false;
-            if (_liftGammaGain.gamma.value == _data.GammaValue)
-            {
-                _liftGammaGain.gamma.Override((Vector4)Vector3.one);
-            }
+            // if (_liftGammaGain.gamma.value == _data.GammaValue)
+            // {
+            //     _liftGammaGain.gamma.Override((Vector4)Vector3.one);
+            // }
 
-            if (_liftGammaGain.gain.value == _data.GainValue)
-            {
-                _liftGammaGain.gain.Override((Vector4)Vector3.one);
-            }
+            // if (_liftGammaGain.gain.value == _data.GainValue)
+            // {
+            //     _liftGammaGain.gain.Override((Vector4)Vector3.one);
+            // }
         }
     }
 
@@ -72,8 +122,7 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
 
     public void SkillPersist()
     {
-        Debug.Log(_isUsed);
-        if (Input.GetKeyDown(_input.GetInput(Q)))
+        if (Input.GetKeyDown(_input.GetInput(Q)) && !_isUsed)
         {
             DOTween.To(
                 () => _liftGammaGain.gamma.value,
@@ -86,29 +135,21 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
                 value => _liftGammaGain.gain.Override(value),
                 _data.GainValue, _data.TweenDuration
             );
+
+            _watchCover.DOLocalRotateQuaternion(Quaternion.Euler(_data.WatchCoverRotation, 0f, 0f), _data.WatchCoveredDuration);
         }
         if (Input.GetKeyUp(_input.GetInput(Q)))
         {
-            Time.timeScale = 1f;
-            GameManager.PlayerTimeScale = 1f;
-            _isUsed = false;
-            _parent.ParticleActive(false);
+            // Time.timeScale = 1f;
+            // GameManager.PlayerTimeScale = 1f;
+            // _isUsed = false;
+            // _parent.ParticleActive(false);
 
-            DOTween.To(
-                () => _liftGammaGain.gamma.value,
-                value => _liftGammaGain.gamma.Override(value),
-                new Vector4(1f, 1f, 1f, 0f), _data.TweenDuration
-            );
 
-            DOTween.To(
-                () => _liftGammaGain.gain.value,
-                value => _liftGammaGain.gain.Override(value),
-                new Vector4(1f, 1f, 1f, 0f), _data.TweenDuration
-            );
         }
         if (!_isUsed)
         {
-            _data.TimeStopSlider.value += Time.deltaTime * _data.AddTimeStopDuration * GameManager.PlayerTimeScale;
+
         }
     }
 }
@@ -148,5 +189,13 @@ public partial class ChronosData
     [SerializeField]
     private float _minSliderValue = 0.5f;
     public float MinSliderValue => _minSliderValue;
+
+    [SerializeField]
+    private float _watchCoverRotation = -95f;
+    public float WatchCoverRotation => _watchCoverRotation;
+
+    [SerializeField]
+    private float _watchCoveredDuration = 0.3f;
+    public float WatchCoveredDuration => _watchCoveredDuration;
 }
 
