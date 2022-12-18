@@ -13,7 +13,6 @@ public class AmonProjectileAttack : BT_Node
         _data = _tree.GetData<AmonData>();
     }
 
-
     private const string PROJECTILE_ATTACK = "attack_02";
 
     public override Result Execute()

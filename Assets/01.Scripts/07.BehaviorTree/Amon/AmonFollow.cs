@@ -13,6 +13,9 @@ public class AmonFollow : BT_Node
     private bool _isSummonBullet;
     private float _timer;
     private int _currentBulletIndex = 0;
+    private float _fireTimer;
+
+    private CollisionFlags _collisionFlag;
 
     public AmonFollow(BehaviorTree t, List<BT_Node> c = null) : base(t, c)
     {
@@ -45,6 +48,7 @@ public class AmonFollow : BT_Node
 
     protected override void OnExit()
     {
+        _fireTimer = 0f;
         base.OnExit();
     }
 
@@ -92,6 +96,17 @@ public class AmonFollow : BT_Node
         }
         else
         {
+            _fireTimer += Time.deltaTime;
+            if(_fireTimer <= _data.FireDelay)
+            {
+                // TODO : 풀링
+                // 불 소환
+                AmonFire g = GameObject.Instantiate(_data.FireWalkPrefab, _tree.transform.position, Quaternion.Euler(0f, _tree.transform.eulerAngles.y, 0f));
+                g.gameObject.SetActive(true);
+
+                g.Duration = _data.FireWalkDuration;
+                _fireTimer = 0f;
+            }
             if (Vector3.Distance(_data.Target.position, _tree.transform.position) <= _data.AttackDistance)
             {
                 NodeResult = Result.FAILURE;
@@ -107,7 +122,18 @@ public class AmonFollow : BT_Node
                 dir.y = 0f;
                 dir.Normalize();
 
-                _cc.Move(dir * _data.MoveSpeed * Time.deltaTime);
+                if((_collisionFlag & CollisionFlags.Below) != 0)
+                {
+                    dir.y = 0f;
+                    Debug.Log("땅에 닿음");
+                }
+                else
+                {
+                    Debug.Log("중력 적용");
+                    dir.y = Physics.gravity.y * Time.deltaTime;
+                }
+
+                _collisionFlag = _cc.Move(dir * _data.MoveSpeed * Time.deltaTime);
 
                 Vector3 lookDir = _data.Target.position - _tree.transform.position;
                 if (lookDir != Vector3.zero)
@@ -155,6 +181,15 @@ public partial class AmonData
     public LayerMask HitLayer => _hitLayer;
 
     [SerializeField]
-    private LayerMask _groundLayer;
-    public LayerMask GroundLayer => _groundLayer;
+    private float _fireDelay = 0.5f;
+    public float FireDelay => _fireDelay;
+
+    [SerializeField]
+    private AmonFire _fireWalkPrefab;
+    public AmonFire FireWalkPrefab => _fireWalkPrefab;
+
+    [SerializeField]
+    private float _fireWalkDuration = 5f;
+    public float FireWalkDuration => _fireWalkDuration;
+
 }

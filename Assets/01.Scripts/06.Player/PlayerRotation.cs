@@ -8,8 +8,8 @@ public class PlayerRotation : BasePlayerComponent
     // [SerializeField]
     // private LayerMask _groundLayer;
 
-    [SerializeField]
-    private float _rotateSmooth = 8f;
+    // [SerializeField]
+    // private float _rotateSmooth = 8f;
 
     private void Update()
     {
@@ -18,7 +18,7 @@ public class PlayerRotation : BasePlayerComponent
             Vector3 camRotation = MainCam.transform.eulerAngles;
             camRotation.x = 0f;
             camRotation.z = 0f;
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(camRotation), Time.deltaTime * _rotateSmooth * GameManager.PlayerTimeScale);
+            transform.rotation = Quaternion.Euler(camRotation);//Quaternion.Slerp(transform.rotation, Quaternion.Euler(camRotation), Time.deltaTime * _rotateSmooth * GameManager.PlayerTimeScale);
         }
         // if (Physics.Raycast(MainCam.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, Mathf.Infinity, _groundLayer))
         // {
