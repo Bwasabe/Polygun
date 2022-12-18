@@ -9,11 +9,11 @@ public class HealPortion : Item
 	[SerializeField]
 	private GameObject _returnObject;
 
-	protected override void Interaction(Collider other)
+	protected override void Interaction(Collision other)
 	{
 		if(IsInteraction(other))
 		{
-			Player player = other.GetComponent<Player>();
+			Player player = other.gameObject.GetComponent<Player>();
 			if(player.PlayerStat.HP < 100)
 			{
 				player.PlayerStat.Damaged(-_hp);

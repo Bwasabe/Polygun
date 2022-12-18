@@ -52,7 +52,8 @@ public class MeleeEnemy : BehaviorTree
 		if (((1 << other.gameObject.layer) & layer) > 0 && _data.Animator.GetBool("IsAttack") && !isAttackTime)
 		{
 			isAttackTime = true;
-			other.GetComponent<IDmgAble>()?.Damage(_data.Stat.DamageStat);
+			Debug.Log(">");
+			other.gameObject.GetComponent<IDmgAble>()?.Damage(_data.Stat.DamageStat);
 		}
 	}
 }

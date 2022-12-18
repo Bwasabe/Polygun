@@ -27,8 +27,8 @@ public class BoomEnemyAttack : BT_Node
 		Collider[] hitColider = Physics.OverlapSphere(this._tree.transform.position, _data.Radius, _data.PlayerLayerMask);
 		if (hitColider.Length > 0)
 			hitColider[0]?.GetComponent<IDmgAble>().Damage(_data.Stat.DamageStat);
-		_tree.gameObject.SetActive(false);
 		UpdateState = UpdateState.Exit;
+		_tree.gameObject.SetActive(false);
 	}
 }
 

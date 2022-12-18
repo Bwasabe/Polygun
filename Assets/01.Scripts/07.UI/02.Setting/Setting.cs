@@ -4,15 +4,18 @@ using UnityEngine;
 
 public class Setting : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	[SerializeField]
+	private GameObject _settingPanel;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	private bool _isSettingActive;
+	private void Awake()
+	{
+		SettingToggle(false);
+	}
+
+	public void SettingToggle(bool isActive)
+	{
+		_isSettingActive = isActive;
+		_settingPanel.SetActive(_isSettingActive);
+	}
 }

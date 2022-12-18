@@ -137,7 +137,6 @@ GameObject:
   - component: {fileID: 251071072551118726}
   - component: {fileID: 5756179120451686220}
   - component: {fileID: 4205308813506595704}
-  - component: {fileID: 1258268514}
   m_Layer: 7
   m_Name: LongEnemy
   m_TagString: Untagged
@@ -193,7 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data:
     _stat:
-      _defaultHp: 10
+      _defaultHp: 12
       _defaultDamage: 15
       _defaultSpeed: 5
       _defaultAttackRate: 0
@@ -234,19 +233,6 @@ MonoBehaviour:
   _dissolve: {fileID: 6563675844732769047}
   _slider: {fileID: 7762429848194469232}
   _enemyAnimation: {fileID: 7403935763271489881}
---- !u!114 &1258268514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 773996819081677985}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5017d273fddafc4f864f96875bd7fbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
 --- !u!1 &1035973801281281002
 GameObject:
   m_ObjectHideFlags: 0

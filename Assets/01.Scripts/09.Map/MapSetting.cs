@@ -32,10 +32,13 @@ public class MapSetting : MonoBehaviour
 
 	private void Update()
 	{
-		if (!isEnd && !isEnter && OnIsEnter())
+		if (!isEnd && !isEnter)
 		{
-			OnEnter();
-			isEnter = true;
+			if (OnIsEnter())
+			{
+				OnEnter();
+				isEnter = true;
+			}
 		}
 
 		if (isEnter && !isEnd)
@@ -45,10 +48,13 @@ public class MapSetting : MonoBehaviour
 	{	
 
 	}
+	public virtual void RepeatOnEnter()
+	{
+		MiniMap.Instance.MiniMapSet(map);
+	}
 	protected virtual void OnEnter()
 	{
 		map.DoorLock();
-		MiniMap.Instance.MiniMapSet(map);
 	}
 
 	protected virtual void OnPlay()

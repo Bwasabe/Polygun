@@ -12,16 +12,21 @@ public class ButtonEffect : MonoBehaviour
 
 	public void OnEnter()
 	{
-		this.transform.DOScale(scale, 0.4f);
+		this.transform.DOScale(scale, 0.4f).SetUpdate(true);
 	}
 
 	public void OnExit()
 	{
-		this.transform.DOScale(1f, 0.4f);
+		this.transform.DOScale(1f, 0.4f).SetUpdate(true);
 	}
 
 	public void OnDestroy()
 	{
 		DOTween.KillAll();
+	}
+
+	public void OnReset()
+	{
+		this.transform.localScale = Vector3.zero;
 	}
 }

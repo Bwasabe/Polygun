@@ -32,6 +32,7 @@ public class Door : MonoBehaviour
     {
         if (((1 << other.gameObject.layer) & layer) > 0)
         {
+            nextMap.GetComponentInChildren<MapSetting>().RepeatOnEnter();
             StartCoroutine(fadeOut(0));
 			other.gameObject.transform.parent = nextMap.transform.GetChild(0).transform;
             Vector3 vec = nextMap.doorVec[DirectionToInt(dir)];

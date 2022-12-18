@@ -13,15 +13,15 @@ public class Item : MonoBehaviour
 	private void Awake()
 	{
 		_collision = GetComponent<CollisionCtrl>();
-		_collision.ColliderEnterEvent += Interaction;
+		_collision.CollisionEnterEvent += Interaction;
 	}
 
-	protected virtual void Interaction(Collider other)
+	protected virtual void Interaction(Collision other)
 	{
 
 	}
 
-	protected virtual bool IsInteraction(Collider other)
+	protected virtual bool IsInteraction(Collision other)
 	{
 		return ((1 << other.gameObject.layer) & _layerMask) > 0;
 	}

@@ -39,7 +39,7 @@ public class MiniMap : MonoSingleton<MiniMap>
 		//if (vec.y > 0 && vec.y < 90)
 		//	vec.y = -vec.y;
 		//parent.transform.localRotation = Quaternion.Euler(0, 0, vec2.y - 90);
-		playerimage.transform.localRotation = Quaternion.Euler(0, 0,-vec.y + 180f);
+		playerimage.transform.localRotation = Quaternion.Euler(0, 0,-vec.y + 90f);
 	}
 
 	//public void AllMiniMapSetting(Map[,] maps)

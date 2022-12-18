@@ -6,7 +6,7 @@ using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class Coin : Item
 {
-	protected override void Interaction(Collider other)
+	protected override void Interaction(Collision other)
 	{
 		if(IsInteraction(other))
 		{
