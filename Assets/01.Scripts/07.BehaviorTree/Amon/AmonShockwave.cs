@@ -34,7 +34,6 @@ public class AmonShockwave : BT_Node
 
         _targetPos = _data.Target.position;
 
-
         Vector3 lookPos = _targetPos - _tree.transform.position;
         if (lookPos != Vector3.zero)
         {
@@ -118,6 +117,7 @@ public class AmonShockwave : BT_Node
         _tree.IsStop = false;
 
         _targetPos = _data.Target.position;
+        _targetPos.y = _tree.transform.position.y;
         _startPos = _tree.transform.position;
         _startPos.y = Mathf.Max(_data.GroundHeight, _startPos.y);
 

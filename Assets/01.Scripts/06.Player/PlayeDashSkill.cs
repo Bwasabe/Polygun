@@ -47,6 +47,8 @@ public class PlayeDashSkill : BaseSkill, ISkillPersistAble
     {
         _isDash = true;
 
+        _player.GetPlayerComponent<PlayerDamaged>().StopInvinciblePlayer();
+
         Vector3 dir;
         if (_player.CurrentState.HasFlag(PLAYER_STATE.MOVE))
             dir = _player.transform.forward;
@@ -85,7 +87,7 @@ public class PlayeDashSkill : BaseSkill, ISkillPersistAble
         if (_dashTimer >= _dahsModelTime)
         {
             _dashTimer = 0f;
-            MeshRenderer model = GameObject.Instantiate(_model, _dash.transform.position, _dash.transform.rotation, null);
+            MeshRenderer model = GameObject.Instantiate(_model, _model.transform.position, _dash.transform.rotation, null);
             _modelMatList.Add(model);
             _modelDurationList.Add(Time.time);
         }

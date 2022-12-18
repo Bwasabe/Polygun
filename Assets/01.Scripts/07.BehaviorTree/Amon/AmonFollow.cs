@@ -14,6 +14,9 @@ public class AmonFollow : BT_Node
     private float _timer;
     private int _currentBulletIndex = 0;
     private float _fireTimer;
+
+    private CollisionFlags _collisionFlag;
+
     public AmonFollow(BehaviorTree t, List<BT_Node> c = null) : base(t, c)
     {
         _data = _tree.GetData<AmonData>();
@@ -119,7 +122,18 @@ public class AmonFollow : BT_Node
                 dir.y = 0f;
                 dir.Normalize();
 
-                _cc.Move(dir * _data.MoveSpeed * Time.deltaTime);
+                if((_collisionFlag & CollisionFlags.Below) != 0)
+                {
+                    dir.y = 0f;
+                    Debug.Log("땅에 닿음");
+                }
+                else
+                {
+                    Debug.Log("중력 적용");
+                    dir.y = Physics.gravity.y * Time.deltaTime;
+                }
+
+                _collisionFlag = _cc.Move(dir * _data.MoveSpeed * Time.deltaTime);
 
                 Vector3 lookDir = _data.Target.position - _tree.transform.position;
                 if (lookDir != Vector3.zero)
@@ -177,4 +191,5 @@ public partial class AmonData
     [SerializeField]
     private float _fireWalkDuration = 5f;
     public float FireWalkDuration => _fireWalkDuration;
+
 }

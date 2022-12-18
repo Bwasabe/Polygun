@@ -26,13 +26,15 @@ public class AmonFire : MonoBehaviour
         _collisionCtrl.ColliderStayEvent += FireDamage;
     }
 
-    private void OnDisable() {
+    private void OnDisable()
+    {
         _timer = 0f;
     }
 
-    private void Update() {
+    private void Update()
+    {
         _timer += Time.deltaTime;
-        if(_timer > Duration)
+        if (_timer > Duration)
         {
             // TODO: 풀링
             gameObject.SetActive(false);
@@ -43,10 +45,7 @@ public class AmonFire : MonoBehaviour
     {
         if (((1 << other.gameObject.layer) & _hitLayer) > 0)
         {
-            if(!GameManager.Instance.Player.CurrentState.HasFlag(PLAYER_STATE.INVINCIBLE))
-            {
-                other.GetComponent<IDmgAble>()?.Damage(damage);
-            }
+            other.GetComponent<IDmgAble>()?.Damage(damage);
         }
     }
 }
