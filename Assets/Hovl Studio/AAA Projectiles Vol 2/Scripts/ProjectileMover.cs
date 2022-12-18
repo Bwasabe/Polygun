@@ -14,7 +14,9 @@ public class ProjectileMover : MonoBehaviour
     private Rigidbody rb;
     public GameObject[] Detached;
 
-    void Start()
+	[SerializeField]
+	private PoolObjectType _hitType;
+	void Start()
     {
         rb = GetComponent<Rigidbody>();
 	}
@@ -32,7 +34,9 @@ public class ProjectileMover : MonoBehaviour
 
         if (hit != null)
         {
-            var hitInstance = Instantiate(hit, pos, rot);
+            var hitInstance = ObjectPool.Instance.GetObject(_hitType);
+            hitInstance.transform.position = pos;
+            hitInstance.transform.localRotation = rot;
             if (UseFirePointRotation) { hitInstance.transform.rotation = gameObject.transform.rotation * Quaternion.Euler(0, 180f, 0); }
             else if (rotationOffset != Vector3.zero) { hitInstance.transform.rotation = Quaternion.Euler(rotationOffset); }
             else { hitInstance.transform.LookAt(contact.point + contact.normal); }
@@ -55,6 +59,5 @@ public class ProjectileMover : MonoBehaviour
                 detachedPrefab.transform.parent = null;
 			}
         }
-        //Destroy(gameObject);
-    }
+	}
 }

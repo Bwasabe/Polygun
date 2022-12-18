@@ -61,7 +61,9 @@ public class Amon : BehaviorTree
         // TODO: 풀링
         Vector3 dir = _data.Target.position - transform.position;
         dir.Normalize();
-        Bullet bullet = Instantiate(_data.AmonProjectileBullet, _data.AmonProjectileAttackPos.position, Quaternion.identity);
+        Bullet bullet = ObjectPool.Instance.GetObject(PoolObjectType.AmonMeleeBullet).GetComponent<Bullet>();
+        bullet.transform.position = _data.AmonProjectileAttackPos.position;
+        bullet.transform.rotation = Quaternion.identity;
         bullet.gameObject.SetActive(true);
         bullet.HitLayer = _data.HitLayer;
         bullet.Damage = 0;

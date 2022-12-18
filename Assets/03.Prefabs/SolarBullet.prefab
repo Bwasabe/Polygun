@@ -48238,7 +48238,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &7766409629752818837
 Transform:
   m_ObjectHideFlags: 0
@@ -48326,6 +48326,7 @@ MonoBehaviour:
   hit: {fileID: 1767841913861676, guid: 7e33fe33aff4f49449f51ed88f138e9c, type: 3}
   Detached:
   - {fileID: 7765141626001707060}
+  _hitType: 0
 --- !u!114 &983828626136640287
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -54,7 +54,7 @@ public class Bullet : MonoBehaviour
             DoFlash();
         else if (_flash != null)
         {
-            _flashObj = Instantiate(_flash, transform);
+            _flashObj = Instantiate(_flash);
             DoFlash();
         }
     }
@@ -83,18 +83,14 @@ public class Bullet : MonoBehaviour
         _flashObj.transform.forward = gameObject.transform.forward;
         var flashPs = _flashObj.GetComponent<ParticleSystem>();
         flashPs.Play();
-    }
+	}
 
     protected virtual void Hit(Collision other)
     {
         if (((1 << other.gameObject.layer) & HitLayer) > 0)
         {
             other.transform.GetComponent<IDmgAble>()?.Damage(Damage);
-            gameObject.SetActive(false);
-            // GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.PopUpDamage);
-            // obj.GetComponent<DamagePopUp>().DamageText((int)Damage, this.transform.position);
         }
-        // if (_isReturnObject && gameObject.activeSelf)
-        //     ObjectPool.Instance.ReturnObject(_type, this.gameObject);
+        ObjectPool.Instance.ReturnObject(_type, this.gameObject);
     }
 }

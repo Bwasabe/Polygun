@@ -28,7 +28,7 @@ public class SettingManager : MonoBehaviour
 	{
 		_buttons[(int)SettingButtons.Continue].onClick.AddListener(() =>
 		{
-			ButtonReset();
+			//ButtonReset();
 			_input.ToggleSetting();
 			_setting.SettingToggle(false);
 		});

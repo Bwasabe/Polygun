@@ -19467,6 +19467,7 @@ MonoBehaviour:
   rotationOffset: {x: 0, y: 180, z: 0}
   hit: {fileID: 1339124478685776, guid: 983ffc7b1f02f0d46a330ab4d104d17d, type: 3}
   Detached: []
+  _hitType: 9
 --- !u!199 &199828426782813410
 ParticleSystemRenderer:
   serializedVersion: 6

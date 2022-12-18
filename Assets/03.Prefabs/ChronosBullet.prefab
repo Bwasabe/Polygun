@@ -4881,6 +4881,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _type: 2
+  _hitType: 10
   _flash: {fileID: 0}
   _isReturnObject: 1
 --- !u!114 &1457331437900758253

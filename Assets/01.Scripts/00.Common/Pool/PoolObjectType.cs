@@ -8,5 +8,10 @@ public enum PoolObjectType
 	MiddleHeal,
 	HighHeal,
 	AmonMeleeBullet,
-	PopUpDamage
+	PopUpDamage,
+	PlayerBulletHit,
+	ChronosBulletHit,
+	LongEnemyBulletHit,
+	AmonMeleeBulletHit,
+	PlayerDashMesh
 }

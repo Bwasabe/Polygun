@@ -71,7 +71,7 @@ public class PlayeDashSkill : BaseSkill, ISkillPersistAble
         {
             if (Time.time - _modelDurationList[i] >= _modelDuration || _modelMatList[i].material.color.a <= 0)
             {
-                _modelMatList[i].gameObject.SetActive(false);
+                ObjectPool.Instance.ReturnObject(PoolObjectType.PlayerDashMesh, _modelMatList[i].gameObject);
                 _modelMatList.RemoveAt(i);
                 _modelDurationList.RemoveAt(i);
             }
@@ -87,7 +87,8 @@ public class PlayeDashSkill : BaseSkill, ISkillPersistAble
         if (_dashTimer >= _dahsModelTime)
         {
             _dashTimer = 0f;
-            MeshRenderer model = GameObject.Instantiate(_model, _model.transform.position, _dash.transform.rotation, null);
+            MeshRenderer model = ObjectPool.Instance.GetObject(PoolObjectType.PlayerDashMesh).GetComponent<MeshRenderer>();
+            model.transform.position = _model.transform.position;
             _modelMatList.Add(model);
             _modelDurationList.Add(Time.time);
         }

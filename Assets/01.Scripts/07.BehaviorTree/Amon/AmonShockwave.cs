@@ -76,7 +76,9 @@ public class AmonShockwave : BT_Node
             {
                 float angle = j * _data.ShockwaveFireAngle * Mathf.Deg2Rad;
 
-                AmonFire g = GameObject.Instantiate(_data.ShockwaveFirePrefab,
+				//AmonFire g = //instan
+
+				AmonFire g = GameObject.Instantiate(_data.ShockwaveFirePrefab,
                     new Vector3(
                         Mathf.Cos(angle) * i + _data.ShockwaveStartDistance,
                         _tree.transform.position.y,
