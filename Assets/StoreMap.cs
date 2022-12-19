@@ -30,11 +30,11 @@ public class StoreMap : MapSetting
 	private LayerMask _layerMask;
 	protected override void OnStart()
 	{
-
 	}
 	protected override void OnEnter()
 	{
 		RandomObjs();
+		_collisiionCtrl.ColliderEnterEvent += GroundOut;
 	}
 
 	protected override void OnPlay()
@@ -64,11 +64,15 @@ public class StoreMap : MapSetting
 			_itemObjects.RemoveAt(rand);
 		}
 	}
-	private void GroundOut(Collision col)
+	private void GroundOut(Collider col)
 	{
 		if (((1 << col.gameObject.layer) & _layerMask) > 0)
 		{
-			col.transform.position = col.gameObject.GetComponent<PlayerJump>()._vec;
+			Debug.Log("?");
+			col.GetComponent<CharacterController>().enabled = false;
+			col.transform.localPosition = new Vector3(121.6f, 0,-13.4f);
+			col.GetComponent<IDmgAble>().Damage(5f);
+			col.GetComponent<CharacterController>().enabled = true;
 		}
 	}
 }

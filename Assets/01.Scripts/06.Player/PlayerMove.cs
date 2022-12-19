@@ -77,14 +77,14 @@ public class PlayerMove : BasePlayerComponent
         if (dir != Vector3.zero)
         {
             _player.CurrentState |= PLAYER_STATE.MOVE;
-			_player.CurrentState &= ~PLAYER_STATE.IDLE;
+            _player.CurrentState &= ~PLAYER_STATE.IDLE;
 
-		}
-		else
+        }
+        else
         {
-			_player.CurrentState |= PLAYER_STATE.IDLE;
+            _player.CurrentState |= PLAYER_STATE.IDLE;
 
-			_player.CurrentState &= ~PLAYER_STATE.MOVE;
+            _player.CurrentState &= ~PLAYER_STATE.MOVE;
         }
     }
 
@@ -105,5 +105,4 @@ public class PlayerMove : BasePlayerComponent
         }
         _cc.Move(_playerStat.Speed * _dir * Time.deltaTime * GameManager.TimeScale * GameManager.PlayerTimeScale);
     }
-
 }
