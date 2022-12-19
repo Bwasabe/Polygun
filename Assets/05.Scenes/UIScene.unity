@@ -3287,7 +3287,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1809388270
 MonoBehaviour:
@@ -3301,6 +3301,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6303639500c8954fa36aaa7cb25a69f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _uiCam: {fileID: 1740058686}
 --- !u!1001 &1890581215
 PrefabInstance:
   m_ObjectHideFlags: 0
