@@ -33,7 +33,7 @@ public class Door : MonoBehaviour
         if (((1 << other.gameObject.layer) & layer) > 0)
         {
             nextMap.GetComponentInChildren<MapSetting>().RepeatOnEnter();
-            StartCoroutine(fadeOut(0));
+            StartCoroutine(fadeOut(1));
 			other.gameObject.transform.parent = nextMap.transform.GetChild(0).transform;
             Vector3 vec = nextMap.doorVec[DirectionToInt(dir)];
             vec += Vector3.up;
@@ -63,8 +63,9 @@ public class Door : MonoBehaviour
 
     private IEnumerator fadeOut(float waitTime)
     {
+        Debug.Log(Define.FadeParent);
 		Define.FadeParent.Fade(1f, 0);
-		yield return new WaitForSeconds(1f);
+		yield return new WaitForSeconds(waitTime);
 		Define.FadeParent.Fade(0f, 0.1f);
 	}
 }

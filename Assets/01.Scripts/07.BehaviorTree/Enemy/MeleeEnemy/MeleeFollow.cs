@@ -8,6 +8,8 @@ public class MeleeFollow : BT_Node
     private MeleeEnemy_Data _data;
     private Transform _player;
     private CharacterController ch;
+
+	private CollisionFlags _collisionFlag;
 	public MeleeFollow(BehaviorTree t,  Transform player,List<BT_Node> c = null) : base(t, c)
     {
         _player = player;
@@ -24,7 +26,22 @@ public class MeleeFollow : BT_Node
 
 		rotation.Normalize();
 
-		ch.Move(playerNormal.normalized * Time.deltaTime * _data.Stat.Speed);
+		Vector3 dir = GameManager.Instance.Player.transform.position - _tree.transform.position;
+		dir.y = 0f;
+		dir.Normalize();
+
+		if ((_collisionFlag & CollisionFlags.Below) != 0)
+		{
+			dir.y = 0f;
+			Debug.Log("¶¥¿¡ ´êÀ½");
+		}
+		else
+		{
+			Debug.Log("Áß·Â Àû¿ë");
+			dir.y = Physics.gravity.y * Time.deltaTime;
+		}
+
+		_collisionFlag = ch.Move(dir * _data.Stat.Speed * Time.deltaTime);
 
 		//_tree.transform.rotation = Quaternion.Slerp(_tree.transform.rotation, Quaternion.LookRotation(rotation), Time.deltaTime * 5);
 
@@ -36,7 +53,7 @@ public class MeleeFollow : BT_Node
 		}
 	}
 
-    protected override void OnExit()
+	protected override void OnExit()
     {
 		_data.Animator.SetBool("IsWalk", false);
         base.OnExit();
