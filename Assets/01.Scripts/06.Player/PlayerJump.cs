@@ -28,6 +28,8 @@ public class PlayerJump : BasePlayerComponent
 
     private CharacterController _cc;
 
+    public Vector3 _vec;
+
     private void Awake()
     {
         _cc = GetComponent<CharacterController>();
@@ -86,6 +88,10 @@ public class PlayerJump : BasePlayerComponent
                 _player.CurrentState |= PLAYER_STATE.JUMP;
             }
         }
+        else
+        {
+            _vec = transform.position;
+		}
         _velocity.y += Physics.gravity.y * Time.deltaTime * _gravityScale * GameManager.TimeScale * GameManager.PlayerTimeScale;
 
         _cc.Move(_velocity * Time.deltaTime * GameManager.TimeScale * GameManager.PlayerTimeScale);

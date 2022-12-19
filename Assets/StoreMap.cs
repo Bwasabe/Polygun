@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Linq;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public enum StoreObjs
 {
@@ -14,12 +16,18 @@ public enum StoreObjs
 public class StoreMap : MapSetting
 {
 	[SerializeField]
-	private List<ItemObject> itemObjects;
+	private List<ItemObject> _itemObjects;
 	[SerializeField]
-	private Vector3[] storeObjVec = new Vector3[3];
+	private Vector3[] _storeObjVec = new Vector3[3];
 
 	[SerializeField]
-	private int confirmationObjectCount = 0;
+	private int _confirmationObjectCount = 0;
+
+	[SerializeField]
+	private CollisionCtrl _collisiionCtrl;
+
+	[SerializeField]
+	private LayerMask _layerMask;
 	protected override void OnStart()
 	{
 
@@ -41,19 +49,26 @@ public class StoreMap : MapSetting
 
 	private void RandomObjs()
 	{
-		for(int i = 0; i<confirmationObjectCount; i++)
+		for (int i = 0; i < _confirmationObjectCount; i++)
 		{
-			GameObject obj = Instantiate(itemObjects[i].obj, transform);
-			obj.transform.localPosition = storeObjVec[i];
-			itemObjects.RemoveAt(i);
+			GameObject obj = Instantiate(_itemObjects[i].obj, transform);
+			obj.transform.localPosition = _storeObjVec[i];
+			_itemObjects.RemoveAt(i);
 		}
 
-		for (int i = confirmationObjectCount; i<= storeObjVec.Length - 1; i++)
+		for (int i = _confirmationObjectCount; i <= _storeObjVec.Length - 1; i++)
 		{
-			int rand = UnityEngine.Random.Range(0, itemObjects.Count-1);
-			GameObject obj = Instantiate(itemObjects[rand].obj, transform);
-			obj.transform.localPosition = storeObjVec[i];
-			itemObjects.RemoveAt(rand);
+			int rand = UnityEngine.Random.Range(0, _itemObjects.Count - 1);
+			GameObject obj = Instantiate(_itemObjects[rand].obj, transform);
+			obj.transform.localPosition = _storeObjVec[i];
+			_itemObjects.RemoveAt(rand);
+		}
+	}
+	private void GroundOut(Collision col)
+	{
+		if (((1 << col.gameObject.layer) & _layerMask) > 0)
+		{
+			col.transform.position = col.gameObject.GetComponent<PlayerJump>()._vec;
 		}
 	}
 }
