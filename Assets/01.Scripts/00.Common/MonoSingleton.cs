@@ -23,7 +23,7 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
                     if (_instance == null)
                     {
                         _instance = new GameObject(typeof(T).ToString()).AddComponent<T>();
-                        DontDestroyOnLoad(_instance);
+                        // DontDestroyOnLoad(_instance);
                     }
                 }
                 return _instance;
@@ -34,12 +34,14 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
         _shuttingDown = false;
 
     }
-    private void OnDestroy()
-    {
-        _shuttingDown = true;
-    }
+    // private void OnDestroy()
+    // {
+    //     Debug.Log("지워짐");
+    //     _shuttingDown = true;
+    // }
     private void OnApplicationQuit()
     {
+        Debug.Log("앱 꺼짐");
         _shuttingDown = true;
     }
 }

@@ -6,10 +6,12 @@ public class GameManager : MonoSingleton<GameManager>
 {
     public Player Player => _player ??= FindObjectOfType<Player>();
 
+    [SerializeField]
     private Player _player;
 
     public InputManager InputManager => _inputManager ??= GetComponent<InputManager>() ?? gameObject.AddComponent<InputManager>();
 
+    [SerializeField]
     private InputManager _inputManager;
 
     public static float TimeScale = 1f;
@@ -17,6 +19,10 @@ public class GameManager : MonoSingleton<GameManager>
     public static float PlayerTimeScale = 1f;
 
     public int CoinAmount = 0;
+
+    private void Awake() {
+        _player = FindObjectOfType<Player>();
+    }
 
     private void Start()
     {
