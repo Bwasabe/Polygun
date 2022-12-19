@@ -52,7 +52,7 @@ public class MapManager : MonoBehaviour
 
 	private List<RoomType> roomTypes = new List<RoomType>();
 	private Map bossMap;
-	private void Start()
+	private void Awake()
 	{
 		MapInit();
 	}
