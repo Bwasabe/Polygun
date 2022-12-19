@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Internal;
 
-public class ChronosAttack : BaseSkill
+public class ChronosAttack : BaseSkill, ISkillInitAble
 {
     private PlayerAttack _attack;
     private ChronosData _data;
@@ -35,7 +34,11 @@ public class ChronosAttack : BaseSkill
             Attack(_data.Damage, Vector3.one);
             _attack.SetBulletRate(_data.AttackCoolTime);
         }
+    }
 
+    public void SkillInit()
+    {
+        _attack.SetReload(16, 2f);
     }
 
     private void Attack(float damage, Vector3 scale)

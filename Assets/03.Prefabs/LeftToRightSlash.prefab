@@ -42,7 +42,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2857569329268093009}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
@@ -9877,7 +9877,7 @@ Transform:
   - {fileID: 3234693418427034347}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 5, y: 115, z: 0}
 --- !u!198 &5786075611093393360
 ParticleSystem:
   m_ObjectHideFlags: 0
