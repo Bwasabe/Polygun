@@ -126,7 +126,6 @@ GameObject:
   - component: {fileID: 2797534377793723467}
   - component: {fileID: 2797534377793723464}
   - component: {fileID: 2797534377793723465}
-  - component: {fileID: 2797534377793723466}
   m_Layer: 0
   m_Name: Touch
   m_TagString: Untagged
@@ -201,17 +200,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2797534377793723466
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2797534377793723460}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 7e4cf185bdd2cad4bbdd5461011d7a99, type: 3}
