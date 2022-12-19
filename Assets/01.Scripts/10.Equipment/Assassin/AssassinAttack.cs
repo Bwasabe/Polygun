@@ -48,14 +48,7 @@ public class AssassinAttack : BaseSkill, ISkillInitAble
 
     public void SkillInit()
     {
-        // _attackObjectList.ForEach(x =>
-        // {
-
-        //     Vector3 rot = x.transform.localEulerAngles;
-        //     rot.y += Define.MainCam.transform.eulerAngles.y;
-        //     x.transform.rotation = Quaternion.Euler(rot);
-
-        // });
+        _playerAttack.SetReload(-1, 0f);
     }
 }
 

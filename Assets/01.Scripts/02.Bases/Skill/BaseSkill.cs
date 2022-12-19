@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class BaseSkill
 {
     protected BaseEquipment _parent;
+    
     public BaseSkill(BaseEquipment parent)
     {
         _parent = parent;

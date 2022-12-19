@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerAttack : BasePlayerSkillComponent
 {
@@ -16,9 +17,18 @@ public class PlayerAttack : BasePlayerSkillComponent
     private float _bulletRate;
     [SerializeField]
     private float _attackStateRate = 1f;
+    [SerializeField]
+    private float _reloadDuration = 2f;
+    [SerializeField]
+    private Image _reloadImage;
+    [SerializeField]
+    private TMPro.TMP_Text _reloadText;
 
-    public int ReloadCount { get; set; }
-    private float _rateTime;
+
+    public int ReloadCount { get; private set; }
+    private int _currentReloadCount;
+
+    private float _rateTimer;
 
     private PlayerStat _playerStat;
 
@@ -31,23 +41,55 @@ public class PlayerAttack : BasePlayerSkillComponent
     {
         base.Start();
         _playerStat = _player.PlayerStat;
-        if(_skill == null)
+        if (_skill == null)
             _player.GetPlayerComponent<PlayerSkillCtrl>().AddPlayerSkill<PlayerAttack>(new PlayerDefaultAttack(this));
     }
     private void Update()
     {
-        _rateTime += Time.deltaTime * GameManager.PlayerTimeScale;
-        if (Input.GetKey(_input.GetInput("MOUSE_LEFTBUTTON")) && _bulletRate <= _rateTime)
+        _rateTimer += Time.deltaTime * GameManager.PlayerTimeScale;
+        if (Input.GetKey(_input.GetInput("MOUSE_LEFTBUTTON")) && _bulletRate <= _rateTimer && _currentReloadCount != 0)
         {
-            _player.CurrentState |= PLAYER_STATE.ATTACK;
-            _rateTime = 0;
+            if (!_player.CurrentState.HasFlag(PLAYER_STATE.ATTACK))
+            {
+                _player.CurrentState |= PLAYER_STATE.ATTACK;
+                _player.GetPlayerComponent<PlayerRotation>().ChangeRotate();
+            }
+            _rateTimer = 0;
             _skill.Skill();
+            _currentReloadCount--;
+            UpdateReloadText();
+
         }
 
-        if(_rateTime >= _attackStateRate)
+        if (_currentReloadCount == 0)
+        {
+            _reloadImage.fillAmount += Time.deltaTime * GameManager.PlayerTimeScale / _reloadDuration;
+            if (_reloadImage.fillAmount >= 1f)
+            {
+                _reloadImage.fillAmount = 0f;
+                _currentReloadCount = ReloadCount;
+                UpdateReloadText();
+            }
+        }
+
+        if (_rateTimer >= _attackStateRate)
         {
             _player.CurrentState &= ~PLAYER_STATE.ATTACK;
         }
+    }
+
+    public void SetReload(int reloadCount, float reloadDuration)
+    {
+        ReloadCount = reloadCount;
+        _currentReloadCount = ReloadCount;
+        _reloadDuration = reloadDuration;
+        UpdateReloadText();
+    }
+
+    private void UpdateReloadText()
+    {
+        _reloadText.text = $"{_currentReloadCount.ToString()} / {ReloadCount.ToString()}";
+
     }
 
     public void SetBulletRate(float value)
