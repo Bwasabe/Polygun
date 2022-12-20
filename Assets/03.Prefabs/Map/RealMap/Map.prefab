@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4458731810646607245
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4458731810646607244}
+  - component: {fileID: 1032249183916605795}
+  m_Layer: 0
+  m_Name: Map
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4458731810646607244
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4458731810646607245}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1032249183916605795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4458731810646607245}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c956b59f1809674b992a951da171c6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pos: {x: 0, y: 0}
+  moveMaps: []
+  roomObjects:
+  - {fileID: 8943515344106007442, guid: 0f323e45e1468da428cfa535a2cb3045, type: 3}
+  - {fileID: 8211678342548090671, guid: dfb61d0ecaeb10247b618f201d248b6c, type: 3}
+  - {fileID: 5100124953999124724, guid: f6cf5563919c15e42bcda58d306917e6, type: 3}
+  - {fileID: 3519037113994575751, guid: 50753a39f4f53f94bb5e0d05d1edb7d2, type: 3}
+  - {fileID: 5716246657738432570, guid: d7e8791070d0b9640b54a6b498a2ad32, type: 3}
+  - {fileID: 7254386677922731001, guid: 5c27f9d520934bf42ae2d70507280c5e, type: 3}
+  - {fileID: 4143522783604892489, guid: 650ac0748be821248a490c62b1c3d16b, type: 3}
+  roomType: 0
+  doorVec:
+  - {x: -5, y: 0, z: 6}
+  - {x: -17, y: 0, z: 6}
+  - {x: -11, y: 0, z: 0}
+  - {x: -11, y: 0, z: 12}
+  wallObj: {fileID: 1285216984, guid: 8ab0d05ceccffa2469d030535e60f0d2, type: 3}
+  doorObj: {fileID: 2354936453688865565, guid: 53586fa06fb0f68418a5b4f6532ec8f0, type: 3}
+  doorObjs: []
