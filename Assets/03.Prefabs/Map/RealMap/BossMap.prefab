@@ -186,7 +186,7 @@ MonoBehaviour:
   - {x: -25, y: 0, z: 6}
   - {x: -11, y: 0, z: -8}
   - {x: -11, y: 0, z: 20}
-  bossObject: {fileID: 5835283655632028495, guid: f7383ff9cf931de41adb867a677ac8ab, type: 3}
+  bossObject: {fileID: 6761338053608037636, guid: 9585f3e9cb8f8b54988eca4fe46f3f0f, type: 3}
 --- !u!1001 &207016450021378664
 PrefabInstance:
   m_ObjectHideFlags: 0
