@@ -12,8 +12,9 @@ GameObject:
   - component: {fileID: 681889384410993077}
   - component: {fileID: 7518748974801692925}
   - component: {fileID: 1418547022}
+  - component: {fileID: 2497449552880924913}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,6 +76,21 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2497449552880924913
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 993035054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90f9f61fbc6ff104fbde41f3ac36f161, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &137914043969356521
 GameObject:
   m_ObjectHideFlags: 0
@@ -3038,20 +3054,17 @@ MonoBehaviour:
   _itemObjects:
   - ObjsType: 0
     obj: {fileID: 1000012970591572, guid: 7cafb89b5a0f61f479d0a748962abbbc, type: 3}
-    cost: 0
     isDelete: 0
   - ObjsType: 1
     obj: {fileID: 1000012970591572, guid: 65bbb3c6606664d4bbb37e5871d36112, type: 3}
-    cost: 0
     isDelete: 0
   - ObjsType: 2
     obj: {fileID: 5325251698631418681, guid: 286d7e1a3b54d6646ab52fbc8d68d097, type: 3}
-    cost: 0
     isDelete: 0
   - ObjsType: 3
     obj: {fileID: 3905018282133043358, guid: 8dad58be561fd504f88047b31cb8c9eb, type: 3}
-    cost: 0
     isDelete: 0
+  _welcomeAudios: []
   _storeObjVec:
   - {x: 136.42, y: 1, z: 2.8}
   - {x: 126.42, y: 1, z: 2.8}
