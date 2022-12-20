@@ -81,7 +81,7 @@ public class AmonShockwave : BT_Node
                 g.transform.position =
                     new Vector3(
                         Mathf.Cos(angle) * i + _data.ShockwaveStartDistance,
-                        _tree.transform.position.y,
+                        0f,
                         Mathf.Sin(angle) * i + _data.ShockwaveStartDistance) + _tree.transform.position;
 
                 g.transform.rotation = _tree.transform.rotation;

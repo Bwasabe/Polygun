@@ -3230,7 +3230,7 @@ MonoBehaviour:
       m_Bits: 320
     _fireDelay: 0.5
     _fireWalkPrefab: {fileID: 0}
-    _fireWalkDuration: 5
+    _fireWalkDuration: 2
     _meleeBulletSpeed: 45
     _meleeBulletDamage: 0
     _meleeBulletAttackDelay: 0.5
@@ -3242,7 +3242,7 @@ MonoBehaviour:
     _shockwaveFireDelay: 0.02
     _shockwaveFireAngle: 45
     _shockwaveStartDistance: 1
-    _shockwaveDuration: 10
+    _shockwaveDuration: 5
     _shockwaveFirePrefab: {fileID: 0}
 --- !u!114 &6761338053608037759
 MonoBehaviour:

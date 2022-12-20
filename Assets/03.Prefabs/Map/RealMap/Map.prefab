@@ -53,7 +53,7 @@ MonoBehaviour:
   - {fileID: 3519037113994575751, guid: 50753a39f4f53f94bb5e0d05d1edb7d2, type: 3}
   - {fileID: 5716246657738432570, guid: d7e8791070d0b9640b54a6b498a2ad32, type: 3}
   - {fileID: 7254386677922731001, guid: 5c27f9d520934bf42ae2d70507280c5e, type: 3}
-  - {fileID: 4143522783604892489, guid: 650ac0748be821248a490c62b1c3d16b, type: 3}
+  - {fileID: 8979372363495797579, guid: 1c54171fcdbb9344e8c5bd8e6c1c5793, type: 3}
   roomType: 0
   doorVec:
   - {x: -5, y: 0, z: 6}
