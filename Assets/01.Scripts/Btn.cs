@@ -10,6 +10,7 @@ public class Btn : MonoBehaviour
 
 	public virtual void Interaction()
 	{
-		SceneManager.LoadScene(loadSceneText);
+        Define.LoadingSceneName = loadSceneText;
+        SceneManager.LoadScene("LoadingScene");
 	}
 }
