@@ -20,9 +20,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     public int CoinAmount = 0;
 
-    private void Awake() {
-        _player = FindObjectOfType<Player>();
-    }
 
     private void Start()
     {

@@ -15,7 +15,7 @@ public class ObjectPool : MonoSingleton<ObjectPool>
 
     Dictionary<PoolObjectType, Queue<GameObject>> poolObjectMap = new Dictionary<PoolObjectType, Queue<GameObject>>();
 
-    private void Awake()
+    protected override void Awake()
     {
         Initialize();
     }

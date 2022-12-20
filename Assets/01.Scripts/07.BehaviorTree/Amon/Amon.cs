@@ -27,18 +27,18 @@ public class Amon : BehaviorTree
     {
         base.Update();
 
-        if (!_data.IsShockwave)
-        {
-            if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity, _data.GroundLayer))
-            {
-                if(transform.position.y - hit.point.y >= 1.1f || transform.position.y - hit.point.y <= 0.6f)
-                {
-                    Vector3 pos = transform.position;
-                    pos.y = hit.point.y;
-                    transform.position = pos;
-                }
-            }
-        }
+        // if (!_data.IsShockwave)
+        // {
+        //     if (Physics.Raycast(transform.position, Vector3.down, out RaycastHit hit, Mathf.Infinity, _data.GroundLayer))
+        //     {
+        //         if(transform.position.y - hit.point.y >= 1.1f || transform.position.y - hit.point.y <= 0.6f)
+        //         {
+        //             Vector3 pos = transform.position;
+        //             pos.y = hit.point.y;
+        //             transform.position = pos;
+        //         }
+        //     }
+        // }
     }
 
     protected override BT_Node SetupTree()

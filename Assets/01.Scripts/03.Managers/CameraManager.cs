@@ -20,10 +20,10 @@ public class CameraManager : MonoSingleton<CameraManager>
 
     private CinemachineImpulseSource _impulseSource;
 
-    private void Awake()
-    {
-        _impulseSource = GetComponent<CinemachineImpulseSource>();
-	}
+    // private void Awake()
+    // {
+    //     _impulseSource = GetComponent<CinemachineImpulseSource>();
+	// }
     public void CameraShake()
     {
         _impulseSource.GenerateImpulse();
