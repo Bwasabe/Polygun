@@ -126,7 +126,6 @@ GameObject:
   - component: {fileID: 8981567066002155343}
   - component: {fileID: 2572747615572820994}
   - component: {fileID: 6459650331999438129}
-  - component: {fileID: 6813902101223935630}
   m_Layer: 0
   m_Name: CandleLight1
   m_TagString: Untagged
@@ -200,17 +199,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &6813902101223935630
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7511887143392269727}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300000, guid: 8ae30ebdea1fe5947ae79813afca3880, type: 3}

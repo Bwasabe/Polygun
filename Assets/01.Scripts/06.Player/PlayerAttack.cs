@@ -58,7 +58,10 @@ public class PlayerAttack : BasePlayerSkillComponent
             _skill.Skill();
             _currentReloadCount--;
             UpdateReloadText();
-
+        }
+        if(Input.GetKeyDown(_input.GetInput("RELOAD")))
+        {
+            _currentReloadCount = 0;
         }
 
         if (_currentReloadCount == 0)
@@ -100,6 +103,7 @@ public class PlayerAttack : BasePlayerSkillComponent
     protected override void RegisterInput()
     {
         _input.AddInput("MOUSE_LEFTBUTTON", KeyCode.Mouse0);
+        _input.AddInput("RELOAD", KeyCode.R);
     }
 
 }
