@@ -49,12 +49,12 @@ public class PlayerSkillCtrl : BasePlayerComponent
             _atkSkills.Add(atkAble);
     }
 
-    public void RemovePlayerSkill<T>(BaseSkill skill, bool isNullPlayerSKill = false) where T : BasePlayerSkillComponent
+    public void RemovePlayerSkill<T>(BaseSkill skill) where T : BasePlayerSkillComponent
     {
-        if(isNullPlayerSKill)
-        {
-            _player.GetPlayerComponent<T>().SetPlayerSkill(skill);
-        }
+        // if(isNullPlayerSKill)
+        // {
+        //     _player.GetPlayerComponent<T>().SetPlayerSkill(skill);
+        // }
 
         _playerSkills.Remove(skill);
 

@@ -10,6 +10,7 @@ public enum AudioType
 {
     BGM,
     SFX,
+    Voice,
 
     Length
 }
@@ -31,14 +32,16 @@ public class SoundManager : MonoSingleton<SoundManager>
     private AudioSource[] _audioSources = new AudioSource[(int)AudioType.Length];
 
 
-    protected override void Awake() {
+    protected override void Awake()
+    {
         base.Awake();
         Init();
         CallInitMethod();
-        
+
     }
 
-    private void Start() {
+    private void Start()
+    {
     }
 
     private void Init()
@@ -67,9 +70,19 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     private void PlayBGM(AudioClip clip)
     {
-        Debug.Log("브금 실행");
+        // Debug.Log("브금 실행");
         AudioSource audioSource = _audioSources[(int)AudioType.BGM];
-        if(audioSource.isPlaying)
+        if (audioSource.isPlaying)
+            audioSource.Stop();
+
+        audioSource.clip = clip;
+        audioSource.Play();
+    }
+
+    private void PlayVoice(AudioClip clip)
+    {
+        AudioSource audioSource = _audioSources[(int)AudioType.Voice];
+        if (audioSource.isPlaying)
             audioSource.Stop();
 
         audioSource.clip = clip;
@@ -86,7 +99,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         for (int i = 0; i < (int)BuildingScenes.Length; i++)
         {
-            if(scene.name.Equals((BuildingScenes)i))
+            if (scene.name.Equals((BuildingScenes)i))
             {
                 Play(AudioType.BGM, _bgms[i]);
             }
@@ -95,7 +108,7 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     public void Play(AudioType type, AudioClip clip)
     {
-        _typeMethod[type].Invoke(this, new object[]{clip});
+        _typeMethod[type].Invoke(this, new object[] { clip });
     }
 
     public void SetPitch(AudioType type, float pitch)

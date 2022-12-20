@@ -48,6 +48,8 @@ public static class Define
 
     public const int DEFAULT_RANDOM_NUM = -1;
 
+    public static string LoadingSceneName = "";
+
 
     public static Vector2 MousePos => MainCam.ScreenToWorldPoint(Input.mousePosition);
 

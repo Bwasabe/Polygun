@@ -14,15 +14,21 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
     private Transform _equipmentTransform;
 
     private List<BaseEquipment> _equipmentList = new List<BaseEquipment>();
-
     private PlayerSkillCtrl _playerSkillCtrl;
-    private BaseEquipment _currentEquipment;
-    public BaseEquipment CurrentEquipment => _currentEquipment;
+
+    public event System.Action<BaseEquipment> ShopEquipmentCallback;
+
+    // [SerializeField]
+    // private bool _isShopEquipment = false;
+
+    // private BaseEquipment _currentEquipment;
+    // public BaseEquipment CurrentEquipment => _currentEquipment;
+
     private int _currentEquipmentIndex = 0;
 
-    private const string ONE = "ONE";
-    private const string SECOND = "SECOND";
-    private const string TAB = "TAB";
+    // private const string ONE = "ONE";
+    // private const string SECOND = "SECOND";
+    // private const string TAB = "TAB";
 
     protected override void Start()
     {
@@ -34,6 +40,7 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
     }
     private void GetEquipment(BaseEquipment equipment)
     {
+        ShopEquipmentCallback?.Invoke(equipment);
         equipment.transform.SetParent(_equipmentTransform);
         equipment.transform.localPosition = Vector3.zero;
         equipment.transform.localRotation = Quaternion.identity;
@@ -44,6 +51,7 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
         if (_equipmentList[_currentEquipmentIndex] != null)
         {
             // 아이템 드롭하는 것
+            // TODO : 풀링
             _equipmentList[_currentEquipmentIndex].transform.SetParent(null);
             _equipmentList[_currentEquipmentIndex].IsEquip = false;
             _equipmentList[_currentEquipmentIndex].gameObject.SetActive(false);
