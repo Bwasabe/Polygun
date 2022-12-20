@@ -39,14 +39,17 @@ public class StoreMap : MapSetting
 
 	protected override void OnPlay()
 	{
-
+		//여기서 사면 애니 캐릭터가 웃거나 감사합니다 하기
 	}
 
 	protected override bool OnIsEnter()
 	{
 		return base.OnIsEnter();
 	}
-
+	public override void RepeatOnEnter()
+	{
+		//음성 나오고 웃게 하기
+	}
 	private void RandomObjs()
 	{
 		for (int i = 0; i < _confirmationObjectCount; i++)
