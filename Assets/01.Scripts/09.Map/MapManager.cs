@@ -78,10 +78,11 @@ public class MapManager : MonoBehaviour
 		MapTypeSelect();
 		MapDoorSet();
 
+		//MiniMap.Instance.AllMiniMapSetting(mapInfoArray);
+		playerObj.GetComponent<CharacterController>().enabled = false;
 		playerObj.transform.parent = mapInfoArray[mapMaxCreateCount / 2, mapMaxCreateCount / 2].transform.GetChild(0);
 		playerObj.transform.localPosition = new Vector3(-2.69f, -1.12f, 1.19f);
-
-		//MiniMap.Instance.AllMiniMapSetting(mapInfoArray);
+		playerObj.GetComponent<CharacterController>().enabled = true;
 	}
 
 	#region 맵 생성하는 것
