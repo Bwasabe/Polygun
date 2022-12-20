@@ -4,13 +4,19 @@ using UnityEngine;
 
 [RequireComponent(typeof(CollisionCtrl))]
 [DisallowMultipleComponent]
-public class Item : MonoBehaviour
+public class Item : MonoBehaviour, IPurchaseAble
 {
 	private CollisionCtrl _collision;
 
 	[SerializeField]
 	private LayerMask _layerMask;
-	private void Awake()
+
+	[SerializeField]
+	private int _price;
+
+    public int Price => _price;
+
+    private void Awake()
 	{
 		_collision = GetComponent<CollisionCtrl>();
 		_collision.CollisionEnterEvent += Interaction;
@@ -25,4 +31,9 @@ public class Item : MonoBehaviour
 	{
 		return ((1 << other.gameObject.layer) & _layerMask) > 0;
 	}
+
+    public void PurchaseCallBack()
+    {
+        
+    }
 }

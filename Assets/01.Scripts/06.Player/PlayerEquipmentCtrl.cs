@@ -16,8 +16,6 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
     private List<BaseEquipment> _equipmentList = new List<BaseEquipment>();
     private PlayerSkillCtrl _playerSkillCtrl;
 
-    public event System.Action<BaseEquipment> ShopEquipmentCallback;
-
     // [SerializeField]
     // private bool _isShopEquipment = false;
 
@@ -38,9 +36,8 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
 
         _equipmentList.Add(null);
     }
-    private void GetEquipment(BaseEquipment equipment)
+    public void GetEquipment(BaseEquipment equipment)
     {
-        ShopEquipmentCallback?.Invoke(equipment);
         equipment.transform.SetParent(_equipmentTransform);
         equipment.transform.localPosition = Vector3.zero;
         equipment.transform.localRotation = Quaternion.identity;
@@ -93,15 +90,16 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
         {
             _getEquipmentUI.gameObject.SetActive(true);
             // 장비 구매 or 획득 UI띄어주기
-            BaseEquipment equipment = colliders[0].transform.GetComponent<BaseEquipment>();
-            if (equipment != null)
+            IPurchaseAble purchaseAble = colliders[0].transform.GetComponent<IPurchaseAble>();
+            if (purchaseAble != null)
             {
-                if (GameManager.Instance.CoinAmount >= equipment.Price)
+                if (GameManager.Instance.CoinAmount >= purchaseAble.Price)
                 {
-                    _getEquipmentUI.text = PriceText(equipment.Price);
+                    _getEquipmentUI.text = PriceText(purchaseAble.Price);
                     if (Input.GetKeyDown(KeyCode.E))
                     {
-                        GetEquipment(equipment);
+                        purchaseAble.PurchaseCallBack();
+                        // GetEquipment(equipment);
                     }
                 }
                 else
@@ -120,7 +118,7 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
 
     private string PriceText(int value)
     {
-        return $"E를 눌러 장비를 {value.ToString()}원에 구매하세요";
+        return $"E를 눌러 아이템을 {value.ToString()}원에 구매하세요";
     }
 
 }

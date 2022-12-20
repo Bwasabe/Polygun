@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 using System.Reflection;
 
-public abstract class BaseEquipment : MonoBehaviour
+public abstract class BaseEquipment : MonoBehaviour, IPurchaseAble
 {
     [SerializeField]
     private float _sinCycle = 1.5f;
@@ -27,6 +27,7 @@ public abstract class BaseEquipment : MonoBehaviour
 
     private Dictionary<System.Type, BaseEquipmentData> _dataDict = new Dictionary<System.Type, BaseEquipmentData>();
     protected PlayerSkillCtrl _skillCtrl;
+    private PlayerEquipmentCtrl _equipmentCtrl;
 
     private Vector3 _startPos;
 
@@ -38,6 +39,7 @@ public abstract class BaseEquipment : MonoBehaviour
     {
         RegisterSkills();
         _skillCtrl = GameManager.Instance.Player.GetPlayerComponent<PlayerSkillCtrl>();
+        _equipmentCtrl = GameManager.Instance.Player.GetPlayerComponent<PlayerEquipmentCtrl>();
         _startPos = transform.position;
 
     }
@@ -91,6 +93,11 @@ public abstract class BaseEquipment : MonoBehaviour
         {
             throw new System.Exception($"{type} is Null in Dict");
         }
+    }
+
+    public void PurchaseCallBack()
+    {
+        _equipmentCtrl.GetEquipment(this);
     }
 }
 
