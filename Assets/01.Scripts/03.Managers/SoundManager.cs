@@ -48,6 +48,7 @@ public class SoundManager : MonoSingleton<SoundManager>
             GameObject g = new GameObject(((AudioType)i).ToString());
             g.transform.SetParent(transform);
             _audioSources[i] = g.AddComponent<AudioSource>();
+            _audioSources[i].playOnAwake = false;
         }
         _audioSources[(int)AudioType.BGM].loop = true;
     }
