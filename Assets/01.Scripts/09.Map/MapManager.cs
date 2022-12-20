@@ -52,6 +52,7 @@ public class MapManager : MonoBehaviour
 
 	private List<RoomType> roomTypes = new List<RoomType>();
 	private Map bossMap;
+	public GameObject boss => bossMap.GetComponentInChildren<BossMap>().Boss;
 	private void Awake()
 	{
 		MapInit();
