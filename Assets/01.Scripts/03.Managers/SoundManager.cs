@@ -13,7 +13,7 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     [Header("BGM For each Scene")]
     [SerializeField]
-    private List<AudioClip> _bgms;
+    private List<AudioClip> _bgms; // BuildingScene 순서로 BGM 배치
 
     private Dictionary<string, AudioClip> _audioDict = new Dictionary<string, AudioClip>();
 

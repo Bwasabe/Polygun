@@ -27,9 +27,10 @@ public class MiniMap : MonoSingleton<MiniMap>
 
 	[SerializeField]
 	RectTransform playerimage;
-	private void Awake()
+	protected override void Awake()
 	{
-		parentRect = parent.GetComponent<RectTransform>();
+        base.Awake();
+        parentRect = parent.GetComponent<RectTransform>();
 	}
 
 	private void Update()
@@ -83,22 +84,22 @@ public class MiniMap : MonoSingleton<MiniMap>
 			Debug.Log(map.pos);
 			if (map.pos.x + 1 == thisMap.pos.x && map.pos.y == thisMap.pos.y)
 			{
-				Debug.Log("¿ÞÂÊ");
+				Debug.Log("ï¿½ï¿½ï¿½ï¿½");
 				vec = Vector2.down * 100;
 			}
 			else if (map.pos.x - 1 == thisMap.pos.x && map.pos.y == thisMap.pos.y)
 			{
-				Debug.Log("¿À¸¥ÂÊ");
+				Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 				vec = Vector2.up * 100;
 			}
 			else if (map.pos.x == thisMap.pos.x && map.pos.y + 1 == thisMap.pos.y)
 			{
-				Debug.Log("À§");
+				Debug.Log("ï¿½ï¿½");
 				vec = Vector2.right * 100;
 			}
 			else if (map.pos.x == thisMap.pos.x && map.pos.y - 1 == thisMap.pos.y)
 			{
-				Debug.Log("¾Æ·¡");
+				Debug.Log("ï¿½Æ·ï¿½");
 				vec = Vector2.left * 100;
 			}
 
