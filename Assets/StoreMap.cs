@@ -1,9 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Linq;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
+using Random = UnityEngine.Random;
 
 public enum StoreObjs
 {
@@ -13,11 +12,14 @@ public enum StoreObjs
 	ASSASSIN,
 	Count
 }
+
 public class StoreMap : MapSetting
 {
 	[SerializeField]
 	private List<ItemObject> _itemObjects;
-	[SerializeField]
+    [SerializeField]
+    private List<AudioClip> _welcomeAudios;
+    [SerializeField]
 	private Vector3[] _storeObjVec = new Vector3[3];
 
 	[SerializeField]
@@ -33,13 +35,21 @@ public class StoreMap : MapSetting
 	}
 	protected override void OnEnter()
 	{
-		RandomObjs();
-		_collisiionCtrl.ColliderEnterEvent += GroundOut;
+		// RandomObjs();
+	}
+
+	protected override void OnExit()
+	{
+		
+	}
+
+	private void Update() {
+		
 	}
 
 	protected override void OnPlay()
 	{
-		//¿©±â¼­ »ç¸é ¾Ö´Ï Ä³¸¯ÅÍ°¡ ¿ô°Å³ª °¨»çÇÕ´Ï´Ù ÇÏ±â
+		//ï¿½ï¿½ï¿½â¼­ ï¿½ï¿½ï¿½ ï¿½Ö´ï¿½ Ä³ï¿½ï¿½ï¿½Í°ï¿½ ï¿½ï¿½ï¿½Å³ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Õ´Ï´ï¿½ ï¿½Ï±ï¿½
 	}
 
 	protected override bool OnIsEnter()
@@ -48,8 +58,9 @@ public class StoreMap : MapSetting
 	}
 	public override void RepeatOnEnter()
 	{
-		//À½¼º ³ª¿À°í ¿ô°Ô ÇÏ±â
-	}
+        //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï±ï¿½
+        SoundManager.Instance.Play(AudioType.Voice, _welcomeAudios[Random.Range(0, _welcomeAudios.Count)]);
+    }
 	private void RandomObjs()
 	{
 		for (int i = 0; i < _confirmationObjectCount; i++)
@@ -67,17 +78,7 @@ public class StoreMap : MapSetting
 			_itemObjects.RemoveAt(rand);
 		}
 	}
-	private void GroundOut(Collider col)
-	{
-		if (((1 << col.gameObject.layer) & _layerMask) > 0)
-		{
-			Debug.Log("?");
-			col.GetComponent<CharacterController>().enabled = false;
-			col.transform.localPosition = new Vector3(121.6f, 0,-13.4f);
-			col.GetComponent<IDmgAble>().Damage(5f);
-			col.GetComponent<CharacterController>().enabled = true;
-		}
-	}
+
 }
 
 [Serializable]
@@ -85,6 +86,5 @@ public struct ItemObject
 {
 	public StoreObjs ObjsType;
 	public GameObject obj;
-	public int cost;
 	public bool isDelete;
 }

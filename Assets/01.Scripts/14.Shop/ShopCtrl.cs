@@ -5,8 +5,6 @@ using UnityEngine;
 [RequireComponent(typeof(CollisionCtrl))]
 public class ShopCtrl : MonoBehaviour
 {
-    [SerializeField]
-    private List<AudioClip> _welcomeAudios;
 
     [SerializeField]
     private List<string> _welcomeText;
@@ -37,9 +35,8 @@ public class ShopCtrl : MonoBehaviour
         if( ((1 <<collider.gameObject.layer) & _playerLayer) > 0)
         {
             Debug.Log("상점에 플레이어가 들어옴");
-            SoundManager.Instance.Play(AudioType.Voice, _welcomeAudios[Random.Range(0, _welcomeAudios.Count)]);
+            // SoundManager.Instance.Play(AudioType.Voice, _welcomeAudios[Random.Range(0, _welcomeAudios.Count)]);
             // TODO: 웰컴 텍스트 띄어주기
-            _player.GetPlayerComponent<PlayerEquipmentCtrl>().ShopEquipmentCallback += SpawnEquipment;
         }
     }
 
@@ -51,7 +48,6 @@ public class ShopCtrl : MonoBehaviour
             // TODO : 안녕히가세요
             //SoundManager.Instance.Play(AudioType.Voice, _welcomeAudios[Random.Range(0, _welcomeAudios.Count)]);
             // TODO: 웰컴 텍스트 띄어주기
-            _player.GetPlayerComponent<PlayerEquipmentCtrl>().ShopEquipmentCallback -= SpawnEquipment;
         }
     }
 
@@ -61,7 +57,7 @@ public class ShopCtrl : MonoBehaviour
         // TODO : 풀링
         BaseEquipment g = GameObject.Instantiate(equipment, Vector3.zero, Quaternion.identity, parent);
         // TODO: 감사합니다
-        SoundManager.Instance.Play(AudioType.Voice, _welcomeAudios[Random.Range(0, _welcomeAudios.Count)]);
+        // SoundManager.Instance.Play(AudioType.Voice, _welcomeAudios[Random.Range(0, _welcomeAudios.Count)]);
 
 
     }
