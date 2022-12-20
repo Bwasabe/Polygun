@@ -59,6 +59,7 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
 
         if (_type.Equals(ChronosType.UseEnter))
         {
+            _watchCover.DOLocalRotateQuaternion(Quaternion.Euler(_data.WatchOpenRotation, 0f, 0f), _data.WatchCoveredDuration);
             _isCanUse = false;
             DOTween.To(
                 () => _liftGammaGain.gamma.value,
@@ -70,6 +71,7 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
                 value => _liftGammaGain.gain.Override(value),
                 new Vector4(1f, 1f, 1f, 0f), _data.TweenDuration
             );
+            _parent.StartCoroutine(ChangePitch(1 / _data.TimeScaleValue));
             _parent.ParticleActive(true);
             _type = ChronosType.Use;
         }
@@ -98,10 +100,13 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
                 value => _liftGammaGain.gain.Override(value),
                 new Vector4(1f, 1f, 1f, 0f), _data.TweenDuration
             );
+            
             _watchCover.DOLocalRotateQuaternion(Quaternion.Euler(_data.WatchCoverRotation, 0f, 0f), _data.WatchCoveredDuration);
             _parent.ParticleActive(false);
             _data.RingParticle.SetActive(false);
             _type = ChronosType.Fill;
+
+            _parent.StartCoroutine(ChangePitch(1f));
         }
         if (_type.Equals(ChronosType.Fill))
         {
@@ -110,14 +115,30 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
             _data.TimeStopSlider.value += Time.deltaTime * _data.AddTimeStopDuration * GameManager.PlayerTimeScale;
             if (_data.TimeStopSlider.value >= _data.MinSliderValue && !_isCanUse)
             {
-                _watchCover.DOLocalRotateQuaternion(Quaternion.Euler(_data.WatchOpenRotation, 0f, 0f), _data.WatchCoveredDuration).OnComplete(() =>
-                {
                     _isCanUse = true;
                     _data.RingParticle.SetActive(true);
-                });
+                // _watchCover.DOLocalRotateQuaternion(Quaternion.Euler(_data.WatchOpenRotation, 0f, 0f), _data.WatchCoveredDuration).OnComplete(() =>
+                // {
+                // });
 
             }
         }
+    }
+
+    private IEnumerator ChangePitch(float value)
+    {
+        
+        float timer = 0f;
+        while(timer <= _data.PitchChangeDuration)
+        {
+            timer += Time.deltaTime;
+            SoundManager.Instance.SetAllSourcePitch(
+                Mathf.Lerp(
+                    SoundManager.Instance.GetPitch(AudioType.BGM), value, timer / _data.PitchChangeDuration
+            ));
+            yield return null;
+        }
+        timer = 0f;
     }
 }
 
@@ -171,5 +192,9 @@ public partial class ChronosData
     [SerializeField]
     private float _watchCoveredDuration = 0.3f;
     public float WatchCoveredDuration => _watchCoveredDuration;
+
+    [SerializeField]
+    private float _pitchChangeSmooth = 3f;
+    public float PitchChangeDuration => _pitchChangeSmooth;
 }
 

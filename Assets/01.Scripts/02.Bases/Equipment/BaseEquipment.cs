@@ -12,8 +12,10 @@ public abstract class BaseEquipment : MonoBehaviour, IPurchaseAble
     private float _height = 0.5f;
     [SerializeField]
     private int _price;
-    
     public int Price => _price;
+
+    [SerializeField]
+    private AudioClip _attackClip;
 
     [SerializeField]
     protected GameObject _particle;

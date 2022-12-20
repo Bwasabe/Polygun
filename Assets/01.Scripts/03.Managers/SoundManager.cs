@@ -11,6 +11,7 @@ public enum AudioType
     BGM,
     SFX,
     Voice,
+    IgnorePitch,
 
     Length
 }
@@ -37,11 +38,6 @@ public class SoundManager : MonoSingleton<SoundManager>
         base.Awake();
         Init();
         CallInitMethod();
-
-    }
-
-    private void Start()
-    {
     }
 
     private void Init()
@@ -114,6 +110,21 @@ public class SoundManager : MonoSingleton<SoundManager>
     public void SetPitch(AudioType type, float pitch)
     {
         _audioSources[(int)type].pitch = pitch;
+    }
+
+    public float GetPitch(AudioType type)
+    {
+        return _audioSources[(int)type].pitch;
+    }
+
+    public void SetAllSourcePitch(float pitch)
+    {
+        for (int i = 0; i < _audioSources.Length; ++i)
+        {
+            if (i == (int)AudioType.IgnorePitch) continue;
+
+            _audioSources[i].pitch = pitch;
+        }
     }
 
     public void AddAudio(string key, AudioClip clip)
