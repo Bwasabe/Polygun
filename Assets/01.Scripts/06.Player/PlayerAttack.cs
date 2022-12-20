@@ -59,7 +59,7 @@ public class PlayerAttack : BasePlayerSkillComponent
             _currentReloadCount--;
             UpdateReloadText();
         }
-        if(Input.GetKeyDown(_input.GetInput("RELOAD")))
+        if(Input.GetKeyDown(_input.GetInput("RELOAD")) && _currentReloadCount != ReloadCount)
         {
             _currentReloadCount = 0;
         }
