@@ -11,7 +11,6 @@ public enum AudioType
 {
     BGM,
     SFX,
-    Voice,
     IgnorePitch,
 
     Length
@@ -98,21 +97,21 @@ public class SoundManager : MonoSingleton<SoundManager>
         audioSource.Play();
     }
 
-    private void PlayVoice(AudioClip clip)
-    {
-        if(clip == null)
-        {
-            Debug.Log("Clip is Null");
-            return;
-        }
+    // private void PlayVoice(AudioClip clip)
+    // {
+    //     if(clip == null)
+    //     {
+    //         Debug.Log("Clip is Null");
+    //         return;
+    //     }
 
-        AudioSource audioSource = _audioSources[(int)AudioType.Voice];
-        if (audioSource.isPlaying)
-            audioSource.Stop();
+    //     AudioSource audioSource = _audioSources[(int)AudioType.Voice];
+    //     if (audioSource.isPlaying)
+    //         audioSource.Stop();
 
-        audioSource.clip = clip;
-        audioSource.Play();
-    }
+    //     audioSource.clip = clip;
+    //     audioSource.Play();
+    // }
 
     private void PlaySFX(AudioClip clip)
     {

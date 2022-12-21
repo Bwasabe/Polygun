@@ -3210,7 +3210,7 @@ MonoBehaviour:
       _defaultSpeed: 18
       _defaultAttackRate: 3
       baseSlider: {fileID: 0}
-    _amonProjectileSound: {fileID: 0}
+    _amonProjectileSound: {fileID: 8300000, guid: fda12e12571da4de2a95ecc163fe9ace, type: 3}
     _amonProjectileParticle: {fileID: 0}
     _amonProjectileAttackPos: {fileID: 6761338052427737756}
     _projectileBulletSpeed: 60
