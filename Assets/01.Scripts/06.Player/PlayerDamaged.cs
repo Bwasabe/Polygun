@@ -19,7 +19,7 @@ public class PlayerDamaged : BasePlayerComponent, IDmgAble
     private int _invincibleCount = 2;
     [SerializeField]
     private HpText _hpText;
-
+    [SerializeField]
     private Color _deadVignetteColor;
     [SerializeField]
     private float _deadColorDuration = 0.2f;
@@ -88,6 +88,7 @@ public class PlayerDamaged : BasePlayerComponent, IDmgAble
 
     private void Die()
     {
+        _vignette.color.Override(_deadVignetteColor);
         _player.CurrentState = PLAYER_STATE.DIE;
         Time.timeScale = 0.1f;
         DOTween.To(

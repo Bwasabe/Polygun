@@ -33,11 +33,11 @@ public class SoundManager : MonoSingleton<SoundManager>
     private AudioSource[] _audioSources = new AudioSource[(int)AudioType.Length];
 
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
         Init();
         CallInitMethod();
+        Play(AudioType.BGM, _bgms[0]);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
@@ -128,11 +128,7 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
-        try
-        {
-            Play(AudioType.BGM,_bgmDict[scene.name]);
-        }
-        catch{}
+        Play(AudioType.BGM,_bgmDict[scene.name]);
 
         // for (int i = 0; i < (int)BuildingScenes.Length; i++)
         // {

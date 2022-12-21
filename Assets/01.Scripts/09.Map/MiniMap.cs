@@ -27,9 +27,8 @@ public class MiniMap : MonoSingleton<MiniMap>
 
 	[SerializeField]
 	RectTransform playerimage;
-	protected override void Awake()
+	private void Awake()
 	{
-        base.Awake();
         parentRect = parent.GetComponent<RectTransform>();
 	}
 

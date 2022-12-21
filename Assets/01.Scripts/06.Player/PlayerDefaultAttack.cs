@@ -12,6 +12,7 @@ public class PlayerDefaultAttack : BaseSkill, ISkillInitAble
 
     public override void Skill()
     {
+        Debug.Log(ObjectPool.Instance);
         GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.PlayerBullet);
         obj.transform.position = _attack.AttackPos.position;
         obj.transform.rotation = _attack.transform.localRotation;
