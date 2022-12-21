@@ -57,6 +57,7 @@ public class AmonShockwave : BT_Node
         {
             // TODO: 쇼크 웨이브 소환
             // TODO: 카메라 쉐이크
+            SoundManager.Instance.Play(AudioType.SFX, _data.ShockwaveSound);
             CameraManager.Instance.CameraShake();
             // Debug.Break();
             _data.CC.enabled = true;
@@ -168,4 +169,9 @@ public partial class AmonData
     [SerializeField]
     private AmonFire _shockwaveFirePrefab;
     public AmonFire ShockwaveFirePrefab => _shockwaveFirePrefab;
+
+    [SerializeField]
+    private AudioClip _shockwaveSound;
+    public AudioClip ShockwaveSound => _shockwaveSound;
+
 }

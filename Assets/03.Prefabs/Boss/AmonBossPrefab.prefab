@@ -3236,6 +3236,7 @@ MonoBehaviour:
     _meleeBulletSpeed: 45
     _meleeBulletDamage: 10
     _meleeBulletAttackDelay: 0.5
+    _amonMeleeBulletSound: {fileID: 8300000, guid: bd5b12716d1a342849735322365e5b20, type: 3}
     _projectileAttackDelay: 1
     _projectileAttackEndDelay: 1
     _rotateSmooth: 8
@@ -3246,6 +3247,7 @@ MonoBehaviour:
     _shockwaveStartDistance: 1
     _shockwaveDuration: 5
     _shockwaveFirePrefab: {fileID: 0}
+    _shockwaveSound: {fileID: 8300000, guid: f5a962cf7a0c349e8a20af1cba03d5ed, type: 3}
 --- !u!114 &6761338053608037759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3262,6 +3264,7 @@ MonoBehaviour:
   _hitColor: {r: 0.75686276, g: 0.05490196, b: 0, a: 1}
   CoinObject: {fileID: 0}
   CoinPercent: 0
+  _hitSound: {fileID: 0}
 --- !u!143 &6761338053608037634
 CharacterController:
   m_ObjectHideFlags: 0

@@ -42,7 +42,7 @@ MeshCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2857569329268093009}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 4
   m_Convex: 1
@@ -75,6 +75,8 @@ MonoBehaviour:
   _type: 0
   _flash: {fileID: 0}
   _isReturnObject: 0
+  _isTriggerBullet: 1
+  _hitSound: {fileID: 0}
 --- !u!1 &5786075610037106735
 GameObject:
   m_ObjectHideFlags: 0

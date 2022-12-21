@@ -95,4 +95,8 @@ public partial class AmonData
     [SerializeField]
     private float _meleeBulletAttackDelay = 1f;
     public float MeleeBulletAttackDelay => _meleeBulletAttackDelay;
+
+    [SerializeField]
+    private AudioClip _amonMeleeBulletSound;
+    public AudioClip AmonMeleeBulletSound => _amonMeleeBulletSound;
 }

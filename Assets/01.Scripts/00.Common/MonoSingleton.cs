@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
 {
@@ -30,9 +31,14 @@ public class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T>
             }
         }
     }
-    private void Start() {
+    private void Start()
+    {
         _shuttingDown = false;
-
+        SceneManager.sceneUnloaded += OnSceneUnloaded;
+    }
+    private void OnSceneUnloaded(Scene scene)
+    {
+        _instance = null;
     }
     // private void OnDestroy()
     // {

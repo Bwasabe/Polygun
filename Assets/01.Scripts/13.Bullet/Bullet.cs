@@ -22,6 +22,8 @@ public class Bullet : MonoBehaviour
     [SerializeField]
     private bool _isReturnObject = true;
     [SerializeField]
+    private bool _isTriggerBullet = false;
+    [SerializeField]
     private AudioClip _hitSound;
 
     public float Damage { get; set; }
@@ -49,6 +51,9 @@ public class Bullet : MonoBehaviour
     {
         _particleSystem = GetComponent<ParticleSystem>();
         _collisionCtrl = GetComponent<CollisionCtrl>();
+        if(_isTriggerBullet)
+        _collisionCtrl.ColliderEnterEvent += TriggerHit;
+        else
         _collisionCtrl.CollisionEnterEvent += Hit;
     }
 
@@ -103,7 +108,28 @@ public class Bullet : MonoBehaviour
             }
             else
             {
-                //SoundManager.Instance.Play(AudioType.SFX, _hitSound);
+                SoundManager.Instance.Play(AudioType.SFX, _hitSound);
+            }
+        }
+        if(_isReturnObject)
+            ObjectPool.Instance.ReturnObject(_type, this.gameObject);
+    }
+
+    protected virtual void TriggerHit(Collider other)
+    {
+        // TODO : 사운드
+        if (((1 << other.gameObject.layer) & HitLayer) > 0)
+        {
+            other.transform.GetComponent<IDmgAble>()?.Damage(Damage);
+            GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.PopUpDamage);
+            obj.GetComponent<DamagePopUp>().DamageText((int)Damage, transform.position);
+            if(IgnorePitch)
+            {
+                SoundManager.Instance.Play(AudioType.IgnorePitch, _hitSound);
+            }
+            else
+            {
+                SoundManager.Instance.Play(AudioType.SFX, _hitSound);
             }
         }
         if(_isReturnObject)
