@@ -12,7 +12,7 @@ public class LobyButton : Btn
     public override void Interaction()
     {
         _canvas.SetActive(false);
+		SceneManager.LoadScene("UIScene", LoadSceneMode.Additive);
 		_palyDirect.Play();
-		// SceneManager.LoadScene("UIScene", LoadSceneMode.Additive);
 	}
 }

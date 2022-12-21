@@ -59956,7 +59956,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _audioMixer: {fileID: 24100000, guid: 7a44bdd5f2da7bc48b3bf0c9633c1d80, type: 2}
-  _bgms: []
+  _bgms:
+  - {fileID: 8300000, guid: 34c045d6fca7ff542804b0c77e0b57e5, type: 3}
+  - {fileID: 8300000, guid: 99719f6616c2a814a995bb11c73591da, type: 3}
 --- !u!4 &1647546224
 Transform:
   m_ObjectHideFlags: 0
