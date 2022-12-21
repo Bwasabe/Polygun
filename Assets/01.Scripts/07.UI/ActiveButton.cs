@@ -5,13 +5,13 @@ using UnityEngine;
 public class ActiveButton : MonoBehaviour
 {
     [SerializeField]
-    private GameObject _falseObejct;
+    private List<GameObject> _falseObejct;
     [SerializeField]
-    private GameObject _trueObject;
+    private List<GameObject> _trueObject;
 
     public void ChangeObject()
     {
-        _falseObejct.SetActive(false);
-        _trueObject.SetActive(true);
+        _falseObejct.ForEach(x => x?.SetActive(false));
+        _trueObject.ForEach(x => x?.SetActive(true));
     }
 }
