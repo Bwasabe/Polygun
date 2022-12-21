@@ -1,10 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
-using UnityEditor.Search;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class Melee_Attack : BT_Node
 {
@@ -41,11 +37,11 @@ public class Melee_Attack : BT_Node
 		if ((_collisionFlag & CollisionFlags.Below) != 0)
 		{
 			dir.y = 0f;
-			Debug.Log("¶¥¿¡ ´êÀ½");
+			Debug.Log("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 		}
 		else
 		{
-			Debug.Log("Áß·Â Àû¿ë");
+			Debug.Log("ï¿½ß·ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			dir.y = Physics.gravity.y * Time.deltaTime;
 		}
 
