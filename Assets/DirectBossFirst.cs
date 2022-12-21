@@ -33,5 +33,8 @@ public class DirectBossFirst : MonoBehaviour
 		_cine.gameObject.SetActive(false);
 		bt.IsStop = false;
 		obj.SetActive(true);
+		obj.GetComponent<CharacterController>().enabled = false;
+		obj.transform.localPosition = new Vector3(4.39f, 8, 0f);
+		obj.GetComponent<CharacterController>().enabled = true;
 	}
 }

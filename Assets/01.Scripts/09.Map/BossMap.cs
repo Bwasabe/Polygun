@@ -20,6 +20,8 @@ public class BossMap : MapSetting
 
 	[SerializeField]
 	private AudioClip _bgm;
+	[SerializeField]
+	private AudioClip _endbgm;
 	//private GameObject bossObj;
 	public GameObject Boss => bossObject;
 	protected override void OnStart()
@@ -46,7 +48,10 @@ public class BossMap : MapSetting
 		_playableDirect.playableAsset = _clip[1];
 		_playableDirect.Play();
 	}
-
+	public void BGMStart()
+	{
+		SoundManager.Instance.Play(AudioType.BGM, _endbgm);
+	}
 	public void ReturnLobby()
 	{
 		SceneManager.LoadScene("Lobby");
@@ -58,5 +63,6 @@ public class BossMap : MapSetting
 		obj.SetActive(false);
 		GameObject canvas = GameObject.Find("PlayerCanvas");
 		canvas.SetActive(false);
+		SoundManager.Instance.StopBGM();
 	}
 }

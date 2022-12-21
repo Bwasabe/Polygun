@@ -143,8 +143,13 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         _typeMethod[type].Invoke(this, new object[] { clip });
     }
-
-    public void SetPitch(AudioType type, float pitch)
+	public void StopBGM()
+	{
+		AudioSource audioSource = _audioSources[(int)AudioType.BGM];
+		if (audioSource.isPlaying)
+			audioSource.Stop();
+	}
+	public void SetPitch(AudioType type, float pitch)
     {
         _audioSources[(int)type].pitch = pitch;
     }

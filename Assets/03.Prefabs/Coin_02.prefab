@@ -144,3 +144,5 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 256
+  _price: 0
+  _coinClip: {fileID: 8300000, guid: 17a6b4d2671934970bcb874b930bcacd, type: 3}
