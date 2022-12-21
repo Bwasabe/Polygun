@@ -2155,7 +2155,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8874478461235556364}
   m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
-  m_LocalPosition: {x: -6.4, y: 88.8, z: -17.3}
+  m_LocalPosition: {x: -6.4, y: 77.2, z: -17.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2173,7 +2173,7 @@ Light:
   serializedVersion: 10
   m_Type: 1
   m_Shape: 0
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.6182809, b: 0, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -2318,6 +2318,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: cf26135f246269640934d00157b88f99, type: 2}
   - {fileID: 11400000, guid: 705cb33e05bd8e64ea38edd8c0ac6e37, type: 2}
   _bgm: {fileID: 8300000, guid: b32a91e272d67084f8bb7703708bbcdb, type: 3}
+  _endbgm: {fileID: 8300000, guid: 0167ab71134924b40a6bc98bb6f699ea, type: 3}
 --- !u!320 &3071203974781404071
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -2327,7 +2328,7 @@ PlayableDirector:
   m_GameObject: {fileID: 8979372363495797579}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: cf26135f246269640934d00157b88f99, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 705cb33e05bd8e64ea38edd8c0ac6e37, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -2394,6 +2395,7 @@ MonoBehaviour:
     m_Signals:
     - {fileID: 11400000, guid: cba01ead0e4ea544687eff3a73e41a29, type: 2}
     - {fileID: 11400000, guid: 0775ff881f6d7124d9a2cd0783e1820f, type: 2}
+    - {fileID: 11400000, guid: 58ee719c48a40b24492cea5f6bf0b4f8, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
@@ -2414,6 +2416,20 @@ MonoBehaviour:
         - m_Target: {fileID: 8979372363495797578}
           m_TargetAssemblyTypeName: BossMap, Assembly-CSharp
           m_MethodName: BossStart
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 8979372363495797578}
+          m_TargetAssemblyTypeName: BossMap, Assembly-CSharp
+          m_MethodName: BGMStart
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
