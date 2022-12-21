@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.Rendering.Universal;
 using UnityEngine.UI;
 using DG.Tweening;
@@ -37,7 +36,7 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
 
         // _data.TimeStopSlider.maxValue = _data.TimeStopCoolTime;
 
-        if (!_data.GlobalVolume.profile.TryGet(out _liftGammaGain)) throw new System.Exception("LiftGamma is None or Volume is None");
+        if (!GameManager.Instance.GlobalVolume.profile.TryGet(out _liftGammaGain)) throw new System.Exception("LiftGamma is None or Volume is None");
     }
 
     public override void Skill()
@@ -64,12 +63,12 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
             DOTween.To(
                 () => _liftGammaGain.gamma.value,
                 value => _liftGammaGain.gamma.Override(value),
-                new Vector4(1f, 1f, 1f, 0f), _data.TweenDuration
+                _data.GammaValue, _data.TweenDuration
             );
             DOTween.To(
                 () => _liftGammaGain.gain.value,
                 value => _liftGammaGain.gain.Override(value),
-                new Vector4(1f, 1f, 1f, 0f), _data.TweenDuration
+                _data.GainValue, _data.TweenDuration
             );
             _parent.StartCoroutine(ChangePitch(1 / _data.TimeScaleValue));
             _parent.ParticleActive(true);
@@ -159,8 +158,6 @@ public partial class ChronosData
     [SerializeField]
     private Slider _timeStopSlider;
     public Slider TimeStopSlider => _timeStopSlider;
-
-    public Volume GlobalVolume { get; set; }
 
     [SerializeField]
     private Vector4 _gammaValue = new Vector4(1f, 0.9f, 0.7f, 0);

@@ -3229,7 +3229,7 @@ MonoBehaviour:
     _meleeBulletPrefab: {fileID: 0}
     _hitLayer:
       serializedVersion: 2
-      m_Bits: 320
+      m_Bits: 256
     _fireDelay: 0.5
     _fireWalkPrefab: {fileID: 0}
     _fireWalkDuration: 2
