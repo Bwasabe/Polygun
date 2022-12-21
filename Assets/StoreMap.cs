@@ -59,7 +59,7 @@ public class StoreMap : MapSetting
 	public override void RepeatOnEnter()
 	{
         //���� ������ ���� �ϱ�
-        SoundManager.Instance.Play(AudioType.Voice, _welcomeAudios[Random.Range(0, _welcomeAudios.Count)]);
+        //SoundManager.Instance.Play(AudioType.Voice, _welcomeAudios[Random.Range(0, _welcomeAudios.Count)]);
     }
 	private void RandomObjs()
 	{

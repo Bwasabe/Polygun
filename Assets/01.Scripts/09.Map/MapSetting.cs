@@ -20,7 +20,7 @@ public class MapSetting : MonoBehaviour
 	private bool isEnd;
 	private bool isEnter;
 	private MapState mapState;
-	protected MapState MapState { get { return mapState; } set { if (MapState.End == value) { isEnd = true; OnExit(); map.DoorOpen(); } else mapState = value; } }
+	protected MapState MapState { get { return mapState; } set { if (MapState.End == value) { isEnd = true; OnExit(); } else mapState = value; } }
 
 	private void Start()
 	{
@@ -51,7 +51,7 @@ public class MapSetting : MonoBehaviour
 
     protected virtual void OnExit()
 	{
-
+		map.DoorOpen();
 	}
     public virtual void RepeatOnEnter()
 	{
