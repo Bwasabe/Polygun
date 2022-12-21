@@ -96,7 +96,7 @@ public class PlayerDamaged : BasePlayerComponent, IDmgAble
                 _vignetteIntensity, _deadColorDuration
         ).SetLoops(2, LoopType.Yoyo).OnComplete(()=>{
             Time.timeScale = 1f;
-            SceneManager.LoadScene(BuildingScenes.Lobby.ToString());
+            SceneManager.LoadScene(BuildingScenes.Action.ToString());
         });
         this.gameObject.SetActive(false);
     }
