@@ -103,7 +103,7 @@ public class Bullet : MonoBehaviour
             }
             else
             {
-                SoundManager.Instance.Play(AudioType.SFX, _hitSound);
+                //SoundManager.Instance.Play(AudioType.SFX, _hitSound);
             }
         }
         if(_isReturnObject)

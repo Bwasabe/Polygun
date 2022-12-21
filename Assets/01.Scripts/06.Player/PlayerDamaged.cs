@@ -18,6 +18,8 @@ public class PlayerDamaged : BasePlayerComponent, IDmgAble
     [SerializeField]
     private int _invincibleCount = 2;
     [SerializeField]
+    private HpText _hpText;
+
     private Color _deadVignetteColor;
     [SerializeField]
     private float _deadColorDuration = 0.2f;
@@ -46,7 +48,9 @@ public class PlayerDamaged : BasePlayerComponent, IDmgAble
             return;
 
         _player.PlayerStat.Damaged(damage);
-        if (_player.PlayerStat.HP <= 0)
+        _hpText.SetHp();
+
+		if (_player.PlayerStat.HP <= 0)
         {
             Die();
         }

@@ -11604,7 +11604,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sinCycle: 1.5
   _height: 0.5
-  _price: 0
+  _price: 15
+  _attackClip: {fileID: 0}
   _particle: {fileID: 5325251699888880153}
   _data:
     _reloadCount: 16
@@ -11615,6 +11616,8 @@ MonoBehaviour:
     _attackCoolTime: 0.1
     _lastAttackCoolTime: 0.4
     _lastAttackIndex: 5
+    _smallAttackSound: {fileID: 0}
+    _bigAttackSound: {fileID: 0}
     _ringParticle: {fileID: 5325251698529772668}
     _addTimeStopDuration: 1
     _minTimeStopDuration: 2
@@ -11627,6 +11630,7 @@ MonoBehaviour:
     _watchCoverRotation: -95
     _watchOpenRotation: 30
     _watchCoveredDuration: 0.3
+    _pitchChangeSmooth: 3
 --- !u!135 &5325251698631418679
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -30980,7 +30984,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -31033,7 +31037,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startSizeZ:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 1
       maxCurve:
@@ -31086,7 +31090,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationX:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:
@@ -31139,7 +31143,7 @@ ParticleSystem:
         m_RotationOrder: 4
     startRotationY:
       serializedVersion: 2
-      minMaxState: 0
+      minMaxState: 3
       scalar: 1
       minScalar: 0
       maxCurve:

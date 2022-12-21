@@ -55,7 +55,7 @@ public class StoreMap : MapSetting
         if (_target != null)
         {
             Vector3 lookDir = _target.position - _muryotaisu.position;
-            lookDir.x = lookDir.z = 0f;
+            lookDir.y = 0f;
             _muryotaisu.rotation = Quaternion.LookRotation(lookDir * Time.deltaTime * _lookSmooth);
         }
 
@@ -75,16 +75,17 @@ public class StoreMap : MapSetting
         // TODO: 사운드
         _target = GameManager.Instance.Player.transform;
         //���� ������ ���� �ϱ�
-        SoundManager.Instance.Play(AudioType.Voice, _welcomeAudios[Random.Range(0, _welcomeAudios.Count)]);
+        //SoundManager.Instance.Play(AudioType.Voice, _welcomeAudios[Random.Range(0, _welcomeAudios.Count)]);
     }
     private void SpawnItems()
     {
         for (int i = 0; i < _itemObjects.Count; ++i)
         {
+            Debug.Log(">");
             Vector3 storePos = _storeObj[i].position;
             storePos.y += _height;
 
-            GameObject obj = Instantiate(_itemObjects[i].obj, storePos, Quaternion.identity);
+            GameObject obj = Instantiate(_itemObjects[i].obj, storePos, Quaternion.identity, transform);
         }
 
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public enum FADECHILDS
 {
@@ -36,6 +37,8 @@ public class FadeParent : MonoBehaviour
         Vector2 topAnchorPos = _topBar.anchoredPosition;
         topAnchorPos.y = _hideBarY;
         _topBar.anchoredPosition = topAnchorPos;
+
+        SceneManager.sceneLoaded += (a, b) => { Fade(0f, 1f); };
     }
     public void ShowBar(bool isShow, float duration = 1f)
     {

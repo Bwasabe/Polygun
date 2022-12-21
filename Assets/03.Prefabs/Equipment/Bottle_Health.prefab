@@ -4970,7 +4970,7 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 256
-  _price: 0
+  _price: 5
   _hp: 15
   _returnObject: {fileID: 1000012970591572}
 --- !u!54 &1916637839048901832
