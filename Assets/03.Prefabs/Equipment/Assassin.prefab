@@ -52263,8 +52263,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _sinCycle: 1.5
   _height: 0.5
+  _price: 10
+  _attackClip: {fileID: 0}
   _particle: {fileID: 3905018281818281005}
   _data:
+    _reloadCount: -1
+    _reloadDuration: 0
     _attackPrefabList:
     - {fileID: 6403273339774999349, guid: bfaf932f44308484ba0ec8ec059948cc, type: 3}
     - {fileID: 5786075611093392941, guid: b9b135c3897a2b84a9439e5c10d25921, type: 3}
@@ -52286,12 +52290,14 @@ MonoBehaviour:
     _hitLayer:
       serializedVersion: 2
       m_Bits: 128
+    _attackSound: {fileID: 0}
     _starFall: {fileID: 3905018282573435981}
     _subSkillDistance: 30
     _subSkillDuration: 1
     _subSkillCoolTime: 1
     _teleportParticle: {fileID: 1360494733901356967, guid: a8c45002b604091479327b6597e327ca, type: 3}
     _teleportParticleDuration: 0.5
+    _teleportSound: {fileID: 0}
 --- !u!1 &3905018282310663027
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.SceneManagement;
 
 public class FirstTimeLinePlayerScript : MonoBehaviour
@@ -10,6 +11,14 @@ public class FirstTimeLinePlayerScript : MonoBehaviour
 
 	[SerializeField]
 	private Animator ani;
+
+	[SerializeField]
+	private GameObject canvasObj;
+	[SerializeField]
+	private PlayableDirector _playableDirector;
+
+	[SerializeField]
+	private float _fadeTime;
 	public void PlayerActive()
 	{
 		this.transform.parent = obj.transform;
@@ -20,9 +29,24 @@ public class FirstTimeLinePlayerScript : MonoBehaviour
 	{
 		ani.SetTrigger("attack_02");
 	}
+	public void Fade()
+	{
+		Define.FadeParent.Fade(1, _fadeTime);
+	}
+	public void SetLobbyScene()
+	{
+		canvasObj.SetActive(true);
+		_playableDirector.Pause();
+	}
 
 	public void End()
 	{
-		SceneManager.LoadScene("Release");
+		Define.LoadingSceneName = BuildingScenes.Release.ToString();
+		SceneManager.LoadScene(BuildingScenes.LoadingScene.ToString());
+	}
+
+	public void SkipTimeline()
+	{
+		_playableDirector.time = 28.9833f;
 	}
 }

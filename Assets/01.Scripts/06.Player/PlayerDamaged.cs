@@ -10,6 +10,8 @@ public class PlayerDamaged : BasePlayerComponent, IDmgAble
     private float _invincibleTime = 0.4f;
     [SerializeField]
     private int _invincibleCount = 2;
+    [SerializeField]
+    private HpText _hpText;
 
     private MeshRenderer _model;
 
@@ -31,7 +33,9 @@ public class PlayerDamaged : BasePlayerComponent, IDmgAble
             return;
         
         _player.PlayerStat.Damaged(damage);
-        if (_player.PlayerStat.HP <= 0)
+        _hpText.SetHp();
+
+		if (_player.PlayerStat.HP <= 0)
         {
             Die();
         }
