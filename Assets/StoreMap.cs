@@ -86,6 +86,9 @@ public class StoreMap : MapSetting
             storePos.y += _height;
 
             GameObject obj = Instantiate(_itemObjects[i].obj, storePos, Quaternion.identity, transform);
+            if(_itemObjects[i].ObjsType.Equals(StoreObjs.MIDDLEHPHEAL) || _itemObjects[i].ObjsType.Equals(StoreObjs.SMALLHPHEAL))
+                obj.GetComponent<HealPortion>().IsShopPotion = true;
+
         }
 
     }
