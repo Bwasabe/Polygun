@@ -5,14 +5,15 @@ using UnityEngine;
 public class PlayerDefaultAttack : BaseSkill, ISkillInitAble
 {
     private PlayerAttack _attack;
-    public PlayerDefaultAttack(object parent) : base(null)
+    private AudioClip _clip;
+    public PlayerDefaultAttack(object parent, AudioClip _defaultClip) : base(null)
     {
         _attack = parent as PlayerAttack;
     }
 
     public override void Skill()
     {
-        Debug.Log(ObjectPool.Instance);
+        SoundManager.Instance.Play(AudioType.SFX, _clip);
         GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.PlayerBullet);
         obj.transform.position = _attack.AttackPos.position;
         obj.transform.rotation = _attack.transform.localRotation;

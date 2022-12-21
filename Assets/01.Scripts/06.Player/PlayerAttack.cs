@@ -23,6 +23,8 @@ public class PlayerAttack : BasePlayerSkillComponent
     private Image _reloadImage;
     [SerializeField]
     private TMPro.TMP_Text _reloadText;
+    [SerializeField]
+    private AudioClip _defaultAttackClip;
 
 
     public int ReloadCount { get; private set; }
@@ -42,7 +44,7 @@ public class PlayerAttack : BasePlayerSkillComponent
         base.Start();
         _playerStat = _player.PlayerStat;
         if (_skill == null)
-            _player.GetPlayerComponent<PlayerSkillCtrl>().AddPlayerSkill<PlayerAttack>(new PlayerDefaultAttack(this));
+            _player.GetPlayerComponent<PlayerSkillCtrl>().AddPlayerSkill<PlayerAttack>(new PlayerDefaultAttack(this, _defaultAttackClip));
     }
     private void Update()
     {
