@@ -1,24 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!243 &-5890845032042610737
-AudioMixerGroupController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Voice
-  m_AudioMixer: {fileID: 24100000}
-  m_GroupID: 0e336c708107ddd4795403268b37e756
-  m_Children: []
-  m_Volume: c51108f67ab60e448bf713e83c9d8729
-  m_Pitch: f52cccbd7c680db43bceea7829b00e5b
-  m_Send: 00000000000000000000000000000000
-  m_Effects:
-  - {fileID: 6648503889868289053}
-  m_UserColorIndex: 0
-  m_Mute: 0
-  m_Solo: 0
-  m_BypassEffects: 0
 --- !u!243 &-4554015043010504454
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -76,14 +57,11 @@ AudioMixerController:
     name: Master
   - guid: e2a37ea6e83c6494f865849be1e57628
     name: SFX
-  - guid: c51108f67ab60e448bf713e83c9d8729
-    name: Voice
   m_AudioMixerGroupViews:
   - guids:
     - 2f4130c6e1129f0438420f2781cf3ce7
     - 0f5cb4c2b51d422478f6d821573599e3
     - df0bcfc55fb9fd846b6a3c226bb24b33
-    - 0e336c708107ddd4795403268b37e756
     - 0b66dd72c7210fe4e88cd86463e26f40
     name: View
   m_CurrentViewIndex: 0
@@ -100,7 +78,6 @@ AudioMixerGroupController:
   m_Children:
   - {fileID: 5837178529293105384}
   - {fileID: 8007413559486359607}
-  - {fileID: -5890845032042610737}
   - {fileID: -4554015043010504454}
   m_Volume: 55bc9e38ff72dc648b96ee3d9871da04
   m_Pitch: eac64c1a27141bb4d97485252fcb2033
@@ -183,20 +160,6 @@ AudioMixerGroupController:
   m_Mute: 0
   m_Solo: 0
   m_BypassEffects: 0
---- !u!244 &6648503889868289053
-AudioMixerEffectController:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: 
-  m_EffectID: a2034b38ba08ecb4498b0d81e58066d8
-  m_EffectName: Attenuation
-  m_MixLevel: a1eeb8aa347d5484798b2aa6b966d86a
-  m_Parameters: []
-  m_SendTarget: {fileID: 0}
-  m_EnableWetMix: 0
-  m_Bypass: 0
 --- !u!243 &8007413559486359607
 AudioMixerGroupController:
   m_ObjectHideFlags: 0

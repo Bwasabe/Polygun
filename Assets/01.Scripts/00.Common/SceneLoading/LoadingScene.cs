@@ -24,12 +24,15 @@ public class LoadingScene : MonoBehaviour
     {
         yield return null;
         AsyncOperation operation = SceneManager.LoadSceneAsync(Define.LoadingSceneName);
-        while (!operation.isDone)
+        operation.allowSceneActivation = false;
+        while (operation.progress < 0.9f)
         {
             _slider.value = operation.progress;
             _text.text = string.Format("{0}%", (int)(operation.progress * 100f));
             yield return null;
+            Debug.Log(operation.progress);
         }
+        Debug.Log("끝");
         // while (_timer <= 0.99f)
         // {
         //     _timer += Time.deltaTime;
@@ -43,10 +46,11 @@ public class LoadingScene : MonoBehaviour
         // }
         _text.text = "100%";
         yield return WaitForSeconds(0.5f);
-
         if (Define.LoadingSceneName.Equals("Release"))
         {
+            Debug.Log("로딩씬 ");
             SceneManager.LoadScene("UIScene", LoadSceneMode.Additive);
         }
+        operation.allowSceneActivation = true;
     }
 }
