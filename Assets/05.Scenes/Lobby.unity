@@ -1247,7 +1247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3de7010f37caf7e4a80a6847cf925646, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadSceneText: Action
+  loadSceneText: Release
 --- !u!1 &2107867546
 GameObject:
   m_ObjectHideFlags: 0

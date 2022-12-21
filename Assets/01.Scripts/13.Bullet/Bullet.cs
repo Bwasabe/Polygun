@@ -106,6 +106,7 @@ public class Bullet : MonoBehaviour
                 SoundManager.Instance.Play(AudioType.SFX, _hitSound);
             }
         }
-        ObjectPool.Instance.ReturnObject(_type, this.gameObject);
+        if(_isReturnObject)
+            ObjectPool.Instance.ReturnObject(_type, this.gameObject);
     }
 }

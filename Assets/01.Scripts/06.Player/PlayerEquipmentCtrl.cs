@@ -48,7 +48,6 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
         if (_equipmentList[_currentEquipmentIndex] != null)
         {
             // 아이템 드롭하는 것
-            // TODO : 풀링
             _equipmentList[_currentEquipmentIndex].transform.SetParent(null);
             _equipmentList[_currentEquipmentIndex].IsEquip = false;
             _equipmentList[_currentEquipmentIndex].gameObject.SetActive(false);
@@ -67,7 +66,7 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
 
     }
 
-    // // TODO: 장비가 바뀌는 UI
+    // : 나중에 장비가 바뀌는 UI
     // private void ChangeEquipment()
     // {
     //     _currentEquipmentIndex = (_currentEquipmentIndex + 1) % _equipmentList.Count;

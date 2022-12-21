@@ -72,6 +72,17 @@ public class SoundManager : MonoSingleton<SoundManager>
         }
     }
 
+    private void PlayIgnorePitch(AudioClip clip)
+    {
+        if(clip == null)
+        {
+            Debug.Log("Clip is Null");
+            return;
+        }
+        AudioSource audioSource = _audioSources[(int)AudioType.IgnorePitch];
+        audioSource.PlayOneShot(clip);
+    }
+
     private void PlayBGM(AudioClip clip)
     {
         if(clip == null)
@@ -117,8 +128,12 @@ public class SoundManager : MonoSingleton<SoundManager>
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode loadMode)
     {
-        Play(AudioType.BGM,_bgmDict[scene.name]);
-        
+        try
+        {
+            Play(AudioType.BGM,_bgmDict[scene.name]);
+        }
+        catch{}
+
         // for (int i = 0; i < (int)BuildingScenes.Length; i++)
         // {
         //     if (scene.name.Equals((BuildingScenes)i))

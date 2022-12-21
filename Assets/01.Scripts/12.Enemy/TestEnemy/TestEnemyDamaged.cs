@@ -11,6 +11,9 @@ public class TestEnemyDamaged : BaseEnemyDamaged
         _testEnemy = GetComponent<TestEnemy>();
         base.Start();
     }
+    protected override void Die()
+    {
+    }
     protected override void RegisterStat()
     {
         _stat = _testEnemy._unitStat;
