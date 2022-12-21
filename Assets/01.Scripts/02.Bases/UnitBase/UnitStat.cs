@@ -35,7 +35,7 @@ public class UnitStat
         get { return _hp; }
         set
         {
-            _hp = Mathf.Clamp(value, 0, _defaultHp);
+            _hp = Mathf.Clamp(_hp+value, 0, _defaultHp);
         }
     }
 
