@@ -52290,14 +52290,14 @@ MonoBehaviour:
     _hitLayer:
       serializedVersion: 2
       m_Bits: 128
-    _attackSound: {fileID: 0}
+    _attackSound: {fileID: 8300000, guid: 2a5e90752d2d74797a1a13d3858888b5, type: 3}
     _starFall: {fileID: 3905018282573435981}
     _subSkillDistance: 30
     _subSkillDuration: 1
     _subSkillCoolTime: 1
     _teleportParticle: {fileID: 1360494733901356967, guid: a8c45002b604091479327b6597e327ca, type: 3}
     _teleportParticleDuration: 0.5
-    _teleportSound: {fileID: 0}
+    _teleportSound: {fileID: 8300000, guid: fdb5c99b77c90416f97318ccb18bd0f4, type: 3}
 --- !u!1 &3905018282310663027
 GameObject:
   m_ObjectHideFlags: 0

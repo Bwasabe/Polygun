@@ -540,6 +540,8 @@ MonoBehaviour:
     _playerLayerMask:
       serializedVersion: 2
       m_Bits: 256
+    boomClip: {fileID: 8300000, guid: 607b2014152584b4bb1e87c87ac6c1af, type: 3}
+    boomStartClip: {fileID: 8300000, guid: da396a16a7f24f64cbb0054f5a56b46a, type: 3}
     _groundLayer:
       serializedVersion: 2
       m_Bits: 64

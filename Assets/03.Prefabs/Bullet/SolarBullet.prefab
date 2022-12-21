@@ -48342,6 +48342,7 @@ MonoBehaviour:
   _type: 9
   _flash: {fileID: 0}
   _isReturnObject: 1
+  _hitSound: {fileID: 8300000, guid: 684f631f28ca846e19443536eba3b005, type: 3}
   _groundLayer:
     serializedVersion: 2
     m_Bits: 64

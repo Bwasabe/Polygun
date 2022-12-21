@@ -20,10 +20,12 @@ public class BoomEnemyAttack : BT_Node
 	{
 		base.OnEnter();
 		_animator.SetTrigger("attack");
+		SoundManager.Instance.Play(AudioType.SFX, _data.boomStartClip);
 	}
 
 	public void EndAttackAnimation()
 	{
+		SoundManager.Instance.Play(AudioType.SFX, _data.boomClip);
 		Collider[] hitColider = Physics.OverlapSphere(this._tree.transform.position, _data.Radius, _data.PlayerLayerMask);
 		if (hitColider.Length > 0)
 			hitColider[0]?.GetComponent<IDmgAble>().Damage(_data.Stat.DamageStat);
@@ -38,6 +40,9 @@ public partial class BoomEnemyData
 	private float _radius;
 	[SerializeField]
 	private LayerMask _playerLayerMask;
+
+	public AudioClip boomClip;
+	public AudioClip boomStartClip;
 
 	public LayerMask PlayerLayerMask => _playerLayerMask;
 	public float Radius => _radius;

@@ -30,7 +30,7 @@ public class MapSetting : MonoBehaviour
 		OnStart();
 	}
 
-	private void Update()
+	protected virtual void Update()
 	{
 		if (!isEnd && !isEnter)
 		{

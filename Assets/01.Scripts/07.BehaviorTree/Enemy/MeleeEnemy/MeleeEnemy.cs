@@ -17,6 +17,8 @@ public class MeleeEnemy : BehaviorTree
 	[SerializeField]
 	private LayerMask layer;
 
+	[SerializeField]
+	private AudioClip _attackClip;
 	public bool isAttackTime;
 	public Action endAnimation;
 	protected override void Awake()
@@ -52,7 +54,7 @@ public class MeleeEnemy : BehaviorTree
 		if (((1 << other.gameObject.layer) & layer) > 0 && _data.Animator.GetBool("IsAttack") && !isAttackTime)
 		{
 			isAttackTime = true;
-			Debug.Log(">");
+			SoundManager.Instance.Play(AudioType.SFX, _attackClip);
 			other.gameObject.GetComponent<IDmgAble>()?.Damage(_data.Stat.DamageStat);
 		}
 	}

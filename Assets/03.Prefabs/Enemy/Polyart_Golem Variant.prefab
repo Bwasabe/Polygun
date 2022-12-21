@@ -432,6 +432,7 @@ MonoBehaviour:
   layer:
     serializedVersion: 2
     m_Bits: 256
+  _attackClip: {fileID: 8300000, guid: b5be1fc0677fa429bae9def683eb8df4, type: 3}
   isAttackTime: 0
 --- !u!114 &1300720126
 MonoBehaviour:
