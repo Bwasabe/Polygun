@@ -13,8 +13,10 @@ public class BaseEnemyDamaged : MonoBehaviour, IDmgAble
     private GameObject CoinObject;
     [SerializeField]
     private float CoinPercent;
+	[SerializeField]
+	protected AudioClip _hitSound;
 
-    protected UnitStat _stat;
+	protected UnitStat _stat;
     protected Material _meshMaterial;
     protected Color _defaultColor;
 

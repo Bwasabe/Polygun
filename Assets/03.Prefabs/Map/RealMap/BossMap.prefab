@@ -2317,6 +2317,7 @@ MonoBehaviour:
   _clip:
   - {fileID: 11400000, guid: cf26135f246269640934d00157b88f99, type: 2}
   - {fileID: 11400000, guid: 705cb33e05bd8e64ea38edd8c0ac6e37, type: 2}
+  _bgm: {fileID: 8300000, guid: b32a91e272d67084f8bb7703708bbcdb, type: 3}
 --- !u!320 &3071203974781404071
 PlayableDirector:
   m_ObjectHideFlags: 0

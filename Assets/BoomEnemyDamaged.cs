@@ -50,6 +50,7 @@ public class BoomEnemyDamaged : BaseEnemyDamaged
 	{
 		//_material.SetFloat("_Dissolve", 0);
 		_stat.Damaged(damage);
+		SoundManager.Instance.Play(AudioType.SFX, _hitSound);
 		if (_stat.HP <= 0)
 		{
 			characterController.enabled = false;

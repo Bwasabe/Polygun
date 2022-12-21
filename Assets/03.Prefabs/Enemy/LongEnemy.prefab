@@ -230,6 +230,7 @@ MonoBehaviour:
   _hitColor: {r: 1, g: 1, b: 1, a: 1}
   CoinObject: {fileID: 2701665430050440195, guid: 93f65a902ba32e14cb4ea3272a978b66, type: 3}
   CoinPercent: 10
+  _hitSound: {fileID: 8300000, guid: bf30f362cfe7c3145a5101701c9a46d0, type: 3}
   _dissolve: {fileID: 6563675844732769047}
   _slider: {fileID: 7762429848194469232}
   _enemyAnimation: {fileID: 7403935763271489881}

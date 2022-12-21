@@ -28,7 +28,8 @@ public class SoundManager : MonoSingleton<SoundManager>
     [SerializeField]
     private List<AudioClip> _bgms; // BuildingScene 순서로 BGM 배치
 
-    private Dictionary<string, AudioClip> _bgmDict = new Dictionary<string, AudioClip>();
+
+	private Dictionary<string, AudioClip> _bgmDict = new Dictionary<string, AudioClip>();
 
     private Dictionary<AudioType, MethodInfo> _typeMethod = new Dictionary<AudioType, MethodInfo>();
     private AudioSource[] _audioSources = new AudioSource[(int)AudioType.Length];
