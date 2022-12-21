@@ -21,9 +21,13 @@ public class Bullet : MonoBehaviour
     private GameObject _flash;
     [SerializeField]
     private bool _isReturnObject = true;
+    [SerializeField]
+    private AudioClip _hitSound;
+
     public float Damage { get; set; }
     public Vector3 Direction { get; set; }
     public float Speed { get; set; } = 1f;
+    public bool IgnorePitch { get; set; } = false;
 
     public LayerMask HitLayer { get; set; }
 
@@ -87,11 +91,20 @@ public class Bullet : MonoBehaviour
 
     protected virtual void Hit(Collision other)
     {
+        // TODO : 사운드
         if (((1 << other.gameObject.layer) & HitLayer) > 0)
         {
             other.transform.GetComponent<IDmgAble>()?.Damage(Damage);
             GameObject obj = ObjectPool.Instance.GetObject(PoolObjectType.PopUpDamage);
             obj.GetComponent<DamagePopUp>().DamageText((int)Damage, transform.position);
+            if(IgnorePitch)
+            {
+                SoundManager.Instance.Play(AudioType.IgnorePitch, _hitSound);
+            }
+            else
+            {
+                SoundManager.Instance.Play(AudioType.SFX, _hitSound);
+            }
         }
         ObjectPool.Instance.ReturnObject(_type, this.gameObject);
     }

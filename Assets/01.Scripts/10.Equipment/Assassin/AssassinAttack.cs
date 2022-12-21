@@ -38,6 +38,9 @@ public class AssassinAttack : BaseSkill, ISkillInitAble
 
     public override void Skill()
     {
+        // TODO : 사운드
+        SoundManager.Instance.Play(AudioType.IgnorePitch, _data.AttackSound);
+
         _attackObjectList[_prevAttackIndex].SetActive(false);
         _prevAttackIndex = _attackIndex;
         _attackObjectList[_attackIndex].SetActive(true);
@@ -69,4 +72,8 @@ public partial class AssassinData
     [SerializeField]
     private LayerMask _hitLayer;
     public LayerMask HitLayer => _hitLayer;
+
+    [SerializeField]
+    private AudioClip _attackSound;
+    public AudioClip AttackSound => _attackSound;
 }

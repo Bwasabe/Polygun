@@ -19,6 +19,7 @@ public class ChronosAttack : BaseSkill, ISkillInitAble
 
     public override void Skill()
     {
+        // TODO : 사운드
         _attackIndex++;
         if (_data.LastAttackIndex - 1 == _attackIndex)
         {
@@ -26,11 +27,13 @@ public class ChronosAttack : BaseSkill, ISkillInitAble
         }
         else if (_data.LastAttackIndex.Equals(_attackIndex))
         {
+            SoundManager.Instance.Play(AudioType.IgnorePitch, _data.BigAttackSound);
             Attack(_data.LastDamage, Vector3.one * 2f); // 4
             _attackIndex = 0;
         }
         else
         {
+            SoundManager.Instance.Play(AudioType.IgnorePitch, _data.SmallAttackSound);
             Attack(_data.Damage, Vector3.one);
             _attack.SetBulletRate(_data.AttackCoolTime);
         }
@@ -82,6 +85,14 @@ public partial class ChronosData
     [SerializeField]
     private int _lastAttackIndex = 5;
     public int LastAttackIndex => _lastAttackIndex;
+
+    [SerializeField]
+    private AudioClip _smallAttackSound;
+    public AudioClip SmallAttackSound => _smallAttackSound;
+
+    [SerializeField]
+    private AudioClip _bigAttackSound;
+    public AudioClip BigAttackSound => _bigAttackSound;
 }
 
 
