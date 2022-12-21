@@ -9,6 +9,7 @@ public class PlayerDefaultAttack : BaseSkill, ISkillInitAble
     public PlayerDefaultAttack(object parent, AudioClip _defaultClip) : base(null)
     {
         _attack = parent as PlayerAttack;
+        _clip = _defaultClip;
     }
 
     public override void Skill()
