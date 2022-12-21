@@ -3205,8 +3205,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data:
     _stat:
-      _defaultHp: 100
-      _defaultDamage: 0
+      _defaultHp: 200
+      _defaultDamage: 5
       _defaultSpeed: 18
       _defaultAttackRate: 3
       baseSlider: {fileID: 0}
@@ -3232,7 +3232,7 @@ MonoBehaviour:
     _fireWalkPrefab: {fileID: 0}
     _fireWalkDuration: 2
     _meleeBulletSpeed: 45
-    _meleeBulletDamage: 0
+    _meleeBulletDamage: 3
     _meleeBulletAttackDelay: 0.5
     _projectileAttackDelay: 1
     _projectileAttackEndDelay: 1

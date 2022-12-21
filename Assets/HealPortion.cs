@@ -9,7 +9,7 @@ public class HealPortion : Item
 	[SerializeField]
 	private GameObject _returnObject;
 
-	protected override void Interaction(Collision other)
+	protected override void Interaction(Collider other)
 	{
 		if(IsInteraction(other))
 		{
