@@ -16,7 +16,7 @@ public class HealPortion : Item
 			Player player = other.gameObject.GetComponent<Player>();
 			if(player.PlayerStat.HP < 100)
 			{
-				player.PlayerStat.Damaged(-_hp);
+				player.GetComponent<PlayerDamaged>().Damage(-_hp);
 				ObjectPool.Instance.ReturnObject(PoolObjectType.MiddleHeal, _returnObject);
 			}
 		}

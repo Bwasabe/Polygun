@@ -30,7 +30,14 @@ public class UnitStat
     public float AttackRate => _attackRate;
 
     private float _hp;
-    public float HP => _hp;
+    public float HP
+    {
+        get { return _hp; }
+        set
+        {
+            _hp = Mathf.Clamp(value, 0, _defaultHp);
+        }
+    }
 
     public virtual void Init()
     {

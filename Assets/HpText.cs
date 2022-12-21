@@ -15,6 +15,7 @@ public class HpText : MonoBehaviour
 	{
 		_text = GetComponent<TMP_Text>();
 		maxHp = player.PlayerStat.HP;
+		SetHp();
 	}
 
 	public void SetHp()
