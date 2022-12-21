@@ -19585,6 +19585,7 @@ MonoBehaviour:
   _type: 0
   _flash: {fileID: 0}
   _isReturnObject: 1
+  _hitSound: {fileID: 8300000, guid: 3b7b7836343d14cefa6ab9a593dfe357, type: 3}
 --- !u!114 &-6938405856507096405
 MonoBehaviour:
   m_ObjectHideFlags: 0

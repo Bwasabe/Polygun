@@ -11,6 +11,9 @@ public class BoomEnemy : BehaviorTree
     public UnitStat _stat => boom_data.Stat;
 
 	public Action endAnimation;
+
+ //   [SerializeField]
+	//protected AudioClip audioClip;
 	protected override BT_Node SetupTree()
     {
         _root = new BT_Selector(this, new List<BT_Node>

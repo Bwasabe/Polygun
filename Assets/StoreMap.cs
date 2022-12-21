@@ -36,43 +36,27 @@ public class StoreMap : MapSetting
 
     private Transform _target;
 
-    protected override void OnStart()
-    {
-    }
-    protected override void OnEnter()
-    {
-        // RandomObjs();
-        SpawnItems();
-    }
 
-    protected override void OnExit()
+    protected override void Update()
     {
-        _target = null;
-    }
-
-    private void Update()
-    {
+        base.Update();
         if (_target != null)
         {
-            Vector3 lookDir = _target.position - _muryotaisu.position;
-            lookDir.y = 0f;
-            _muryotaisu.rotation = Quaternion.LookRotation(lookDir * Time.deltaTime * _lookSmooth);
+            Vector3 lookdir = _target.position - _muryotaisu.position;
+            lookdir.y = 0f;
+            _muryotaisu.rotation = Quaternion.LookRotation(lookdir * Time.deltaTime * _lookSmooth);
         }
 
     }
 
-    protected override void OnPlay()
+    protected override void OnEnter()
     {
-        //���⼭ ��� �ִ� ĳ���Ͱ� ���ų� �����մϴ� �ϱ�
-    }
-
-    protected override bool OnIsEnter()
-    {
-        return base.OnIsEnter();
+        SpawnItems();
     }
     public override void RepeatOnEnter()
     {
         // TODO: 사운드
+        base.RepeatOnEnter();
         _target = GameManager.Instance.Player.transform;
         //���� ������ ���� �ϱ�
         //SoundManager.Instance.Play(AudioType.Voice, _welcomeAudios[Random.Range(0, _welcomeAudios.Count)]);
@@ -92,7 +76,13 @@ public class StoreMap : MapSetting
         }
 
     }
-    private void RandomObjs()
+
+	protected override void OnExit()
+	{
+		_target = null;
+	}
+
+	private void RandomObjs()
     {
         for (int i = 0; i < _confirmationObjectCount; i++)
         {

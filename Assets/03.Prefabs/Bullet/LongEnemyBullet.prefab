@@ -24530,6 +24530,7 @@ MonoBehaviour:
   _type: 5
   _flash: {fileID: 0}
   _isReturnObject: 1
+  _hitSound: {fileID: 8300000, guid: f5a962cf7a0c349e8a20af1cba03d5ed, type: 3}
 --- !u!114 &5375405522510602575
 MonoBehaviour:
   m_ObjectHideFlags: 0
