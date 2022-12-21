@@ -37,8 +37,7 @@ public class SoundManager : MonoSingleton<SoundManager>
     {
         Init();
         CallInitMethod();
-        Play(AudioType.BGM, _bgms[0]);
-        SceneManager.sceneLoaded += OnSceneLoaded;
+        Play(AudioType.BGM, _bgms[SceneManager.GetActiveScene().buildIndex]);
     }
 
     private void Init()
@@ -52,13 +51,13 @@ public class SoundManager : MonoSingleton<SoundManager>
         }
         _audioSources[(int)AudioType.BGM].loop = true;
     }
-    private void InitBGM()
-    {
-        for (int i = 0; i < _bgms.Count; ++i)
-        {
-            _bgmDict.Add(((BuildingScenes)i).ToString(), _bgms[i]);
-        }
-    }
+    // private void InitBGM()
+    // {
+    //     for (int i = 0; i < _bgms.Count; ++i)
+    //     {
+    //         _bgmDict.Add(((BuildingScenes)i).ToString(), _bgms[i]);
+    //     }
+    // }
 
     private void CallInitMethod()
     {
