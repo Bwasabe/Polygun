@@ -6,85 +6,112 @@ using Random = UnityEngine.Random;
 
 public enum StoreObjs
 {
-	SMALLHPHEAL,
-	MIDDLEHPHEAL,
-	CHRONOS,
-	ASSASSIN,
-	Count
+    SMALLHPHEAL,
+    MIDDLEHPHEAL,
+    CHRONOS,
+    ASSASSIN,
+    Count
 }
 
 public class StoreMap : MapSetting
 {
-	[SerializeField]
-	private List<ItemObject> _itemObjects;
+    [SerializeField]
+    private List<ItemObject> _itemObjects;
     [SerializeField]
     private List<AudioClip> _welcomeAudios;
     [SerializeField]
-	private Vector3[] _storeObjVec = new Vector3[3];
+    private List<Transform> _storeObj;
 
-	[SerializeField]
-	private int _confirmationObjectCount = 0;
+    [SerializeField]
+    private float _height = 2f;
 
-	[SerializeField]
-	private CollisionCtrl _collisiionCtrl;
+    [SerializeField]
+    private int _confirmationObjectCount = 0;
 
-	[SerializeField]
-	private LayerMask _layerMask;
-	protected override void OnStart()
-	{
-	}
-	protected override void OnEnter()
-	{
-		// RandomObjs();
-	}
+    [SerializeField]
+    private float _lookSmooth = 8f;
 
-	protected override void OnExit()
-	{
-		
-	}
+    [SerializeField]
+    private Transform _muryotaisu;
 
-	private void Update() {
-		
-	}
+    private Transform _target;
 
-	protected override void OnPlay()
-	{
-		//���⼭ ��� �ִ� ĳ���Ͱ� ���ų� �����մϴ� �ϱ�
-	}
-
-	protected override bool OnIsEnter()
-	{
-		return base.OnIsEnter();
-	}
-	public override void RepeatOnEnter()
-	{
-        //���� ������ ���� �ϱ�
-        //SoundManager.Instance.Play(AudioType.Voice, _welcomeAudios[Random.Range(0, _welcomeAudios.Count)]);
+    protected override void OnStart()
+    {
     }
-	private void RandomObjs()
-	{
-		for (int i = 0; i < _confirmationObjectCount; i++)
-		{
-			GameObject obj = Instantiate(_itemObjects[i].obj, transform);
-			obj.transform.localPosition = _storeObjVec[i];
-			_itemObjects.RemoveAt(i);
-		}
+    protected override void OnEnter()
+    {
+        // RandomObjs();
+        SpawnItems();
+    }
 
-		for (int i = _confirmationObjectCount; i <= _storeObjVec.Length - 1; i++)
-		{
-			int rand = UnityEngine.Random.Range(0, _itemObjects.Count - 1);
-			GameObject obj = Instantiate(_itemObjects[rand].obj, transform);
-			obj.transform.localPosition = _storeObjVec[i];
-			_itemObjects.RemoveAt(rand);
-		}
-	}
+    protected override void OnExit()
+    {
+        _target = null;
+    }
+
+    private void Update()
+    {
+        if (_target != null)
+        {
+            Vector3 lookDir = _target.position - _muryotaisu.position;
+            lookDir.x = lookDir.z = 0f;
+            _muryotaisu.rotation = Quaternion.LookRotation(lookDir * Time.deltaTime * _lookSmooth);
+        }
+
+    }
+
+    protected override void OnPlay()
+    {
+        //���⼭ ��� �ִ� ĳ���Ͱ� ���ų� �����մϴ� �ϱ�
+    }
+
+    protected override bool OnIsEnter()
+    {
+        return base.OnIsEnter();
+    }
+    public override void RepeatOnEnter()
+    {
+        // TODO: 사운드
+        _target = GameManager.Instance.Player.transform;
+        //���� ������ ���� �ϱ�
+        SoundManager.Instance.Play(AudioType.Voice, _welcomeAudios[Random.Range(0, _welcomeAudios.Count)]);
+    }
+    private void SpawnItems()
+    {
+        for (int i = 0; i < _itemObjects.Count; ++i)
+        {
+            Vector3 storePos = _storeObj[i].position;
+            storePos.y += _height;
+
+            GameObject obj = Instantiate(_itemObjects[i].obj, storePos, Quaternion.identity);
+        }
+
+    }
+    private void RandomObjs()
+    {
+        for (int i = 0; i < _confirmationObjectCount; i++)
+        {
+            GameObject obj = Instantiate(_itemObjects[i].obj, transform);
+            // obj.transform.localPosition = _storeObjVec[i];
+            //_itemObjects.RemoveAt(i);
+        }
+
+        // for (int i = _confirmationObjectCount; i <= _storeObjVec.Length - 1; i++)
+        // {
+        // 	int rand = UnityEngine.Random.Range(0, _itemObjects.Count - 1);
+        // 	GameObject obj = Instantiate(_itemObjects[rand].obj, transform);
+        // 	// obj.transform.localPosition = _storeObjVec[i];
+        // 	_itemObjects.RemoveAt(rand);
+        // }
+    }
 
 }
 
 [Serializable]
 public struct ItemObject
 {
-	public StoreObjs ObjsType;
-	public GameObject obj;
-	public bool isDelete;
+    public StoreObjs ObjsType;
+    public GameObject obj;
+    public bool isDelete;
 }
