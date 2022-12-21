@@ -12,6 +12,8 @@ public class DirectBossFirst : MonoBehaviour
 	private BehaviorTree bt;
 	[SerializeField]
 	PlayableDirector _playable;
+	[SerializeField]
+	private GameObject lightobj;
 
 	GameObject obj;
 	public void CutSceneStart()
@@ -23,6 +25,7 @@ public class DirectBossFirst : MonoBehaviour
 		bt.IsStop = true;
 		obj = GameObject.Find("Player");
 		obj.SetActive(false);
+		lightobj.SetActive(true);
 	}
 
 	public void BossEnd()

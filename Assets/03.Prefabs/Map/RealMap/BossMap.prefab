@@ -2483,6 +2483,7 @@ MonoBehaviour:
   _cine: {fileID: 4534930654364316806}
   bt: {fileID: 2398231352850383129}
   _playable: {fileID: 3071203974781404071}
+  lightobj: {fileID: 8874478461235556364}
 --- !u!1001 &430848701890750113
 PrefabInstance:
   m_ObjectHideFlags: 0
