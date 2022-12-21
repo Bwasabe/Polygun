@@ -18,7 +18,8 @@ public class BossMap : MapSetting
 
 	private DirectBossFirst _direct;
 
-
+	[SerializeField]
+	private AudioClip _bgm;
 	//private GameObject bossObj;
 	public GameObject Boss => bossObject;
 	protected override void OnStart()
@@ -31,6 +32,7 @@ public class BossMap : MapSetting
 		bossObject.SetActive(true);
 		_playableDirect.playableAsset = _clip[0];
 		_playableDirect.Play();
+		SoundManager.Instance.Play(AudioType.BGM, _bgm);
 	}
 
 	protected override void OnPlay()

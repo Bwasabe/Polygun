@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Reflection;
+using System.Diagnostics;
 
 [System.Serializable]
 public class UnitStat
@@ -35,7 +36,7 @@ public class UnitStat
         get { return _hp; }
         set
         {
-            _hp = Mathf.Clamp(_hp+value, 0, _defaultHp);
+            _hp = Mathf.Clamp(value, 0, _defaultHp);
         }
     }
 
@@ -80,7 +81,7 @@ public class UnitStat
 
     public void Damaged(float damage)
     {
-        _hp -= damage;
-        baseSlider?.SetSlider(_hp);
+		HP -= damage;
+        baseSlider?.SetSlider(HP);
 	}
 }
