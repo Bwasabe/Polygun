@@ -20,9 +20,8 @@ public class CameraManager : MonoSingleton<CameraManager>
 
     private CinemachineImpulseSource _impulseSource;
 
-    protected override void Awake()
+    private void Awake()
     {
-        base.Awake();
         _impulseSource = GetComponent<CinemachineImpulseSource>();
 	}
     public void CameraShake()
