@@ -10,8 +10,6 @@ public class Chronos : BaseEquipment
     protected override void Awake()
     {
         base.Awake();
-        _data.GlobalVolume = GameObject.FindObjectOfType<Volume>();
-        Debug.Log(_data.GlobalVolume);
     }
     protected override void RegisterSkills()
     {

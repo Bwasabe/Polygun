@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -13,6 +14,11 @@ public class GameManager : MonoSingleton<GameManager>
 
     [SerializeField]
     private InputManager _inputManager;
+
+    [SerializeField]
+    private Volume _globalVolume;
+
+    public Volume GlobalVolume => _globalVolume ??= GameObject.Find("Global Volume").GetComponent<Volume>() ?? new GameObject("Global Volume").AddComponent<Volume>();
 
     [SerializeField]
     private CoinUI coinUI;
