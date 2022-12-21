@@ -11,6 +11,7 @@ public class OnGUIManager : MonoSingleton<OnGUIManager>
 
 
     private void OnGUI() {
+        #if UNITY_EDITOR
         if(_guiDict.Count <=0)return;
         var label = new GUIStyle();
 
@@ -22,5 +23,6 @@ public class OnGUIManager : MonoSingleton<OnGUIManager>
         {
             GUILayout.Label(dict.Value, label);
         }
+        #endif
     }
 }
