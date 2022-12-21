@@ -19,8 +19,6 @@ public class AmonDamaged : BaseEnemyDamaged
 
     protected override void Die()
     {
-        Debug.Log("보스 죽음");
-        Debug.Break();
         base.Die();
     }
 

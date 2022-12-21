@@ -104,7 +104,6 @@ public enum Amon_Animation_State
 
 public partial class AmonData
 {
-    // TODO: 타임라인 끝나면 Transform에 플레이어 넣어주기
     public Transform Target { get; set; } = null;
 
     public AnimatorCtrl<Amon_Animation_State> AnimatorCtrl { get; set; }
