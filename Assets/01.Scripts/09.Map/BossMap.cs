@@ -54,7 +54,7 @@ public class BossMap : MapSetting
 	}
 	public void ReturnLobby()
 	{
-		SceneManager.LoadScene("Lobby");
+		SceneManager.LoadScene(BuildingScenes.Action.ToString());
 	}
 
 	public void BossStart()
