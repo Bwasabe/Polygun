@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class SoundSlider : MonoBehaviour
 {
     [SerializeField]
-    private AudioMixerGroup _group;
+    private List<AudioMixerGroup> _group;
 
     private AudioMixer _audioMixer;
 
@@ -19,10 +19,15 @@ public class SoundSlider : MonoBehaviour
     private void Start() {
         _slider = GetComponent<Slider>();
         _audioMixer = SoundManager.Instance.AudioMixer;
+        _slider.onValueChanged.AddListener(ChangeVolume);
     }
 
     public void ChangeVolume(float volume){
-         if (volume == -40f) _audioMixer.SetFloat(_group.ToString(), -80);
-        else _audioMixer.SetFloat(_group.ToString(), volume);
+        Debug.Log(volume);
+        _group.ForEach(g =>
+        {
+            if (volume == -40f) _audioMixer.SetFloat(g.ToString(), -80f);
+            else _audioMixer.SetFloat(g.ToString(), volume);
+        });
     }
 }

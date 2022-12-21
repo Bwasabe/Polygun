@@ -5,6 +5,7 @@ using System;
 using UnityEngine.Audio;
 using UnityEngine.SceneManagement;
 using System.Reflection;
+using static Yields;
 
 public enum AudioType
 {
@@ -32,7 +33,6 @@ public class SoundManager : MonoSingleton<SoundManager>
     private Dictionary<AudioType, MethodInfo> _typeMethod = new Dictionary<AudioType, MethodInfo>();
     private AudioSource[] _audioSources = new AudioSource[(int)AudioType.Length];
 
-
     private void Awake()
     {
         Init();
@@ -48,6 +48,7 @@ public class SoundManager : MonoSingleton<SoundManager>
             g.transform.SetParent(transform);
             _audioSources[i] = g.AddComponent<AudioSource>();
             _audioSources[i].playOnAwake = false;
+            _audioSources[i].outputAudioMixerGroup = _audioMixer.FindMatchingGroups(((AudioType)i).ToString())[0];
         }
         _audioSources[(int)AudioType.BGM].loop = true;
     }
