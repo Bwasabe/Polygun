@@ -32690,7 +32690,7 @@ MonoBehaviour:
   _hitLayer:
     serializedVersion: 2
     m_Bits: 256
-  damage: 3
+  damage: 7
   _objectType: 3
 --- !u!1 &6251475341108446580
 GameObject:

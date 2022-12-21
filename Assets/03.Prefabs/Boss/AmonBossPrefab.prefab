@@ -3205,17 +3205,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _data:
     _stat:
-      _defaultHp: 200
+      _defaultHp: 300
       _defaultDamage: 5
       _defaultSpeed: 18
       _defaultAttackRate: 3
       baseSlider: {fileID: 0}
+    _amonProjectileSound: {fileID: 0}
     _amonProjectileParticle: {fileID: 0}
     _amonProjectileAttackPos: {fileID: 6761338052427737756}
     _projectileBulletSpeed: 60
     _groundLayer:
       serializedVersion: 2
       m_Bits: 64
+    _amonProjectileDamage: 10
     _moveSpeed: 20
     _attackDistance: 5
     _meleeBulletPos:
@@ -3232,7 +3234,7 @@ MonoBehaviour:
     _fireWalkPrefab: {fileID: 0}
     _fireWalkDuration: 2
     _meleeBulletSpeed: 45
-    _meleeBulletDamage: 3
+    _meleeBulletDamage: 10
     _meleeBulletAttackDelay: 0.5
     _projectileAttackDelay: 1
     _projectileAttackEndDelay: 1

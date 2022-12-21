@@ -38,7 +38,7 @@ public class MeleeFollow : BT_Node
 		else
 		{
 			Debug.Log("중력 적용");
-			dir.y = Physics.gravity.y * Time.deltaTime;
+			dir.y = Physics.gravity.y * Time.deltaTime * _data.GravityScale;
 		}
 
 		_collisionFlag = ch.Move(dir * _data.Stat.Speed * Time.deltaTime);

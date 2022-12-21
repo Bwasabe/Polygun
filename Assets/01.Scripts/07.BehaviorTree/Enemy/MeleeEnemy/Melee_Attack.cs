@@ -9,6 +9,10 @@ using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 public class Melee_Attack : BT_Node
 {
 	private MeleeEnemy_Data _data;
+
+	private CollisionFlags _collisionFlag;
+
+	private CharacterController _ch;
 	public void EndAttackAnimation()
 	{
 		_data.Animator.SetBool("IsAttack", false);
@@ -18,6 +22,7 @@ public class Melee_Attack : BT_Node
 	public Melee_Attack(BehaviorTree t,MeleeEnemy_Data data,List<BT_Node> c = null) : base(t, c)
 	{
 		_data = data;
+		_ch = _tree.GetComponent<CharacterController>();
 	}
 
 	protected override void OnEnter()
@@ -27,6 +32,24 @@ public class Melee_Attack : BT_Node
 		_data.Animator.SetBool("IsAttack",true);
 		NodeResult = Result.RUNNING;
 		base.OnEnter();
+	}
+
+	protected override void OnUpdate()
+	{
+		Vector3 dir = Vector3.zero;
+
+		if ((_collisionFlag & CollisionFlags.Below) != 0)
+		{
+			dir.y = 0f;
+			Debug.Log("¶¥¿¡ ´êÀ½");
+		}
+		else
+		{
+			Debug.Log("Áß·Â Àû¿ë");
+			dir.y = Physics.gravity.y * Time.deltaTime;
+		}
+
+		_collisionFlag = _ch.Move(dir * _data.GravityScale * Time.deltaTime);
 	}
 
 	public override Result Execute()

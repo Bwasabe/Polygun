@@ -91,6 +91,7 @@ MonoBehaviour:
   _playerLayerMask:
     serializedVersion: 2
     m_Bits: 256
+  _collistionCtrl: {fileID: 7518748974801692925}
 --- !u!1 &137914043969356521
 GameObject:
   m_ObjectHideFlags: 0

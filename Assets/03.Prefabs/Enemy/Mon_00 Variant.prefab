@@ -543,7 +543,7 @@ MonoBehaviour:
     _groundLayer:
       serializedVersion: 2
       m_Bits: 64
-    _gravityScale: 2
+    _gravityScale: 100
     _maxDis: 2
 --- !u!114 &2069661345
 MonoBehaviour:

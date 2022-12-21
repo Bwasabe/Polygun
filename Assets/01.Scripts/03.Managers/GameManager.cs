@@ -14,19 +14,25 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField]
     private InputManager _inputManager;
 
+    [SerializeField]
+    private CoinUI coinUI;
+
     public static float TimeScale = 1f;
 
     public static float PlayerTimeScale = 1f;
 
-    public int CoinAmount = 0;
+    private int Coin = 0;
 
-
-    private void Start()
+    public int CoinAmount
     {
-        OnGUIManager.Instance._guiDict.Add("asdf", $"{CoinAmount}");
-    }
-    private void Update()
-    {
-        OnGUIManager.Instance._guiDict["asdf"] = $"{CoinAmount}";
+        get
+        {
+            return Coin;
+        }
+        set
+        {
+            Coin = value;
+            coinUI.CoinSet();
+        }
     }
 }
