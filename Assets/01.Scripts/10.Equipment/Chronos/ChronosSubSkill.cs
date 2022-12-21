@@ -63,12 +63,12 @@ public class ChronosSubSkill : BaseSkill, ISkillInitAble, ISkillPersistAble
             DOTween.To(
                 () => _liftGammaGain.gamma.value,
                 value => _liftGammaGain.gamma.Override(value),
-                new Vector4(1f, 1f, 1f, 0f), _data.TweenDuration
+                _data.GammaValue, _data.TweenDuration
             );
             DOTween.To(
                 () => _liftGammaGain.gain.value,
                 value => _liftGammaGain.gain.Override(value),
-                new Vector4(1f, 1f, 1f, 0f), _data.TweenDuration
+                _data.GainValue, _data.TweenDuration
             );
             _parent.StartCoroutine(ChangePitch(1 / _data.TimeScaleValue));
             _parent.ParticleActive(true);
