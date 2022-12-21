@@ -4836,7 +4836,7 @@ GameObject:
   - component: {fileID: 452936815}
   - component: {fileID: 452936814}
   - component: {fileID: 1916637839048901832}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: bottle_red
   m_TagString: Untagged
   m_Icon: {fileID: 0}

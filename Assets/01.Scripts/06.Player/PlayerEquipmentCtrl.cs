@@ -89,7 +89,7 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
         {
             _getEquipmentUI.gameObject.SetActive(true);
             // 장비 구매 or 획득 UI띄어주기
-            IPurchaseAble purchaseAble = colliders[0].transform.GetComponent<IPurchaseAble>();
+            IPurchaseAble purchaseAble = colliders[0].transform.GetComponentInChildren<IPurchaseAble>();
             if (purchaseAble != null)
             {
                 if (GameManager.Instance.CoinAmount >= purchaseAble.Price)
