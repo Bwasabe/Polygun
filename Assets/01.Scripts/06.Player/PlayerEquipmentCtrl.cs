@@ -97,6 +97,7 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
                     _getEquipmentUI.text = PriceText(purchaseAble.Price);
                     if (Input.GetKeyDown(KeyCode.E))
                     {
+                        GameManager.Instance.CoinAmount -= purchaseAble.Price;
                         purchaseAble.PurchaseCallBack();
                         // GetEquipment(equipment);
                     }

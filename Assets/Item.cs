@@ -4,7 +4,7 @@ using UnityEngine;
 
 [RequireComponent(typeof(CollisionCtrl))]
 [DisallowMultipleComponent]
-public class Item : MonoBehaviour, IPurchaseAble
+public class Item : MonoBehaviour
 {
 	private CollisionCtrl _collision;
 
@@ -43,8 +43,4 @@ public class Item : MonoBehaviour, IPurchaseAble
 		return ((1 << other.gameObject.layer) & _layerMask) > 0;
 	}
 
-	public void PurchaseCallBack()
-    {
-        
-    }
 }
