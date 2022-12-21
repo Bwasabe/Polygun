@@ -19,7 +19,13 @@ public class Item : MonoBehaviour, IPurchaseAble
     private void Awake()
 	{
 		_collision = GetComponent<CollisionCtrl>();
+		_collision.ColliderEnterEvent += Interaction;
 		_collision.CollisionEnterEvent += Interaction;
+	}
+
+	protected virtual void Interaction(Collider other)
+	{
+
 	}
 
 	protected virtual void Interaction(Collision other)
@@ -27,12 +33,17 @@ public class Item : MonoBehaviour, IPurchaseAble
 
 	}
 
+	protected virtual bool IsInteraction(Collider other)
+	{
+		return ((1 << other.gameObject.layer) & _layerMask) > 0;
+	}
+
 	protected virtual bool IsInteraction(Collision other)
 	{
 		return ((1 << other.gameObject.layer) & _layerMask) > 0;
 	}
 
-    public void PurchaseCallBack()
+	public void PurchaseCallBack()
     {
         
     }

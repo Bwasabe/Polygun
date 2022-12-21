@@ -401,6 +401,8 @@ MonoBehaviour:
   _dissolve: {fileID: 3708754889627432596}
   _slider: {fileID: 4542875188729992483}
   characterController: {fileID: 324792498185431436}
+  _collisionCtrl: {fileID: 1644218199270731662}
+  _enemyFollow: {fileID: 1300720126}
 --- !u!114 &638287873
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -417,14 +419,14 @@ MonoBehaviour:
     _stat:
       _defaultHp: 30
       _defaultDamage: 20
-      _defaultSpeed: 10
+      _defaultSpeed: 7
       _defaultAttackRate: 0
       baseSlider: {fileID: 4542875188729992485}
     attackRange: 3
     _groundLayer:
       serializedVersion: 2
       m_Bits: 64
-    _gravityScale: 10
+    _gravityScale: 1000
     _ani: {fileID: 3708754889435996669}
   attackCtrl: {fileID: 1644218199270731662}
   layer:

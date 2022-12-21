@@ -194,7 +194,7 @@ MonoBehaviour:
     _stat:
       _defaultHp: 12
       _defaultDamage: 15
-      _defaultSpeed: 5
+      _defaultSpeed: 10
       _defaultAttackRate: 0
       baseSlider: {fileID: 2567962134314250079}
     MaxMoveCount: 2
@@ -208,7 +208,7 @@ MonoBehaviour:
     layer:
       serializedVersion: 2
       m_Bits: 256
-    bulletSpeed: 10
+    bulletSpeed: 30
     _upX: 30
     _rotateDuration: 1
     _model: {fileID: 773996819492786094}

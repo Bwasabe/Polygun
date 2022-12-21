@@ -18850,7 +18850,7 @@ MonoBehaviour:
   _hitLayer:
     serializedVersion: 2
     m_Bits: 256
-  damage: 0
+  damage: 5
   _objectType: 2
 --- !u!54 &3004085735669121317
 Rigidbody:

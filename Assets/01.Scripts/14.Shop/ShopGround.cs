@@ -7,7 +7,13 @@ public class ShopGround : MonoBehaviour
 {
     [SerializeField]
     private LayerMask _playerLayerMask;
+    [SerializeField]
+    private CollisionCtrl _collistionCtrl;
+    private void Start()
+    {
+        _collistionCtrl.ColliderEnterEvent += GroundOut;
 
+	}
     private void GroundOut(Collider col)
     {
         if (((1 << col.gameObject.layer) & _playerLayerMask) > 0)

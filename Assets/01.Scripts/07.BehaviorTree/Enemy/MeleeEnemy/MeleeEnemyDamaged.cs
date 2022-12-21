@@ -13,6 +13,10 @@ public class MeleeEnemyDamaged : BaseEnemyDamaged
 	private GameObject _slider;
 	[SerializeField]
 	private CharacterController characterController;
+	[SerializeField]
+	private CollisionCtrl _collisionCtrl;
+	[SerializeField]
+	private EnemyFollow _enemyFollow;
 
 	private MeleeEnemy _testEnemy;
 	private Material _material;
@@ -55,6 +59,8 @@ public class MeleeEnemyDamaged : BaseEnemyDamaged
 		_stat.Damaged(damage);
 		if (_stat.HP <= 0)
 		{
+			_enemyFollow.enabled = false;
+			_collisionCtrl.gameObject.SetActive(false);
 			characterController.enabled = false;
 			_enemyAnimator.enabled = false;
 			_testEnemy.enabled = false;

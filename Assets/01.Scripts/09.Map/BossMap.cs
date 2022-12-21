@@ -54,5 +54,7 @@ public class BossMap : MapSetting
 	{
 		GameObject obj = GameObject.Find("Player");
 		obj.SetActive(false);
+		GameObject canvas = GameObject.Find("PlayerCanvas");
+		canvas.SetActive(false);
 	}
 }
