@@ -23,6 +23,11 @@ public class AssassinSubSkill : BaseSkill, ISkillPersistAble, ISkillInitAble
         dir.y = 0f;
         dir.Normalize();
 
+        // TODO: 사운드
+        SoundManager.Instance.Play(AudioType.IgnorePitch, _data.TeleportSound);
+
+        // TODO: 풀링
+
         GameObject teleportStart = GameObject.Instantiate(_data.TeleportParticle, _player.transform.position, Quaternion.identity, null);
         teleportStart.SetActive(true);
         _parent.StartCoroutine(TeleportParticleFalse(teleportStart));
@@ -107,4 +112,8 @@ public partial class AssassinData
     [SerializeField]
     private float _teleportParticleDuration = 3f;
     public float TeleportParticleDuartion => _teleportParticleDuration;
+
+    [SerializeField]
+    private AudioClip _teleportSound;
+    public AudioClip TeleportSound => _teleportSound;
 }

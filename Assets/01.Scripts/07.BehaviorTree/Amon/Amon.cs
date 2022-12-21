@@ -58,7 +58,9 @@ public class Amon : BehaviorTree
 
     public void EventProjectileAttack()
     {
-        // TODO: 풀링
+        //TODO: 사운드
+        SoundManager.Instance.Play(AudioType.SFX, _data.AmonProjectileSound);
+
         Vector3 dir = _data.Target.position - transform.position;
         dir.Normalize();
         Bullet bullet = ObjectPool.Instance.GetObject(PoolObjectType.AmonBullet).GetComponent<Bullet>();
@@ -66,7 +68,7 @@ public class Amon : BehaviorTree
         bullet.transform.rotation = Quaternion.identity;
         bullet.gameObject.SetActive(true);
         bullet.HitLayer = _data.HitLayer;
-        bullet.Damage = 0;
+        bullet.Damage = _data.AmonProjectileDamage;
         bullet.Speed = _data.ProjectileBulletSpeed;
         bullet.transform.rotation = Quaternion.LookRotation(dir);
         bullet.Direction = dir;
@@ -108,6 +110,10 @@ public partial class AmonData
     public AnimatorCtrl<Amon_Animation_State> AnimatorCtrl { get; set; }
 
     [SerializeField]
+    private AudioClip _amonProjectileSound;
+    public AudioClip AmonProjectileSound => _amonProjectileSound;
+
+    [SerializeField]
     private GameObject _amonProjectileParticle;
     public GameObject AmonProjectileParticle => _amonProjectileParticle;
 
@@ -122,4 +128,8 @@ public partial class AmonData
     [SerializeField]
     private LayerMask _groundLayer;
     public LayerMask GroundLayer => _groundLayer;
+
+    [SerializeField]
+    private float _amonProjectileDamage;
+    public float AmonProjectileDamage => _amonProjectileDamage;
 }
