@@ -39,8 +39,8 @@ public class PlayeDashSkill : BaseSkill, ISkillPersistAble
         _startColor = startColor;
         _endColor = endColor;
 
-        OnGUIManager.Instance._guiDict.Add("CalcVelocity", $"CalcVelocity : {_calcVelocity.ToString()}");
-        OnGUIManager.Instance._guiDict.Add("CalcVelocityMag", $"CalcVelocity : {_calcVelocity.magnitude.ToString()}");
+        // OnGUIManager.Instance._guiDict.Add("CalcVelocity", $"CalcVelocity : {_calcVelocity.ToString()}");
+        // OnGUIManager.Instance._guiDict.Add("CalcVelocityMag", $"CalcVelocity : {_calcVelocity.magnitude.ToString()}");
     }
 
     public override void Skill()
@@ -104,8 +104,8 @@ public class PlayeDashSkill : BaseSkill, ISkillPersistAble
 
 
 
-        OnGUIManager.Instance._guiDict["CalcVelocity"] = $"CalcVelocity : {_calcVelocity.ToString()}";
-        OnGUIManager.Instance._guiDict["CalcVelocityMag"] = $"CalcVelocity : {_calcVelocity.magnitude.ToString()}";
+        // OnGUIManager.Instance._guiDict["CalcVelocity"] = $"CalcVelocity : {_calcVelocity.ToString()}";
+        // OnGUIManager.Instance._guiDict["CalcVelocityMag"] = $"CalcVelocity : {_calcVelocity.magnitude.ToString()}";
         _cc.Move(_calcVelocity * Time.deltaTime);
         _calcVelocity.x /= 1 + _drags.x * Time.deltaTime * GameManager.PlayerTimeScale;
         _calcVelocity.y /= 1 + _drags.y * Time.deltaTime * GameManager.PlayerTimeScale;

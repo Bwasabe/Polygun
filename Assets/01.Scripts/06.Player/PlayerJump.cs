@@ -39,7 +39,7 @@ public class PlayerJump : BasePlayerComponent
 	protected override void Start()
 	{
 		base.Start();
-		OnGUIManager.Instance._guiDict.Add("IsGround", "");
+		// OnGUIManager.Instance._guiDict.Add("IsGround", "");
 	}
 
 	protected override void RegisterInput()
@@ -72,7 +72,7 @@ public class PlayerJump : BasePlayerComponent
 	private void Jump()
 	{
 		CheckJumpState();
-		OnGUIManager.Instance._guiDict["IsGround"] = $"{IsGround()}";
+		// OnGUIManager.Instance._guiDict["IsGround"] = $"{IsGround()}";
 		if (IsGround())
 		{
 			if (_jumpState == JUMP_STATE.JUMPDOWN)
@@ -131,7 +131,7 @@ public class PlayerJump : BasePlayerComponent
 	/// </summary>
 	private void AdjoinGround()
 	{
-		OnGUIManager.Instance._guiDict["JUMPSTATE"] = $"JumpState : {_jumpState}";
+		// OnGUIManager.Instance._guiDict["JUMPSTATE"] = $"JumpState : {_jumpState}";
 		if (_player.CurrentState.HasFlag(PLAYER_STATE.JUMP)) return;
 
 		if (!(_jumpState == JUMP_STATE.NONE)) return;

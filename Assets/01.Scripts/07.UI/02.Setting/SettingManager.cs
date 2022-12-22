@@ -42,7 +42,7 @@ public class SettingManager : MonoBehaviour
 			_input.ToggleSetting();
 			_setting.SettingToggle(false);
 			DOTween.KillAll();
-			SceneManager.LoadScene("Lobby");
+			SceneManager.LoadScene(BuildingScenes.Action.ToString());
 		});
 		_buttons[(int)SettingButtons.Exit].onClick.AddListener(() =>
 		{

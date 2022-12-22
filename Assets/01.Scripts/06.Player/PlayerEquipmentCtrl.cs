@@ -92,11 +92,12 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
             IPurchaseAble purchaseAble = colliders[0].transform.GetComponentInChildren<IPurchaseAble>();
             if (purchaseAble != null)
             {
-                if (GameManager.Instance.CoinAmount >= purchaseAble.Price)
+                if (GameManager.Instance.CoinAmount >= purchaseAble.Price && purchaseAble.IsShopItem)
                 {
                     _getEquipmentUI.text = PriceText(purchaseAble.Price);
                     if (Input.GetKeyDown(KeyCode.E))
                     {
+                        _player.GetPlayerComponent<PlayerAttack>().ResetReload();
                         GameManager.Instance.CoinAmount -= purchaseAble.Price;
                         purchaseAble.PurchaseCallBack();
                         // GetEquipment(equipment);

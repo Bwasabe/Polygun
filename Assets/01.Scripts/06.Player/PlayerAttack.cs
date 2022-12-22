@@ -71,9 +71,7 @@ public class PlayerAttack : BasePlayerSkillComponent
             _reloadImage.fillAmount += Time.deltaTime * GameManager.PlayerTimeScale / _reloadDuration;
             if (_reloadImage.fillAmount >= 1f)
             {
-                _reloadImage.fillAmount = 0f;
-                _currentReloadCount = ReloadCount;
-                UpdateReloadText();
+                ResetReload();
             }
         }
 
@@ -81,6 +79,13 @@ public class PlayerAttack : BasePlayerSkillComponent
         {
             _player.CurrentState &= ~PLAYER_STATE.ATTACK;
         }
+    }
+
+    public void ResetReload()
+    {
+        _reloadImage.fillAmount = 0f;
+        _currentReloadCount = ReloadCount;
+        UpdateReloadText();
     }
 
     public void SetReload(int reloadCount, float reloadDuration)

@@ -38,13 +38,13 @@ public class Player : MonoBehaviour
         }
     }
 
-    private void Start() {
-        OnGUIManager.Instance._guiDict.Add("PLAYER_STATE", "");
-    }
+    // private void Start() {
+    //     OnGUIManager.Instance._guiDict.Add("PLAYER_STATE", "");
+    // }
 
-    private void Update() {
-        OnGUIManager.Instance._guiDict["PLAYER_STATE"] = CurrentState.ToString();
-    }
+    // private void Update() {
+    //     OnGUIManager.Instance._guiDict["PLAYER_STATE"] = CurrentState.ToString();
+    // }
 
     public void SetPlayerComponent<T>(BasePlayerComponent playerComponent) where T : BasePlayerComponent
     {

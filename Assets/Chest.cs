@@ -55,7 +55,7 @@ public class Chest : MonoBehaviour
 		obj = Instantiate(objs[0].obj);
         HealPortion portion = obj.GetComponent<HealPortion>();
 		if(portion != null)
-        	portion.IsShopPotion = false;
+        	portion.IsShopItem = false;
 			
         obj.transform.position = this.transform.position + Vector3.up;
 	}

@@ -25,7 +25,8 @@ public abstract class BaseEquipment : MonoBehaviour, IPurchaseAble
     protected BaseSkill _subSkill;
     public BaseSkill SubSkill => _subSkill;
 
-    public bool IsEquip { get; set; } = false;
+    public bool IsEquip { get; set; } = true;
+    public bool IsShopItem { get; set; } = true;
 
     private Dictionary<System.Type, BaseEquipmentData> _dataDict = new Dictionary<System.Type, BaseEquipmentData>();
     protected PlayerSkillCtrl _skillCtrl;

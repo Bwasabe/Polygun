@@ -34750,18 +34750,18 @@ PrefabInstance:
     - target: {fileID: 895333399385918173, guid: 4ca337a93d96e4a40b234cafdacfc727, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1435994893}
     - target: {fileID: 895333399385918173, guid: 4ca337a93d96e4a40b234cafdacfc727, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 895333399385918173, guid: 4ca337a93d96e4a40b234cafdacfc727, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Interaction
+      value: OnExit
       objectReference: {fileID: 0}
     - target: {fileID: 895333399385918173, guid: 4ca337a93d96e4a40b234cafdacfc727, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: Btn, Assembly-CSharp
+      value: ButtonEffect, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 895333399385918173, guid: 4ca337a93d96e4a40b234cafdacfc727, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -42264,7 +42264,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 0.6039216}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -54999,6 +54999,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5708141380686604968, guid: 52757b6367ec83841b79426726a303a6, type: 3}
   m_PrefabInstance: {fileID: 1435516398}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1435994893 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 895333399385918175, guid: 4ca337a93d96e4a40b234cafdacfc727, type: 3}
+  m_PrefabInstance: {fileID: 887948013}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6793651971bc6654381f99c68ff878d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1438713229
 PrefabInstance:
   m_ObjectHideFlags: 0

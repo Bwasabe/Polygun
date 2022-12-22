@@ -8,7 +8,7 @@ public class PlayerDash : BasePlayerSkillComponent
 
     private float _timer;
 
-    public int MaxDashCount{ get; set; } = 1;
+    public int MaxDashCount { get; set; } = 1;
     private int _currentDashCount = 0;
 
 
@@ -30,25 +30,31 @@ public class PlayerDash : BasePlayerSkillComponent
     protected override void Start()
     {
         base.Start();
-        if(_skill == null)
+        if (_skill == null)
         {
             _player.GetPlayerComponent<PlayerSkillCtrl>().AddPlayerSkill<PlayerDash>(
-                new PlayeDashSkill(this,_startColor, _endColor,_modelDuration, _dashDistance, _dashSpawnDuration ,_drags));
+                new PlayeDashSkill(this, _startColor, _endColor, _modelDuration, _dashDistance, _dashSpawnDuration, _drags));
         }
     }
-    private void Update() {
-        if(_currentDashCount < MaxDashCount)
+    private void Update()
+    {
+        if (_currentDashCount < MaxDashCount)
         {
             _timer += Time.deltaTime * GameManager.PlayerTimeScale;
-            if(_timer >= _player.PlayerStat.DashRatio)
+            if (_timer >= _player.PlayerStat.DashRatio)
             {
                 _timer = 0f;
                 _currentDashCount++;
             }
         }
 
-        if(Input.GetKey(_input.GetInput(LSHIFT)) && _currentDashCount > 0)
+        if (Input.GetKey(_input.GetInput(LSHIFT)) && _currentDashCount > 0)
         {
+            if (_skill == null)
+            {
+                _player.GetPlayerComponent<PlayerSkillCtrl>().AddPlayerSkill<PlayerDash>(
+                    new PlayeDashSkill(this, _startColor, _endColor, _modelDuration, _dashDistance, _dashSpawnDuration, _drags));
+            }
             _currentDashCount--;
             _skill.Skill();
         }

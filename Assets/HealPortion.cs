@@ -9,7 +9,7 @@ public class HealPortion : Item, IPurchaseAble
     [SerializeField]
     private GameObject _returnObject;
 
-    public bool IsShopPotion { get; set; } = false;
+    public bool IsShopItem { get; set; } = false;
 
     public void PurchaseCallBack()
     {
@@ -22,7 +22,7 @@ public class HealPortion : Item, IPurchaseAble
     }
     protected override bool IsInteraction(Collider other)
     {
-        return !IsShopPotion && base.IsInteraction(other);
+        return !IsShopItem && base.IsInteraction(other);
     }
 
     protected override void Interaction(Collider other)
