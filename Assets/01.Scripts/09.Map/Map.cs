@@ -11,6 +11,22 @@ public enum DoorDirection
 	Left,
 	Right,
 }
+[Serializable]
+public class Pair<T, U>
+{
+	public Pair()
+	{
+	}
+	public Pair(T first, U second)
+	{
+		this.first = first;
+		this.secound = second;
+	}
+
+	public T first;
+	public U secound;
+}
+
 public class Map : MonoBehaviour
 {
 	public Vector2Int pos;
