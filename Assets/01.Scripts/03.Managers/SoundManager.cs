@@ -16,7 +16,6 @@ public enum AudioType
     Length
 }
 
-[DontDestroyOnLoadAttribute]
 public class SoundManager : MonoSingleton<SoundManager>
 {
     [SerializeField]

@@ -23,7 +23,7 @@ public class DirectBossFirst : MonoBehaviour
 	public void BossFirst()
 	{
 		bt.IsStop = true;
-		obj = GameObject.Find("Player");
+		obj = GameObject.Find("CM vcam1");
 		obj.SetActive(false);
 		lightobj.SetActive(true);
 	}

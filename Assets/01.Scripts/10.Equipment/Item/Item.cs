@@ -20,7 +20,8 @@ public class Item : MonoBehaviour
 	{
 		_collision = GetComponent<CollisionCtrl>();
 		_collision.ColliderEnterEvent += Interaction;
-		_collision.CollisionEnterEvent += Interaction;
+		_collision.CollisionStayEvent += Interaction;
+		//_collision.CollisionEnterEvent += Interaction;
 	}
 
 	protected virtual void Interaction(Collider other)

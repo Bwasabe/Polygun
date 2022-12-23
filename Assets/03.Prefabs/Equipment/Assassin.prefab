@@ -52282,11 +52282,11 @@ MonoBehaviour:
     - 0.7
     - 1
     _attackDamages:
-    - 1
-    - 1
-    - 1
-    - 1
-    - 3
+    - 5
+    - 5
+    - 5
+    - 5
+    - 8
     _hitLayer:
       serializedVersion: 2
       m_Bits: 128
