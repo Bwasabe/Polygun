@@ -28584,6 +28584,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 82b31a0312a9227408cee9d5fa651e62, type: 3}
+    - target: {fileID: 895333399385918162, guid: 4ca337a93d96e4a40b234cafdacfc727, type: 3}
+      propertyPath: m_Color.b
+      value: 0.6768899
+      objectReference: {fileID: 0}
+    - target: {fileID: 895333399385918162, guid: 4ca337a93d96e4a40b234cafdacfc727, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 895333399385918162, guid: 4ca337a93d96e4a40b234cafdacfc727, type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 895333399385918169, guid: 4ca337a93d96e4a40b234cafdacfc727, type: 3}
       propertyPath: m_Name
       value: Practice
@@ -34554,6 +34566,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 82b31a0312a9227408cee9d5fa651e62, type: 3}
+    - target: {fileID: 895333399385918162, guid: 4ca337a93d96e4a40b234cafdacfc727, type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 895333399385918162, guid: 4ca337a93d96e4a40b234cafdacfc727, type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 895333399385918162, guid: 4ca337a93d96e4a40b234cafdacfc727, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 895333399385918169, guid: 4ca337a93d96e4a40b234cafdacfc727, type: 3}
       propertyPath: m_Name
       value: Setting
@@ -34735,6 +34759,18 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 82b31a0312a9227408cee9d5fa651e62, type: 3}
+    - target: {fileID: 895333399385918162, guid: 4ca337a93d96e4a40b234cafdacfc727, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 895333399385918162, guid: 4ca337a93d96e4a40b234cafdacfc727, type: 3}
+      propertyPath: m_Color.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 895333399385918162, guid: 4ca337a93d96e4a40b234cafdacfc727, type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 895333399385918169, guid: 4ca337a93d96e4a40b234cafdacfc727, type: 3}
       propertyPath: m_Name
       value: Exit

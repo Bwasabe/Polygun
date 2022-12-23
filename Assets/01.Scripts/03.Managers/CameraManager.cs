@@ -22,6 +22,8 @@ public class CameraManager : MonoSingleton<CameraManager>
 
     private void Awake()
     {
+        // Cursor.visible=false;
+        // Cursor.lockState = CursorLockMode.Locked;
         _impulseSource = GetComponent<CinemachineImpulseSource>();
 	}
     public void CameraShake()

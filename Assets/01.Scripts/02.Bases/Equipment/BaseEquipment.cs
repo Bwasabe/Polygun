@@ -98,7 +98,7 @@ public abstract class BaseEquipment : MonoBehaviour, IPurchaseAble
         }
     }
 
-    public void PurchaseCallBack()
+    public virtual void PurchaseCallBack()
     {
         _equipmentCtrl.GetEquipment(this);
     }

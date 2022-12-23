@@ -87,12 +87,13 @@ public class PlayerEquipmentCtrl : BasePlayerComponent
         Collider[] colliders = Physics.OverlapSphere(transform.position, _radius, _equipmentLayer);
         if (colliders.Length > 0)
         {
-            _getEquipmentUI.gameObject.SetActive(true);
             // 장비 구매 or 획득 UI띄어주기
             IPurchaseAble purchaseAble = colliders[0].transform.GetComponentInChildren<IPurchaseAble>();
-            if (purchaseAble != null)
+            if (purchaseAble != null && purchaseAble.IsShopItem)
             {
-                if (GameManager.Instance.CoinAmount >= purchaseAble.Price && purchaseAble.IsShopItem)
+                _getEquipmentUI.gameObject.SetActive(true);
+
+                if (GameManager.Instance.CoinAmount >= purchaseAble.Price)
                 {
                     _getEquipmentUI.text = PriceText(purchaseAble.Price);
                     if (Input.GetKeyDown(KeyCode.E))

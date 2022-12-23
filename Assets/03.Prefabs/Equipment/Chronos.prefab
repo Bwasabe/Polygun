@@ -11608,13 +11608,13 @@ MonoBehaviour:
   _attackClip: {fileID: 0}
   _particle: {fileID: 5325251699888880153}
   _data:
-    _reloadCount: 16
-    _reloadDuration: 2
-    _damage: 3
-    _lastDamage: 6
+    _reloadCount: 20
+    _reloadDuration: 1
+    _damage: 4
+    _lastDamage: 8
     _bulletSpeed: 40
     _attackCoolTime: 0.1
-    _lastAttackCoolTime: 0.4
+    _lastAttackCoolTime: 0.2
     _lastAttackIndex: 5
     _smallAttackSound: {fileID: 8300000, guid: 607b2014152584b4bb1e87c87ac6c1af, type: 3}
     _bigAttackSound: {fileID: 8300000, guid: 607b2014152584b4bb1e87c87ac6c1af, type: 3}
