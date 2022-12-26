@@ -53,12 +53,4 @@ public class SettingManager : MonoBehaviour
 		});
 	}
 
-
-	public void ButtonReset()
-	{
-		foreach (Button b in _buttons)
-		{
-			b.GetComponent<ButtonEffect>().OnReset();
-		}
-	}
 }
