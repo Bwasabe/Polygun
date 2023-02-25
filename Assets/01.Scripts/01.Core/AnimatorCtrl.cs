@@ -14,6 +14,8 @@ public class AnimatorCtrl<T> where T : Enum
 
     // public Animator Animator => _animator;
 
+    private T _animationState;
+
     public AnimatorCtrl(Animator animator)
     {
         _animator = animator;
@@ -37,9 +39,15 @@ public class AnimatorCtrl<T> where T : Enum
         }
     }
 
-
     public void SetAnimationState(T animationState)
     {
+        _animationState = animationState;
         _animator.SetInteger(STATE_HASH, animationState.GetEnumValue<int>());
+    }
+
+    public void SetAnimationStateOnce(T animationState)
+    {
+        if(_animationState.Equals(animationState))
+            SetAnimationState(animationState);
     }
 }
