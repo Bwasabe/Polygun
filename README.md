@@ -25,11 +25,10 @@
    
    <b>다운로드</b>
    - https://drive.google.com/file/d/1goiuNIHUQPA2lziF2dtcdu8MFHHL4vvF/view
-   
-   
+  
    <br>
    
-   [![Video Label](https://user-images.githubusercontent.com/81199996/177677532-4c5f557f-e484-479a-837e-8f4a58b76fc2.png)](https://www.youtube.com/watch?v=pU6z6IjE80I)
+   [![Video Label](https://user-images.githubusercontent.com/77655332/224497006-4161a992-136f-478c-9106-fc0dd5a81d42.png)](https://www.youtube.com/watch?v=pU6z6IjE80I)
    
    ## 인게임 화면
    
