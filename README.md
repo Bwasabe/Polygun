@@ -20,16 +20,16 @@
   Made by 박두팔과 김억두
   
   <b>만만게임즈 유튜브</b>
-   - https://youtu.be/GNlec7o6iUE
+   - https://youtu.be/pU6z6IjE80I
     
    
    <b>다운로드</b>
-   - https://drive.google.com/file/d/1gD04665yJ-vdwSET_NpxABxHfe3XUkoa/view?usp=sharing
+   - https://drive.google.com/file/d/1goiuNIHUQPA2lziF2dtcdu8MFHHL4vvF/view
    
    
    <br>
    
-   [![Video Label](https://user-images.githubusercontent.com/81199996/177677532-4c5f557f-e484-479a-837e-8f4a58b76fc2.png)](https://www.youtube.com/watch?v=XYj1v_vGxR0)
+   [![Video Label](https://user-images.githubusercontent.com/81199996/177677532-4c5f557f-e484-479a-837e-8f4a58b76fc2.png)](https://www.youtube.com/watch?v=pU6z6IjE80I)
    
    ## 인게임 화면
    
