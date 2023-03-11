@@ -19,7 +19,7 @@
   
   Made by 박두팔과 김억두
   
-  <b>만만게임즈 유튜브</b>
+  <b>유튜브</b>
    - https://youtu.be/pU6z6IjE80I
     
    
