@@ -1,6 +1,34 @@
-# Polygun
+# 우물 안 개구리 Frog In The Well
 
-----
+우물 밖을 향해 뛰어 올라가세요!
 
-장르 : 3인칭 액션게임
-설명 : 주인공이 괴물에게 빼앗긴 애인을 되찾기 위해 던전에 들어가는 액션 게임입니다
+다양한 <b>아이템</b>을 먹어 <b>능력</b>을 사용하세요!
+
+수많은 능력을 사용하여 당신의 앞을 가로막는 <b>장애물</b>을 뛰어넘으세요!
+
+당신은 어디까지 올라갈 수 있을까요?
+
+<b>조작 방법</b> :
+  - 좌우이동 : AD
+  - 점프 : SPACE
+  - 아이템 먹기 : F
+  - 능력 사용하기 : E
+  - 일시 정지 : ESC
+  
+  ※ <b>주의!</b> 자동 세이브 안됨
+  
+  Made by 만만 게임즈
+  
+  <b>만만게임즈 유튜브</b>
+   - https://youtu.be/GNlec7o6iUE
+   
+   <b>만만게임즈 페이스북</b>
+   - https://www.facebook.com/manmangames
+   
+   <b>다운로드</b>
+   - https://drive.google.com/file/d/1gD04665yJ-vdwSET_NpxABxHfe3XUkoa/view?usp=sharing
+   
+   
+   <br>
+   
+   [![Video Label](https://user-images.githubusercontent.com/81199996/177677532-4c5f557f-e484-479a-837e-8f4a58b76fc2.png)](https://www.youtube.com/watch?v=XYj1v_vGxR0)
