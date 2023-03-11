@@ -20,7 +20,7 @@
   Made by 박두팔과 김억두
   
   <b>유튜브</b>
-   - https://youtu.be/pU6z6IjE80I
+   - https://www.youtube.com/@user-iv4sg9vs6q
     
    
    <b>다운로드</b>
