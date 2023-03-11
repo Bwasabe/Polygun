@@ -8,6 +8,8 @@
 
 당신은 어디까지 올라갈 수 있을까요?
 
+![(포)적 움직임](https://user-images.githubusercontent.com/77655332/224495609-0299cef6-040d-4be2-bad4-d12b1f99b451.gif)
+
 <b>조작 방법</b> :
   - 이동 : W A S D
   - 점프 : Space
