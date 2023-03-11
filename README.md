@@ -8,7 +8,7 @@
 
 당신은 어디까지 올라갈 수 있을까요?
 
-<img src="https://user-images.githubusercontent.com/77655332/224495609-0299cef6-040d-4be2-bad4-d12b1f99b451.gif" width="1280" height="720"/>
+<img src="https://user-images.githubusercontent.com/77655332/224495609-0299cef6-040d-4be2-bad4-d12b1f99b451.gif" width="540" height="360"/>
 
 <b>조작 방법</b> :
   - 이동 : W A S D
