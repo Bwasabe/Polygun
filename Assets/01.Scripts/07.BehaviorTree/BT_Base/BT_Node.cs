@@ -56,6 +56,8 @@ public class BT_Node
         return Result.FAILURE;
     }
 
+
+
     public void EnterNode()
     {
         UpdateState = UpdateState.Enter;

@@ -30,9 +30,8 @@ public abstract class BehaviorTree : MonoBehaviour
 
         foreach (var field in fieldInfos)
         {
-            BT_Data data = field.GetValue(this) as BT_Data;
 
-            if(data != null)
+            if(field.GetValue(this) is BT_Data data)
             {
                 _dataDict.Add(field.FieldType, data);
             }
